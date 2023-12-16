@@ -1,11 +1,13 @@
 using TOML
+using Dates
 calfile = joinpath(pwd(), "S24", "calendar.toml")    
 config = TOML.parsefile(calfile)
 
 duedates = filter(pr -> occursin("due", pr[2]), config["fixedDates"])
 
 function formatpair(pr)
-    string("- ", pr[1], ": ", pr[2])
+    evtdate = Date(pr[1])
+    string("- ", Dates.monthname(evtdate), " ", Dates.day(evtdate), ": ", pr[2])
 end
 
 md = join(map(pr -> formatpair(pr), duedates), "\n")
@@ -17,7 +19,7 @@ layout: page
 nav_order: 3
 ---
 
-## Checklist of due dates
+## Checklist of important due dates
 
 
 
