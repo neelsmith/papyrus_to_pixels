@@ -32,8 +32,3 @@ Hands-on course activities:
 1. [Small-group labs](./labs/) modelling, classifying and interpreting evolution/transmission
 2. Developing an [original research project](./project/)
 
-## Pluto notebooks
-
-Written in Julia, viewable here as HTML pages:
-
-- Modelling a [feature matrix](./julia/featurematrix.html) in Julia

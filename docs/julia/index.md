@@ -12,7 +12,15 @@ has_children: true
 
 ## Sample Pluto notebooks
 
+> These Pluto notebooks are viewable here as HTML pages you can read in a web browser: save them to your computer in Pluto notebook format and open them in Pluto  to run them live.
 
-Viewable here as HTML pages: save as a notebook and open in Pluto run live.
+Introduction to the Julia language:
 
-- modelling a [feature matrix](./featurematrix.html)
+- the [nouns and verbs](./julia-nouns-verbs.html) of the Julia language
+- [collections of data](./julia-collections-of-data.html) (including the basic scholarly operations: *filter* and *map*)
+
+
+Some common activities:
+
+- [file I/O](./fileio.html): reading from and writing to files
+- creating matrices in Julia: modelling a [feature matrix](./featurematrix.html)
