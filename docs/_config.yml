@@ -1,5 +1,5 @@
 remote_theme: pmarsceill/just-the-docs
-title: "Classics 199: Digital Mythology"
+title: "Classics 199: Papyrus to Pixels"
 
 aux_links:
   "Course Google Drive (TBA)": 
@@ -7,7 +7,7 @@ aux_links:
   "juliahub's AskAI":
     - "https://juliahub.com/ui/AskAI"
   "Due dates": 
-    - ""
+    - "https://neelsmith.github.io/papyrus_to_pixels/duedates/"
 
 
 footer_content: "Classics 199, <i>Papyrus to Pixels</i>. All material on this web site is available under the Creative Commons Attribution Share-Alike license <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0 <img height=\"15\" width=\"80\" src=\"https://mirrors.creativecommons.org/presskit/buttons/80x15/png/by-sa.png\" /></a> on <a href=\"https://github.com/neelsmith/digitalmyth\">github</a>."   
