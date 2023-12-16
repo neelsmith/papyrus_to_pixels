@@ -8,6 +8,7 @@ has_children: true
 
 # Labs
 
+
 ## Prerequisites
 
 - complete Google form with schedule
@@ -15,6 +16,8 @@ has_children: true
 
 
 ## Collaborative assignments
+
+> A single submission for the entire team
 
 1. rhetorical style in the Gettysburg Address (modeling texts)
 2. comparing sequences in DNA (classifying species)
