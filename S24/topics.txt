@@ -1,0 +1,70 @@
+
+
+## Introduction to course
+
+Introduction to course
+[Evolution, textual transmission, and code](../classes/content+tech1/)
+
+
+## Modelling species and texts
+
+Using [Julia in the REPL](../classes/repl1/) 
+Workshop lab 1: rhetorical style at Gettysburg 
+
+## Classifying species and texts
+
+DNA sequences
+Workshop lab 2: comparing DNA sequences in beetles and humans
+
+
+Review collections of data in Julia, and [plain-text formats](../classes/textio/)
+Zipf's law
+
+
+Workshop lab 3: (Feature extraction: finding named entities?)
+class
+
+Workshop lab 4: (Classification?)
+class
+
+***Spring break***
+***Spring break***
+
+## Thinking within and across disciplines
+
+class
+class
+
+
+class
+📓 Project proposal due
+
+
+
+class
+***Easter break***
+
+
+## Writing with digital evidence
+
+
+class
+class
+
+
+Workshop draft code
+Presentations
+
+class
+class
+
+
+
+class
+Project fair, 1
+
+
+Project fair, 2
+Evolution, transmission, AI, and you
+
+
