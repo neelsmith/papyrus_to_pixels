@@ -40,7 +40,7 @@ Deadlines to note:
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
 | *Mar 12*, *Mar 14* | Introduction to research projects |  🔛  Extending your lab work | **Tue**: *Class resumes.* |
-| *Mar 19*, *Mar 21* | Workshop: Formal project proposals |  🔛 📓 Project proposal due |  |
+| *Mar 19*, *Mar 21* | Workshop: Formal project proposals |  🔛 📓 Project proposal due | **Thu**: *Project proposal due.* |
 | *Mar 26*, *Mar 28* | class | ***Easter break*** | **Tue**: *Last class before Easter break.* |
 
 ## Investigating a research topic
@@ -48,7 +48,7 @@ Deadlines to note:
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
 | *Apr 2*, *Apr 4* | class | class | **Tue**: *Class resumes.* |
-| *Apr 9*, *Apr 11* | Workshop draft code | Presentations |  |
+| *Apr 9*, *Apr 11* | Workshop draft code | Presentations | **Tue**: *First draft of project code due.* |
 | *Apr 16*, *Apr 18* | class | class |  |
 
 ## Perspectives across sections
@@ -56,4 +56,5 @@ Deadlines to note:
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
 | *Apr 23*, *Apr 25* | class | Project fair, 1 |  |
-| *Apr 30*, *May 2* | Project fair, 2 | Evolution, transmission, AI, and you | **Thu**: *Last class.* |
+| *Apr 30*, *May 2* | Project fair, 2 | Evolution, textual transmission, AI, and you | **Thu**: *Last class.* |
+| *May 7*, *May 9* | *Study period* | *Exams begin* | **Tue**: *Complete project submission due.* |

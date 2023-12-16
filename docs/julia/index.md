@@ -7,7 +7,7 @@ has_children: true
 
 # Resources for working with Julia
 
-- juliahub's AskAI
+- juliahub's [AskAI](https://juliahub.com/ui/AskAI)
 
 
 ## Sample Pluto notebooks
