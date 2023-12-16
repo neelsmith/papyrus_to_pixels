@@ -17,18 +17,20 @@ Main sections of course content:
 Meta-goals:
 
 - work collaboratively
-- develop a reproducible research project from an initial question to implementation
+- cultivate habits of test-driven thinking:
+    - hypotheses are wrong until proven otherwise
+    - to know if a test works, you must first fail it
+- develop a reproducible research project from an initial question to implementation, including
     - explicit license for reuse
     - source material and analytical methods identified
 - oral presentation 
 - written presentation: one source, multiple formats
 
 
-Course activities:
+Hands-on course activities:
 
 1. [Small-group labs](./labs/) modelling, classifying and interpreting evolution/transmission
-2. [Extending your lab work](./extending/)
-3. Developing an [original research project](./project/)
+2. Developing an [original research project](./project/)
 
 ## Pluto notebooks
 
