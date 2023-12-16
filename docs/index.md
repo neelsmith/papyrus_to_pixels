@@ -14,12 +14,21 @@ Main sections of course content:
 - Classifying species and texts
 - Interpreting change through time
 
+Meta-goals:
+
+- work collaboratively
+- develop a reproducible research project from an initial question to implementation
+    - explicit license for reuse
+    - source material and analytical methods identified
+- oral presentation 
+- written presentation: one source, multiple formats
+
 
 Course activities:
 
-1. Small-group labs modelling, classifying and interpreting evolution/transmission
-2. Extending your lab work
-3. Developing an original research project
+1. [Small-group labs](./labs/) modelling, classifying and interpreting evolution/transmission
+2. [Extending your lab work](./extending/)
+3. Developing an [original research project](./project/)
 
 ## Pluto notebooks
 

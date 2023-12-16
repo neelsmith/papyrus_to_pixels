@@ -1,12 +1,12 @@
 ---
-title: "Extended project"
+title: "Original project"
 layout: page
-nav_order: 3
+nav_order: 4
 has_children: true
 ---
 
 
-# Extended project
+# Original project
 
 Required stages:
 
