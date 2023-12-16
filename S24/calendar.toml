@@ -20,15 +20,17 @@ fixedDates = [
   ["2024-04-02",  "Class resumes."],
   ["2024-05-02",  "Last class."],
 
-  ["2024-02-29",  "NB 4 due."],
 
-    ["2023-09-21",  "NB 1 due."],
-    ["2023-09-28",  "NB 2 due."],
-    ["2023-10-03",  "Graphviz with Gephi due."],
+  ["2024-02-20",  "**NB 3** due."],
+  ["2024-02-27",  "**NB 4** due."],
+
+    ["2024-02-01",  "**NB 1** due."],
+    ["2024-02-08",  "**NB 2** due."],
+    
     
 
 
-    ["2023-10-26",  "Project proposal due."],
+    ["2023-03-21",  "Project proposal due."],
     ["2023-11-09",  "First draft of project code due."],
     ["2023-12-07",  "Complete project submission due."],
   

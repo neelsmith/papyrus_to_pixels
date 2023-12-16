@@ -21,6 +21,7 @@ has_children: true
 Deadlines to note:
 
 - 📓 Lab notebook or other assignment due
+- 🔛 Sections meet separately
 
 """
 

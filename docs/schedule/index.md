@@ -10,6 +10,7 @@ has_children: true
 Deadlines to note:
 
 - 📓 Lab notebook or other assignment due
+- 🔛 Sections meet separately
 
 
 ## Introduction to course
@@ -22,32 +23,37 @@ Deadlines to note:
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Jan 30*, *Feb 1* | Using [Julia in the REPL](../classes/repl1/)  | Workshop lab 1: rhetorical style at Gettysburg  |  |
+| *Jan 30*, *Feb 1* | Using [Julia in the REPL](../classes/repl1/)  | Workshop lab 1: rhetorical style at Gettysburg  | **Thu**: ***NB 1** due.* |
 
 ## Classifying species and texts
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Feb 6*, *Feb 8* | DNA sequences | Workshop lab 2: comparing DNA sequences in beetles and humans |  |
+| *Feb 6*, *Feb 8* | DNA sequences | Workshop lab 2: comparing DNA sequences in beetles and humans | **Thu**: ***NB 2** due.* |
 | *Feb 13*, *Feb 15* | Review collections of data in Julia, and [plain-text formats](../classes/textio/) | Zipf's law |  |
-| *Feb 20*, *Feb 22* | Workshop lab 3: (Feature extraction: finding named entities?) | class |  |
-| *Feb 27*, *Feb 29* | Workshop lab 4: (Classification?) | class | **Thu**: *Last class before spring break.* **Thu**: *NB 4 due.* |
+| *Feb 20*, *Feb 22* | Workshop lab 3: (Feature extraction: finding named entities?) | 🔛 Defining features | **Tue**: ***NB 3** due.* |
+| *Feb 27*, *Feb 29* | Workshop lab 4: (Classification?) | class | **Thu**: *Last class before spring break.* **Tue**: ***NB 4** due.* |
 | *Mar 5*, *Mar 7* | ***Spring break*** | ***Spring break*** |  |
 
-## Thinking within and across disciplines
+## Developing a project proposal
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Mar 12*, *Mar 14* | class | class | **Tue**: *Class resumes.* |
-| *Mar 19*, *Mar 21* | class | 📓 Project proposal due |  |
+| *Mar 12*, *Mar 14* | Introduction to research projects |  🔛  Extending your lab work | **Tue**: *Class resumes.* |
+| *Mar 19*, *Mar 21* | Workshop: Formal project proposals |  🔛 📓 Project proposal due |  |
 | *Mar 26*, *Mar 28* | class | ***Easter break*** | **Tue**: *Last class before Easter break.* |
 
-## Writing with digital evidence
+## Investigating a research topic
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
 | *Apr 2*, *Apr 4* | class | class | **Tue**: *Class resumes.* |
 | *Apr 9*, *Apr 11* | Workshop draft code | Presentations |  |
 | *Apr 16*, *Apr 18* | class | class |  |
+
+## Perspectives across sections
+
+| Dates | Tuesday | Thursday | Notes |
+| ---: | :--- | :--- | :--- |
 | *Apr 23*, *Apr 25* | class | Project fair, 1 |  |
 | *Apr 30*, *May 2* | Project fair, 2 | Evolution, transmission, AI, and you | **Thu**: *Last class.* |

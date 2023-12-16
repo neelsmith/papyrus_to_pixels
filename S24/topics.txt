@@ -22,7 +22,7 @@ Zipf's law
 
 
 Workshop lab 3: (Feature extraction: finding named entities?)
-class
+🔛 Defining features
 
 Workshop lab 4: (Classification?)
 class
@@ -30,14 +30,14 @@ class
 ***Spring break***
 ***Spring break***
 
-## Thinking within and across disciplines
+## Developing a project proposal
 
-class
-class
+Introduction to research projects
+ 🔛  Extending your lab work
 
 
-class
-📓 Project proposal due
+Workshop: Formal project proposals
+ 🔛 📓 Project proposal due
 
 
 
@@ -45,8 +45,8 @@ class
 ***Easter break***
 
 
-## Writing with digital evidence
 
+## Investigating a research topic
 
 class
 class
@@ -59,6 +59,7 @@ class
 class
 
 
+## Perspectives across sections
 
 class
 Project fair, 1
