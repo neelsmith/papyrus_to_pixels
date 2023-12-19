@@ -1,0 +1,38 @@
+# Configure a course calendar
+# Used for title of web page
+courseTitle = "Classics 199, S'24"
+# YYYY-MM-DD
+firstDay = "2024-01-23"
+lastDay = "2025-05-06"
+
+# Pattern of class meetings: "mwf", "tt" or "wf"
+schedule = "tth"
+
+# Number of weeks the calendar should run for
+totalWeeks =  16
+
+fixedDates = [
+
+  
+  ["2024-02-29",  "Last class before spring break."],
+  ["2024-03-12",  "Class resumes."],
+  ["2024-03-26",  "Last class before Easter break."],
+  ["2024-04-02",  "Class resumes."],
+  ["2024-05-02",  "Last class."],
+
+
+  ["2024-02-01",  "**NB 1** due."],
+    ["2024-02-08",  "**NB 2** due."],
+  ["2024-02-20",  "**NB 3** due."],
+  ["2024-02-27",  "**NB 4** due."],
+
+    ["2024-03-21",  "Project proposal due."],
+    
+    
+
+
+    
+    ["2024-04-09",  "First draft of project code due."],
+    ["2024-05-07",  "Complete project submission due."],
+  
+]
