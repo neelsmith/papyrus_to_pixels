@@ -1,13 +1,12 @@
 ### A Pluto.jl notebook ###
-# v0.19.35
+# v0.19.32
 
 using Markdown
 using InteractiveUtils
 
 # ╔═╡ 632940f0-0f5d-4f7d-b5be-70ab6b06a0db
-begin
-	using PlotlyJS
-end
+using PlotlyJS
+
 
 # ╔═╡ 72e4c43c-9bee-11ee-3343-99f776f74115
 md"""# 2D matrices for features in Julia"""
@@ -47,7 +46,7 @@ swims = [true, true, false]
 md"""The `hcat` function lets you concatenate columns *horizontally* (i.e., as rows) to get a matrix:"""
 
 # ╔═╡ 1c87fae3-3375-46a9-8c05-12aa8754d338
-matrix1 = hcat(wings, flies, swims)
+featurematrix = hcat(wings, flies, swims)
 
 # ╔═╡ 206689bb-92d0-48f3-90ac-7a41ff36c885
 md"""!!! tip "Syntax note!"
@@ -75,6 +74,37 @@ md"""The `stack` function "stacks" a list of rows together vertically to get a m
 # ╔═╡ 68e70305-0a5f-4fdc-b9f6-8a01f748634f
 matrix2 = stack([penguin, shark, dodo])
 
+# ╔═╡ ad839f21-b811-44f6-a4fd-473d763d98b9
+"""Convert Boolean value to emoji."""
+function emojifybool(tf::Bool)
+	tf ? "✅" : "❌"
+end
+
+# ╔═╡ d90fe6e0-34e2-4594-9033-a5be1be82f4a
+"""Compose a markdown table for matrix `m`, labelling rows and columns
+using the lists of strings `rlabels` and `clabels`.  It's on you to make
+sure you've got the right dimensions!
+"""
+function tablify(m, rlabels, clabels)
+	formatline = repeat("| --- ", length(clabels) + 1) * " |"
+	hdrline = join(vcat(["|  "], clabels), " | ") * " |"
+	mdlines = [hdrline, formatline]
+
+	(rows, columns) = size(m)
+	for r in 1:rows
+		current_row = [rlabels[r]]
+		for c in 1:columns
+			push!(current_row, emojifybool(m[CartesianIndex(r,c)]))
+		end
+		push!(mdlines, 
+			string(join(current_row, " | "), 
+			" | ")
+		)
+	end
+
+	join(mdlines, "\n")
+end
+
 # ╔═╡ 82e4cc99-fd01-4638-9a13-53572b4ab16d
 md"""!!! tip "Syntax note!"
     Pass a single parameter to `stack`: a list of lists (Vector of Vector). Notice that the previous cell puts `penguin`, `shark` and `dodo` in a Vector that is the sole parameter to `stack`.
@@ -87,13 +117,13 @@ md"""### Both methods work!"""
 md"""The results are the same:"""
 
 # ╔═╡ 4ec9a484-3329-4cac-a104-e05fa899e9ad
-matrix1 == matrix2
+featurematrix == matrix2
 
 # ╔═╡ 85ea2362-746f-4350-b90d-8f477acfd0fb
 md"""## From features matrix to similarity matrix"""
 
 # ╔═╡ 09dc4528-7a5a-4b1a-ad85-8f57470da586
-matrix1
+featurematrix
 
 # ╔═╡ 850a7831-2aaf-4cc6-a98a-fc6e01290c4b
 rowlabels  = ["penguin", "shark", "dodo"]
@@ -101,44 +131,50 @@ rowlabels  = ["penguin", "shark", "dodo"]
 # ╔═╡ 7ed29dcb-6ba2-46ce-9f75-7b190a0eb519
 columnlabels = ["wings","flies","swims"]
 
+# ╔═╡ 6c0477d6-abe3-4180-ba82-404792d8c63c
+tablify(featurematrix, rowlabels, columnlabels) |> Markdown.parse
+
+# ╔═╡ 10ead651-85ad-4128-96c8-0d4797f274d9
+vcat([""], columnlabels)
+
 # ╔═╡ ac23b18b-9b1b-494e-94e5-13ca81ced55f
-matrix1 |> length
+featurematrix |> length
 
 # ╔═╡ 69aec10f-fb9d-4094-977f-a8100b729ffd
-matrix1 |> ndims
+featurematrix |> ndims
 
 # ╔═╡ b005d922-a2f0-44cc-a25a-0a6e1a02c182
-matrix1 |> size
+featurematrix |> size
 
 # ╔═╡ 227173cd-e5e0-45d4-8a98-11323c90f92a
-matrix1 |> axes
+featurematrix |> axes
 
 # ╔═╡ cf073fd5-b12f-422a-b470-ccc9cfc7c448
-matrix1 |> strides
+featurematrix |> strides
 
 # ╔═╡ 68ed28d9-6830-47b1-beca-5c75d4c3ba9d
-matrix1
+featurematrix
 
 # ╔═╡ d80aecbc-eefa-4a46-b28b-113deb0b2994
-matrix1[CartesianIndex(2,3)]
+featurematrix[CartesianIndex(2,3)]
 
 # ╔═╡ 2bd2e44f-65c5-4dd6-a34a-28edbafbe295
 md"""Maybe look at [https://www.geeksforgeeks.org/manipulating-matrices-in-julia/](https://www.geeksforgeeks.org/manipulating-matrices-in-julia/)"""
 
 # ╔═╡ 4d275c83-5523-46a9-a9b1-c2ef6c559132
-firstindex(matrix1, 1)
+firstindex(featurematrix, 1)
 
 # ╔═╡ 18129cc0-d4a5-4edf-928a-59e64adc997f
-eachindex(matrix1)
+eachindex(featurematrix)
 
 # ╔═╡ 883a396b-e346-4a04-acb0-59240b5d4496
-matrix1[1,:]
+featurematrix[1,:]
 
 # ╔═╡ 8000c26c-4250-4604-b1ed-2bc0b68bca2f
 matrix1 |> size
 
 # ╔═╡ 1b30421e-a1b1-4912-abcb-5b49083f12c5
-(rows, cols) = size(matrix1)
+(rows, cols) = size(featurematrix)
 
 # ╔═╡ e43ab7be-8305-4dcd-9ae4-e5ba69b6eaef
 # ╠═╡ show_logs = false
@@ -151,7 +187,7 @@ begin
 			println("Compare along $(columnlabels[c])")
 			for r2 in 1:rows
 				println("Compare with $(rowlabels[r2])")
-				similaritymatrix[r,r2] = matrix1[r, c] == matrix1[r2, c]
+				similaritymatrix[r,r2] = matrix1[r, c] == featurematrix[r2, c]
 			end
 			#println("col $(c)")
 			#println(string(r,":",c))
@@ -214,7 +250,7 @@ PlotlyJS = "~0.18.11"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.9.4"
+julia_version = "1.9.3"
 manifest_format = "2.0"
 project_hash = "e974633589b93b5eb36a3efc079a5bbfe6569c15"
 
@@ -407,12 +443,12 @@ version = "0.15.1"
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
 uuid = "b27032c2-a3e7-50c8-80cd-2d36dbcbfd21"
-version = "0.6.4"
+version = "0.6.3"
 
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "8.4.0+0"
+version = "7.84.0+0"
 
 [[deps.LibGit2]]
 deps = ["Base64", "NetworkOptions", "Printf", "SHA"]
@@ -421,7 +457,7 @@ uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
 [[deps.LibSSH2_jll]]
 deps = ["Artifacts", "Libdl", "MbedTLS_jll"]
 uuid = "29816b5a-b9ab-546f-933c-edad1886dfa8"
-version = "1.11.0+1"
+version = "1.10.2+0"
 
 [[deps.Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
@@ -698,7 +734,7 @@ version = "5.8.0+0"
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
-version = "1.52.0+1"
+version = "1.48.0+0"
 
 [[deps.p7zip_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -707,7 +743,6 @@ version = "17.4.0+0"
 """
 
 # ╔═╡ Cell order:
-# ╠═632940f0-0f5d-4f7d-b5be-70ab6b06a0db
 # ╟─72e4c43c-9bee-11ee-3343-99f776f74115
 # ╟─41bebee1-fc3a-4ff1-8fc1-7e30e1f19422
 # ╟─3b544242-2bcb-426c-b5e5-0773079c83bd
@@ -726,13 +761,18 @@ version = "17.4.0+0"
 # ╟─41a66fe9-e5fb-4911-b2bd-5d8cce43ebeb
 # ╟─ff3dcbbe-3e81-45ea-9634-e8ce54e3e61b
 # ╠═68e70305-0a5f-4fdc-b9f6-8a01f748634f
+# ╠═6c0477d6-abe3-4180-ba82-404792d8c63c
+# ╟─d90fe6e0-34e2-4594-9033-a5be1be82f4a
+# ╟─ad839f21-b811-44f6-a4fd-473d763d98b9
 # ╟─82e4cc99-fd01-4638-9a13-53572b4ab16d
 # ╟─367d1356-4a01-48d5-8cd1-01ec505957e5
 # ╟─ecb54c48-e2a3-4de4-b600-2888bc7ce86c
 # ╠═4ec9a484-3329-4cac-a104-e05fa899e9ad
 # ╟─85ea2362-746f-4350-b90d-8f477acfd0fb
 # ╠═09dc4528-7a5a-4b1a-ad85-8f57470da586
+# ╠═10ead651-85ad-4128-96c8-0d4797f274d9
 # ╠═850a7831-2aaf-4cc6-a98a-fc6e01290c4b
+# ╠═632940f0-0f5d-4f7d-b5be-70ab6b06a0db
 # ╠═7ed29dcb-6ba2-46ce-9f75-7b190a0eb519
 # ╠═ac23b18b-9b1b-494e-94e5-13ca81ced55f
 # ╠═69aec10f-fb9d-4094-977f-a8100b729ffd
@@ -748,7 +788,7 @@ version = "17.4.0+0"
 # ╠═8000c26c-4250-4604-b1ed-2bc0b68bca2f
 # ╠═1b30421e-a1b1-4912-abcb-5b49083f12c5
 # ╠═e43ab7be-8305-4dcd-9ae4-e5ba69b6eaef
-# ╟─ee0a622b-05c0-4d5a-ab44-75dadf515932
+# ╠═ee0a622b-05c0-4d5a-ab44-75dadf515932
 # ╟─5d52ae87-acad-4e49-883c-2980c37972e7
 # ╠═a52246c3-1533-45e5-b6d0-3dd26b6571ff
 # ╟─26766bcb-002a-444e-b8b9-67928604b6f2
