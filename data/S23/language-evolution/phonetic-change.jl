@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.22
+# v0.19.32
 
 using Markdown
 using InteractiveUtils
@@ -20,12 +20,13 @@ begin
 end
 
 # ╔═╡ 9f51f0da-2f32-4b34-b510-106991af5e9a
-md"""*Notebook version*: **1.0.0** *See version info*: $(@bind showversions CheckBox())"""
+md"""*Notebook version*: **1.1.0** *See version info*: $(@bind showversions CheckBox())"""
 
 # ╔═╡ cf04fb10-c82a-4f99-84c6-24fb2da174ce
 begin
 	if showversions
 		md"""
+- **1.1.0**: starting work on feature matrix
 - **1.0.0**: initial release version to use in Bio114 class meeting in S'23.
 		
 """
@@ -62,6 +63,21 @@ md"""
 # ╔═╡ e6f5fe38-cb09-11ed-093a-89974c867831
 md"""## Comparison of phonetic features"""
 
+# ╔═╡ 26a77be4-1ae4-42d0-befa-37bfe7627765
+md"""Map terms in matrix to values for each of
+
+- place
+- voice
+- manner
+"""
+
+# ╔═╡ fdd8fc52-ce1a-47f4-a060-660e710542e0
+md"""Then offer choice of property and show similarity matrix
+"""
+
+# ╔═╡ c23798ab-e68f-43c0-8678-4e89468804ef
+md"""Maybe offer a cumluative score similarity matrix?"""
+
 # ╔═╡ d575f55c-35fc-458d-a014-882aaddf8125
 html"""
 
@@ -89,6 +105,9 @@ f = "data.cex"
 
 # ╔═╡ cc80b08c-98b3-4ad3-b6b4-af0c250634ef
 langnames = split(readlines(f)[1],"|")	
+
+# ╔═╡ 8c520beb-0e2f-406c-9e64-e9a301a8d319
+langnames
 
 # ╔═╡ 020da4a6-3251-49bc-bbb8-19339965a53b
 srcdata = readlines(f)[2:end]
@@ -120,6 +139,9 @@ featuremtrx = begin
 	end
 	datamtrx
 end
+
+# ╔═╡ bb62b466-3b45-4b0e-b9ed-d10d1a9d5a0f
+featuremtrx
 
 # ╔═╡ 3946304a-a0db-418d-b470-d8b035d42776
 md"""> ### Phonological analysis
@@ -346,7 +368,7 @@ PlutoUI = "~0.7.50"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.8.4"
+julia_version = "1.9.3"
 manifest_format = "2.0"
 project_hash = "d8b0bbb312600ec81f2769bd72048a77429debd9"
 
@@ -375,7 +397,7 @@ version = "0.11.4"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.1+0"
+version = "1.0.5+0"
 
 [[deps.Dates]]
 deps = ["Printf"]
@@ -446,7 +468,7 @@ version = "1.10.2+0"
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
 
 [[deps.LinearAlgebra]]
-deps = ["Libdl", "libblastrampoline_jll"]
+deps = ["Libdl", "OpenBLAS_jll", "libblastrampoline_jll"]
 uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 
 [[deps.Logging]]
@@ -464,14 +486,14 @@ uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
-version = "2.28.0+0"
+version = "2.28.2+0"
 
 [[deps.Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
-version = "2022.2.1"
+version = "2022.10.11"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
@@ -480,7 +502,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.20+0"
+version = "0.3.21+4"
 
 [[deps.Parsers]]
 deps = ["Dates", "SnoopPrecompile"]
@@ -489,9 +511,9 @@ uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
 version = "2.5.8"
 
 [[deps.Pkg]]
-deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
+deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
-version = "1.8.0"
+version = "1.9.2"
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
@@ -539,22 +561,28 @@ version = "1.0.3"
 uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
 
 [[deps.SparseArrays]]
-deps = ["LinearAlgebra", "Random"]
+deps = ["Libdl", "LinearAlgebra", "Random", "Serialization", "SuiteSparse_jll"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 
 [[deps.Statistics]]
 deps = ["LinearAlgebra", "SparseArrays"]
 uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+version = "1.9.0"
+
+[[deps.SuiteSparse_jll]]
+deps = ["Artifacts", "Libdl", "Pkg", "libblastrampoline_jll"]
+uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
+version = "5.10.1+6"
 
 [[deps.TOML]]
 deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
-version = "1.0.0"
+version = "1.0.3"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
 uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
-version = "1.10.1"
+version = "1.10.0"
 
 [[deps.Test]]
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
@@ -580,12 +608,12 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
-version = "1.2.12+3"
+version = "1.2.13+0"
 
 [[deps.libblastrampoline_jll]]
-deps = ["Artifacts", "Libdl", "OpenBLAS_jll"]
+deps = ["Artifacts", "Libdl"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.1.1+0"
+version = "5.8.0+0"
 
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -610,6 +638,11 @@ version = "17.4.0+0"
 # ╟─3fa6ffb2-8e09-40dc-9356-47743e912a32
 # ╟─499181ee-1c7b-49ff-ab3a-1889ae285d1d
 # ╟─d6fa7afc-d3e3-4205-8d35-639dee64cfc2
+# ╠═8c520beb-0e2f-406c-9e64-e9a301a8d319
+# ╠═bb62b466-3b45-4b0e-b9ed-d10d1a9d5a0f
+# ╟─26a77be4-1ae4-42d0-befa-37bfe7627765
+# ╟─fdd8fc52-ce1a-47f4-a060-660e710542e0
+# ╟─c23798ab-e68f-43c0-8678-4e89468804ef
 # ╟─d575f55c-35fc-458d-a014-882aaddf8125
 # ╟─fa737dfb-8306-4eaf-8554-6d473c8e8e60
 # ╟─d14eb600-90eb-4e06-94cf-b3fba0ff2378
