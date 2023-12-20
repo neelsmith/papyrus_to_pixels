@@ -182,6 +182,9 @@ rowlabels = ["penguin", "shark","dodo"]
 # ╔═╡ 7ed29dcb-6ba2-46ce-9f75-7b190a0eb519
 columnlabels = ["wings","flies","swims"]
 
+# ╔═╡ 682960fb-95fd-4c09-a2f2-97339a896815
+tablify(stringfeatures, rowlabels, columnlabels) |> Markdown.parse
+
 # ╔═╡ cf4f8736-754c-457d-a015-6a39fb8e3cfa
 md"""
 
@@ -214,9 +217,6 @@ function tablify(m, rlabels, clabels)
 
 	join(mdlines, "\n")
 end
-
-# ╔═╡ 682960fb-95fd-4c09-a2f2-97339a896815
-tablify(stringfeatures, rowlabels, columnlabels) |> Markdown.parse
 
 # ╔═╡ Cell order:
 # ╟─7a90d749-6955-4e1b-8c50-3f2a8e023caa
