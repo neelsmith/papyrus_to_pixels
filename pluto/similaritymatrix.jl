@@ -155,7 +155,7 @@ Plot(
         x=rowlabels,
         y=rowlabels,
         z= similarityints,
-		legend = :none
+		showscale = false
     ),
     Layout(xaxis_side="top",
 		height = 400,
