@@ -56,5 +56,5 @@ Deadlines to note:
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
 | *Apr 23*, *Apr 25* | class | Project fair, 1 |  |
-| *Apr 30*, *May 2* | Project fair, 2 | Evolution, textual transmission, AI, and you | **Thu**: *Last class.* |
+| *Apr 30*, *May 2* | Project fair, 2 | [Evolution, textual transmission, AI, and you](../classes/conclusion/) | **Thu**: *Last class.* |
 | *May 7*, *May 9* | *Study period* | *Exams begin* | **Tue**: *Complete project submission due.* |
