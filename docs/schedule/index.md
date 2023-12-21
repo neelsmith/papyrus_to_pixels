@@ -29,10 +29,10 @@ Deadlines to note:
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Feb 6*, *Feb 8* | DNA sequences | Workshop lab 2: [comparing DNA sequences](../labs/lab2/) in beetles and humans | **Thu**: ***NB 2** due.* |
-| *Feb 13*, *Feb 15* | Review collections of data in Julia, and [plain-text formats](../classes/textio/) | Zipf's law |  |
+| *Feb 6*, *Feb 8* | DNA sequences as texts | Workshop lab 2: [comparing DNA sequences](../labs/lab2/) in beetles and humans | **Thu**: ***NB 2** due.* |
+| *Feb 13*, *Feb 15* | 🔛 Tree models in biology and textual criticism | Interpreting classified data as trees: language evolution |  |
 | *Feb 20*, *Feb 22* | Workshop lab 3: (Feature extraction: [finding named entities](../labs/lab3/)?) | 🔛 Defining features | **Tue**: ***NB 3** due.* |
-| *Feb 27*, *Feb 29* | Workshop lab 4: (Classification: [comparing translations](../labs/lab4) of the Bible ?) | class | **Thu**: *Last class before spring break.* **Tue**: ***NB 4** due.* |
+| *Feb 27*, *Feb 29* | Workshop lab 4: (Classification: [comparing translations](../labs/lab4) of the Bible ?) | Zipf's law ? | **Thu**: *Last class before spring break.* **Tue**: ***NB 4** due.* |
 | *Mar 5*, *Mar 7* | ***Spring break*** | ***Spring break*** |  |
 
 ## Developing a project proposal
@@ -47,7 +47,7 @@ Deadlines to note:
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Apr 2*, *Apr 4* | class | class | **Tue**: *Class resumes.* |
+| *Apr 2*, *Apr 4* | Review collections of data in Julia, and [plain-text formats](../classes/textio/) | class | **Tue**: *Class resumes.* |
 | *Apr 9*, *Apr 11* | Workshop draft code | Presentations | **Tue**: *First draft of project code due.* |
 | *Apr 16*, *Apr 18* | class | class |  |
 
