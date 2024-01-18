@@ -1,7 +1,7 @@
 ---
 title: "Goals and objectives"
 layout: page
-parent:  Syllabus
+parent: "Course syllabus"
 nav_order: 2
 ---
 

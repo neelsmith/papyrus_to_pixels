@@ -1,9 +1,15 @@
 ---
 title: "Course requirements and grades"
 layout: page
-parent:  Syllabus
 nav_order: 7
+parent: "Course syllabus"
 ---
+
+
+
+
+
+
 
 
 # Course requirements and grades

@@ -1,7 +1,7 @@
 ---
 title: "Policies"
 layout: page
-parent:  Syllabus
+parent: "Course syllabus"
 nav_order: 10
 ---
 

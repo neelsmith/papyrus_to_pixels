@@ -1,7 +1,7 @@
 ---
 title: "What to expect"
 layout: page
-parent:  Syllabus
+parent: "Course syllabus"
 nav_order: 5
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Contact information"
 layout: page
-parent:  Syllabus
+parent: "Course syllabus"
 nav_order: 1
 ---
 

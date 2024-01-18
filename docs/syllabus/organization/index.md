@@ -2,7 +2,7 @@
 title: "Organization of the course"
 layout: page
 parent:  Syllabus
-nav_order: 4
+parent: "Course syllabus"
 ---
 
 # Organization of the course
