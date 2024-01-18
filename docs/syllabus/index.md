@@ -7,4 +7,3 @@ has_children: true
 
 # Course syllabus
 
-Ultimately, a copy will go here.
