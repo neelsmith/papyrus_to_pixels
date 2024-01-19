@@ -35,3 +35,4 @@ We will introduce the course's subject matter on Tuesday. Jim Cahill from Educat
 
 - *Wednesday, 12:00*: complete Google form with introductory survey information
 - *Thursday, 12:00*:  submit required assignment for [today's class preparation](./classes/content+tech1/).
+

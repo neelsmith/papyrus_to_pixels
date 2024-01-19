@@ -11,12 +11,14 @@ In this class, we'll begin to use the Julia REPL to explore texts of Abraham Lin
 
 ## Contract for group work
 
+Please download and complete the contract for group work. Print a copy of your completed contract, and submit one hard copy of the contract signed by all members of your group.
+
+While digital assignments are due at 12:00 pm, this hard-copy requirement is instead due 2:00 when you come to class.
 
 ## Class preparation
 
-> **TBA**: add background reading on the Gettysburg Address
 
-1. TBA
+1. Read the two introductory paragraphs about the Gettysburg Address on this page from [abrahamlincolnonline.org](https://www.abrahamlincolnonline.org/lincoln/speeches/gettysburg.htm)
 2. If you have followed the instructions in [the previous class preparation assignment to install Julia on your computer](../content+tech1/), make sure you can open a Julia REPL (or interactive terminal) on your computer.
 
 
