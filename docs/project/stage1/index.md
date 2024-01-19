@@ -1,8 +1,8 @@
 ---
 parent: "Original project"
 layout: page
-nav_order: 2
-title: "Project stage 2: initial project idea"
+nav_order: 1
+title: "Project stage 1: initial project idea"
 ---
 
 
