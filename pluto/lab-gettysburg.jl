@@ -46,13 +46,13 @@ md"""
 *Authors*: **-->ALL NAMES OF COLLABORATORS HERE<--**
 
 
-*Date last modified*: **Feb. 6, 2023** **-->UPDATE THIS DATE WHEN YOU SUBMIT YOUR ASSIGNMENT<--**
+*Date last modified*: **Jan. 19, 2024** **-->UPDATE THIS DATE WHEN YOU SUBMIT YOUR ASSIGNMENT<--**
 
 """
 
 # ╔═╡ 721993ff-db6a-498a-b4ed-d9131d47de36
 md"""
-# Bio 114: classifying rhetoric
+# Classifying rhetoric
 """
 
 # ╔═╡ 34fd640a-71fc-446d-ad9b-230153e59b50

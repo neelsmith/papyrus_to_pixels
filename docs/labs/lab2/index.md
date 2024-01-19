@@ -7,4 +7,8 @@ parent: "Labs"
 
 # Matching sequences in DNA
 
-TBA
+**TBA**
+
+- texts can be viewed as a seriees of symbols
+- DNA sequences can be viewed as series of symbols
+
