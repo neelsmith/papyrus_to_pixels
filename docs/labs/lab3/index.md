@@ -1,10 +1,10 @@
 ---
-title: "Lab 3: finding named entities in text"
+title: "Lab 3: feature extraction"
 layout: page
 nav_order: 3
 parent: "Labs"
 ---
 
-# (Possible topic?) Feature extraction: finding named entities in text
+# Feature extraction
 
 TBA
