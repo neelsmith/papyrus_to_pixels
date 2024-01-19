@@ -21,8 +21,12 @@ Before our first hands-on class session on Thursday, Jan. 25, please make sure t
 
 ## Tips
 
-> they won't believe it on the syllabus, but I'll repeat it a lot
-
+- expect to be wrong
+- test to find out if you're right
+- break problems down into smaller, simpler pieces
+- rewrite: your prose, your code
+- fail early
+- 
 
 
 
