@@ -8,8 +8,6 @@ has_children: true
 
 # Papyrus to Pixels: home page
 
-Very rough draft of a [schedule](./schedule/)
-
 
 Main sections of course content:
 
