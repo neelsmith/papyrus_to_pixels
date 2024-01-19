@@ -17,7 +17,7 @@ You determine your own course grade by satisfactorily completing a number of ass
 
 All assignments will be graded satisfactory/unsatisfactory according to an explicit specification of requirements: if you complete *all* requirements, the assignment is satisfactory. If you complete an assignment and submit it on time, but it fails to satisfy all requirements, you will have opportunities to revise the assignment to receive full credit for it.
 
-The deadline for all written submssions such as lab notebooks is noon on the day of the due date.
+The deadline for all written submissions (such as lab notebooks) is noon on the day of the due date.
 
 
 ## Small-group lab assignments
@@ -37,14 +37,15 @@ The total points you can earn in this category is 2.
 
 ## Longer research project
 
-In the last part of the course, you will develop an original research project in five steps. Each step is worth two points, and earns points just like the previous lab assignments: you earn one point if the step is submitted by the due date, and a second point if all specifications for that step are satisfied by the final deadline for revisions.
+In the last part of the course, you will develop an original research project in five steps. Each step is worth two points, calculated just like the previous lab assignments: you earn one point if the step is submitted by the due date, and a second point if all specifications for that step are satisfied by the final deadline for revisions.
 
 
 ## Attendance
 
-Being prepared and attending class is an essential part of the learning proces.
+Being prepared and attending class is an essential part of the learning process. We have 27 scheduled class meetings. Occasionally, your class preparation instructions on the daily schedule will require you to submit some preparatory work prior to class. To receive credit for a class meeting, you must submit any required preparatory work on time and attend class. (See the section of the syllabus on "[Policies](https://neelsmith.github.io/papyrus_to_pixels/syllabus/policies/)" for guidance on excused absences.) You may therefore receive credit for up to 27 class meetings, which earn you up to four points in the class attendance category.
 
-We have 27 scheduled class meetings. This table summarizes the scale of attendance points:
+The following table summarizes how your class attendance record translates to points for your course grade.
+
 
 | Class meetings attended |	Points earned |
 | --- | --- |
@@ -58,7 +59,7 @@ The total points you can earn in this category is 4.
 
 ## Determination of final course grade
 
-Your course grade will be recorded by reading the following table.  Each column records points in one of the five grade categories. In each row, the numbers represent the *minimum* number of points required in that category for the grade in that row. For example, if you get 0 points in the category "Resources" (contribution to a collection of course resources), the highest grade you could earn is a C-.  If you earn the maxiumum of 8 points for lab assignments, 10 points for a course project, and 2 points for contribution to course resources, but only 2 points for attendance, your course grade is a B-.
+Your course grade will be recorded by reading the following table.  Each column records points in one of the five grade categories. In each row, the numbers represent the *minimum* number of points required in that category for the grade in that row. For example, if you get 0 points in the category "Resource" (contribution to a collection of course resources), the highest grade you could earn is a C-.  If you earn the maxiumum of 8 points for lab assignments, 10 points for a course project, and 2 points for contribution to course resources, but only 2 points for attendance, your course grade is a B-.
 
 
 | Course grade |  Lab assignments (8) | Project (10) | Resource (2) | Attendance (4) |

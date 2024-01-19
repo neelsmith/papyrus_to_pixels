@@ -15,6 +15,14 @@ has_children: true
 - contract for collaborative work
 
 
+## Common structure
+
+- goal
+- breakdown subproblems
+    - assessment
+    - implementation
+- reflection
+
 ## Collaborative assignments
 
 > A single submission for the entire team
