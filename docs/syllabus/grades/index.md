@@ -6,19 +6,13 @@ parent: "Course syllabus"
 ---
 
 
-
-
-
-
-
-
 # Course requirements and grades
 
 You determine your own course grade by satisfactorily completing a number of assignments in these categories:
 
 1. four lab assignments, completed in small groups
-1. a longer research project completed in multiple stages
 1. a contribution to a collection of course resources
+1. a longer research project completed in multiple stages
 1. class attendance
 
 All assignments will be graded satisfactory/unsatisfactory according to an explicit specification of requirements: if you complete *all* requirements, the assignment is satisfactory. If you complete an assignment and submit it on time, but it fails to satisfy all requirements, you will have opportunities to revise the assignment to receive full credit for it.
@@ -28,47 +22,53 @@ The deadline for all written submssions such as lab notebooks is noon on the day
 
 ## Small-group lab assignments
 
+In the first part of the course, you will complete four lab exercises that you will work on in teams. Each exercise is worth two points. You earn one point if the *completed* assignment is submitted by the due date. You earn a second point if *all* the specifications for the assignment are satisfied by the final deadline for revisions.
 
+The total points you can earn in this category is 8.
+
+
+## Contribution to a collection of course resources
+
+In the course of developing a longer research project, you will share some part of your experience with the rest of the class. You can earn one point for successfully proposing an idea to share, and a second point for submitting a satisfactory contribution.
+
+
+The total points you can earn in this category is 2.
 
 
 ## Longer research project
 
+In the last part of the course, you will develop an original research project in five steps. Each step is worth two points, and earns points just like the previous lab assignments: you earn one point if the step is submitted by the due date, and a second point if all specifications for that step are satisfied by the final deadline for revisions.
 
-
-## Contribution to a collection of course resources
 
 ## Attendance
 
 Being prepared and attending class is an essential part of the learning proces.
 
-We have 39 scheduled class meetings. This table summarizes the scale of attendance points:
+We have 27 scheduled class meetings. This table summarizes the scale of attendance points:
 
 | Class meetings attended |	Points earned |
 | --- | --- |
-| 37+ |	6 |
+| 26+ |	4 |
+| 25	| 3 |
+| 24	| 2 |
+| 23	| 1 |
+| < 23	| 0 |
 
-36	5
-34	4
-32	3
-30	2
-< 22	0
-The total points you can earn in this category is 6.
+The total points you can earn in this category is 4.
 
 ## Determination of final course grade
 
+Your course grade will be recorded by reading the following table.  Each column records points in one of the five grade categories. In each row, the numbers represent the *minimum* number of points required in that category for the grade in that row. For example, if you get 0 points in the category "Resources" (contribution to a collection of course resources), the highest grade you could earn is a C-.  If you earn the maxiumum of 8 points for lab assignments, 10 points for a course project, and 2 points for contribution to course resources, but only 2 points for attendance, your course grade is a B-.
 
-For each category except the CBL project, the preceding sections define the *maximum* number of assignments. If the daily course schedule changes, and we have fewer than the maximum number of assignments, you will receive full credit for any dropped assignments. For example, if we have 7 in-class language assessments instead of the maximum of 8, you will receive 2 points for the omitted assignment; that plus your points on the seven completed assignments would be your total for the semester in the category of language assessments.
 
-Your course grade will be recorded from the following table.  In the row for each grade, the numbers in each column represent the minimum number of points required in that category.
-
-| Course grade |  Portfolio (18) | Homework (12) | Vocab. assessments (20) | Language assessments  (16) | CBL participation | CBL project |
+| Course grade |  Lab assignments (8) | Project (10) | Resource (2) | Attendance (4) |
 | --- | --- | --- | --- | --- |--- | --- |
-| A |17 | 12 | 18 |  16 | 9| 6 |
-| A- |17| 11 | 16 |  15 |  9 | 6 |
-| B+ | 16 | 10| 16 | 14 | 8 | 6 |
-| B | 15 | 10 | 16 | 13 | 8 | 6 |
-| B- | 14 | 9 | 14 | 12 |8  | 6 |
-| C+ | 14  | 9 | 13  | 12| 6  | 6 |
-| C | 12 |  8  | 13 | 12 | 6 | 4 |
-| C- | 12 | 8 | 12 | 12 | 5 | 4 |
-| D | 10  | 6 | 10 | 8 | 5| 4 |
+| A | 8 | 10 | 2 | 4 |
+| A-  | 7 | 10  | 2 | 4 |
+| B+  | 7 | 9 | 2| 3 |
+| B  | 6 | 8 |2 | 3 |
+| B-  | 6| 8 | 2 | 2 |
+| C+  |  6 | 7 | 1| 2 |
+| C  | 5 | 7 | 1 | 1 |
+| C-  | 4 | 6 | 0 | 1 |
+| D  | 3 | 6 | 0 | 1 |
