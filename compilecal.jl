@@ -20,8 +20,8 @@ has_children: true
 
 Deadlines to note:
 
-- 📓 Lab notebook or other assignment due
-- 🔛 Sections meet separately
+- 📓 Lab notebook or other written assignment due
+- 🔛 Sections meet separately: CLAS 199 in Fenwick 415
 
 """
 

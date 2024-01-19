@@ -2,19 +2,19 @@
 
 ## Introduction to course
 
-Introduction to course
-[Evolution, textual transmission, and code](../classes/content+tech1/)
+[Introduction to course](../classes/intro/)
+[Evolution, textual transmission, and code](../classes/content+tech1/) 📓
 
 
 ## Modelling species and texts
 
-Using [Julia in the REPL](../classes/repl1/) 
-Workshop lab 1: [rhetorical style at Gettysburg](../labs/lab1/)
+Using [Julia in the REPL](../classes/repl1/) 📓
+Workshop lab 1: [rhetorical style at Gettysburg](../labs/lab1/) 📓
 
 ## Classifying species and texts
 
 DNA sequences as texts
-Workshop lab 2: [comparing DNA sequences](../labs/lab2/) in beetles and humans
+Workshop lab 2: [comparing DNA sequences](../labs/lab2/) in beetles and humans 📓
 
 
 🔛 Tree models in biology and textual criticism
@@ -23,11 +23,11 @@ Interpreting classified data as trees: language evolution
 
 
 
-Workshop lab 3: (Feature extraction: [finding named entities](../labs/lab3/)?)
-🔛 Defining features
+Workshop lab 3: Feature extraction 📓
+🔛 Defining features 
 
-Workshop lab 4: (Classification: [comparing translations](../labs/lab4) of the Bible ?)
-Zipf's law ?
+Workshop lab 4: Classification 📓
+Zipf's law
 
 ***Spring break***
 ***Spring break***

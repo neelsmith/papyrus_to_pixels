@@ -9,30 +9,30 @@ has_children: true
 
 Deadlines to note:
 
-- 📓 Lab notebook or other assignment due
-- 🔛 Sections meet separately
+- 📓 Lab notebook or other written assignment due
+- 🔛 Sections meet separately: CLAS 199 in Fenwick 415
 
 
 ## Introduction to course
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Jan 23*, *Jan 25* | Introduction to course | [Evolution, textual transmission, and code](../classes/content+tech1/) |  |
+| *Jan 23*, *Jan 25* | [Introduction to course](../classes/intro/) | [Evolution, textual transmission, and code](../classes/content+tech1/) 📓 |  |
 
 ## Modelling species and texts
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Jan 30*, *Feb 1* | Using [Julia in the REPL](../classes/repl1/)  | Workshop lab 1: [rhetorical style at Gettysburg](../labs/lab1/) | **Thu**: ***NB 1** due.* |
+| *Jan 30*, *Feb 1* | Using [Julia in the REPL](../classes/repl1/) 📓 | Workshop lab 1: [rhetorical style at Gettysburg](../labs/lab1/) 📓 | **Thu**: ***NB 1** due.* |
 
 ## Classifying species and texts
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Feb 6*, *Feb 8* | DNA sequences as texts | Workshop lab 2: [comparing DNA sequences](../labs/lab2/) in beetles and humans | **Thu**: ***NB 2** due.* |
+| *Feb 6*, *Feb 8* | DNA sequences as texts | Workshop lab 2: [comparing DNA sequences](../labs/lab2/) in beetles and humans 📓 | **Thu**: ***NB 2** due.* |
 | *Feb 13*, *Feb 15* | 🔛 Tree models in biology and textual criticism | Interpreting classified data as trees: language evolution |  |
-| *Feb 20*, *Feb 22* | Workshop lab 3: (Feature extraction: [finding named entities](../labs/lab3/)?) | 🔛 Defining features | **Tue**: ***NB 3** due.* |
-| *Feb 27*, *Feb 29* | Workshop lab 4: (Classification: [comparing translations](../labs/lab4) of the Bible ?) | Zipf's law ? | **Thu**: *Last class before spring break.* **Tue**: ***NB 4** due.* |
+| *Feb 20*, *Feb 22* | Workshop lab 3: Feature extraction 📓 | 🔛 Defining features  | **Tue**: ***NB 3** due.* |
+| *Feb 27*, *Feb 29* | Workshop lab 4: Classification 📓 | Zipf's law | **Thu**: *Last class before spring break.* **Tue**: ***NB 4** due.* |
 | *Mar 5*, *Mar 7* | ***Spring break*** | ***Spring break*** |  |
 
 ## Developing a project proposal

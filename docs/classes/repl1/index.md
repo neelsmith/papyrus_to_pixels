@@ -9,6 +9,9 @@ nav_order: 4
 
 In this class, we'll begin to use the Julia REPL to explore texts of Abraham Lincoln's Gettysburg Address.
 
+## Contract for group work
+
+
 ## Class preparation
 
 > **TBA**: add background reading on the Gettysburg Address
