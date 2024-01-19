@@ -8,20 +8,27 @@ has_children: true
 
 # Papyrus to Pixels: home page
 
+## Welcome!
 
+Classics 199-S05, "Papyrus to Pixels," is offered jointly this semester with BIO 199-S02, "Change Through Time."  Our two courses will meet jointly in O'Neil 101 on several occasions. (*NB: including the first day of class*!)  When the courses meet separately, CLAS 199-S05 will meet in Fenwick 420.
 
-Meets jointly with BIO 199-S02, "Change through time."
+Our coordinated courses are organized in three main sections:
 
+1. Modelling species and texts
+2. Classifying species and texts
+3. Interpreting change through time
 
-Main sections of course content:
-
-- Modelling species and texts
-- Classifying species and texts
-- Interpreting change through time
-
-Hands-on course activities:
+A major part of your course assignments will focus on hands-on work, including:
 
 1. [Small-group labs](./labs/) modelling, classifying and interpreting evolution/transmission
 2. Developing an [original research project](./project/)
+
+
+## Week at a glance: Jan. 23 - 25
+
+We will introduce the course's subject matter, and 
+
+
+### Due dates
 
 
