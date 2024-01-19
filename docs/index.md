@@ -33,5 +33,6 @@ We will introduce the course's subject matter on Tuesday. Jim Cahill from Educat
 
 ### Due dates this week
 
-- *Wednesday, 12:00*: complete Google form with introductory survey information
+- *Wednesday, 12:00*: complete [this Google form](https://docs.google.com/forms/d/11tgd9yTntxP0_2yuO199p0tAhjGgFCk-9Jvy_Ve68eQ/edit?ts=65a96ef8) with introductory survey information
 - *Thursday, 12:00*:  submit required assignment for [today's class preparation](./classes/content+tech1/).
+

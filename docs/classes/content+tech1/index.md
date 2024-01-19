@@ -18,7 +18,13 @@ The course emphasizes hands-on work, and you are expected to be able to use a co
 If you are uncertain how to do this or need help, you can get help from Educational Design and Digital Media Services.
 
 
-### 1. Familiarizing yourself with the syllabus
+### 1. Survey
+
+Please complete [this Google form](https://docs.google.com/forms/d/11tgd9yTntxP0_2yuO199p0tAhjGgFCk-9Jvy_Ve68eQ/edit?ts=65a96ef8). Your responses will be helpful to the instructors in both courses.
+
+> ‼️ Note that, exceptionally, this requirement is due on *Wednesday, Jan. 24* at 12:00.
+
+### 2. Familiarizing yourself with the syllabus
 
 Syllabi are often too long and not terrribly interesting: it's tiresome to read the same college-wide policies repeated in syllabi for four different courses. Nevertheless, they include important information you need to be familiar with. Please familiarize yourself with the course syllabus handed out in class (or online [here](https://neelsmith.github.io/papyrus_to_pixels/syllabus/)).
 
@@ -32,7 +38,7 @@ If you're not sure how to save a plain-text file or need other technical help, p
 
 
 
-### 2. Defining evolution and textual transmission
+### 3. Defining evolution and textual transmission
 
 
 *Evolution*: introductory reading *TBA**
@@ -41,7 +47,7 @@ If you're not sure how to save a plain-text file or need other technical help, p
 
 For discussion in class, you should be able to identify at least three different factors that affect the survival of an ancient Greek or Latin text today.
 
-### 3. Preparing to write code
+### 4. Preparing to write code
 
 This semester, we'll explore texts and biological data using the Julia programming language. If you have a computer, before coming to class, follow [these instructions](../../techprereqs/) to install Julia on your computer. If you don't have access to a computer, you will be able to use the machines in the Classics Department's research lab in Fenwick 406.  (Please speak with Prof. Smith if you would like to have access to the Fenwick 406 outside of regular work hours when the Classics Department Administrator can let you in.)
 
