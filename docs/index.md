@@ -10,7 +10,7 @@ has_children: true
 
 ## Welcome!
 
-Classics 199-S05, "Papyrus to Pixels," is offered jointly this semester with BIO 199-S02, "Change Through Time."  Our two courses will meet jointly in O'Neil 101 on several occasions. (*NB: including the first day of class*!)  When the courses meet separately, CLAS 199-S05 will meet in Fenwick 420.
+Classics 199-S05, "Papyrus to Pixels," is offered jointly this semester with BIO 199-S02, "Change Through Time."  Our two courses will meet together in O'Neil 101 on several occasions. (*NB: including the first day of class*!)  When the courses meet separately, CLAS 199-S05 will meet in Fenwick 420.
 
 Our coordinated courses are organized in three main sections:
 
