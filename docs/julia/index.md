@@ -22,7 +22,7 @@ has_children: true
 - creating matrices in Julia: modelling a [feature matrix](./featurematrix.html)
 
 
-## AskAI
+## Code with an AI
 
 - juliahub's [AskAI](https://juliahub.com/ui/AskAI)
 
