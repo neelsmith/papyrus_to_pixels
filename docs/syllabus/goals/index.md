@@ -13,7 +13,7 @@ Shared goals with both sections:
 - work collaboratively
 - cultivate habits of test-driven thinking:
     - hypotheses are wrong until proven otherwise
-    - to know if a test works, you must first fail it
+    - to know if a test works, you must first fail it. That's why the first word of our embedded theme is "fail."
     - iteratively improve
 - develop a reproducible research project from an initial question to implementation, including
     - explicit license for reuse
