@@ -21,11 +21,7 @@ Any supplementary hard-copy material will be distributed in class. There is no t
 
 ## Technical requisites
 
-As part of your lab assignments, you will learn how to write code in the Julia language. You will want to install it on your personal computer, or speak with Prof. Smith about access to the Classics Department research lab, where machines have Julia installed.
-
-To install Julia on your computer, follow these instructions for class preparation
-
-
+As part of your lab assignments, you will learn how to write code in the Julia language. You will want to install it on your personal computer (you can follow [these directions](https://neelsmith.github.io/papyrus_to_pixels/techprereqs/)), or speak with Prof. Smith about access to the Classics Department research lab, where machines have Julia installed.
 
 
 
