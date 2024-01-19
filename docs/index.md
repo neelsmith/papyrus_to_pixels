@@ -28,7 +28,7 @@ A major part of your course assignments will focus on hands-on work, including:
 
 We meet in O'Neil 101 for both classes this week.
 
-We will introduce the course's subject matter on Tuesday. Jim Cahill from Educational Design and Digital Media Services will visit us on Thursday, as we set introduce and test the technologies we will rely on this semester.
+We will introduce the course's subject matter on Tuesday. Jim Cahill from Educational Design and Digital Media Services will visit us on Thursday, as we  introduce and test the technologies we will rely on this semester.
 
 
 ### Due dates this week
