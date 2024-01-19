@@ -29,7 +29,7 @@ Deadlines to note:
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Feb 6*, *Feb 8* | DNA sequences as texts | Workshop lab 2: [comparing DNA sequences](../labs/lab2/) in beetles and humans 📓 | **Thu**: ***NB 2** due.* |
+| *Feb 6*, *Feb 8* | [DNA sequences](../classes/dna/) as texts | Workshop lab 2: [comparing DNA sequences](../labs/lab2/) in beetles and humans 📓 | **Thu**: ***NB 2** due.* |
 | *Feb 13*, *Feb 15* | 🔛 Tree models in biology and textual criticism | Interpreting classified data as trees: language evolution |  |
 | *Feb 20*, *Feb 22* | Workshop lab 3: Feature extraction 📓 | 🔛 Defining features  | **Tue**: ***NB 3** due.* |
 | *Feb 27*, *Feb 29* | Workshop lab 4: Classification 📓 | Zipf's law | **Thu**: *Last class before spring break.* **Tue**: ***NB 4** due.* |
@@ -39,9 +39,9 @@ Deadlines to note:
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Mar 12*, *Mar 14* | Introduction to research projects |  🔛  Extending your lab work | **Tue**: *Class resumes.* |
-| *Mar 19*, *Mar 21* | Workshop: Formal project proposals |  🔛 📓 Project proposal due | **Thu**: *Project proposal due.* |
-| *Mar 26*, *Mar 28* | class | ***Easter break*** | **Tue**: *Last class before Easter break.* |
+| *Mar 12*, *Mar 14* | Introduction to research projects |  🔛  Extending your lab work 📓 | **Tue**: *Class resumes.* |
+| *Mar 19*, *Mar 21* | Workshop: Formal project proposals |  🔛 class | **Thu**: *Project proposal due.* |
+| *Mar 26*, *Mar 28* |  📓  Project proposal due | ***Easter break*** | **Tue**: *Last class before Easter break.* |
 
 ## Investigating a research topic
 

@@ -13,7 +13,7 @@ Workshop lab 1: [rhetorical style at Gettysburg](../labs/lab1/) 📓
 
 ## Classifying species and texts
 
-DNA sequences as texts
+[DNA sequences](../classes/dna/) as texts
 Workshop lab 2: [comparing DNA sequences](../labs/lab2/) in beetles and humans 📓
 
 
@@ -35,15 +35,17 @@ Zipf's law
 ## Developing a project proposal
 
 Introduction to research projects
- 🔛  Extending your lab work
+ 🔛  Extending your lab work 📓
 
 
 Workshop: Formal project proposals
- 🔛 📓 Project proposal due
+ 🔛 class
 
 
 
-class
+ 📓  Project proposal due
+
+
 ***Easter break***
 
 
