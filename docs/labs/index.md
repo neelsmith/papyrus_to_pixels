@@ -6,7 +6,10 @@ has_children: true
 ---
 
 
-# Labs
+# Lab assignments
+
+In the first section of the course, you will work in small teams to complete a series of hands-on lab assignments.  Based on the
+
 
 
 ## Prerequisites
