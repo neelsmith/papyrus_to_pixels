@@ -21,12 +21,22 @@ Before our first hands-on class session on Thursday, Jan. 25, please make sure t
 
 ## Tips
 
-- expect to be wrong
-- test to find out if you're right
-- break problems down into smaller, simpler pieces
-- rewrite: your prose, your code
-- fail early
-- 
+**Expect to be wrong.** You will try things in this course you have never tried before; you will not always succeed on your first try.  That's great! Every time you're wrong is an opportunity to learn something, and that's our highest course goal.
+
+**Fail early.** Give yourself time to be wrong. 
+
+**Test to find out if you're right.**  Make a habit of asking ahead of time how you will determine if your solution to a problem is correct. Create a test that you can apply to your work. Apply the test *before* you attempt to solve a problem, and *fail* the test. *Then* try to solve the problem. If your solution passes your test, you can be confident your solution is valid.
+
+**Rewrite.** Writing well always requires rewriting.  This is true of your prose, and of your code. While we have to set practical deadlines when we stop rewriting, you should never expect to write something once.
+
+
+
+**Break problems down into smaller, simpler pieces**. It is sometimes said the problem decomposition is the essence of computer science, but the ability to analyze complex problems in terms of smaller parts is central to scholarly thinking more generally. For example, if you wanted to compare the rhetorical style of Abraham Lincoln's Gettysburg address with the keynote speech by Edward Everett at the Gettysburg dedication, you would need to break down the idea of style into specific features.  If one feature was length of sentences, you would need to break that down in to the problems of isolating sentences, and measuring their length. 
+
+
+
+
+
 
 
 

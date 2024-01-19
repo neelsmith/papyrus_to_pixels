@@ -2,7 +2,7 @@
 title: "Goals and objectives"
 layout: page
 parent: "Course syllabus"
-nav_order: 2
+nav_order: 3
 ---
 
 # Goals

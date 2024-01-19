@@ -9,6 +9,10 @@ has_children: true
 # Papyrus to Pixels: home page
 
 
+
+Meets jointly with BIO 199-S02, "Change through time."
+
+
 Main sections of course content:
 
 - Modelling species and texts

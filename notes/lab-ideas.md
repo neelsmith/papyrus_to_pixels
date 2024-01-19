@@ -12,3 +12,8 @@ Possible demos to prompt thinking about project possibilities:
 - deriving evolutionary trees
 
 
+
+
+Federalist papers: https://trisxcjoseph.medium.com/clustering-analysis-who-wrote-the-last-federalist-papers-8226140fddb0
+
+https://blog.wolfram.com/2018/10/11/revisiting-the-disputed-federalist-papers-historical-forensics-with-the-chaos-game-representation-and-ai/

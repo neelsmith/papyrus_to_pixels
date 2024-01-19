@@ -42,9 +42,10 @@ In the last part of the course, you will develop an original research project in
 
 ## Attendance
 
-Being prepared and attending class is an essential part of the learning proces.
+Being prepared and attending class is an essential part of the learning process. We have 27 scheduled class meetings. Occasionally, your class preparation instructions on the daily schedule will require you to submit some preparatory work prior to class. To receive credit for a class meeting, you must submit any required preparatory work and attend class. (See the section of the syllabus on "Policies" for guidance on excused absences.) You may therefore receive credit for up to 27 class meetings, which earn you up to four points in the class attendance category.
 
-We have 27 scheduled class meetings. This table summarizes the scale of attendance points:
+The following table summarizes how your class attendance record translates to points for your course grade.
+
 
 | Class meetings attended |	Points earned |
 | --- | --- |
