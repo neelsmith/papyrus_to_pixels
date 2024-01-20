@@ -4,16 +4,6 @@
 using Markdown
 using InteractiveUtils
 
-# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
-macro bind(def, element)
-    quote
-        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
-        local el = $(esc(element))
-        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
-        el
-    end
-end
-
 # ╔═╡ 013d3cd8-b92f-4fa8-99af-db2bb591a736
 begin 
 	using CitableBase
@@ -27,8 +17,11 @@ end
 # ╔═╡ 08162444-b78b-11ee-3077-812550ee5ff9
 md"""# Reading strings: DNA and texts"""
 
-# ╔═╡ 994f821e-581e-4cc6-9426-5efd7d3dc59b
-md"""*Size of n-gram*: $(@bind n Slider(1:4, show_value = true))"""
+# ╔═╡ f0f7d7ee-a199-4be9-8019-6e0e36413339
+s1 = "abcde"
+
+# ╔═╡ 472aa747-b433-455b-a39d-346061495f8c
+s2 = "cef"
 
 # ╔═╡ a51a8601-edb4-451a-ba13-98aa9ca8cf46
 # Ripped off from:
@@ -46,30 +39,7 @@ end
 
 
 # ╔═╡ 71ba155e-0fcc-42d6-81a2-4cb8fee225e4
-lcs("abcde", "ad")
-
-# ╔═╡ 61a6f572-25f5-4c79-bd5b-0ab2695fa13f
-s1 = "abdcde"
-
-# ╔═╡ 42130c93-b9a2-4df7-8968-d0cf61c9db70
-s2 = "dcf"
-
-# ╔═╡ 4ad3f502-f0c4-4d19-b3d2-cc8e2a5dd4a3
-  y,z = length(s1), length(s2)
-
-# ╔═╡ a2ad120b-3ae1-4837-8fbe-7a6e0c5d3ef7
-initialdp = OffsetArray(fill(0, y + 1, z + 1), -1, -1)
-
-# ╔═╡ 5d5b9a7b-9408-4fae-81f1-cfff4a2e3b0e
-    begin
-		dp = OffsetArray(fill(0, y + 1, z + 1), -1, -1)
-		for i in 1:y, j in 1:z
-	        dp[i, j] = max(
-	            dp[i - 1, j], dp[i, j - 1], dp[i - 1, j - 1] + Int(s1[i] == s2[j])
-	        )
-	    end
-		dp
-	end
+lcs(s1, s2)
 
 # ╔═╡ a03dc796-8af6-431a-bebc-40e20ab0da18
 # https://cn.julialang.org/LeetCode.jl/dev/democards/problems/problems/1092.shortest-common-supersequence/#problem1092
@@ -101,7 +71,7 @@ function scs(str1::String, str2::String)
 end
 
 # ╔═╡ 13b1a781-1d3a-408b-9fa1-55537a2c134f
-scs("abcd", "ade")
+scs(s1, s2)
 
 # ╔═╡ 683a32a4-955a-45ee-90b2-6cdda2fd1702
 
@@ -111,65 +81,6 @@ html"""
 <br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/>
 """
-
-# ╔═╡ 3b0afeef-d129-4780-b0da-b32362b7ed5e
-md"""> Acquire data"""
-
-# ╔═╡ 3c01fb5a-8ffa-46b9-bf18-ad0d2b23feaa
-datadir = joinpath(pwd() |> dirname, "data")
-
-# ╔═╡ 0b5e6b3a-e27c-4c4a-9e71-d7820eb5b2cb
-f1 = joinpath(datadir, "DNA.txt")
-
-# ╔═╡ 66cfd705-6d8e-4a0d-9692-c7cd267fc6ab
-rawdata = filter(ln -> !isempty(ln), readlines(f1))
-
-# ╔═╡ 3f160d3f-088a-4eb7-b65e-93fcfdf4722d
-typeof(rawdata)
-
-# ╔═╡ 7ff4539d-bb58-47b3-93cf-e0922755f4df
-function dnaparser(src)
-	labelleddata = []
-	species = ""
-	data = ""
-	for ln in src
-		if startswith(ln, ">")
-			if ! isempty(species)
-				push!(labelleddata, (species = species, dna = data))
-			end
-			species = replace(ln, ">" => "")
-			data = ""
-		else
-			data = ln
-		end
-	end
-	push!(labelleddata,(species = species, dna = data))
-	labelleddata
-end
-
-# ╔═╡ cfebfdf3-3520-4a3a-8a00-241fd366dac3
-dataset = dnaparser(rawdata)
-
-# ╔═╡ 42d6da9d-2a3a-447c-93e7-07d24600f5b4
-hs = dataset[1]
-
-# ╔═╡ b491f8d4-a356-4975-85db-c61bed92c954
-ngrams = join.(slidingwindow(split(hs.dna, ""), n = n)) 
-
-# ╔═╡ 6803fb02-9906-476d-a7e5-b5e0cad51ba3
-counts = countmap(ngrams) |> OrderedDict
-
-# ╔═╡ 1fdef089-7462-42f6-bba6-7239a252252a
-sorted = sort(counts; byvalue = true, rev = true)
-
-# ╔═╡ c3f06aaa-bc2c-4474-b038-7430038fe164
-hs.dna |> length
-
-# ╔═╡ abff8302-7dce-4e7b-9748-f484b420ec34
-df = dataset[2]
-
-# ╔═╡ 713f715e-85ac-4679-8f79-5e5eca84a466
-df.dna |> length
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -642,31 +553,13 @@ version = "17.4.0+2"
 # ╔═╡ Cell order:
 # ╠═013d3cd8-b92f-4fa8-99af-db2bb591a736
 # ╟─08162444-b78b-11ee-3077-812550ee5ff9
-# ╟─994f821e-581e-4cc6-9426-5efd7d3dc59b
-# ╠═b491f8d4-a356-4975-85db-c61bed92c954
-# ╠═6803fb02-9906-476d-a7e5-b5e0cad51ba3
+# ╠═f0f7d7ee-a199-4be9-8019-6e0e36413339
+# ╠═472aa747-b433-455b-a39d-346061495f8c
 # ╠═71ba155e-0fcc-42d6-81a2-4cb8fee225e4
 # ╠═13b1a781-1d3a-408b-9fa1-55537a2c134f
 # ╠═a51a8601-edb4-451a-ba13-98aa9ca8cf46
-# ╠═61a6f572-25f5-4c79-bd5b-0ab2695fa13f
-# ╠═42130c93-b9a2-4df7-8968-d0cf61c9db70
-# ╠═4ad3f502-f0c4-4d19-b3d2-cc8e2a5dd4a3
-# ╠═a2ad120b-3ae1-4837-8fbe-7a6e0c5d3ef7
-# ╠═5d5b9a7b-9408-4fae-81f1-cfff4a2e3b0e
 # ╠═a03dc796-8af6-431a-bebc-40e20ab0da18
-# ╠═1fdef089-7462-42f6-bba6-7239a252252a
-# ╠═42d6da9d-2a3a-447c-93e7-07d24600f5b4
-# ╠═abff8302-7dce-4e7b-9748-f484b420ec34
-# ╠═c3f06aaa-bc2c-4474-b038-7430038fe164
-# ╠═713f715e-85ac-4679-8f79-5e5eca84a466
 # ╠═683a32a4-955a-45ee-90b2-6cdda2fd1702
 # ╟─cec08ff2-e857-4838-9634-d93c8a95d57b
-# ╟─3b0afeef-d129-4780-b0da-b32362b7ed5e
-# ╠═3c01fb5a-8ffa-46b9-bf18-ad0d2b23feaa
-# ╠═0b5e6b3a-e27c-4c4a-9e71-d7820eb5b2cb
-# ╠═66cfd705-6d8e-4a0d-9692-c7cd267fc6ab
-# ╠═3f160d3f-088a-4eb7-b65e-93fcfdf4722d
-# ╠═cfebfdf3-3520-4a3a-8a00-241fd366dac3
-# ╟─7ff4539d-bb58-47b3-93cf-e0922755f4df
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
