@@ -30,6 +30,79 @@ md"""# Reading strings: DNA and texts"""
 # ╔═╡ 994f821e-581e-4cc6-9426-5efd7d3dc59b
 md"""*Size of n-gram*: $(@bind n Slider(1:4, show_value = true))"""
 
+# ╔═╡ a51a8601-edb4-451a-ba13-98aa9ca8cf46
+# Ripped off from:
+# https://cn.julialang.org/LeetCode.jl/dev/democards/problems/problems/1143.longest-common-subsequence/#problem1143
+function lcs(itr1, itr2)::Int32
+    m, n = length(itr1) + 1, length(itr2) + 1
+    dp = fill(0, m, n)
+
+    for i in 2:m, j in 2:n
+        dp[i, j] = (itr1[i - 1] == itr2[j - 1]) ? (dp[i - 1, j - 1] + 1) : max(dp[i - 1, j], dp[i, j - 1])
+    end
+
+    return dp[m, n]
+end
+
+
+# ╔═╡ 71ba155e-0fcc-42d6-81a2-4cb8fee225e4
+lcs("abcde", "ad")
+
+# ╔═╡ 61a6f572-25f5-4c79-bd5b-0ab2695fa13f
+s1 = "abdcde"
+
+# ╔═╡ 42130c93-b9a2-4df7-8968-d0cf61c9db70
+s2 = "dcf"
+
+# ╔═╡ 4ad3f502-f0c4-4d19-b3d2-cc8e2a5dd4a3
+  y,z = length(s1), length(s2)
+
+# ╔═╡ a2ad120b-3ae1-4837-8fbe-7a6e0c5d3ef7
+initialdp = OffsetArray(fill(0, y + 1, z + 1), -1, -1)
+
+# ╔═╡ 5d5b9a7b-9408-4fae-81f1-cfff4a2e3b0e
+    begin
+		dp = OffsetArray(fill(0, y + 1, z + 1), -1, -1)
+		for i in 1:y, j in 1:z
+	        dp[i, j] = max(
+	            dp[i - 1, j], dp[i, j - 1], dp[i - 1, j - 1] + Int(s1[i] == s2[j])
+	        )
+	    end
+		dp
+	end
+
+# ╔═╡ a03dc796-8af6-431a-bebc-40e20ab0da18
+# https://cn.julialang.org/LeetCode.jl/dev/democards/problems/problems/1092.shortest-common-supersequence/#problem1092
+function scs(str1::String, str2::String)
+    m, n = length(str1), length(str2)
+    dp = OffsetArray(fill(0, m + 1, n + 1), -1, -1)
+    for i in 1:m, j in 1:n
+        dp[i, j] = max(
+            dp[i - 1, j], dp[i, j - 1], dp[i - 1, j - 1] + Int(str1[i] == str2[j])
+        )
+    end
+    res = ""
+    coord = CartesianIndex(m, n)
+    while coord != CartesianIndex(0, 0)
+        c1 = coord - CartesianIndex(1, 0)
+        c2 = coord - CartesianIndex(0, 1)
+        if c1 ∈ CartesianIndices(dp) && dp[coord] == dp[c1]
+            res *= str1[coord[1]]
+            coord -= CartesianIndex(1, 0)
+        elseif c2 ∈ CartesianIndices(dp) && dp[coord] == dp[c2]
+            res *= str2[coord[2]]
+            coord -= CartesianIndex(0, 1)
+        else
+            res *= str1[coord[1]]
+            coord -= CartesianIndex(1, 1)
+        end
+    end
+    return reverse(res)
+end
+
+# ╔═╡ 13b1a781-1d3a-408b-9fa1-55537a2c134f
+scs("abcd", "ade")
+
 # ╔═╡ 683a32a4-955a-45ee-90b2-6cdda2fd1702
 
 
@@ -572,6 +645,15 @@ version = "17.4.0+2"
 # ╟─994f821e-581e-4cc6-9426-5efd7d3dc59b
 # ╠═b491f8d4-a356-4975-85db-c61bed92c954
 # ╠═6803fb02-9906-476d-a7e5-b5e0cad51ba3
+# ╠═71ba155e-0fcc-42d6-81a2-4cb8fee225e4
+# ╠═13b1a781-1d3a-408b-9fa1-55537a2c134f
+# ╠═a51a8601-edb4-451a-ba13-98aa9ca8cf46
+# ╠═61a6f572-25f5-4c79-bd5b-0ab2695fa13f
+# ╠═42130c93-b9a2-4df7-8968-d0cf61c9db70
+# ╠═4ad3f502-f0c4-4d19-b3d2-cc8e2a5dd4a3
+# ╠═a2ad120b-3ae1-4837-8fbe-7a6e0c5d3ef7
+# ╠═5d5b9a7b-9408-4fae-81f1-cfff4a2e3b0e
+# ╠═a03dc796-8af6-431a-bebc-40e20ab0da18
 # ╠═1fdef089-7462-42f6-bba6-7239a252252a
 # ╠═42d6da9d-2a3a-447c-93e7-07d24600f5b4
 # ╠═abff8302-7dce-4e7b-9748-f484b420ec34
