@@ -1,12 +1,12 @@
 ---
 layout: page
-title: "Evolution, textual transmission and code"
+title: "Textual transmission and code"
 parent: "Schedule"
 nav_order: 2
 ---
 
 
-# What are evolution and textual transmission, and what do they have to do with code?
+# What is and textual transmission, and what does it have to do with code?
 
 ## Before coming to class
 
@@ -38,12 +38,9 @@ If you're not sure how to save a plain-text file or need other technical help, p
 
 
 
-### 3. Defining evolution and textual transmission
+### 3. Defining textual transmission
 
-
-*Evolution*: introductory reading *TBA**
-
-*Textual transmission.* When we pick up a text from the ancient Greek or Roman world in the library or on Amazon, we're looking only at the last phase of a history reaching back hundreds or thousands of years. We use the term "textual transmission" to refer to the entire history of a text from its creation to the present day. To get a taste of different ways ancient texts have -- and have not -- survived, please read this [brief blog post](https://brewminate.com/classics-lost-and-found-the-survival-of-ancient-texts/), illustrated with examples from the British Library in London.
+When we pick up a text from the ancient Greek or Roman world in the library or on Amazon, we're looking only at the last phase of a history reaching back hundreds or thousands of years. We use the term "textual transmission" to refer to the entire history of a text from its creation to the present day. To get a taste of different ways ancient texts have -- and have not -- survived, please read this [brief blog post](https://brewminate.com/classics-lost-and-found-the-survival-of-ancient-texts/), illustrated with examples from the British Library in London.
 
 For discussion in class, you should be able to identify at least three different factors that affect the survival of an ancient Greek or Latin text today.
 

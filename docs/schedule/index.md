@@ -17,7 +17,7 @@ Deadlines to note:
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Jan 23*, *Jan 25* | [Introduction to course](../classes/intro/) | [Evolution, textual transmission, and code](../classes/content+tech1/) 📓 |  |
+| *Jan 23*, *Jan 25* | [Introduction to course](../classes/intro/) | [Textual transmission, and code](../classes/content+tech1/) 📓 |  |
 
 ## Modelling species and texts
 
