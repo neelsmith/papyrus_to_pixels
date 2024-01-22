@@ -43,7 +43,7 @@ Deadlines to note:
 | *Mar 19*, *Mar 21* | Workshop: Formal project proposals |  🔛 class | **Thu**: *Project proposal due.* |
 | *Mar 26*, *Mar 28* |  📓  Project proposal due | ***Easter break*** | **Tue**: *Last class before Easter break.* |
 
-## Investigating a research topic
+## Investigating a research topic: interpreting change through time
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
