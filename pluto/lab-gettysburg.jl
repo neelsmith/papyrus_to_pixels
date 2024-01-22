@@ -77,6 +77,14 @@ md"""*See text of Cicero*: $(@bind show_cicero CheckBox())"""
 
 
 
+# ╔═╡ 0c4609e5-0ecf-4fc4-bd7d-af966a7586f9
+if show_cicero
+
+	cic_url = "https://raw.githubusercontent.com/neelsmith/bio114/main/data/cicero/ad_herennium.md"
+	cic_text = string_dl(cic_url)
+	Markdown.parse(cic_text)
+end
+
 # ╔═╡ b66e998d-3d7b-4995-8606-c5967f313203
 md"""## Data model"""
 
@@ -247,28 +255,14 @@ md"""> A utility function and data: you should not need to edit these"""
 # ╔═╡ 2cd587f6-a536-11ed-0b34-5170abae9185
 lincoln_url = "https://raw.githubusercontent.com/neelsmith/bio114/main/data/lincoln/hay.txt"
 
-# ╔═╡ f3ea28a2-0de1-478b-9fc5-6ea6d1864980
-everett_url = "https://raw.githubusercontent.com/neelsmith/bio114/main/data/everett/everett.txt"
-
-# ╔═╡ 0fe93b1c-4552-46bf-9e91-a09498d72802
-"""Download text content from a URL."""
-function string_dl(u)
-	Downloads.download(u) |> read |> String
-end
-
-# ╔═╡ 0c4609e5-0ecf-4fc4-bd7d-af966a7586f9
-if show_cicero
-
-	cic_url = "https://raw.githubusercontent.com/neelsmith/bio114/main/data/cicero/ad_herennium.md"
-	cic_text = string_dl(cic_url)
-	Markdown.parse(cic_text)
-end
-
 # ╔═╡ c8306b5b-64f2-4dff-8ae2-fe8bafdcb949
 lincoln_text = string_dl(lincoln_url)
 
 # ╔═╡ 3e2dbd02-04d3-4b4e-bef3-654e367de042
 lincoln_words = words(lincoln_text)
+
+# ╔═╡ f3ea28a2-0de1-478b-9fc5-6ea6d1864980
+everett_url = "https://raw.githubusercontent.com/neelsmith/bio114/main/data/everett/everett.txt"
 
 # ╔═╡ a43e7573-0005-400a-9385-9b6d1def6bc0
 everett_text = string_dl(everett_url)
@@ -286,6 +280,12 @@ begin
 	else
 		correct()
 	end
+end
+
+# ╔═╡ 0fe93b1c-4552-46bf-9e91-a09498d72802
+"""Download text content from a URL."""
+function string_dl(u)
+	Downloads.download(u) |> read |> String
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001

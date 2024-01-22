@@ -3,7 +3,7 @@
 ## Introduction to course
 
 [Introduction to course](../classes/intro/)
-[Evolution, textual transmission, and code](../classes/content+tech1/) 📓
+[Textual transmission, and code](../classes/content+tech1/) 📓
 
 
 ## Modelling species and texts
