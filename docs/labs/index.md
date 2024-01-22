@@ -24,7 +24,7 @@ For each lab assigment, you will be given a template Pluto notebook to work from
 
 All four lab assignments have a common outline, that could be summarized as:
 
-1. define the goal of the notebook
+1. define the goal or problem you want to solve
 2. break down and identify specific subproblems to achieve the goal of the assignment.  For each subproblem,
     1. define a test to assess whether your solution is value. Note that your test should initially *fail*!
     2. successfully implement a solution to the subproblem, and verify your success by passing your test(s).

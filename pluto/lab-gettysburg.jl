@@ -31,11 +31,11 @@ TableOfContents()
 
 # ╔═╡ fa6cc51d-4c99-4ec8-a292-27575abdd96d
 md"""
-!!! alert "Assignment: Classifying Rhetoric"
+!!! alert "Requirements for assignment: Classifying Rhetoric"
 
-    1. Define a data model with at least two features, and implement it to compare Lincoln and Everett's orations at Gettysburg in 1863.  The notebook guides you through the implementation of one feature, the frequency or proportion of long words in the orations.
+    1. Define a data model with at least two features, and implement it to compare Lincoln and Everett's orations at Gettysburg in 1863.  This template notebook guides you through the implementation of one feature, the frequency or proportion of long words in the orations.
     2. Take advantage of any interactive widgets (like numeric sliders) in your notebook to explore your data by experimenting with different values for parameters.
-    3. When you have completed all missing sections of code and discussion, save your notebook as a file with a name ending in `.jl` (for *Julia*), and upload it to Canvas,
+    3. When you have completed all missing sections of code and discussion, save your notebook as a file named `{LASTNAME}-lab1.jl` substituting your last name for `{LASTNAME}`, and add the file to your personal folder on the course Google drive.
 """
 
 # ╔═╡ f0c5b969-8cb6-4479-96d2-48f3718c0dc5
@@ -50,46 +50,60 @@ md"""
 
 """
 
+# ╔═╡ 38ec9200-ae15-47c2-8b55-448953ee1dc2
+md"""*License* : 
+**[CC BY-SA 4.0 DEED](https://creativecommons.org/licenses/by-sa/4.0/deed.en)** [![](https://upload.wikimedia.org/wikipedia/commons/a/a9/CC-BY-SA.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.en)
+"""
+
 # ╔═╡ 721993ff-db6a-498a-b4ed-d9131d47de36
 md"""
 # Classifying rhetoric
 """
 
 # ╔═╡ 34fd640a-71fc-446d-ad9b-230153e59b50
-md"""## Identifying the problem
+md"""## 1. Defining the goal
 
-Classical rhetoric traditionally analyzed speeches as "Plain or Simple Style", "Medium Style", and the "Grand Style".  Can we develop a model we could apply to any number of texts to help us classify them on this scale of Plain to Grand?
+As you learned in your background reading for this assignment, classical rhetoric traditionally analyzed speeches as "Plain or Simple Style", "Medium Style", and the "Grand Style".  Can we develop a model we could apply to any number of texts to help us classify them on this scale of Plain to Grand?
 
-This notebook defines a model and applies it to two speeches: Lincoln and Everett's addresses at Gettysburg in 1863.
+
 """
 
 # ╔═╡ 9ce3acd3-61b8-4c34-a62e-5cdec7e56710
 md"""
-!!! note "Cicero on rhetorical style"
-
-    If you'd like to read Cicero's discussion of the Plain, Simple and Grand Styles, check the following box!
-
-    Notice that Cicero doesn't really define the styles in any detail: he just gives examples of each. In this interactive notebook, we want to look at concrete features that could help us recognize each style.
+Notice that Cicero doesn't really *define* the styles in any detail: he just gives examples of each. In this interactive notebook, we want to look at concrete features that could help us recognize each style. We will define a *model* and apply it to two speeches: Lincoln and Everett's addresses at Gettysburg in 1863.
 """
 
 # ╔═╡ 37ec1fad-7838-429c-ab80-4ee0dc4560d3
-md"""*See text of Cicero*: $(@bind show_cicero CheckBox())"""
+md"""*If you'd like to refer to Cicero's discussion of the Plain, Simple and Grand Styles, check the following box*:  $(@bind show_cicero CheckBox())"""
 
 
 
-# ╔═╡ 0c4609e5-0ecf-4fc4-bd7d-af966a7586f9
-if show_cicero
+# ╔═╡ d5a42f5a-0a84-43f6-a26f-7049243e2e54
+md"""
+!!! note "Goal"
 
-	cic_url = "https://raw.githubusercontent.com/neelsmith/bio114/main/data/cicero/ad_herennium.md"
-	cic_text = string_dl(cic_url)
-	Markdown.parse(cic_text)
-end
+    In this notebook we want to develop a model we could apply to any number of texts to help us classify them on Cicero's scale of "Plain" to "Grand."
+"""
 
 # ╔═╡ b66e998d-3d7b-4995-8606-c5967f313203
-md"""## Data model"""
+md"""## 2. Breaking down the problem"""
+
+# ╔═╡ 2ac9ca80-5829-4544-aae3-65e9d9494171
+md"""We can first break down the problem of defining a data model by defining specific features we want to look for in each text."""
+
+# ╔═╡ 3e364bc6-0d45-45a8-a441-5363fdc53032
+md"""
+!!! note "Breaking down the problem"
+
+    We can develop our model in the following steps:
+
+    1. define features, and note their limitations
+	2. implementing the model. We'll break this down further into several steps.
+    3. evaluating the model. We'll apply the model to our two comparison texts and see if the results seem reasonable. We'll visualize the comparison graphically to help us understand our results.
+"""
 
 # ╔═╡ 88429f30-fc5d-4fe4-a887-97491737611b
-md"""### Features"""
+md"""### A. Defining features"""
 
 # ╔═╡ 89594e4e-ffc2-4cd5-ac7c-3b6a7914928c
 md"""
@@ -99,21 +113,28 @@ md"""
 """
 
 # ╔═╡ 0e2cb5dc-e972-4824-85fa-ff914dfd0b2c
-md"""### Limitations of the model"""
+md"""#### Limitations of the definintion of the mmodel"""
 
 # ╔═╡ f2a70911-af63-4389-a194-999303928156
 md"""
 **-->COMMENT BRIEFLY ON THE LIMITATIONS OF THIS MODEL<--**
 """
 
-# ╔═╡ 8f88830c-fb34-49e6-97f8-8ce422a7c463
-md"""## Data to compare"""
-
 # ╔═╡ db389aa5-51da-483a-a82c-f446f2c05880
-md"""## Implementing the model"""
+md"""### B. Implementing the model"""
+
+# ╔═╡ 8f88830c-fb34-49e6-97f8-8ce422a7c463
+md"""#### Data to compare"""
+
+# ╔═╡ 74c79e54-8969-410d-9d85-3e64be07976c
+md"""This notebook includes a utility function that will download the text of Lincoln and Everett's speeches and read them into a String variable.
+"""
 
 # ╔═╡ 2a8ca9b9-7f5b-46b3-ab91-2617c89419a4
-md"""### Proportion of long words"""
+md"""#### Proportion of long words"""
+
+# ╔═╡ 9c776e06-ec92-4599-b1a1-d59e5efec82a
+md"""Before we can measure a proportion of long words, we need to break the text up into a list of words."""
 
 # ╔═╡ f97f1999-1988-4f2b-9614-db22236964d7
 md"""In the following cell, replace `missing` with Julia code to remove all punctuation characters from `txt`, and then split the resulting string on whitespace.
@@ -127,9 +148,8 @@ function words(txt)
 	missing
 end
 
-# ╔═╡ 008e05a3-b027-4df5-b1c9-81546c3abf52
-md"""
-"""
+# ╔═╡ 316aed2f-30df-4767-8ab6-1367f3dc4eb9
+md"""Next, we want to define what we mean by a "long" word."""
 
 # ╔═╡ 81525041-dc5a-4ae3-b5f7-62cb04fdcabc
 md"""In the following cell, replace `missing` with a line of Julia that will return `true` if a word is longer than the cutoff point, or false if it is not."""
@@ -158,7 +178,7 @@ begin
 end
 
 # ╔═╡ 86f3361c-3e31-4e8c-82f1-15a15fa53e98
-md"""Words longer than the value you set on this slider will be considered "long".
+md"""We can use a Slider from the PlutoUI widgets to change a cutoff value for long words.  Words longer than the value you set on this slider will be considered "long".
 
 
 *Set cutoff*:""" 
@@ -168,6 +188,9 @@ md"""Words longer than the value you set on this slider will be considered "long
 
 # ╔═╡ 045757b6-67af-4fed-8773-5f78a0856691
 cutoff
+
+# ╔═╡ 47da9b11-9830-4c2d-ac44-397c7a8e5f14
+md"""Finally, we want to filter the list of words for each text to include only "long" words."""
 
 # ╔═╡ 4862e5a0-d8fb-46f9-97de-ef55f12b02be
 md"""In the following two cells, replace `missing` with a Julia expression that will filter the words in Lincoln and in Everett's speeches to select only long words.
@@ -179,6 +202,10 @@ lincoln_long = missing
 # ╔═╡ 45135246-abee-4ee1-8da6-b10ca50acf4e
 everett_long = missing
 
+# ╔═╡ cebc89a7-fd39-4459-a729-15094c3b7a40
+md"""Counts by themselves are not useful for comparing texts of vastly different lengths like Lincoln and Everett's orations. In order to compare our two texts, we want to calculate the proportion of long words.
+"""
+
 # ╔═╡ e97f5bf9-fe32-48fa-ac2e-87fe0f094c6f
 md"""In the next two cells, remove `nothing` and uncomment the Julia expression computing the proportion of long words to all words."""
 
@@ -188,8 +215,8 @@ lincoln_longscore = nothing # length(lincoln_long) / length(lincoln_words)
 # ╔═╡ f693cd96-b0d4-43e4-9323-b9d563560907
 everett_longscore = nothing #  length(everett_long) / length(everett_words)
 
-# ╔═╡ 5ee577ab-10e6-4465-b2c9-7abeeff9bd90
-md"""#### Visualizing the results"""
+# ╔═╡ ae09e084-c4f9-4512-aa21-6f445d17314e
+md"""### C. Evaluating the results"""
 
 # ╔═╡ 1650da05-b8e6-4540-aae6-79a03ab481db
 md"""It can be useful to compare proportions in a bar chart."""
@@ -212,11 +239,8 @@ scores = [lincoln_longscore, everett_longscore]
 md"""### ==>ADDITIONAL FEATURE(S)<=="""
 
 # ╔═╡ dcd01a30-b889-456b-9e91-cc4304a64ac7
-md"""## Conclusions
+md"""#### Conclusions: classifying Lincoln and Everett
 """
-
-# ╔═╡ 8150ea1f-0e9f-436c-bbbc-14662f4d04a0
-md"""### Classifying Lincoln and Everett"""
 
 # ╔═╡ fc9dab4c-1fdc-433f-93f1-65e3ea802ad4
 md"""
@@ -226,12 +250,12 @@ Do your results suggest a classification for Lincoln and Everett's speeches?
 """
 
 # ╔═╡ 71823f6e-015e-46bb-8ad0-fccae04dd799
-md"""### Next steps"""
+md"""#### Next steps"""
 
 # ╔═╡ f185587c-96cb-4857-b9c4-888e6a31bae6
-md"""!!! note "Next steps"
+md"""!!! tip "Next steps"
 
-    Scholarly work doesn't end because your project is completed.  Your conclusion should normally or always include your thoughts on how to improve or go beyond what you've done in this project.
+    Scholarly work doesn't end because your project is completed.  Your conclusion should normally or even always include thoughts on how to improve or go beyond what you've done in this project.
 
     This could include your ideas about:
 
@@ -241,28 +265,46 @@ md"""!!! note "Next steps"
 
 # ╔═╡ 122a84a8-a85e-4fc2-8528-31078b05dfde
 md"""
-**==> ADD YOUR CLOSING COMMENTS HERE <==**
+**==> ADD YOUR IDEAS ABOUT NEXT STEPS HERE <==**
 """
+
+# ╔═╡ 75348b30-30d9-4d8c-b3a5-90c70aefd2d3
+md""" ## 3. Reflection"""
 
 # ╔═╡ 7cc5f92d-3aff-4679-b8b3-a32ec842817b
 html"""
-<br/><br/><br/>
+<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
 """
 
 # ╔═╡ 5f680036-467a-4f1d-959c-664c8847a922
-md"""> A utility function and data: you should not need to edit these"""
+md"""> URLs for data sources and a simple utility function: you should not need to edit these"""
 
 # ╔═╡ 2cd587f6-a536-11ed-0b34-5170abae9185
 lincoln_url = "https://raw.githubusercontent.com/neelsmith/bio114/main/data/lincoln/hay.txt"
+
+# ╔═╡ f3ea28a2-0de1-478b-9fc5-6ea6d1864980
+everett_url = "https://raw.githubusercontent.com/neelsmith/bio114/main/data/everett/everett.txt"
+
+# ╔═╡ 0fe93b1c-4552-46bf-9e91-a09498d72802
+"""Download text content from a URL."""
+function string_dl(u)
+	read(Downloads.download(u), String)
+end
+
+# ╔═╡ 0c4609e5-0ecf-4fc4-bd7d-af966a7586f9
+if show_cicero
+
+	cic_url = "https://raw.githubusercontent.com/neelsmith/bio114/main/data/cicero/ad_herennium.md"
+	cic_text = string_dl(cic_url)
+	Markdown.parse(cic_text)
+end
 
 # ╔═╡ c8306b5b-64f2-4dff-8ae2-fe8bafdcb949
 lincoln_text = string_dl(lincoln_url)
 
 # ╔═╡ 3e2dbd02-04d3-4b4e-bef3-654e367de042
 lincoln_words = words(lincoln_text)
-
-# ╔═╡ f3ea28a2-0de1-478b-9fc5-6ea6d1864980
-everett_url = "https://raw.githubusercontent.com/neelsmith/bio114/main/data/everett/everett.txt"
 
 # ╔═╡ a43e7573-0005-400a-9385-9b6d1def6bc0
 everett_text = string_dl(everett_url)
@@ -280,12 +322,6 @@ begin
 	else
 		correct()
 	end
-end
-
-# ╔═╡ 0fe93b1c-4552-46bf-9e91-a09498d72802
-"""Download text content from a URL."""
-function string_dl(u)
-	Downloads.download(u) |> read |> String
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -1448,55 +1484,63 @@ version = "1.4.1+1"
 # ╟─fa6cc51d-4c99-4ec8-a292-27575abdd96d
 # ╟─f0c5b969-8cb6-4479-96d2-48f3718c0dc5
 # ╟─558f05dd-07db-4413-bd39-1fa504882465
+# ╟─38ec9200-ae15-47c2-8b55-448953ee1dc2
 # ╟─721993ff-db6a-498a-b4ed-d9131d47de36
 # ╟─34fd640a-71fc-446d-ad9b-230153e59b50
 # ╟─9ce3acd3-61b8-4c34-a62e-5cdec7e56710
 # ╟─37ec1fad-7838-429c-ab80-4ee0dc4560d3
 # ╟─0c4609e5-0ecf-4fc4-bd7d-af966a7586f9
+# ╟─d5a42f5a-0a84-43f6-a26f-7049243e2e54
 # ╟─b66e998d-3d7b-4995-8606-c5967f313203
+# ╟─2ac9ca80-5829-4544-aae3-65e9d9494171
+# ╟─3e364bc6-0d45-45a8-a441-5363fdc53032
 # ╟─88429f30-fc5d-4fe4-a887-97491737611b
 # ╟─89594e4e-ffc2-4cd5-ac7c-3b6a7914928c
 # ╟─0e2cb5dc-e972-4824-85fa-ff914dfd0b2c
 # ╟─f2a70911-af63-4389-a194-999303928156
+# ╟─db389aa5-51da-483a-a82c-f446f2c05880
 # ╟─8f88830c-fb34-49e6-97f8-8ce422a7c463
+# ╟─74c79e54-8969-410d-9d85-3e64be07976c
 # ╠═c8306b5b-64f2-4dff-8ae2-fe8bafdcb949
 # ╠═a43e7573-0005-400a-9385-9b6d1def6bc0
-# ╟─db389aa5-51da-483a-a82c-f446f2c05880
 # ╟─2a8ca9b9-7f5b-46b3-ab91-2617c89419a4
+# ╟─9c776e06-ec92-4599-b1a1-d59e5efec82a
 # ╟─f97f1999-1988-4f2b-9614-db22236964d7
 # ╠═a201e580-396e-49d9-87d4-55314486e325
-# ╠═008e05a3-b027-4df5-b1c9-81546c3abf52
 # ╠═3e2dbd02-04d3-4b4e-bef3-654e367de042
 # ╠═1f3c4d0f-a2b4-42b8-a94c-da64f8645d4d
+# ╟─316aed2f-30df-4767-8ab6-1367f3dc4eb9
 # ╟─81525041-dc5a-4ae3-b5f7-62cb04fdcabc
 # ╠═c391c1d9-f2c6-4e9c-913c-458a9f5a923d
 # ╟─146d0f24-973d-4083-a537-7db5ad563336
 # ╟─86f3361c-3e31-4e8c-82f1-15a15fa53e98
-# ╠═c62f6987-ab2f-4c4e-b67f-7166fd8974ce
+# ╟─c62f6987-ab2f-4c4e-b67f-7166fd8974ce
 # ╠═045757b6-67af-4fed-8773-5f78a0856691
+# ╠═47da9b11-9830-4c2d-ac44-397c7a8e5f14
 # ╟─4862e5a0-d8fb-46f9-97de-ef55f12b02be
 # ╠═295d06d8-1327-4c16-ab73-85f53f787cfe
 # ╠═45135246-abee-4ee1-8da6-b10ca50acf4e
 # ╟─02a7dee6-3a0b-4302-be36-6e1d06388771
+# ╟─cebc89a7-fd39-4459-a729-15094c3b7a40
 # ╟─e97f5bf9-fe32-48fa-ac2e-87fe0f094c6f
 # ╠═4136bf8d-8ce4-4fa2-b575-0b72d4d4ecc2
 # ╠═f693cd96-b0d4-43e4-9323-b9d563560907
-# ╟─5ee577ab-10e6-4465-b2c9-7abeeff9bd90
-# ╟─1650da05-b8e6-4540-aae6-79a03ab481db
+# ╟─ae09e084-c4f9-4512-aa21-6f445d17314e
+# ╠═1650da05-b8e6-4540-aae6-79a03ab481db
 # ╠═33e6ce69-9222-45ef-9f1c-ec26e2e88ca0
 # ╠═8bd52867-4efb-405e-9a63-46406b4a567e
 # ╠═67bb2fb1-e9a7-4940-b67a-b3f5cd689cc6
-# ╠═dc2a1c0c-9571-43e0-bbe4-78a666401bc5
+# ╟─dc2a1c0c-9571-43e0-bbe4-78a666401bc5
 # ╟─dcd01a30-b889-456b-9e91-cc4304a64ac7
-# ╟─8150ea1f-0e9f-436c-bbbc-14662f4d04a0
-# ╠═fc9dab4c-1fdc-433f-93f1-65e3ea802ad4
+# ╟─fc9dab4c-1fdc-433f-93f1-65e3ea802ad4
 # ╟─71823f6e-015e-46bb-8ad0-fccae04dd799
 # ╟─f185587c-96cb-4857-b9c4-888e6a31bae6
-# ╠═122a84a8-a85e-4fc2-8528-31078b05dfde
+# ╟─122a84a8-a85e-4fc2-8528-31078b05dfde
+# ╟─75348b30-30d9-4d8c-b3a5-90c70aefd2d3
 # ╟─7cc5f92d-3aff-4679-b8b3-a32ec842817b
 # ╟─5f680036-467a-4f1d-959c-664c8847a922
 # ╟─2cd587f6-a536-11ed-0b34-5170abae9185
 # ╟─f3ea28a2-0de1-478b-9fc5-6ea6d1864980
-# ╠═0fe93b1c-4552-46bf-9e91-a09498d72802
+# ╟─0fe93b1c-4552-46bf-9e91-a09498d72802
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

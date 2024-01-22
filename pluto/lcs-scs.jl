@@ -10,7 +10,7 @@ begin
 	using StatsBase
 	using OrderedCollections
 	using PlutoUI
-
+	using Memoize
 	using OffsetArrays
 end
 
@@ -22,6 +22,91 @@ s1 = "abcde"
 
 # ╔═╡ 472aa747-b433-455b-a39d-346061495f8c
 s2 = "cef"
+
+# ╔═╡ cea45358-9b42-4e1e-8c9f-e6aeb921b88a
+md"""Matrix for **$(s1)** : **$(s2)**"""
+
+# ╔═╡ e934b170-49ad-4839-b798-f5722fd2ea99
+function lcsdebug(a::String, b::String)
+    lengths = zeros(Int, length(a) + 1, length(b) + 1)
+
+    # row 0 and column 0 are initialized to 0 already
+    for (i, x) in enumerate(a), (j, y) in enumerate(b)
+        #@info("At $(i)/$(j) wtih chars $(x)/$(y)")
+        if x == y
+            #@info("Matched on $(x) at counts $(i)/$(j)")
+            lengths[i+1, j+1] = lengths[i, j] + 1
+        else
+            lengths[i+1, j+1] = max(lengths[i+1, j], lengths[i, j+1])
+        end
+    end
+    #@info("Lengths array: $(lengths)")
+	lengths
+    # read the substring out from the matrix
+    #
+    # Determine if char is in a only, b only, or both
+
+	#=
+    result = ""
+    x, y = length(a) + 1, length(b) + 1
+    while x > 1 && y > 1
+        if lengths[x, y] == lengths[x-1, y]
+            x -= 1
+        elseif lengths[x, y] == lengths[x, y-1]
+            y -= 1
+        else
+            @assert a[x-1] == b[y-1]
+            result = string(a[x-1], result)
+            x -= 1
+            y -= 1
+        end
+    end
+=#
+    #return result
+end
+
+# ╔═╡ 2f92e62a-422c-498d-b69f-4d9c37a063d5
+lcsdebug(s1,s2)
+
+# ╔═╡ 565034ce-474b-4849-a6ac-d3f3064d2d69
+function lcsdynamic(a::String, b::String)
+    lengths = zeros(Int, length(a) + 1, length(b) + 1)
+
+    # row 0 and column 0 are initialized to 0 already
+    for (i, x) in enumerate(a), (j, y) in enumerate(b)
+        #@info("At $(i)/$(j) wtih chars $(x)/$(y)")
+        if x == y
+            #@info("Matched on $(x) at counts $(i)/$(j)")
+            lengths[i+1, j+1] = lengths[i, j] + 1
+        else
+            lengths[i+1, j+1] = max(lengths[i+1, j], lengths[i, j+1])
+        end
+    end
+    #@info("Lengths array: $(lengths)")
+
+    # read the substring out from the matrix
+    #
+    # Determine if char is in a only, b only, or both
+    result = ""
+    x, y = length(a) + 1, length(b) + 1
+    while x > 1 && y > 1
+        if lengths[x, y] == lengths[x-1, y]
+            x -= 1
+        elseif lengths[x, y] == lengths[x, y-1]
+            y -= 1
+        else
+            @assert a[x-1] == b[y-1]
+            result = string(a[x-1], result)
+            x -= 1
+            y -= 1
+        end
+    end
+
+    return result
+end
+
+# ╔═╡ 4a8b7ad5-ff29-4493-9a75-c3f664eb3c72
+lcsdynamic(s1, s2)
 
 # ╔═╡ a51a8601-edb4-451a-ba13-98aa9ca8cf46
 # Ripped off from:
@@ -74,7 +159,26 @@ end
 scs(s1, s2)
 
 # ╔═╡ 683a32a4-955a-45ee-90b2-6cdda2fd1702
+# Recursive solution from https://rosettacode.org/wiki/Shortest_common_supersequence#Julia
+#using Memoize
 
+@memoize function scsmemo(x, y)
+    if x == ""
+        return y
+    elseif y == ""
+        return x
+    elseif x[1] == y[1]
+        return "$(x[1])$(scsmemo(x[2:end], y[2:end]))"
+    elseif length(scs(x, y[2:end])) <= length(scsmemo(x[2:end], y))
+        return "$(y[1])$(scsmemo(x, y[2:end]))"
+    else
+        return "$(x[1])$(scsmemo(x[2:end], y))"
+    end
+end
+
+
+# ╔═╡ 5d31f63d-615b-451b-a58e-4e71476c4447
+scsmemo(s1, s2)
 
 # ╔═╡ cec08ff2-e857-4838-9634-d93c8a95d57b
 html"""
@@ -86,6 +190,7 @@ html"""
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
+Memoize = "c03570c3-d221-55d1-a50c-7939bbd78826"
 OffsetArrays = "6fe1bfb0-de20-5000-8ca7-80f57d26f881"
 OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
@@ -93,6 +198,7 @@ StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 
 [compat]
 CitableBase = "~10.3.1"
+Memoize = "~0.4.4"
 OffsetArrays = "~1.13.0"
 OrderedCollections = "~1.6.3"
 PlutoUI = "~0.7.55"
@@ -105,7 +211,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.0"
 manifest_format = "2.0"
-project_hash = "8310721a60dc809cf3232987fd4dfc16cf8043c7"
+project_hash = "c46b00e960ba60370d64c04af7962be30a5319af"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -333,6 +439,12 @@ git-tree-sha1 = "65f28ad4b594aebe22157d6fac869786a255b7eb"
 uuid = "6c6e2e6c-3030-632d-7369-2d6c69616d65"
 version = "0.1.4"
 
+[[deps.MacroTools]]
+deps = ["Markdown", "Random"]
+git-tree-sha1 = "2fa9ee3e63fd3a4f7a9a4f4744a52f4856de82df"
+uuid = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
+version = "0.5.13"
+
 [[deps.Markdown]]
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
@@ -347,6 +459,12 @@ version = "0.1.2"
 deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
 version = "2.28.2+1"
+
+[[deps.Memoize]]
+deps = ["MacroTools"]
+git-tree-sha1 = "2b1dfcba103de714d31c033b5dacc2e4a12c7caa"
+uuid = "c03570c3-d221-55d1-a50c-7939bbd78826"
+version = "0.4.4"
 
 [[deps.Missings]]
 deps = ["DataAPI"]
@@ -557,6 +675,12 @@ version = "17.4.0+2"
 # ╠═472aa747-b433-455b-a39d-346061495f8c
 # ╠═71ba155e-0fcc-42d6-81a2-4cb8fee225e4
 # ╠═13b1a781-1d3a-408b-9fa1-55537a2c134f
+# ╠═5d31f63d-615b-451b-a58e-4e71476c4447
+# ╠═4a8b7ad5-ff29-4493-9a75-c3f664eb3c72
+# ╠═cea45358-9b42-4e1e-8c9f-e6aeb921b88a
+# ╠═2f92e62a-422c-498d-b69f-4d9c37a063d5
+# ╠═e934b170-49ad-4839-b798-f5722fd2ea99
+# ╠═565034ce-474b-4849-a6ac-d3f3064d2d69
 # ╠═a51a8601-edb4-451a-ba13-98aa9ca8cf46
 # ╠═a03dc796-8af6-431a-bebc-40e20ab0da18
 # ╠═683a32a4-955a-45ee-90b2-6cdda2fd1702
