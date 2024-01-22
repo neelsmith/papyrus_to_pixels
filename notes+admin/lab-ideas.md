@@ -8,6 +8,9 @@ Our problem:
 3. compare frequencies of codon trigrams and frequencies of amino acids
 4. visualize
 
+amino acids defined funcdtionally; codons structurally
+ 
+
 
 Lab 3: feature extraction: 
 [identifying named entities in texts](./lab3/?)
