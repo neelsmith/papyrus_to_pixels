@@ -1,7 +1,7 @@
 ---
 title: "Due dates"
 layout: page
-nav_order: 5
+nav_order: 20
 ---
 
 ## Checklist of important due dates

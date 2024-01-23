@@ -1,7 +1,7 @@
 ---
 title: "Resources for working with Julia"
 layout: page
-nav_order: 5
+nav_order: 10
 has_children: true
 ---
 
