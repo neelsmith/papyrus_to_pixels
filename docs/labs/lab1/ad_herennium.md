@@ -1,4 +1,13 @@
-## Cicero, *Ad Herennium*, 4.8-4.15
+---
+title: "Cicero, Ad Herennium, 4.8-4.15"
+layout: page
+nav_order: 1
+grant_parent: "Labs"
+parent: "Lab 1: Rhetorical style at Gettysburg"
+---
+
+
+# Cicero, *Ad Herennium*, 4.8-4.15
 
 >(Translation by Harry Caplan in the Loeb Classical Library, now in the public domain)
 
