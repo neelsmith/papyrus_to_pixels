@@ -26,7 +26,7 @@ Throughout the semester, we will stress the importance of defining tests before 
 
 To test whether you have installed Julia correctly, try to open a julia terminal (or REPL, for "Read-Evaluate-Print-Loop").  You should see something like this:
 
-![img](../../imgs/julia-REPL.png)
+![img](../imgs/julia-REPL.png)
     
 If you do, great!  At the `julia>` prompt, enter `exit()` to quit the REPL.
 

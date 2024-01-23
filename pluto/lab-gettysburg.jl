@@ -29,6 +29,9 @@ end
 # This function is part of the `PlutoUI` pacakge:
 TableOfContents()
 
+# ╔═╡ ebb9527e-2995-4341-babb-e4ef6a6eea61
+md"""*Template notebook: last modified* **Jan. 22, 2024.**"""
+
 # ╔═╡ fa6cc51d-4c99-4ec8-a292-27575abdd96d
 md"""
 !!! alert "Requirements for assignment: Classifying Rhetoric"
@@ -236,7 +239,11 @@ scores = [lincoln_longscore, everett_longscore]
 # bar(labels, scores, title="Proportion of words longer than $(cutoff) characters", legend = false)
 
 # ╔═╡ dc2a1c0c-9571-43e0-bbe4-78a666401bc5
-md"""### ==>ADDITIONAL FEATURE(S)<=="""
+md"""### ==>ADDITIONAL FEATURE(S)<==
+
+Repeat this process to add a second feature to your model.
+
+"""
 
 # ╔═╡ dcd01a30-b889-456b-9e91-cc4304a64ac7
 md"""#### Conclusions: classifying Lincoln and Everett
@@ -270,6 +277,17 @@ md"""
 
 # ╔═╡ 75348b30-30d9-4d8c-b3a5-90c70aefd2d3
 md""" ## 3. Reflection"""
+
+# ╔═╡ af0246f4-d45b-45fa-82dc-448eb85d152c
+md"""
+!!! note "Reflection: model building"
+
+    * *All models are wrong; some models are useful.*
+
+    In this notebook, you created a *stylometric* model: a model for rhetorical style. You then applied your model to two sample texts.  What advantages does your model offer by making it possible to automate a generalized analysis of texts?  What disadvantages does it create by simplifying the representation of your text?
+
+    How can you transfer your experience in this lab to other problems? Think of at least one other question you think you could address by defining a model and implementing it in Julia.  (You don't need to *do* this, or even know exactly how you would solve the problem in detail.)
+"""
 
 # ╔═╡ 7cc5f92d-3aff-4679-b8b3-a32ec842817b
 html"""
@@ -1481,6 +1499,7 @@ version = "1.4.1+1"
 # ╔═╡ Cell order:
 # ╟─5c11507f-89ac-44ae-8a60-556a536df435
 # ╟─7378e7de-7731-460c-a8a2-f72eeea6cc92
+# ╟─ebb9527e-2995-4341-babb-e4ef6a6eea61
 # ╟─fa6cc51d-4c99-4ec8-a292-27575abdd96d
 # ╟─f0c5b969-8cb6-4479-96d2-48f3718c0dc5
 # ╟─558f05dd-07db-4413-bd39-1fa504882465
@@ -1516,7 +1535,7 @@ version = "1.4.1+1"
 # ╟─86f3361c-3e31-4e8c-82f1-15a15fa53e98
 # ╟─c62f6987-ab2f-4c4e-b67f-7166fd8974ce
 # ╠═045757b6-67af-4fed-8773-5f78a0856691
-# ╠═47da9b11-9830-4c2d-ac44-397c7a8e5f14
+# ╟─47da9b11-9830-4c2d-ac44-397c7a8e5f14
 # ╟─4862e5a0-d8fb-46f9-97de-ef55f12b02be
 # ╠═295d06d8-1327-4c16-ab73-85f53f787cfe
 # ╠═45135246-abee-4ee1-8da6-b10ca50acf4e
@@ -1526,17 +1545,18 @@ version = "1.4.1+1"
 # ╠═4136bf8d-8ce4-4fa2-b575-0b72d4d4ecc2
 # ╠═f693cd96-b0d4-43e4-9323-b9d563560907
 # ╟─ae09e084-c4f9-4512-aa21-6f445d17314e
-# ╠═1650da05-b8e6-4540-aae6-79a03ab481db
+# ╟─1650da05-b8e6-4540-aae6-79a03ab481db
 # ╠═33e6ce69-9222-45ef-9f1c-ec26e2e88ca0
 # ╠═8bd52867-4efb-405e-9a63-46406b4a567e
 # ╠═67bb2fb1-e9a7-4940-b67a-b3f5cd689cc6
-# ╟─dc2a1c0c-9571-43e0-bbe4-78a666401bc5
+# ╠═dc2a1c0c-9571-43e0-bbe4-78a666401bc5
 # ╟─dcd01a30-b889-456b-9e91-cc4304a64ac7
 # ╟─fc9dab4c-1fdc-433f-93f1-65e3ea802ad4
 # ╟─71823f6e-015e-46bb-8ad0-fccae04dd799
 # ╟─f185587c-96cb-4857-b9c4-888e6a31bae6
 # ╟─122a84a8-a85e-4fc2-8528-31078b05dfde
 # ╟─75348b30-30d9-4d8c-b3a5-90c70aefd2d3
+# ╟─af0246f4-d45b-45fa-82dc-448eb85d152c
 # ╟─7cc5f92d-3aff-4679-b8b3-a32ec842817b
 # ╟─5f680036-467a-4f1d-959c-664c8847a922
 # ╟─2cd587f6-a536-11ed-0b34-5170abae9185

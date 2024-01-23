@@ -50,7 +50,7 @@ Workshop: Formal project proposals
 
 
 
-## Investigating a research topic
+## Investigating a research topic: interpreting change through time
 
 Review collections of data in Julia, and [plain-text formats](../classes/textio/)
 class
