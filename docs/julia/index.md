@@ -8,6 +8,21 @@ has_children: true
 # Resources for working with Julia
 
 
+## Installing Pluto
+
+See the separate page on [installing Julia and Pluto](https://neelsmith.github.io/papyrus_to_pixels/techprereqs/).
+
+## Running Pluto
+
+- To start Pluto, in a Julia REPL, enter `using Pluto; Pluto.run()`. 
+- To stop  Pluto, at the same REPL prompt, enter  `Ctl-C`` (the control key + c). This will put you back at the initial `julia` prompt in your REPL. You may continue to work in Julia or use `exit()` to quit the REPL.
+
+
+## Saving and opening notebooks in Pluto
+
+See the separate page on [saving and opening notebooks in Pluto](./pluto/)
+
+
 ## Introduction to the Julia language in Pluto notebooks
 
 > These Pluto notebooks are viewable here as HTML pages you can read in a web browser: save them to your computer in Pluto notebook format and open them in Pluto  to run them live.

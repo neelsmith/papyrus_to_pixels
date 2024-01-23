@@ -23,43 +23,18 @@ At this point, we are translating *data models* into digital *data structures*. 
 
 Open [this web page](./lab-gettysburg.html), saved from a Pluto notebook you can use as a template for your work.
 
-To get started working on your notebook, you'll need to run Pluto on your computer, and download the web page as notebook file you can open locally.
+To get started working on your notebook, you'll need to run Pluto on your computer, and download the web page as notebook file you can open locally. If you don't remember from class how to do that, refer to these  guides:
 
-### Start Pluto on your machine
-
-
-You should already have [installed Pluto on your machine](https://neelsmith.github.io/papyrus_to_pixels/techprereqs/). Then, in a Julia REPL, enter:
-
-    using Pluto
-    Pluto.run()
-
-This will start up Pluto, and when Pluto is running, will open your default web browser.
-
-
-### Save the web page and open it in Pluto
-
-
-To save the template file on your local machine as a Pluto  notebook, first click the button  "**Edit** or **run** this notebook" at the top right of the web page.
-
-
-You'll see a dialog box like the one illustrated here.  Follow the instructions under the heading "On your computer."
-
-![](./pluto-nb.png)
-
-
-Once you have opened the notebook file with Pluto, you can run it and modify it.  When you want to save your work, you can use the "Export" button at the top right of your notebook, highlighted in red here:
-
-![](./dl-options2.png)    
-
-Notice that you can save your notebook in different formats. We'll explore that option later in the semester. For your lab assignments, you'll use first open, "Notebook file."
+- [running Pluto](../../julia)
+- [opening a notebook saved as a web page](../../julia/pluto)
 
 
 
 ### Requirements for satisfactory submission
 
 1. Complete the template notebook.
-2. Save your completed notebook using the "Notebook file" option. 
-3. On your computer, ind the file you saved, and name it `{LASTNAME}-lab1.jl`, replacing `{LASTNAME}` with your last name.
+2. Save your completed notebook using the "Notebook file" option.  If you need help doing this, see "[Saving a notebook](../../pluto/julia/)"
+3. On your computer, find the file you saved, and name it `{LASTNAME}-lab1.jl`, replacing `{LASTNAME}` with your last name.
 4. Add the correctly named file to your personal folder on the course Google drive. 
     
 
