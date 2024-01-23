@@ -10,7 +10,7 @@ has_children: true
 
 ## Data structures
 
-In your previous class preparation, you proposed a data model for comparing orations.   Read the following passage from an ancient handbook on rhetoric by Cicero, entitled *Ad Herennium* ("Guidebook to rhetoric for Herennius"): [selection from Cicero](./ad_herennium). Cicero proposes a kind of sliding scale of styles, from the "Simple" style at one end to the "Grand" style at the other, and gives examples of each, but doesn't tell us specifically what to look for in each example. We'll try to improve on Cicero by collecting specific, identified observations using the data model you developed for the previous class.
+In your [previous class preparation](https://neelsmith.github.io/papyrus_to_pixels/classes/content+tech1/), you proposed a data model for comparing orations.   Read the following passage from an ancient handbook on rhetoric by Cicero, entitled *Ad Herennium* ("Guidebook to rhetoric for Herennius"): [selection from Cicero](./ad_herennium). Cicero proposes a kind of sliding scale of styles, from the "Simple" style at one end to the "Grand" style at the other, and gives examples of each, but doesn't tell us specifically what to look for in each example. We'll try to improve on Cicero by collecting specific, identified observations using the data model you developed for the previous class.
 
 How should we collect those observations?  We could simply read Lincoln and Everett's speeches, and take notes.
 
