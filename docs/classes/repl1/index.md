@@ -11,7 +11,7 @@ In this class, we'll begin to use the Julia REPL to explore texts of Abraham Lin
 
 ## Contract for group work
 
-Please download and complete the contract for group work. Print a copy of your completed contract, and submit one hard copy of the contract signed by all members of your group.
+Please download and complete the contract for group work availabe in the course Google drive. Print a copy of your completed contract, and submit one hard copy of the contract signed by all members of your group.
 
 While digital assignments are due at 12:00 pm, this hard-copy requirement is instead due 2:00 when you come to class.
 
