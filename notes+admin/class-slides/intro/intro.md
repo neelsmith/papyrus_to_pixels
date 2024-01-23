@@ -1,9 +1,12 @@
+# CLAS 199 "Papyrus to pixels" / BIO 199 "Change through time"
+
+---
 
 # Main course sections
 
-- Modeling species and texts
-- Classifying species and texts
-- Modeling change through time
+1. Modeling species and texts
+2. Classifying species and texts
+3. Modeling change through time
 
 
 ---
@@ -25,7 +28,11 @@ Darwin, *On the Origin of Species*, 1859
 
 ![bg right](https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Charles_Darwin_by_Julia_Margaret_Cameron%2C_c._1868.jpg/440px-Charles_Darwin_by_Julia_Margaret_Cameron%2C_c._1868.jpg)
 
+---
 
+Two modern evolutionary trees:
+
+![](https://s3-us-west-2.amazonaws.com/courses-images/wp-content/uploads/sites/110/2016/05/02192630/Figure_20_01_01-1024x308.jpg)
 
 ---
 
