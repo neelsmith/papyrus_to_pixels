@@ -1,12 +1,12 @@
 ---
-title: "On-line course material and technical requisites"
+title: "On-line course material and technical prerequisites"
 layout: page
 parent:  Syllabus
 parent: "Course syllabus"
 nav_order: 2
 ---
 
-# On-line course material and technical requisites
+# On-line course material and technical prerequisites
 
 
 
