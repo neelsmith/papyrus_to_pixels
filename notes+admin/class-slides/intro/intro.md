@@ -1,4 +1,6 @@
-# CLAS 199 "Papyrus to pixels" / BIO 199 "Change through time"
+# BIO 199  / CLAS 199 
+
+# "Change through time" / "Papyrus to pixels"   
 
 ---
 
@@ -41,8 +43,12 @@ Karl Lachmann, *Betrachtungen über Homer's Iliad*, 1837, and especially *De Rer
 
 ![bg right](https://upload.wikimedia.org/wikipedia/commons/c/c3/Karl_Lachmann_-_Imagines_philologorum.jpg)
 
-![Stemma of Lucretius](https://classicsforall.org.uk/sites/default/files/uploads/images/Picture2_13.png)
 
+
+---
+
+
+![Stemma of Lucretius](https://classicsforall.org.uk/sites/default/files/uploads/images/Picture2_13.png)
 
 ---
 
@@ -51,6 +57,8 @@ Karl Lachmann, *Betrachtungen über Homer's Iliad*, 1837, and especially *De Rer
 
 ---
 
+Codon table to translate mitochondrial DNA to amino acids
+
 ![MitoGeneticCode](./MitoGneticCode.png)
 
 ---
@@ -58,4 +66,14 @@ Karl Lachmann, *Betrachtungen über Homer's Iliad*, 1837, and especially *De Rer
 Greek mythological narratives in a 12-dimensional topic space
 
 ![](./apollodorus-tm.png)
+
+
+---
+
+# Assignments this week
+
+- Survey form due 12:00 *tomorrow* (Wed.)
+- Simple submission to Google drive
+- Bring a computer to class with Julia installed on Thursday
+
 
