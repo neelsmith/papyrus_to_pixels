@@ -9,13 +9,23 @@
 ## Modelling species and texts
 
 Using [Julia in the REPL](../classes/repl1/) 📓
+Working with collections of data
+
 Workshop lab 1: [rhetorical style at Gettysburg](../labs/lab1/) 📓
+Modelling [DNA sequences](../classes/dna/) as texts
+
 
 ## Classifying species and texts
 
-[DNA sequences](../classes/dna/) as texts
 Workshop lab 2: [comparing DNA sequences](../labs/lab2/) in beetles and humans 📓
+🔛 Defining features 
 
+
+Workshop lab 3: Feature extraction 📓
+Zipf's law
+
+
+## Modeling change through time
 
 🔛 Tree models in biology and textual criticism
 Interpreting classified data as trees: language evolution
@@ -23,37 +33,29 @@ Interpreting classified data as trees: language evolution
 
 
 
-Workshop lab 3: Feature extraction 📓
-🔛 Defining features 
+
+
+
+***Spring break***
+***Spring break***
 
 Workshop lab 4: Classification 📓
-Zipf's law
-
-***Spring break***
-***Spring break***
+Introduction to research projects
 
 ## Developing a project proposal
 
-Introduction to research projects
- 🔛  Extending your lab work 📓
+🔛  Extending your lab work 📓
+Workshop: Formal project proposals\
 
-
-Workshop: Formal project proposals
- 🔛 class
-
-
-
- 📓  Project proposal due
-
-
+🔛 class
 ***Easter break***
-
 
 
 ## Investigating a research topic: interpreting change through time
 
+📓  Project proposal due
 Review collections of data in Julia, and [plain-text formats](../classes/textio/)
-class
+
 
 
 Workshop draft code
