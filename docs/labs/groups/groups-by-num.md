@@ -11,6 +11,7 @@ has_children: true
 |Name|Group|
 |--- | ---|
 |Thomas|1|
+|Kyle|1|
 |Payton|1|
 |Marquis|1|
 |Tate|2|
