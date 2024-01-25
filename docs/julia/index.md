@@ -23,6 +23,10 @@ See the separate page on [installing Julia and Pluto](https://neelsmith.github.i
 See the separate page on [saving and opening notebooks in Pluto](./pluto/)
 
 
+## Using Pluto in the cloud
+
+See the separate page on ways to [use a Pluto notebook without running Pluto](./cloud/) on your machine.
+
 ## Introduction to the Julia language in Pluto notebooks
 
 > These Pluto notebooks are viewable here as HTML pages you can read in a web browser: save them to your computer in Pluto notebook format and open them in Pluto  to run them live.
