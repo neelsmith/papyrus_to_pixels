@@ -40,7 +40,7 @@ Review your list of proposed observations.  Append to it a paragraph identifying
 
 ### Assignment: proposing a data model
 
-By 12:00 pm on Thursday, add to your personal folder on the course Google drive a file named `{LASTNAME}-oration-model.txt`, replacing `{LASTNAME}` with your last name. The file should be in plain-text format. Its contents should include both the list of your proposed observations and your paragraph identifying ways your model is wrong.
+By 12:00 pm on the day of class, add to your personal folder on the course Google drive a file named `{LASTNAME}-oration-model.txt`, replacing `{LASTNAME}` with your last name. The file should be in plain-text format. Its contents should include both the list of your proposed observations and your paragraph identifying ways your model is wrong.
 
 
 
