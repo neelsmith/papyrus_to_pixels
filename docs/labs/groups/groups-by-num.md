@@ -10,7 +10,7 @@ has_children: true
 
 |Name|Group|
 |--- | ---|
-|Connor|1|
+|Thomas|1|
 |Payton|1|
 |Marquis|1|
 |Tate|2|

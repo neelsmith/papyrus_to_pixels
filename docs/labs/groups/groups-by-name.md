@@ -17,7 +17,6 @@ has_children: true
 |Bryce|6|
 |Caitlyn|3|
 |Cam|7|
-|Connor|1|
 |Connor|5|
 |Emily|2|
 |Emma Crain|6|
@@ -34,3 +33,4 @@ has_children: true
 |Payton|1|
 |Sal|3|
 |Tate|2|
+|Thomas|1|
