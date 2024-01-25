@@ -1,0 +1,53 @@
+
+
+TECH SETUP: expect to be wrong; devise a test
+
+1. We devised a test, and we were wrong!  Thanks!
+
+2. Fix it! Grading scheme matches our goals: revise by 12:00 on Monday for full credit.
+
+
+GROUP COMPACTS
+Collaboration is hard. 6 areas you'll draft an agreement for
+
+TEXTUAL XMISSION
+
+- Date of Lucretius? 1st c BCE
+- Date of MS: !!!
+
+This is typical.
+
+Why the big gap?
+
+What factors affect survival?
+
+We need to think about this to understand *transmission*; it's a *process* so what *mechanisms* explain it?
+
+
+WHY JULIA?
+
+- goals: for a CS major, programming skill includes choosing language for task, easily switching to "best" choice. Optimizing your coding skills
+
+- for a BIO or CLAS major: optimization is *your time* and getting value out of your domain expertise SO over a 4-year UG career
+
+--> choose ONE language you can be proficient in 
+
+Julia:
+
+- many contexts: notebooks; REPL; scripts; distributed computing and numerically intense computation (climate modeling, finance)
+
+- modern language: (pkg mgmt; Unicode! Testing and other modern ideas BUILT INTO core language) 
+
+(CS majors: slightly different model from OO you've learned)
+
+FOCUS NEXT WEEK;
+
+- nouns/verbs
+- collections of data and the 2 central computational operations of scholarly work with data
+
+
+
+
+
+
+

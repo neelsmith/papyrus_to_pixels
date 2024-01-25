@@ -23,31 +23,36 @@ Deadlines to note:
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Jan 30*, *Feb 1* | Using [Julia in the REPL](../classes/repl1/) 📓 | Workshop lab 1: [rhetorical style at Gettysburg](../labs/lab1/) 📓 | **Thu**: ***NB 1** due.* |
+| *Jan 30*, *Feb 1* | Using [Julia in the REPL](../classes/repl1/) 📓 | Working with collections of data |  |
+| *Feb 6*, *Feb 8* | Workshop lab 1: [rhetorical style at Gettysburg](../labs/lab1/) 📓 | Modelling [DNA sequences](../classes/dna/) as texts | **Tue**: ***NB 1** due.* |
 
 ## Classifying species and texts
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Feb 6*, *Feb 8* | [DNA sequences](../classes/dna/) as texts | Workshop lab 2: [comparing DNA sequences](../labs/lab2/) in beetles and humans 📓 | **Thu**: ***NB 2** due.* |
-| *Feb 13*, *Feb 15* | 🔛 Tree models in biology and textual criticism | Interpreting classified data as trees: language evolution |  |
-| *Feb 20*, *Feb 22* | Workshop lab 3: Feature extraction 📓 | 🔛 Defining features  | **Tue**: ***NB 3** due.* |
-| *Feb 27*, *Feb 29* | Workshop lab 4: Classification 📓 | Zipf's law | **Thu**: *Last class before spring break.* **Tue**: ***NB 4** due.* |
+| *Feb 13*, *Feb 15* | Workshop lab 2: [comparing DNA sequences](../labs/lab2/) in beetles and humans 📓 | 🔛 Defining features  | **Tue**: ***NB 2** due.* |
+| *Feb 20*, *Feb 22* | Workshop lab 3: Feature extraction 📓 | Zipf's law | **Tue**: ***NB 3** due.* |
+
+## Modeling change through time
+
+| Dates | Tuesday | Thursday | Notes |
+| ---: | :--- | :--- | :--- |
+| *Feb 27*, *Feb 29* | 🔛 Tree models in biology and textual criticism | Interpreting classified data as trees: language evolution | **Thu**: *Last class before spring break.* |
 | *Mar 5*, *Mar 7* | ***Spring break*** | ***Spring break*** |  |
+| *Mar 12*, *Mar 14* | Workshop lab 4: Classification 📓 | Introduction to research projects | **Tue**: *Class resumes.* **Tue**: ***NB 4** due.* |
 
 ## Developing a project proposal
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Mar 12*, *Mar 14* | Introduction to research projects |  🔛  Extending your lab work 📓 | **Tue**: *Class resumes.* |
-| *Mar 19*, *Mar 21* | Workshop: Formal project proposals |  🔛 class | **Thu**: *Project proposal due.* |
-| *Mar 26*, *Mar 28* |  📓  Project proposal due | ***Easter break*** | **Tue**: *Last class before Easter break.* |
+| *Mar 19*, *Mar 21* | 🔛  Extending your lab work 📓 | Workshop: Formal project proposals\ | **Thu**: *Project proposal due.* |
+| *Mar 26*, *Mar 28* | 🔛 class | ***Easter break*** | **Tue**: *Last class before Easter break.* |
 
 ## Investigating a research topic: interpreting change through time
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Apr 2*, *Apr 4* | Review collections of data in Julia, and [plain-text formats](../classes/textio/) | class | **Tue**: *Class resumes.* |
+| *Apr 2*, *Apr 4* | 📓  Project proposal due | Review collections of data in Julia, and [plain-text formats](../classes/textio/) | **Tue**: *Class resumes.* |
 | *Apr 9*, *Apr 11* | Workshop draft code | Presentations | **Tue**: *First draft of project code due.* |
 | *Apr 16*, *Apr 18* | class | class |  |
 

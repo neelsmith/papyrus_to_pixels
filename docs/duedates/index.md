@@ -8,10 +8,10 @@ nav_order: 20
 
 
 
-- February 1: notebook 1, "[Rhetorical style at Gettsyburg](../labs/lab1/)," due.
-- February 8: notebook 2, "[Matching sequences in DNA](../labs/lab2/)," due.
+- February 6: notebook 1, "[Rhetorical style at Gettsyburg](../labs/lab1/)," due.
+- February 13: notebook 2, "[Matching sequences in DNA](../labs/lab2/)," due.
 - February 20: NB 3 due.
-- February 27: NB 4 due.
+- March 13: NB 4 due.
 - March 14: Initial idea for project due.
 - March 26: Formal project proposal due.
 - April 2: Proposal for contribution to course-wide shared resources.
