@@ -18,3 +18,8 @@ You can open any notebook file on binder, a free service that runs a virtual mac
 3. In the dialog that pops up, click the "binder"  button in the section labelled "In the cloud (experimental).
 
 Binder will then build an entire virtual machine on the fly (!!), install Julia, start up a Pluto notebook server, and open your notebook!  That's amazing -- but not fast.  Once your notebook is open and running, however, it will run normally.
+
+
+## JuliaHub
+
+It is also possible to run Pluto notebooks on a hosted service at [JuliaHub](https://juliahub.com/ui/Notebooks). This is a commercial service but claims to give individuals 20 free hours of usage per calendar month, resetting the count to 0 monthly. The remote machines and Pluto servers are already running so unlike Binder your startup time is more or less instantaneous.  I'm exploring optoins for students to use JuliaHub for free for course work.
