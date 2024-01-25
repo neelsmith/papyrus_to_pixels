@@ -9,6 +9,7 @@
 2. Group compacts
 3. Textual transmission
 4. Why Julia?
+5. Assignments for Tuesday
 
 ---
 
@@ -59,3 +60,9 @@ CLAS 199: resubmit with correct name in correct format by 12:00 on Monday for fu
 - What are your goals?
 
 
+---
+
+# Assignments for Tuesday
+
+1. Compact
+2. Data model for rhetorical style
