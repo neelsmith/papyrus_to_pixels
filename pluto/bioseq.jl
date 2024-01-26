@@ -22,6 +22,9 @@ md"""# Strings and Biosequences"""
 # ╔═╡ a984869e-e464-40ee-b60c-a0d64308fe79
 md"""## Some kind of solution to lab 2"""
 
+# ╔═╡ 1ddbcc54-7218-445a-acbe-28fcca1b6723
+md"""### Summarizing a single sequence: how does encoding of proteins vary?"""
+
 # ╔═╡ 37ce29a3-6bef-469e-977c-0c855c0b6762
 md"""Here is a nucleotide sequence for a Cytochrome Oxidase I mitochondria in  *homo sapiens*."""
 
@@ -30,6 +33,21 @@ hs_seq = dna"ATGTTCGCCGACCGTTGACTATTCTCTACAAACCACAAAGACATTGGAACACTATACCTATTATTCG
 
 # ╔═╡ b95a1cb0-1a9d-4d30-8f3c-dc30bde2a3ac
 md"""Here's the same sequence translated to a sequence of amino acids. The `BioSequences` package makes these two actions trivial. (Thanks, `BioSequences` authors!)"""
+
+# ╔═╡ 9b8e92a5-7b18-489a-af44-822ab8800293
+hs_aseq = translate(hs_seq)
+
+# ╔═╡ b37b2015-51b7-4018-a040-a7b21dc406be
+"""The following two-line table shows the sequence of <b>$(length(hs_aseq)) amino acids</b> in the top row; in the second row, we see the corresponding <b>three nucleotides for each amino acid</b>.  Individual nucleotides are highlighted <span class="varies">like this</span> if other values in that position encode the same amino acid.
+
+
+""" |> HTML
+
+# ╔═╡ af917767-c3a0-4470-b356-83e9a93b69fc
+md"""Summary of the variety in each position of the three-nucleotide sequence. Out of $(length(hs_aseq)) amino acids:"""
+
+# ╔═╡ c741a1e5-05ea-44e6-8cf7-664686240a74
+
 
 # ╔═╡ d6a65b27-3704-4f74-b38b-4fdd76a669f4
 html"""
@@ -123,15 +141,6 @@ df_complement = complement(dyscfus_seq)
 # ╔═╡ ee335bed-fdca-495d-b0d2-ddff56a74939
 md"""Translate a DNA sequence to a sequence of amino acids:"""
 
-# ╔═╡ b37b2015-51b7-4018-a040-a7b21dc406be
-"""The following two-line table shows the sequence of <b>$(length(hs_aseq)) amino acids</b> in the top row; in the second row, we see the corresponding <b>three nucleotides for each amino acid</b>.  Individual nucleotides are highlighted <span class="varies">like this</span> if other values in that position encode the same amino acid.
-
-
-""" |> HTML
-
-# ╔═╡ af917767-c3a0-4470-b356-83e9a93b69fc
-md"""Summary of the variety in each position of the three-nucleotide sequence. Out of $(length(hs_aseq)) amino acids:"""
-
 # ╔═╡ 0ed8bfe0-18b5-451c-8433-178afebbad1e
 md"""> It would be fun to fix this with our own subdivision function!
 """
@@ -146,7 +155,7 @@ md"""### Viz this"""
 """Cluster a nucleotide sequence into successive groups of three nucleotides."""
 function codons(seq::LongSequence{BioSequences.DNAAlphabet{4}}) 
 	n = 3
-    codonlist = []
+    codonlist = LongSequence{DNAAlphabet{4}}[]
     for i in 1:n:length(seq)
         stophere = min(i+n-1, length(seq))
         subseq = [seq[j] for j in i:stophere] |> LongDNA{4}
@@ -157,6 +166,12 @@ end
 
 # ╔═╡ 7915b4c4-0442-4336-9747-b097b6ec704e
 hs_codons = codons(hs_seq)
+
+# ╔═╡ abd7cf4e-ed57-40c8-9cdd-11acf2ec884d
+hs_codons
+
+# ╔═╡ 787d3c15-a043-4000-8d18-1e86717283f1
+hs_codons[1]
 
 # ╔═╡ 05812847-be60-4011-b24e-a03cec24585f
 md"""
@@ -172,6 +187,9 @@ aa_labels = translate.(hs_codons) .|> string
 
 # ╔═╡ f8b99e5c-1f01-4a4a-800b-698c81866dad
 hdr = "<tr><td><i>Amino acids</i></td><th>" * join(aa_labels, "</th><th>") * "</th><tr>"
+
+# ╔═╡ c9d658e2-1c4d-408a-8692-34902f40d4c1
+hs_codons[1] |> typeof
 
 # ╔═╡ b3638d21-22bf-4829-8548-076980f1cb8e
 length(hs_codons)
@@ -196,6 +214,40 @@ codon_possiblities = begin
 	end
 	codon_dict
 end
+
+# ╔═╡ 3722d543-d715-4e02-aac2-2e941f10ab2a
+unambiguous_aaseq = filter(v -> length(unique(v)) == 1, collect(values(codon_possiblities))) |> unique
+
+# ╔═╡ ccc475cd-5a8f-4463-855d-134b8641f3a3
+unambiguous_aas = map(v -> v[1], unambiguous_aaseq)
+
+# ╔═╡ 58eb3544-c3bc-4f02-a50a-b8ea6c1d1084
+md"""The $(length(unambiguous_aas)) unambiguous sequences are:
+
+"""
+
+
+# ╔═╡ 9d1ef359-c196-4514-9648-efe99331db5e
+
+
+join(map(nt -> string("- ", nt), unambiguous_aas), "\n") |> Markdown.parse
+
+# ╔═╡ 94bfb23b-f600-4ae9-9796-7dc94a4e096e
+unambiguous_aas[1]
+
+# ╔═╡ 347ffb95-9a06-4356-af1f-8283809bf35a
+q = ExactSearchQuery(unambiguous_aas[1])
+
+# ╔═╡ 6035fc99-de0b-4789-90c9-324a014b1adf
+filter(unambiguous_aas) do aa
+	! isempty(findall(q, aa))
+end
+
+# ╔═╡ b62254b9-d59c-4412-b026-c2ea484e12e1
+ambiguous_aas = filter(v -> length(unique(v)) > 1, collect(values(codon_possiblities))) |> unique
+
+# ╔═╡ 25176ec7-22f4-4270-9df6-10995d7f064e
+md"""Out of $(length(keys(codon_possiblities))) amino acids, $(length(ambiguous_aas)) are encoded by multiple nucleotide sequences."""
 
 # ╔═╡ 77b71866-63a5-4b8c-bde4-aed7ca718d9b
 variety = [checkvariety(aa, codon_possiblities) for aa in hs_aseq ]
@@ -248,15 +300,6 @@ html"""
 
 # ╔═╡ 7a0f76f1-4da3-4064-abf3-8d17cf3261d1
 md"""## Kmers are ngrams!"""
-
-# ╔═╡ 9b8e92a5-7b18-489a-af44-822ab8800293
-hs_aseq = translate(hs_seq)
-
-# ╔═╡ 0a615793-60d2-4632-8e2e-0d65efb4f9cc
-# ╠═╡ disabled = true
-#=╠═╡
-hs_aseq = translate(hs_seq)
-  ╠═╡ =#
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -334,6 +377,7 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 # ╟─66b221fe-c37c-4f1e-8f28-b6c6c82aba2d
 # ╟─65c3e03e-bad5-11ee-3d46-23a97d85021e
 # ╟─a984869e-e464-40ee-b60c-a0d64308fe79
+# ╟─1ddbcc54-7218-445a-acbe-28fcca1b6723
 # ╟─37ce29a3-6bef-469e-977c-0c855c0b6762
 # ╟─0323429f-5d95-47ce-b52e-3627696f73b1
 # ╟─b95a1cb0-1a9d-4d30-8f3c-dc30bde2a3ac
@@ -342,10 +386,22 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 # ╟─792c8e66-ac28-4bbd-b43d-27b26ddee13a
 # ╟─af917767-c3a0-4470-b356-83e9a93b69fc
 # ╟─000ada82-e646-445c-98aa-33bf7fee6839
+# ╟─25176ec7-22f4-4270-9df6-10995d7f064e
+# ╟─58eb3544-c3bc-4f02-a50a-b8ea6c1d1084
+# ╟─9d1ef359-c196-4514-9648-efe99331db5e
+# ╠═abd7cf4e-ed57-40c8-9cdd-11acf2ec884d
+# ╠═94bfb23b-f600-4ae9-9796-7dc94a4e096e
+# ╠═347ffb95-9a06-4356-af1f-8283809bf35a
+# ╠═6035fc99-de0b-4789-90c9-324a014b1adf
+# ╠═787d3c15-a043-4000-8d18-1e86717283f1
+# ╠═ccc475cd-5a8f-4463-855d-134b8641f3a3
+# ╠═3722d543-d715-4e02-aac2-2e941f10ab2a
+# ╠═b62254b9-d59c-4412-b026-c2ea484e12e1
+# ╠═c741a1e5-05ea-44e6-8cf7-664686240a74
 # ╟─d6a65b27-3704-4f74-b38b-4fdd76a669f4
 # ╟─248ef413-bc3d-4b9e-a6d7-871b1abdbd00
 # ╟─181ef67a-43b6-41d4-b634-392eebce4bc5
-# ╠═05812847-be60-4011-b24e-a03cec24585f
+# ╟─05812847-be60-4011-b24e-a03cec24585f
 # ╟─39edc96d-a72b-4445-a821-25b4f4c081b1
 # ╠═77b71866-63a5-4b8c-bde4-aed7ca718d9b
 # ╠═bc9a21c0-83f3-491c-ab38-3d98a76653e8
@@ -367,11 +423,11 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 # ╠═5b9663ca-0642-4c44-a339-37e90c4b15bd
 # ╟─f1062a07-c0a9-4836-9730-85a2cd46e699
 # ╟─ee335bed-fdca-495d-b0d2-ddff56a74939
-# ╠═0a615793-60d2-4632-8e2e-0d65efb4f9cc
 # ╟─0ed8bfe0-18b5-451c-8433-178afebbad1e
 # ╠═7a0b2cbe-d255-4732-98c6-72136edaed9a
 # ╟─8489df6f-0bcc-4ab2-8435-a5b5e562df2d
-# ╟─f6cec82d-24dd-4214-ba4e-6a4293aaac24
+# ╠═f6cec82d-24dd-4214-ba4e-6a4293aaac24
+# ╠═c9d658e2-1c4d-408a-8692-34902f40d4c1
 # ╠═7915b4c4-0442-4336-9747-b097b6ec704e
 # ╠═b3638d21-22bf-4829-8548-076980f1cb8e
 # ╠═cd52e391-dd3b-4bbf-9967-20526464926b
