@@ -9,7 +9,7 @@
 ## Modelling species and texts
 
 Using [Julia in the REPL](../classes/repl1/) 📓
-Working with collections of data
+Working with [collections of data](../classes/collections/)
 
 Workshop lab 1: [rhetorical style at Gettysburg](../labs/lab1/) 📓
 Modelling [DNA sequences](../classes/dna/) as texts
