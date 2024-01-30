@@ -29,13 +29,13 @@ With Jim Cahill, Director, Educational Design and Digital Media Services
 
 - 🎉🎉🎉  Great success getting material into course Google drive!   🍾🍾🍾
 - Issues saving file in plain-text format
-    - from a word processor, looke for "Save as..."
+    - from a word processor or a Google doc, look for "Save as..."
     - better yet, use a text editor that works in plain text
 - Issues saving file with correct name
     - consider changing settings for your OS to display full file name
 
 
-CLAS 199: resubmit with correct name in correct format by 12:00 on Monday for full credit
+☞ Resubmit with correct name in correct format by 12:00 on Monday for full credit
 
 ---
 
@@ -51,6 +51,13 @@ CLAS 199: resubmit with correct name in correct format by 12:00 on Monday for fu
 
 
 [How do texts survive?](https://brewminate.com/classics-lost-and-found-the-survival-of-ancient-texts/)
+
+
+---
+
+Archaeopteryx
+
+![bg](./archaeopteryx.png)
 
 ---
 

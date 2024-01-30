@@ -23,7 +23,7 @@ Deadlines to note:
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Jan 30*, *Feb 1* | Using [Julia in the REPL](../classes/repl1/) 📓 | Working with collections of data |  |
+| *Jan 30*, *Feb 1* | Using [Julia in the REPL](../classes/repl1/) 📓 | Working with [collections of data](../classes/collections/) |  |
 | *Feb 6*, *Feb 8* | Workshop lab 1: [rhetorical style at Gettysburg](../labs/lab1/) 📓 | Modelling [DNA sequences](../classes/dna/) as texts | **Tue**: ***NB 1** due.* |
 
 ## Classifying species and texts

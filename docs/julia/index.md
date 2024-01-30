@@ -40,6 +40,9 @@ See the separate page on ways to [use a Pluto notebook without running Pluto](./
 - [file I/O](./fileio.html): reading from and writing to files
 - creating matrices in Julia: modelling a [feature matrix](./featurematrix.html)
 
+## Other nifty stuff
+
+- plot tree relationships using [Mermaid flowcharts](./sketch-tree.html)
 
 ## Code with an AI
 
