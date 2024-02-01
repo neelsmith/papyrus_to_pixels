@@ -23,6 +23,19 @@ begin
 	md"""*Unhide this cell to see the Julia environment.*"""
 end
 
+# ╔═╡ 2149a6e1-a158-4e72-b5eb-4fe91d6d73d1
+md"""*Notebook version*:  **1.0.0** *See version description*: $(@bind showversion CheckBox())
+"""
+
+# ╔═╡ 085be780-d017-4632-887e-bce3cdb2c0a9
+if showversion
+
+	md"""
+
+- **1.0.0**: initial release supports defining a Mermaid flowchart and interpreting its graph as a `NewickTree`.  No sanitizing of node names included in this version.	
+"""	
+end
+
 # ╔═╡ c9d97d70-e584-4724-bedb-673d2ca226a7
 md"""# Sketch a tree in Mermaid syntax and convert it to newick"""
 
@@ -1382,6 +1395,8 @@ version = "1.4.1+1"
 
 # ╔═╡ Cell order:
 # ╟─fb041168-bd60-11ee-129e-af955355f4ac
+# ╟─2149a6e1-a158-4e72-b5eb-4fe91d6d73d1
+# ╟─085be780-d017-4632-887e-bce3cdb2c0a9
 # ╟─c9d97d70-e584-4724-bedb-673d2ca226a7
 # ╟─7bfb4f76-5ab3-4871-b747-090dca64f11b
 # ╟─425cc328-ec56-4015-980f-c9de9f994cd9
@@ -1391,7 +1406,7 @@ version = "1.4.1+1"
 # ╠═eee67019-eb47-4434-a60b-e6e7d921e2cd
 # ╟─cc8c69fd-c8f5-4772-a85d-8fed909c98d5
 # ╟─3ba25212-ba78-4961-a484-487486c2988a
-# ╟─694ecf82-5252-46e4-b29d-213da036dfd5
+# ╠═694ecf82-5252-46e4-b29d-213da036dfd5
 # ╠═db21a1c7-5dc5-4f85-9e30-ad49e1b9ad96
 # ╟─11675e4b-9160-419b-b390-ae896760d5e3
 # ╟─b234a942-7c46-4b29-88b2-c20d332efe05
