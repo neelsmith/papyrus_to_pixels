@@ -18,18 +18,6 @@ has_children: true
 
 
 
-## Week at a glance: Jan. 23 - 25
-
-We meet in O'Neil 101 for both classes this week.
-
-We will introduce the course's subject matter on Tuesday. Jim Cahill from Educational Design and Digital Media Services will visit us on Thursday, as we  introduce and test the technologies we will rely on this semester.
-
-
-### Due dates this week
-
-- *Wednesday, 12:00*: complete [this Google form](https://docs.google.com/forms/d/11tgd9yTntxP0_2yuO199p0tAhjGgFCk-9Jvy_Ve68eQ/edit?ts=65a96ef8) with introductory survey information
-- *Thursday, 12:00*:  submit required assignment for [today's class preparation](./classes/content+tech1/).
-
 
 
 ## Week at a glance: Jan. 30 - Feb. 1
