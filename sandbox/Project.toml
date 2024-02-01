@@ -1,0 +1,4 @@
+[deps]
+NewickTree = "b0a14db8-6308-4ebc-8917-f72cd81f5094"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+
