@@ -15,6 +15,9 @@ has_children: true
 
 > STANDING beneath this serene sky, overlooking these broad fields now reposing from the labors of the waning year, the mighty Alleghenies dimly towering before us, the graves of our brethren beneath our feet, it is with hesitation that I raise my poor voice to break the eloquent silence of God and Nature. But the duty to which you have called me must be performed;–grant me, I pray you, your indulgence and your sympathy.
 
+- **Feb. 1**: 60-second guide to [Markdown](https://commonmark.org/help/)
+
+
 - **Jan. 25**: **revised schedule** including (*NB*!) [**revised due dates**](./duedates) for first lab assignments
 - **Jan 25**:  groups for first lab assignments now posted. You can find your group number in this list [sorted by name](./labs/groups/groups-by-name), then find your teammates' names by finding your group in this list [sorted by group number](./labs/groups/groups-by-num)
 - **Jan. 25**: As "Week at a glance" sections of this course home page go out of date, they migrate to [this review page](./previous/) where you can find all material previously on the home page.
