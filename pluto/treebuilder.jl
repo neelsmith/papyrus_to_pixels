@@ -205,12 +205,13 @@ latin --> oldfrench
 oldfrench --> french
 latin --> spanish
 latin --> portuguese
+latin --> vulgarlatin
+vulgarlatin --> italian
 
 
 
 arabic --> msa
 
-sumerian
 
 """
 
@@ -1401,7 +1402,7 @@ version = "1.4.1+1"
 # ╟─7bfb4f76-5ab3-4871-b747-090dca64f11b
 # ╟─425cc328-ec56-4015-980f-c9de9f994cd9
 # ╠═70ac9a69-0eab-47c0-b9ca-b86d4481884c
-# ╟─ac34a8f9-8f96-4158-99bd-4d109a53d20e
+# ╠═ac34a8f9-8f96-4158-99bd-4d109a53d20e
 # ╠═89363915-894c-45de-9f86-503ff161d1eb
 # ╠═eee67019-eb47-4434-a60b-e6e7d921e2cd
 # ╟─cc8c69fd-c8f5-4772-a85d-8fed909c98d5
