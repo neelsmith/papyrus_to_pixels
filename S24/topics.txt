@@ -21,7 +21,7 @@ Workshop lab 2: [comparing DNA sequences](../labs/lab2/) in beetles and humans �
 🔛 Defining features 
 
 
-Workshop lab 3: Feature extraction 📓
+Workshop lab 3: Constructing and evaluating trees 📓
 Zipf's law
 
 

@@ -31,7 +31,7 @@ Deadlines to note:
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
 | *Feb 13*, *Feb 15* | Workshop lab 2: [comparing DNA sequences](../labs/lab2/) in beetles and humans 📓 | 🔛 Defining features  | **Tue**: ***NB 2** due.* |
-| *Feb 20*, *Feb 22* | Workshop lab 3: Feature extraction 📓 | Zipf's law | **Tue**: ***NB 3** due.* |
+| *Feb 20*, *Feb 22* | Workshop lab 3: Constructing and evaluating trees 📓 | Zipf's law | **Tue**: ***NB 3** due.* |
 
 ## Modeling change through time
 
