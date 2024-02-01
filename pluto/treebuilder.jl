@@ -29,8 +29,16 @@ md"""# Sketch a tree in Mermaid syntax and convert it to newick"""
 # ╔═╡ 7bfb4f76-5ab3-4871-b747-090dca64f11b
 md"""> *Draw and visualize family trees using Mermaid flow charts*"""
 
+# ╔═╡ cc8c69fd-c8f5-4772-a85d-8fed909c98d5
+html"""
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+"""
+
 # ╔═╡ 3ba25212-ba78-4961-a484-487486c2988a
-md"""> **Mermaid utitlities**"""
+md"""> **Mermaid tree utilities**"""
 
 # ╔═╡ 11675e4b-9160-419b-b390-ae896760d5e3
 """Extract source->target pairs from a Mermaid diagram"""
@@ -51,7 +59,7 @@ end
 
 # ╔═╡ 7ccf7a2f-bb42-4cfb-b6a6-5be353455d56
 """Find children of a node in a list of source->target pairs."""
-function children(nd, pairings)
+function kids(nd, pairings)
 	map(filter(pr -> pr[1] == nd, pairings)) do pr
 		pr[2]
 	end
@@ -65,38 +73,54 @@ function nodes(pairings)
 	vcat(left, right) |> unique
 end
 
-# ╔═╡ fa42519e-b56e-4d07-acdb-b9338da345d0
-"""Find root of a rooted tree expressed as source->target pairs."""
-function root(pairings)
+# ╔═╡ 0bdac854-a8ec-4537-971f-e73e1fda1ab9
+"""Find all root nodes in a graph expressed as src -> target pairs.
+"""
+function rootnodes(pairings)
 	right = map(pr -> pr[2], pairings)
 	filter(nodes(pairings)) do nd
 		! (nd in right)
-	end[1]
+	end
 end
 
-# ╔═╡ bea063a8-0daf-4fe7-9cdb-5f296bd426e6
-"""Find leaf nodes of a rooted tree expressed as src->target pairings"""
-function tips(pairlist)
-	left = map(pr -> pr[1], pairlist)
-	#filter(nd -> ! (nd in right), pairlist)[1]
-	filter(nd -> ! (nd in left), nodes(pairlist))
+# ╔═╡ fa42519e-b56e-4d07-acdb-b9338da345d0
+"""Find a single root node of tree expressed as source->target pairs.
+If the graph includes more than one root, it arbirarily takes the first one.
+"""
+function root(pairings)
+	rootnodes(pairings)[1]
 end
 
 # ╔═╡ db21a1c7-5dc5-4f85-9e30-ad49e1b9ad96
 """Recursively compose elements of a Newick format tree from a rooted tree represented as src-> target pairs."""
 function newicktree(pairings, currentnode = nothing, cattable = [], sibling = false)
-	nd = isnothing(currentnode) ? root(pairings) : currentnode
-	kids = children(nd, pairings)
-	#kids = children(root, pairings)
-	if isempty(kids)
-		sibling ? push!(cattable, "," * nd) : push!(cattable, nd )
+    #@info("cattable: $(cattable)")
+    nd = isnothing(currentnode) ? root(pairings) : currentnode
+    if isnothing(currentnode)
+        #@info("Starting from root $(nd)")
+    end
+    #@info("Pushing $(nd): sibling? $(sibling)")
+    push!(cattable, nd)
+
+    kidnodes = kids(nd, pairings)	
+	if isempty(kidnodes)
 	else
-		push!(cattable, ")$(nd)")
-		for (i, kid) in enumerate(kids)
-			newicktree(pairings, kid, cattable, i < length(kids))
+        #@info("-- Has children so pushing right paren")
+		push!(cattable, ")")
+		for (i, kid) in enumerate(kidnodes)
+            #@info("child $(i): $(kid)")
+			
+			newicktree(pairings, kid, cattable, i < length(kidnodes))
 		end
+        #@info("-- Closing node $(nd) with left paren")
 		push!(cattable, "(")
 	end
+
+    #@info("Node $(nd): sibling? $(sibling)")
+    if sibling 
+        push!(cattable, ",")
+    end
+
 	cattable
 end
 
@@ -106,15 +130,13 @@ function newick(txt)
 	(mermaidpairs(txt) |> newicktree |> reverse |> join) * ";"
 end
 
-# ╔═╡ a993cffb-57fb-4e43-8ec6-5baaccc147ca
-html"""
-<br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/>
-"""
-
-# ╔═╡ 587b3fa7-dff9-4f84-9527-08e2c892e807
-md"""> Utilities you don't need to look at"""
+# ╔═╡ bea063a8-0daf-4fe7-9cdb-5f296bd426e6
+"""Find leaf nodes of a rooted tree expressed as src->target pairings"""
+function tips(pairlist)
+	left = map(pr -> pr[1], pairlist)
+	#filter(nd -> ! (nd in right), pairlist)[1]
+	filter(nd -> ! (nd in left), nodes(pairlist))
+end
 
 # ╔═╡ 9d767368-090a-4c73-8131-585fbc876976
 """Implement interpreting Mermaid diagram."""
@@ -143,35 +165,52 @@ menu = [
 	]
 
 # ╔═╡ 425cc328-ec56-4015-980f-c9de9f994cd9
-md"""*Direction of mermaid *: $(@bind direction Select(menu))"""
+md"""*Direction of mermaid plot*: $(@bind direction Select(menu))"""
 
 # ╔═╡ 70ac9a69-0eab-47c0-b9ca-b86d4481884c
 languages = """
 flowchart $(direction)
 
+turkish
+
+
 pie --> oldenglish
 oldenglish --> middleenglish
+middleenglish --> modernenglish
+modernenglish --> americanenglish
+modernenglish --> britishenglish
+
 
 pie --> protogermanic
+protogermanic --> german
+protogermanic --> dutch
+protogermanic --> danish
 
 pie --> latin
 
+latin --> oldfrench
+oldfrench --> french
+latin --> spanish
+latin --> portuguese
 
 
+
+arabic --> msa
+
+sumerian
 
 """
 
 # ╔═╡ 89363915-894c-45de-9f86-503ff161d1eb
 mermaid(languages)
 
-# ╔═╡ 82b80bba-fec3-43a3-bd37-f3d75e5e025f
- newick(languages)
-
 # ╔═╡ eee67019-eb47-4434-a60b-e6e7d921e2cd
+# ╠═╡ show_logs = false
 newickform = newick(languages) |> readnw
 
-# ╔═╡ 4fe6f439-7405-49ef-818d-2b4ed9f3604d
-plot(newickform)
+# ╔═╡ ac34a8f9-8f96-4158-99bd-4d109a53d20e
+aside(plot(newickform))
+
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1347,21 +1386,20 @@ version = "1.4.1+1"
 # ╟─7bfb4f76-5ab3-4871-b747-090dca64f11b
 # ╟─425cc328-ec56-4015-980f-c9de9f994cd9
 # ╠═70ac9a69-0eab-47c0-b9ca-b86d4481884c
-# ╠═82b80bba-fec3-43a3-bd37-f3d75e5e025f
+# ╟─ac34a8f9-8f96-4158-99bd-4d109a53d20e
 # ╠═89363915-894c-45de-9f86-503ff161d1eb
 # ╠═eee67019-eb47-4434-a60b-e6e7d921e2cd
-# ╠═4fe6f439-7405-49ef-818d-2b4ed9f3604d
+# ╟─cc8c69fd-c8f5-4772-a85d-8fed909c98d5
 # ╟─3ba25212-ba78-4961-a484-487486c2988a
 # ╟─694ecf82-5252-46e4-b29d-213da036dfd5
+# ╠═db21a1c7-5dc5-4f85-9e30-ad49e1b9ad96
 # ╟─11675e4b-9160-419b-b390-ae896760d5e3
 # ╟─b234a942-7c46-4b29-88b2-c20d332efe05
 # ╟─7ccf7a2f-bb42-4cfb-b6a6-5be353455d56
 # ╟─023617b6-24bb-433a-96b3-bf09b8829407
+# ╟─0bdac854-a8ec-4537-971f-e73e1fda1ab9
 # ╟─fa42519e-b56e-4d07-acdb-b9338da345d0
 # ╟─bea063a8-0daf-4fe7-9cdb-5f296bd426e6
-# ╟─db21a1c7-5dc5-4f85-9e30-ad49e1b9ad96
-# ╟─a993cffb-57fb-4e43-8ec6-5baaccc147ca
-# ╟─587b3fa7-dff9-4f84-9527-08e2c892e807
 # ╟─9d767368-090a-4c73-8131-585fbc876976
 # ╟─2da281ee-ae30-4384-9b7a-3787dfa3a0bc
 # ╟─00000000-0000-0000-0000-000000000001
