@@ -36,7 +36,7 @@ See the separate page on ways to [use a Pluto notebook without running Pluto](./
 
 ## Some common tasks illustrated in Pluto notebooks
 
-
+- introduction to [dictionaries](./dicts.html) in Julia
 - [file I/O](./fileio.html): reading from and writing to files
 - creating matrices in Julia: modelling a [feature matrix](./featurematrix.html)
 

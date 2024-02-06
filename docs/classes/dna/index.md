@@ -25,5 +25,5 @@ Prof. Ober's slides for today's class are available from your course Google driv
 
 ## Class preparation: Julia dictionaries
 
-
+In our next lab, we'll continue to use vectors for collections of data, but will also introduce a new struture in Julia, the *dictionary*. Read through [this Pluto notebook](../../julia/dicts.html) before class. It's saved as a web page, just like the template notebook for your lab assignment, so feel free to try it out in Pluto, or to just use a Pluto REPL, and copy and paste some code there to try out dictionaries.
 
