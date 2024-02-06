@@ -130,14 +130,59 @@ md"""This is a Vector of dna sequences: each sequence has 3 nucleotides"""
 # ╔═╡ 1ddbcc54-7218-445a-acbe-28fcca1b6723
 md"""### C. How does encoding of proteins vary?"""
 
+# ╔═╡ 2b230cef-5dbf-441e-b2bf-add59787e77b
+md"""
+!!! note "Challenge here"
+
+    Find set of codons per amino acid
+"""
+
 # ╔═╡ 37ce29a3-6bef-469e-977c-0c855c0b6762
-md"""Here is a nucleotide sequence for a Cytochrome Oxidase I mitochondria in  *homo sapiens*."""
+md"""
 
-# ╔═╡ ff22a554-7e35-41ca-8bc3-c864769a9e32
-md"""We want to compare the two seq (nt, aa)"""
+1. `dna_seq` is a nucleotide sequence for a Cytochrome Oxidase I mitochondria in  either *homo sapiens* of *dyscolus fusipalpus*.
+2. `aa_seq` is the same sequence interpreted as a sequence of amino acids. 
+3. `codons` is the same nucleotide sequence divided into groups of 3, each corresponding to an amino acid.
 
-# ╔═╡ a5528239-4f37-4818-9469-74ac40e620e5
 
+"""
+
+# ╔═╡ 6f19c952-020e-4a14-9652-1fc2498c2250
+md"""### D. Where in each codon does variation occur?"""
+
+# ╔═╡ 93a15dd9-76da-4929-a9a6-715c42599085
+md"""### E. Visualizing results in Pluto"""
+
+# ╔═╡ f82ac9f7-b557-4078-aa38-d08fefec5945
+md"""
+
+- auto formatted table
+- needs a list of amino acids
+- needs a list of nucleotides
+- needs your scores
+
+"""
+
+# ╔═╡ 13a842ca-f0fb-4942-8462-857952fe7f24
+md"""Example:"""
+
+# ╔═╡ d26b1729-6387-4737-9e66-9de225201f64
+seq_eg = dna"""TTC"""
+
+# ╔═╡ f3995027-52bc-4781-82d1-50aba6effc2a
+truthy_eg = [true, true, false]
+
+# ╔═╡ 21e6c7ed-3116-479c-990b-9ed7a0cd4222
+html"""
+<br/><br/><br/><br/>
+"""
+
+# ╔═╡ ef4fac43-d795-4f35-a2bf-11b665046694
+md"""
+---
+
+Some calculations about unambiguous sequences: clean this up.
+"""
 
 # ╔═╡ c741a1e5-05ea-44e6-8cf7-664686240a74
 
@@ -159,6 +204,9 @@ md"""Let's build a "codon diffs" data set. We'll map our vector of codons to T/F
 """
 
 
+# ╔═╡ 4647af0e-5edc-4635-9200-8b31da396760
+
+
 # ╔═╡ e9390860-8d6c-4f71-b1cf-1b8e7b1dc71d
 """`aadict` is a dictionary mapping amino acids to all the nucleotide sequences they are built from.
 """
@@ -166,7 +214,7 @@ function checkvariety(aa, aadict)
 	options = aadict[aa]
 	uniform = Bool[]
 		
-	for i in 1:3
+	for i in 1:3 # Nah, require that aadict's value vectors already are uniqued.
 		ntvals = map(opt -> opt[i], options)	|> unique
 		length(ntvals) == 1 ? push!(uniform,true) : push!(uniform, false)
 	end
@@ -188,38 +236,11 @@ html"""
 # ╔═╡ 52da3927-6bbb-4820-961b-92d6b17ec8cd
 md"""> Sequence data"""
 
-# ╔═╡ f0f7baa7-675a-4e2d-971b-7f15b5467be5
-"""Subdivide a string into a Vector of strings of length n.
-"""
-function split_string(str::AbstractString, n::Integer)
-    substrings = []
-    for i in 1:n:length(str)
-        push!(substrings, SubString(str, i, min(i+n-1, length(str))))
-    end
-    return substrings
-end
-
-# ╔═╡ f6cec82d-24dd-4214-ba4e-6a4293aaac24
-"""Cluster a nucleotide sequence into successive groups of three nucleotides."""
-function splitcodons(seq::LongSequence{BioSequences.DNAAlphabet{4}}) 
-	n = 3
-    codonlist = LongSequence{DNAAlphabet{4}}[]
-    for i in 1:n:length(seq)
-        stophere = min(i+n-1, length(seq))
-        subseq = [seq[j] for j in i:stophere] |> LongDNA{4}
-        push!(codonlist, subseq)
-    end
-    return codonlist
-end
-
 # ╔═╡ 1fe8aa3d-a52b-489b-b996-11ccd53df42e
 md"""**Homo sapiens**"""
 
 # ╔═╡ e66709b6-8ae2-45cc-932d-be8f3898aabb
 hs_str = "ATGTTCGCCGACCGTTGACTATTCTCTACAAACCACAAAGACATTGGAACACTATACCTATTATTCGGCGCATGAGCTGGAGTCCTAGGCACAGCTCTAAGCCTCCTTATTCGAGCCGAGCTGGGCCAGCCAGGCAACCTTCTAGGTAACGACCACATCTACAACGTTATCGTCACAGCCCATGCATTTGTAATAATCTTCTTCATAGTAATACCCATCATAATCGGAGGCTTTGGCAACTGACTAGTTCCCCTAATAATCGGTGCCCCCGATATGGCGTTTCCCCGCATAAACAACATAAGCTTCTGACTCTTACCTCCCTCTCTCCTACTCCTGCTCGCATCTGCTATAGTGGAGGCCGGAGCAGGAACAGGTTGAACAGTCTACCCTCCCTTAGCAGGGAACTACTCCCACCCTGGAGCCTCCGTAGACCTAACCATCTTCTCCTTACACCTAGCAGGTGTCTCCTCTATCTTAGGGGCCATCAATTTCATCACAACAATTATCAATATAAAACCCCCTGCCATAACCCAATACCAAACGCCCCTCTTCGTCTGATCCGTCCTAATCACAGCAGTCCTACTTCTCCTATCTCTCCCAGTCCTAGCTGCTGGCATCACTATACTACTAACAGACCGCAACCTCAACACCACCTTCTTCGACCCCGCCGGAGGAGGAGACCCCATTCTATACCAACACCTATTCTGATTTTTCGGTCACCCTGAAGTTTATATTCTTATCCTACCAGGCTTCGGAATAATCTCCCATATTGTAACTTACTACTCCGGAAAAAAAGAACCATTTGGATACATAGGTATGGTCTGAGCTATGATATCAATTGGCTTCCTAGGGTTTATCGTGTGAGCACACCATATATTTACAGTAGGAATAGACGTAGACACACGAGCATATTTCACCTCCGCTACCATAATCATCGCTATCCCCACCGGCGTCAAAGTATTTAGCTGACTCGCCACACTCCACGGAAGCAATATGAAATGATCTGCTGCAGTGCTCTGAGCCCTAGGATTCATCTTTCTTTTCACCGTAGGTGGCCTGACTGGCATTGTATTAGCAAACTCATCACTAGACATCGTACTACACGACACGTACTACGTTGTAGCCCACTTCCACTATGTCCTATCAATAGGAGCTGTATTTGCCATCATAGGAGGCTTCATTCACTGATTTCCCCTATTCTCAGGCTACACCCTAGACCAAACCTACGCCAAAATCCATTTCACTATCATATTCATCGGCGTAAATCTAACTTTCTTCCCACAACACTTTCTCGGCCTATCCGGAATGCCCCGACGTTACTCGGACTACCCCGATGCATACACCACATGAAACATCCTATCATCTGTAGGCTCATTCATTTCTCTAACAGCAGTAATATTAATAATTTTCATGATTTGAGAAGCCTTCGCTTCGAAGCGAAAAGTCCTAATAGTAGAAGAACCCTCCATAAACCTGGAGTGACTATATGGATGCCCCCCACCCTACCACACATTCGAAGAACCCGTATACATAAAATCTAGA"
-
-# ╔═╡ b189998c-d8ab-44dd-b490-6d0447216118
-
 
 # ╔═╡ 2b70f85c-57e8-44a1-8dc9-6bf4fa2798ca
 md"""**Dyscolus fusipalpis**"""
@@ -247,17 +268,24 @@ dna_seq = LongDNA{4}(dnastring)
 # ╔═╡ 8845c1b1-b088-4a41-8c3b-e9ce218efad8
 aa_seq = translate(dna_seq)
 
-# ╔═╡ b37b2015-51b7-4018-a040-a7b21dc406be
-"""The following two-line table shows the sequence of <b>$(length(aa_seq)) amino acids</b> in the top row; in the second row, we see the corresponding <b>three nucleotides for each amino acid</b>.  Individual nucleotides are highlighted <span class="varies">like this</span> if other values in that position encode the same amino acid.
-
-
-""" |> HTML
-
 # ╔═╡ af917767-c3a0-4470-b356-83e9a93b69fc
 md"""Summary of the variety in each position of the three-nucleotide sequence. Out of $(length(aa_seq)) amino acids:"""
 
 # ╔═╡ 90105131-2a13-4f0e-b30d-6c9a877ff2ad
 aa_values = unique(aa_seq)
+
+# ╔═╡ f6cec82d-24dd-4214-ba4e-6a4293aaac24
+"""Cluster a nucleotide sequence into successive groups of three nucleotides."""
+function splitcodons(seq::LongSequence{BioSequences.DNAAlphabet{4}}) 
+	n = 3
+    codonlist = LongSequence{DNAAlphabet{4}}[]
+    for i in 1:n:length(seq)
+        stophere = min(i+n-1, length(seq))
+        subseq = [seq[j] for j in i:stophere] |> LongDNA{4}
+        push!(codonlist, subseq)
+    end
+    return codonlist
+end
 
 # ╔═╡ c71395e3-ce5b-4c0e-b92c-6316581ddc86
 codons = splitcodons(dna_seq)
@@ -348,6 +376,20 @@ md"""
 - the map of amino acids to all codons appearing in this sequence is `codon_possiblities`. It's a Julia `Dict` keyed by amino acid.
 """
 
+# ╔═╡ 34e76804-9a1a-497c-8903-b9e8cbc093e6
+
+
+# ╔═╡ f0f7baa7-675a-4e2d-971b-7f15b5467be5
+"""Subdivide a string into a Vector of strings of length n.
+"""
+function split_string(str::AbstractString, n::Integer)
+    substrings = []
+    for i in 1:n:length(str)
+        push!(substrings, SubString(str, i, min(i+n-1, length(str))))
+    end
+    return substrings
+end
+
 # ╔═╡ bbc0eb4f-1228-4fe0-ba75-104b88e3e250
 md"""> HTML display"""
 
@@ -379,11 +421,27 @@ function hilite_diffs(ntlist, variety_bools)
 	string("<td>", join(html_list), "</td>")
 end
 
+# ╔═╡ c4f4a8e5-5f64-4c28-ba34-5af96f79767f
+hilite_diffs(seq_eg, truthy_eg) |> HTML
+
 # ╔═╡ bc9a21c0-83f3-491c-ab38-3d98a76653e8
 hilite_diffs(codons[1], variety[1])
 
-# ╔═╡ 0b18e532-95b7-41a2-8943-d652dc311d59
-htmlspans = [hilite_diffs(codons[i], variety[i]) for i in 1:length(codons)]
+# ╔═╡ d564fc1c-4cc8-442f-af3c-906cf6f59f07
+"""Format an HTML table with higlighting of base locations that show variation for a given amino acid.
+"""
+function tablify(codonseq, tfvals, aalabels)
+	aacells = map(lbl -> "<td>$(lbl)</td>", aalabels)
+	aarow = "<tr><td><i>Amino acids</i></td>" * join(aacells) * "</tr>"
+	
+	codoncells  = [hilite_diffs(codonseq[i], tfvals[i]) for i in 1:length(codonseq)]
+	codonrow = "<tr><td><i>Nucleotides</i></td>" *  join(codoncells) * "</tr>"
+
+	join(["<table>", aarow, codonrow, "</table>"], "\n") 
+end
+
+# ╔═╡ c058af20-6644-49a3-bf1a-d060458c9b59
+tablify([seq_eg], [truthy_eg], [aa_labels[2]]) |> HTML
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -789,7 +847,7 @@ version = "17.4.0+2"
 # ╠═159a2399-81d3-4148-957d-c90f5c5e4e66
 # ╟─cbe521e1-6472-4139-b1a7-8539cd85587d
 # ╠═5b25407b-441d-4ae1-935f-c1cbaa4699d7
-# ╠═b5e3b250-2116-4b82-b36c-a3dc06d70276
+# ╟─b5e3b250-2116-4b82-b36c-a3dc06d70276
 # ╠═7ad8ffae-6604-414b-83c3-53676be1f497
 # ╠═5990561b-e760-415e-ac2b-461381d796c9
 # ╠═5e930fc5-fb06-47a0-914f-ad7f1eec1caf
@@ -805,19 +863,27 @@ version = "17.4.0+2"
 # ╠═56ec6953-fbc8-4447-bf9b-ad8d61fc8b93
 # ╟─7ea655b6-0d60-450a-9b82-d3f68373f4b3
 # ╟─1ddbcc54-7218-445a-acbe-28fcca1b6723
+# ╠═2b230cef-5dbf-441e-b2bf-add59787e77b
 # ╟─37ce29a3-6bef-469e-977c-0c855c0b6762
-# ╠═ff22a554-7e35-41ca-8bc3-c864769a9e32
 # ╠═dfa77f84-ceb6-4303-bbd7-93fc6dca2e29
 # ╠═5c4c96d2-1804-49d8-918e-14d2bd34b9d4
-# ╠═a5528239-4f37-4818-9469-74ac40e620e5
-# ╟─b37b2015-51b7-4018-a040-a7b21dc406be
+# ╠═6f19c952-020e-4a14-9652-1fc2498c2250
 # ╟─af917767-c3a0-4470-b356-83e9a93b69fc
-# ╟─000ada82-e646-445c-98aa-33bf7fee6839
+# ╠═000ada82-e646-445c-98aa-33bf7fee6839
 # ╠═77b71866-63a5-4b8c-bde4-aed7ca718d9b
 # ╠═d84d8c5b-bcbc-4f7f-81bc-7040d16dfaa0
 # ╟─25176ec7-22f4-4270-9df6-10995d7f064e
 # ╟─58eb3544-c3bc-4f02-a50a-b8ea6c1d1084
 # ╟─9d1ef359-c196-4514-9648-efe99331db5e
+# ╟─93a15dd9-76da-4929-a9a6-715c42599085
+# ╟─f82ac9f7-b557-4078-aa38-d08fefec5945
+# ╟─13a842ca-f0fb-4942-8462-857952fe7f24
+# ╠═d26b1729-6387-4737-9e66-9de225201f64
+# ╠═f3995027-52bc-4781-82d1-50aba6effc2a
+# ╠═c4f4a8e5-5f64-4c28-ba34-5af96f79767f
+# ╠═c058af20-6644-49a3-bf1a-d060458c9b59
+# ╠═21e6c7ed-3116-479c-990b-9ed7a0cd4222
+# ╟─ef4fac43-d795-4f35-a2bf-11b665046694
 # ╠═347ffb95-9a06-4356-af1f-8283809bf35a
 # ╠═6035fc99-de0b-4789-90c9-324a014b1adf
 # ╠═ccc475cd-5a8f-4463-855d-134b8641f3a3
@@ -830,22 +896,23 @@ version = "17.4.0+2"
 # ╟─05812847-be60-4011-b24e-a03cec24585f
 # ╟─39edc96d-a72b-4445-a821-25b4f4c081b1
 # ╠═bc9a21c0-83f3-491c-ab38-3d98a76653e8
-# ╟─90105131-2a13-4f0e-b30d-6c9a877ff2ad
+# ╠═90105131-2a13-4f0e-b30d-6c9a877ff2ad
+# ╠═4647af0e-5edc-4635-9200-8b31da396760
 # ╟─e9390860-8d6c-4f71-b1cf-1b8e7b1dc71d
 # ╟─8f9484fa-1960-41e1-8652-8a5c2285651b
 # ╟─ed94a586-26ab-4091-92b0-de4a81f77111
 # ╟─52da3927-6bbb-4820-961b-92d6b17ec8cd
 # ╟─48eecf30-3355-4087-902f-3481d4b272cd
-# ╟─f0f7baa7-675a-4e2d-971b-7f15b5467be5
-# ╟─f6cec82d-24dd-4214-ba4e-6a4293aaac24
 # ╟─1fe8aa3d-a52b-489b-b996-11ccd53df42e
 # ╟─e66709b6-8ae2-45cc-932d-be8f3898aabb
-# ╠═b189998c-d8ab-44dd-b490-6d0447216118
 # ╟─2b70f85c-57e8-44a1-8dc9-6bf4fa2798ca
 # ╟─1d171200-ce6a-4881-8777-9493d0c29d88
+# ╟─f6cec82d-24dd-4214-ba4e-6a4293aaac24
+# ╠═34e76804-9a1a-497c-8903-b9e8cbc093e6
+# ╟─f0f7baa7-675a-4e2d-971b-7f15b5467be5
 # ╟─bbc0eb4f-1228-4fe0-ba75-104b88e3e250
 # ╟─5f1f7065-5e60-4266-b422-94f7d7750d1f
 # ╟─0788d300-cc0d-4d43-9ee0-a7c91d542605
-# ╠═0b18e532-95b7-41a2-8943-d652dc311d59
+# ╟─d564fc1c-4cc8-442f-af3c-906cf6f59f07
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
