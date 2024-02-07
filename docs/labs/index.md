@@ -37,3 +37,8 @@ All four lab assignments have a common outline, that could be summarized as:
 2. [comparing sequences in DNA](./lab2/) (classifying species)
 3. Feature extraction
 4. Similarity and classification
+
+
+## Revising assignments
+
+Please follow [these instructions](./revising/)
