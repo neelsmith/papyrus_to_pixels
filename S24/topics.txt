@@ -17,12 +17,18 @@ Modelling [DNA sequences](../classes/dna/) as texts
 
 ## Classifying species and texts
 
-Workshop lab 2: [comparing DNA sequences](../labs/lab2/) in beetles and humans 📓
+
+Introduce [comparing DNA sequences](../labs/lab2/) in beetles and humans
+🔛  Zipf's law
+
+
+Introduce lab 3:  (lab 2 due) 📓
 🔛 Defining features 
 
 
-Workshop lab 3: Constructing and evaluating trees 📓
-Zipf's law
+Constructing and evaluating trees 📓
+Huh?
+
 
 
 ## Modeling change through time
