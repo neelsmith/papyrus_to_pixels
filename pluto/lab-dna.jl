@@ -16,10 +16,13 @@ end
 
 # ╔═╡ cfe33452-3e67-444f-b1c9-26586efd71ec
 begin
-	using BioSequences
+	
 	using PlutoUI
 	using PlutoTeachingTools
 end
+
+# ╔═╡ a5cdfaee-238c-40d3-823c-c41754c8ee66
+using BioSequences
 
 # ╔═╡ cacfdf8a-413e-49b6-a837-773155fb1d6a
 # This function is part of the `PlutoUI` pacakge:
@@ -33,6 +36,10 @@ md"""
 !!! alert "Requirements for assignment: Comparing DNA sequences"
 
     1. Familiarize yourself with the Julia `BioSequences` package by figuring out basic information about some of its types and functions.
+    2. Staring from a nucleotide sequence, find a sequence of amino acids. Find out how many ways each amino acid is encoded, and at what positions in the codon the encoding could vary for each amino acid. This template notebook guides you through this process.
+    3. When you have completed all missing sections of code and discussion, save your notebook as a file named {LASTNAME}-lab2.jl substituting your last name for {LASTNAME}, and add the file to your personal folder on the course Google drive.
+    4. Make sure everyone in your group has submitted a notebook with identical solutions to the problem.  Include your individual thoughts int he final reflection section of the notebook.
+
 """
 
 # ╔═╡ cebc9afd-5f7d-4e7d-a639-5c4ddfbc6455
@@ -43,7 +50,7 @@ md"""
 *Authors*: **-->ALL NAMES OF COLLABORATORS HERE<--**
 
 
-*Date last modified*: **Feb. 6, 2024** **-->UPDATE THIS DATE WHEN YOU SUBMIT YOUR ASSIGNMENT<--**
+*Date last modified*: **Feb. 8, 2024** **-->UPDATE THIS DATE WHEN YOU SUBMIT YOUR ASSIGNMENT<--**
 
 """
 
@@ -66,6 +73,8 @@ md"""
 !!! note "Goal"
 
     In this notebook we want to visualize how the encoding of amino acids varies in a sequence of the same gene in two different species.
+
+    Given a DNA sequence, we want to find out both what different sequences of nucleotides encode any given amino acid in the sequence, and at what position in a codon, if any, an encoding of an amino acid varies.
 """
 
 # ╔═╡ ab1722aa-e118-458d-89d3-625a0bfd9531
@@ -79,17 +88,104 @@ md"""
 
     
 
-    1. background ....
+    1. First, as background, we'll learn a little about Julia's `BioSequences` package, since it can save us some work!
+    2. Next, we'll summarize sequences of nucleotides amino acids, and codon units by counting how many elements occur in a sequence, and how many distinct *values* are found in each sequence.
+    3. Then we'll create a dictionary so we can look up what codons occur for each amino acid in our sequence.
+    4. Finally, we'll map each codon to a list of three true / false values recording whether the nucleotide at that position is always the same (true), or varies (false == not uniform).
 """
 
 # ╔═╡ c4c14430-eb66-46a4-99a5-fb655a7758cf
 md"""### A. the Julia `BioSequences` package"""
 
+# ╔═╡ 3de371de-5054-4c88-9d7f-7010eefce7ca
+md"""
+The Julia `BioSequences` package was developed by biologists to simplify working with data about DNA sequences.  It's not a built-in part of the Julia langauge, so we'll need to tell Julia to include it in our current session, with the keyword  `using`.
+"""
+
+# ╔═╡ 3787be32-9588-4602-82ad-09df3628a258
+md"""The package includes special types for sequences of nucleotides and for sequences of amino acids.
+
+Nucleotides are usually represented by one of four letters: A, T, G or C. We could of course choose to model that with raw strings.
+"""
+
+# ╔═╡ 33c9848d-4e97-4d7c-933b-b0757853ee7a
+dna_string = "ATG"
+
+# ╔═╡ 0e1c6264-452d-4436-95f6-6883c8608d93
+md"""One problem with that approach, however, is that there's nothing to prevent us from using bad data. What should we do if our string includes characters that are not ATGC?
+"""
+
+# ╔═╡ 2e2379a6-3ad4-4391-bde0-7e0210bd0bbc
+bad_dna_string = "ATG🧨"
+
+# ╔═╡ 71e384e7-7a23-456c-83c4-0768eabcb894
+md"""`BioSequences` has a special type, named, approrpiately, `DNA`.  You can use a function named `convert` to convert a single character to a `DNA` object.
+
+"""
+
+# ╔═╡ 2b368302-141f-4afe-aeae-3d6e649dcc44
+one_adenine = convert(DNA, 'A')
+
+# ╔═╡ fb3246ac-5a2c-41e8-9141-43a46279f99e
+typeof(one_adenine)
+
+# ╔═╡ 1c97feb4-2f50-4caf-92e5-da7f5b5c9667
+ md"""But if you try to convert an invalid character, you'll get an error message. Uncomment the following line, and see what happens.
+ 
+ 
+ """
+
+# ╔═╡ 2a58c6a3-89ab-474a-a24e-5d7de5a2d0a5
+# convert(DNA, '🧨')
+
+# ╔═╡ 1b4fd427-a08d-43c6-a5e8-a8005320179d
+md"""Of course we're really interested in looking at sequences of DNA. The package lets you create a sequence of these DNA objects from a single string, as illustrated here.
+
+"""
+
+# ╔═╡ 159a2399-81d3-4148-957d-c90f5c5e4e66
+ntide_example = LongDNA{4}("ATGATT")
+
+# ╔═╡ eabbb5bf-f110-46ed-8675-cf66b5585c10
+md"""
+The displayed value tells us that this is a 6-nucleotide sequence (`6nt DNA Sequence`), with the three bases `A`, `T`,  `G`, `A`, `T`, `T`, in that order.
+"""
+
+# ╔═╡ a449057e-9714-4f8b-a537-aa63eee180a2
+typeof(ntide_example)
+
+# ╔═╡ e90e9b55-4bdd-4c70-9d76-92e25fb1cdf3
+md"""Notice that its type is a `LongSequence`. This is just a specialization of the generic Vectors you've already been using, but now instead of allowing any kind of element to be contained in the vector, a `LongSequence` is a Vector that only contains legitimate biological sequence data.
+
+That means that everything you already know how to do with a Vector, you do with a `LongSequence`.
+"""
+
+# ╔═╡ 16ba1c79-0068-46a9-a948-8974e9c9ccd9
+md"""  Lets find out how many nucleotides are in this example."""
+
+# ╔═╡ d1cc8f2d-97ff-48ee-adac-f4b96e54846e
+length(ntide_example)
+
+# ╔═╡ def367ea-df15-4274-a86b-15ddf7958b2b
+md"""How many different bases are represented? That's also a generic question you can answer for any vector:"""
+
+# ╔═╡ e093e012-dab9-41ef-8daa-3bae19bc88cf
+unique(ntide_example)
+
+# ╔═╡ 5c1652ee-414b-498c-bfa9-6d8e30cd7be6
+md"""Let's use Julia's "pipe" syntax to string together finding and counting a list of unique values."""
+
+# ╔═╡ fee93b2f-f889-4623-825d-dd170120880a
+unique(ntide_example) |> length
+
+# ╔═╡ bf29f041-e685-40cd-bdb0-30acde2b5e5b
+md"""The package has a handy macro for creating a sequence from a string, predictably named `dna`.  Its syntax is just like the macro you  use in Pluto notebooks to create a Markdown formatted object from a string."""
+
 # ╔═╡ f0684962-48bd-44d2-9e36-bb75cddf6968
 n_tide = dna"ATG"
 
-# ╔═╡ 159a2399-81d3-4148-957d-c90f5c5e4e66
-n_tide == LongDNA{4}("ATG")
+# ╔═╡ bcb268e8-6e7b-47ce-8733-f25243f0b31a
+n_tide[1]
 
 # ╔═╡ cbe521e1-6472-4139-b1a7-8539cd85587d
 md"""It's a Vector!"""
@@ -104,6 +200,14 @@ md"""
 - What is the type of each element in `n_tide`?
 """
 
+# ╔═╡ a8f4b9c7-4138-4c9f-9d31-aa8232183f58
+md"""
+
+
+
+
+"""
+
 # ╔═╡ 7ad8ffae-6604-414b-83c3-53676be1f497
 one_aa = translate(n_tide)
 
@@ -115,14 +219,26 @@ one_aa[1]
 
 # ╔═╡ e6eef629-6608-43be-b6df-fb816ff56ffc
 md"""
-### B. Summarizing a sequence
+### B. Summarizing a DNA sequence
 """
 
 # ╔═╡ 7515233b-34ef-4db5-b085-2e0d4cbf52d0
-md"""Cytochrome Oxidase I mitochondria"""
+md"""In this lab, we're going to compare sequences for the same gene in two different species.  The gene is called *Cytochrome Oxidase I mitochondria*; the two species we'll compare are people (*homo sapiens*) and a beetle called *dyscolus fusipalpus*.
+
+You can use the following menu to choose between them; this will assign a value to a variable named `species`.
+"""
 
 # ╔═╡ d09913ca-00ed-48d2-af67-b7f66579adcb
-@bind species Select(["human" => "homo sapiens", "beetle" => "dyscolus fusipalpis"])
+md"""*Choose a species to analyze*: $(@bind species Select(["human" => "homo sapiens", "beetle" => "dyscolus fusipalpis"]))"""
+
+# ╔═╡ 36523fee-f1d8-4747-8720-726eb6ae1800
+species
+
+# ╔═╡ c5e87c41-1a46-4a76-b344-cf9acf32f048
+md"""The next cell uses *interpolation* to include a label for your choice in a string that we'll format as Markdown with the `md` macro."""
+
+# ╔═╡ 5a4032c8-93a6-49b1-b503-ebac439acd2b
+md"""Species to summarize: $(species)"""
 
 # ╔═╡ 1ae6f546-13db-42d1-b764-755eb9b9a233
 md"""This is a Vector of dna sequences: each sequence has 3 nucleotides"""
@@ -255,9 +371,8 @@ function choose_co1(species)
 	species == "human" ? hs_str : df_str
 end
 
-# ╔═╡ 3c62ff7f-bae3-4f17-ba6f-d7a8fed03d14
+# ╔═╡ 1983630a-ff08-4afe-9fca-0fccfb456d1b
 dnastring = choose_co1(species)
-
 
 # ╔═╡ 897b5787-4069-4669-b581-20a5931c9527
 typeof(dnastring)
@@ -375,20 +490,6 @@ md"""
 - The corresponding nucleotides clustered in codons is `codons`. Its length is $(length(codons)) triplets of nucleotides.
 - the map of amino acids to all codons appearing in this sequence is `codon_possiblities`. It's a Julia `Dict` keyed by amino acid.
 """
-
-# ╔═╡ 34e76804-9a1a-497c-8903-b9e8cbc093e6
-
-
-# ╔═╡ f0f7baa7-675a-4e2d-971b-7f15b5467be5
-"""Subdivide a string into a Vector of strings of length n.
-"""
-function split_string(str::AbstractString, n::Integer)
-    substrings = []
-    for i in 1:n:length(str)
-        push!(substrings, SubString(str, i, min(i+n-1, length(str))))
-    end
-    return substrings
-end
 
 # ╔═╡ bbc0eb4f-1228-4fe0-ba75-104b88e3e250
 md"""> HTML display"""
@@ -833,28 +934,54 @@ version = "17.4.0+2"
 # ╟─cfe33452-3e67-444f-b1c9-26586efd71ec
 # ╟─cacfdf8a-413e-49b6-a837-773155fb1d6a
 # ╟─c7925ead-597a-446e-9508-24401dbbb488
-# ╠═e30883ff-1930-4f75-bde8-0ab46e355693
+# ╟─e30883ff-1930-4f75-bde8-0ab46e355693
 # ╟─cebc9afd-5f7d-4e7d-a639-5c4ddfbc6455
 # ╟─9b0a3d35-057c-44fc-b153-b05e02f0f081
 # ╟─ae7b8af9-6293-4345-b1a5-39289bb87f96
 # ╟─f992a862-4aed-4bc5-9bb4-db3f79cbe51d
-# ╠═bcad22fe-07f4-48b4-92d6-46ee4e75ce05
+# ╟─bcad22fe-07f4-48b4-92d6-46ee4e75ce05
 # ╟─f8073ab3-8ec7-4b6e-8971-5efed82b0713
 # ╟─ab1722aa-e118-458d-89d3-625a0bfd9531
 # ╟─eaad5b35-bf55-4606-aab0-6a7e93272e1c
 # ╟─c4c14430-eb66-46a4-99a5-fb655a7758cf
-# ╠═f0684962-48bd-44d2-9e36-bb75cddf6968
+# ╟─3de371de-5054-4c88-9d7f-7010eefce7ca
+# ╠═a5cdfaee-238c-40d3-823c-c41754c8ee66
+# ╟─3787be32-9588-4602-82ad-09df3628a258
+# ╠═33c9848d-4e97-4d7c-933b-b0757853ee7a
+# ╟─0e1c6264-452d-4436-95f6-6883c8608d93
+# ╠═2e2379a6-3ad4-4391-bde0-7e0210bd0bbc
+# ╟─71e384e7-7a23-456c-83c4-0768eabcb894
+# ╠═2b368302-141f-4afe-aeae-3d6e649dcc44
+# ╠═fb3246ac-5a2c-41e8-9141-43a46279f99e
+# ╟─1c97feb4-2f50-4caf-92e5-da7f5b5c9667
+# ╠═2a58c6a3-89ab-474a-a24e-5d7de5a2d0a5
+# ╟─1b4fd427-a08d-43c6-a5e8-a8005320179d
 # ╠═159a2399-81d3-4148-957d-c90f5c5e4e66
-# ╟─cbe521e1-6472-4139-b1a7-8539cd85587d
+# ╟─eabbb5bf-f110-46ed-8675-cf66b5585c10
+# ╠═a449057e-9714-4f8b-a537-aa63eee180a2
+# ╟─e90e9b55-4bdd-4c70-9d76-92e25fb1cdf3
+# ╟─16ba1c79-0068-46a9-a948-8974e9c9ccd9
+# ╠═d1cc8f2d-97ff-48ee-adac-f4b96e54846e
+# ╟─def367ea-df15-4274-a86b-15ddf7958b2b
+# ╠═e093e012-dab9-41ef-8daa-3bae19bc88cf
+# ╟─5c1652ee-414b-498c-bfa9-6d8e30cd7be6
+# ╠═fee93b2f-f889-4623-825d-dd170120880a
+# ╟─bf29f041-e685-40cd-bdb0-30acde2b5e5b
+# ╠═f0684962-48bd-44d2-9e36-bb75cddf6968
+# ╠═bcb268e8-6e7b-47ce-8733-f25243f0b31a
+# ╠═cbe521e1-6472-4139-b1a7-8539cd85587d
 # ╠═5b25407b-441d-4ae1-935f-c1cbaa4699d7
 # ╟─b5e3b250-2116-4b82-b36c-a3dc06d70276
+# ╠═a8f4b9c7-4138-4c9f-9d31-aa8232183f58
 # ╠═7ad8ffae-6604-414b-83c3-53676be1f497
 # ╠═5990561b-e760-415e-ac2b-461381d796c9
 # ╠═5e930fc5-fb06-47a0-914f-ad7f1eec1caf
 # ╟─e6eef629-6608-43be-b6df-fb816ff56ffc
 # ╟─7515233b-34ef-4db5-b085-2e0d4cbf52d0
 # ╟─d09913ca-00ed-48d2-af67-b7f66579adcb
-# ╟─3c62ff7f-bae3-4f17-ba6f-d7a8fed03d14
+# ╠═36523fee-f1d8-4747-8720-726eb6ae1800
+# ╟─c5e87c41-1a46-4a76-b344-cf9acf32f048
+# ╠═5a4032c8-93a6-49b1-b503-ebac439acd2b
 # ╠═897b5787-4069-4669-b581-20a5931c9527
 # ╠═577afd6e-dbbb-414a-bdff-939da44b815a
 # ╠═8845c1b1-b088-4a41-8c3b-e9ce218efad8
@@ -902,14 +1029,13 @@ version = "17.4.0+2"
 # ╟─8f9484fa-1960-41e1-8652-8a5c2285651b
 # ╟─ed94a586-26ab-4091-92b0-de4a81f77111
 # ╟─52da3927-6bbb-4820-961b-92d6b17ec8cd
-# ╟─48eecf30-3355-4087-902f-3481d4b272cd
+# ╟─1983630a-ff08-4afe-9fca-0fccfb456d1b
 # ╟─1fe8aa3d-a52b-489b-b996-11ccd53df42e
 # ╟─e66709b6-8ae2-45cc-932d-be8f3898aabb
 # ╟─2b70f85c-57e8-44a1-8dc9-6bf4fa2798ca
 # ╟─1d171200-ce6a-4881-8777-9493d0c29d88
+# ╟─48eecf30-3355-4087-902f-3481d4b272cd
 # ╟─f6cec82d-24dd-4214-ba4e-6a4293aaac24
-# ╠═34e76804-9a1a-497c-8903-b9e8cbc093e6
-# ╟─f0f7baa7-675a-4e2d-971b-7f15b5467be5
 # ╟─bbc0eb4f-1228-4fe0-ba75-104b88e3e250
 # ╟─5f1f7065-5e60-4266-b422-94f7d7750d1f
 # ╟─0788d300-cc0d-4d43-9ee0-a7c91d542605
