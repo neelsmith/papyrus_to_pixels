@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.37
+# v0.19.38
 
 using Markdown
 using InteractiveUtils
@@ -285,6 +285,9 @@ hdr = "<tr><td><i>Amino acids</i></td><th>" * join(aa_labels, "</th><th>") * "</
 
 # ╔═╡ 1401dca2-c9e7-4158-9a7d-bcdfff9e3a5f
 aarow = hdr
+
+# ╔═╡ d764002d-9d4d-4d29-81fd-284c78f18118
+translate.(hs_codons)
 
 # ╔═╡ cd52e391-dd3b-4bbf-9967-20526464926b
 # Note that we want a single amino acid, not a sequence of length 1
@@ -856,7 +859,7 @@ version = "17.4.0+2"
 # ╠═b62254b9-d59c-4412-b026-c2ea484e12e1
 # ╠═c741a1e5-05ea-44e6-8cf7-664686240a74
 # ╟─d6a65b27-3704-4f74-b38b-4fdd76a669f4
-# ╟─248ef413-bc3d-4b9e-a6d7-871b1abdbd00
+# ╠═248ef413-bc3d-4b9e-a6d7-871b1abdbd00
 # ╟─181ef67a-43b6-41d4-b634-392eebce4bc5
 # ╟─05812847-be60-4011-b24e-a03cec24585f
 # ╟─39edc96d-a72b-4445-a821-25b4f4c081b1
@@ -867,6 +870,7 @@ version = "17.4.0+2"
 # ╟─e9390860-8d6c-4f71-b1cf-1b8e7b1dc71d
 # ╟─0335fa5c-2d04-49a4-b35b-07cf9472dde4
 # ╠═dfa77f84-ceb6-4303-bbd7-93fc6dca2e29
+# ╠═d764002d-9d4d-4d29-81fd-284c78f18118
 # ╠═bddd4abe-511b-4b1c-8dc8-53b4f9286766
 # ╠═1401dca2-c9e7-4158-9a7d-bcdfff9e3a5f
 # ╠═cd52e391-dd3b-4bbf-9967-20526464926b
