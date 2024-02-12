@@ -15,7 +15,7 @@ has_children: true
 - **Feb. 7**: Instructions on [how to submit revisions](./labs/revising/) of lab assignments
 - **Feb 12**: [Assessment of collaboration](./labs/assessment1/) on lab 1 due at 12:00.
 - **Feb. 16, 12:00**: deadline for final revisions of lab 1
-- Reminder: lab 2 will be due at noon on Tuesday, Feb. 13
+- Reminder: lab 2 will be due at noon on Tuesday, Feb. 20
 
 
 
