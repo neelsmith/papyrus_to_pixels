@@ -221,21 +221,30 @@ md"""The `BioSequences` package also has a special type for amino acids. As with
 one_methionine = convert(AminoAcid, 'M')
 
 # ╔═╡ 2722450e-1f58-422b-b4f6-3661336022a9
-md"""The package includes a `translate` function to handle the fundamental task of converting a sequence of nucleotides into a sequence of amino acids. You provide one parameter, a DNA sequence, and it returns a sequence of amino acids.
+md"""The package includes a `translate` function to handle the fundamental task of converting a sequence of nucleotides into a sequence of amino acids. You provide one required parameter, a DNA sequence, and it returns a sequence of amino acids. You may optionally provide a parameter specifying a particular code to use. The package provides a vector named `ncbi_trans_table` with all the available options:
 """
 
+# ╔═╡ 5045cd5d-bb29-4812-a112-492a84783fe4
+ncbi_trans_table
+
+# ╔═╡ 09749743-2f88-4ac3-9003-f88b9778aa38
+md"""Since we're looking at mitochondrial DNA, we'll use the fifth entry:"""
+
+# ╔═╡ 1dd0d47d-7e57-4645-8104-09ebea0cf8b3
+mitochondrial = ncbi_trans_table[5]
+
 # ╔═╡ dd9f8b27-b9d7-44e6-850c-e5581de69c84
-md"""Let's consider a brief example."""
+md"""Let's walk through a brief example."""
 
 # ╔═╡ c7ff8cef-6300-4afa-a55a-8cd7a5267f23
 short_dna_example = dna"ATGATT"
 
 # ╔═╡ fd2dd571-a11b-4640-b8b0-eb4dd0877882
-md"""We're using both the `BioSequences` package and the `Plots` package in this notebook, and *both* packags have a function named `translate`! To make clear which we mean, we include the package name before the function:
+md"""We're using both the `BioSequences` package and the `Plots` package in this notebook, and *both* packages have a function named `translate`! To make clear which we mean, we include the package name before the function:
 """
 
 # ╔═╡ 7ad8ffae-6604-414b-83c3-53676be1f497
-short_aa_example = BioSequences.translate(short_dna_example)
+short_aa_example = BioSequences.translate(short_dna_example, code = mitochondrial)
 
 # ╔═╡ aa4aebcc-a710-4519-9daf-945bcb2b02dc
 md"""Its displayed value means that we have a 2-amino acid sequence (`2aa Amino Acid Sequence`) with the two values `M` and `I` in that order.
@@ -304,16 +313,29 @@ nt_count = missing
 
 # ╔═╡ f32a6518-ca63-4aeb-9989-29209f4a90af
 md"""Replace the empty brackets `[]` in the follow cell with an invocation of the `translate` function from the `BioSequences` package to create a sequence of amino acids from the sequence of nucleotides.
+
+Use the encodiong for mitochondrial DNA as we did in the example above.
 """
 
 # ╔═╡ 8845c1b1-b088-4a41-8c3b-e9ce218efad8
-aa_seq = [] # BioSequences.translate(dna_seq)
+aa_seq = [] 
 
 # ╔═╡ 386ff938-6803-4e0a-b623-a50fc0ce5d2d
 aa_count = missing 
 
 # ╔═╡ 1d77e0cb-3cf6-4bf8-996a-4e9abcd9e8e1
 aa_values_count = missing 
+
+# ╔═╡ 8f63d991-5c01-48e4-b8ad-5611b3607bbc
+if ismissing(aa_count)  || ismissting(aa_values_count)
+	still_missing(md"Supply expressions to find `aa_count` and `aa_values_count`")
+elseif aa_count != length(aa_seq)
+	keep_working(md"This is the same problem you addressed in the previous section: how many items are in the Vector `aa_seq`?")
+elseif aa_values_count != length(aa_seq)
+	keep_working(md"This is the same problem you addressed in the previous section: how many items are in the Vector `aa_seq`?")
+else
+	correct()
+end
 
 # ╔═╡ 1a9ca373-621a-45f7-8eef-08ebe6746841
 md"""#### Codons"""
@@ -499,32 +521,6 @@ Follow the hints in comments to complete the body of the for loop.
 
 """
 
-# ╔═╡ 5c221bf7-b718-427e-bded-78cdad406531
-"""Using the `score_isuniform` function, create a score for every amino acid in the list of keys for a dictionary listing codons for each amino acid.
-"""
-function score_positions(aalist, dict)
-	tfvalues = []
-	for aacid in aalist
-		push!(tfvalues, score_isuniform(aacid, dict))
-		# use the `score_isuniform` function to get a score for `aacid`
-		# add that score to the vector `tfvalues`
-	end
-	return tfvalues
-end
-
-# ╔═╡ d564fc1c-4cc8-442f-af3c-906cf6f59f07
-"""Format an HTML table with higlighting of base locations that show variation for a given amino acid.
-"""
-function tablify(codonseq, tfvals, aalabels)
-	aacells = map(lbl -> "<td>$(lbl)</td>", aalabels)
-	aarow = "<tr><td><i>Amino acids</i></td>" * join(aacells) * "</tr>"
-	
-	codoncells  = [hilite_diffs(codonseq[i], tfvals[i]) for i in 1:length(codonseq)]
-	codonrow = "<tr><td><i>Nucleotides</i></td>" *  join(codoncells) * "</tr>"
-
-	join(["<table>", aarow, codonrow, "</table>"], "\n") 
-end
-
 # ╔═╡ 93a15dd9-76da-4929-a9a6-715c42599085
 md"""### E. Visualizing results in Pluto"""
 
@@ -551,6 +547,25 @@ html"""
 # ╔═╡ 52da3927-6bbb-4820-961b-92d6b17ec8cd
 md"""> Sequence data"""
 
+# ╔═╡ 1fe8aa3d-a52b-489b-b996-11ccd53df42e
+md"""**Homo sapiens**"""
+
+# ╔═╡ e66709b6-8ae2-45cc-932d-be8f3898aabb
+hs_str = "ATGTTCGCCGACCGTTGACTATTCTCTACAAACCACAAAGACATTGGAACACTATACCTATTATTCGGCGCATGAGCTGGAGTCCTAGGCACAGCTCTAAGCCTCCTTATTCGAGCCGAGCTGGGCCAGCCAGGCAACCTTCTAGGTAACGACCACATCTACAACGTTATCGTCACAGCCCATGCATTTGTAATAATCTTCTTCATAGTAATACCCATCATAATCGGAGGCTTTGGCAACTGACTAGTTCCCCTAATAATCGGTGCCCCCGATATGGCGTTTCCCCGCATAAACAACATAAGCTTCTGACTCTTACCTCCCTCTCTCCTACTCCTGCTCGCATCTGCTATAGTGGAGGCCGGAGCAGGAACAGGTTGAACAGTCTACCCTCCCTTAGCAGGGAACTACTCCCACCCTGGAGCCTCCGTAGACCTAACCATCTTCTCCTTACACCTAGCAGGTGTCTCCTCTATCTTAGGGGCCATCAATTTCATCACAACAATTATCAATATAAAACCCCCTGCCATAACCCAATACCAAACGCCCCTCTTCGTCTGATCCGTCCTAATCACAGCAGTCCTACTTCTCCTATCTCTCCCAGTCCTAGCTGCTGGCATCACTATACTACTAACAGACCGCAACCTCAACACCACCTTCTTCGACCCCGCCGGAGGAGGAGACCCCATTCTATACCAACACCTATTCTGATTTTTCGGTCACCCTGAAGTTTATATTCTTATCCTACCAGGCTTCGGAATAATCTCCCATATTGTAACTTACTACTCCGGAAAAAAAGAACCATTTGGATACATAGGTATGGTCTGAGCTATGATATCAATTGGCTTCCTAGGGTTTATCGTGTGAGCACACCATATATTTACAGTAGGAATAGACGTAGACACACGAGCATATTTCACCTCCGCTACCATAATCATCGCTATCCCCACCGGCGTCAAAGTATTTAGCTGACTCGCCACACTCCACGGAAGCAATATGAAATGATCTGCTGCAGTGCTCTGAGCCCTAGGATTCATCTTTCTTTTCACCGTAGGTGGCCTGACTGGCATTGTATTAGCAAACTCATCACTAGACATCGTACTACACGACACGTACTACGTTGTAGCCCACTTCCACTATGTCCTATCAATAGGAGCTGTATTTGCCATCATAGGAGGCTTCATTCACTGATTTCCCCTATTCTCAGGCTACACCCTAGACCAAACCTACGCCAAAATCCATTTCACTATCATATTCATCGGCGTAAATCTAACTTTCTTCCCACAACACTTTCTCGGCCTATCCGGAATGCCCCGACGTTACTCGGACTACCCCGATGCATACACCACATGAAACATCCTATCATCTGTAGGCTCATTCATTTCTCTAACAGCAGTAATATTAATAATTTTCATGATTTGAGAAGCCTTCGCTTCGAAGCGAAAAGTCCTAATAGTAGAAGAACCCTCCATAAACCTGGAGTGACTATATGGATGCCCCCCACCCTACCACACATTCGAAGAACCCGTATACATAAAATCTAGA"
+
+# ╔═╡ 2b70f85c-57e8-44a1-8dc9-6bf4fa2798ca
+md"""**Dyscolus fusipalpis**"""
+
+# ╔═╡ 1d171200-ce6a-4881-8777-9493d0c29d88
+df_str = "atgATTTTACCGCGACAATGATTATTTTCAACAAACCATAAGGATATTGGTACATTATATTTTATTTTTGGAGCATGATCAGGAATAGTAGGGACTTCACTAAGTATACTAATTCGAGCTGAATTGGGAAATCCTGGAGCATTAATTGGTGATGATCAAATTTATAATGTTATTGTAACTGCTCATGCATTTATTATGATTTTTTTTATAGTAATGCCTATTATAATTGGAGGATTTGGAAATTGATTAGTTCCTCTAATATTAGGGGCTCCTGATATAGCCTTTCCTCGAATAAATAATATAAGTTTTTGATTACTTCCTCCTTCACTAACACTTCTCTTAATGAGAAGAATAGTAGAAAGAGGAGCTGGTACCGGATGAACAGTTTACCCACCCCTCTCATCTGGTATTGCCCATGCCGGAGCCTCAGTTGATTTAGCTATTTTTAGTCTACATTTAGCAGGAGTATCTTCAATTTTAGGGGCTGTAAATTTTATTACAACAATTATCAATATACGATCAATTGGTATAACTTTTGATCGAATACCTTTATTTGTATGATCAGTAGGAATTACTGCTTTACTATTACTTTTATCATTACCAGTATTGGCTGGAGCTATCACAATATTATTAACAGATCGAAATTTAAATACTTCATTTTTTGACCCTGCAGGAGGAGGAGATCCTATTTTATACCAACATTTATTTTGATTTTTCGGTCACCCTGAAGTTTATATTTTAATTTTACCAGGATTTGGAATAATTTCTCATATTATTAGCCAAGAAAGAGGGAAAAAGGAAACCTTTGGTTCATTAGGAATAATTTATGCTATATTAGCTATTGGATTATTAGGATTTGTAGTCTGAGCTCACCATATATTTACAGTTGGAATAGATGTTGATACTCGAGCTTATTTTACTTCAGCTACAATAATTATTGCTGTCCCGACTGGAATTAAAATTTTTTCTTGATTAGCAACACTTCATGGAGCTCAAATATCTTATAGTCCTGCATTACTATGAGCTTTAGGATTTGTATTTTTATTCACCGTAGGTGGTCTAACTGGAGTAGTATTAGCTAATTCATCTATTGATATTATTCTTCACGATACATATTATGTTGTTGCCCATTTTCATTATGTGTTATCTATAGGAGCTGTATTTGCAATTATAGCTGGATTTATTCAATGATTCCCTTTATTTACAGGATTAAGAATAAATGATAACTTATTAAAAATTCAATTCATTATTATATTTATTGGGGTAAATTTAACATTTTTCCCTCAACATTTTTTAGGACTAAATGGTATACCACGACGATATTCAGATTATCCTGATGCATATACATCATGAAATATTGTTTCATCAATTGGTTCTACAATTTCTTTTATTGGAGTACTTTTATTAATTTATATTATTTGAGAAAGCTTTGTCTCTCAACGTTTAGTAATTTTCTCAAACCAAATATCAACTTCTATTGAATGATTTCAAAATTATCCTCCAGCTGAACATAGATATTCTGAACTACCGATACTATCTAAT"
+
+# ╔═╡ 48eecf30-3355-4087-902f-3481d4b272cd
+"""Select one of two available string encoding of Cytochrome Oxidase I mitochondria.
+"""
+function choose_co1(species)
+	species == "human" ? hs_str : df_str
+end
+
 # ╔═╡ 1983630a-ff08-4afe-9fca-0fccfb456d1b
 dnastring = choose_co1(species)
 
@@ -576,6 +591,19 @@ elseif nt_count != length(dna_seq)
 	keep_working(md"This is the same problem you addressed in the previous section: how many items are in the Vector `dna_seq`?")
 else
 	correct()
+end
+
+# ╔═╡ f6cec82d-24dd-4214-ba4e-6a4293aaac24
+"""Cluster a nucleotide sequence into successive groups of three nucleotides."""
+function splitcodons(seq::LongSequence{BioSequences.DNAAlphabet{4}}) 
+	n = 3
+    codonlist = LongSequence{DNAAlphabet{4}}[]
+    for i in 1:n:length(seq)
+        stophere = min(i+n-1, length(seq))
+        subseq = [seq[j] for j in i:stophere] |> LongDNA{4}
+        push!(codonlist, subseq)
+    end
+    return codonlist
 end
 
 # ╔═╡ c71395e3-ce5b-4c0e-b92c-6316581ddc86
@@ -665,52 +693,6 @@ All the codons begin with `AT` but the third position varies. `score_isuniform` 
 """
 end
 
-# ╔═╡ b1472850-ab6b-4b29-9ee8-5fe6c7a60d9e
-aa_scores = score_positions(aa_seq, aadict)
-
-# ╔═╡ e2d08eda-64e3-450f-8aa9-7ab137b37526
-if isempty(aa_scores)
-else
-
-tablify(
-	codons,
-	aa_scores,
-	(aa_seq .|> string)
-) |> HTML
-end 
-
-# ╔═╡ 1fe8aa3d-a52b-489b-b996-11ccd53df42e
-md"""**Homo sapiens**"""
-
-# ╔═╡ e66709b6-8ae2-45cc-932d-be8f3898aabb
-hs_str = "ATGTTCGCCGACCGTTGACTATTCTCTACAAACCACAAAGACATTGGAACACTATACCTATTATTCGGCGCATGAGCTGGAGTCCTAGGCACAGCTCTAAGCCTCCTTATTCGAGCCGAGCTGGGCCAGCCAGGCAACCTTCTAGGTAACGACCACATCTACAACGTTATCGTCACAGCCCATGCATTTGTAATAATCTTCTTCATAGTAATACCCATCATAATCGGAGGCTTTGGCAACTGACTAGTTCCCCTAATAATCGGTGCCCCCGATATGGCGTTTCCCCGCATAAACAACATAAGCTTCTGACTCTTACCTCCCTCTCTCCTACTCCTGCTCGCATCTGCTATAGTGGAGGCCGGAGCAGGAACAGGTTGAACAGTCTACCCTCCCTTAGCAGGGAACTACTCCCACCCTGGAGCCTCCGTAGACCTAACCATCTTCTCCTTACACCTAGCAGGTGTCTCCTCTATCTTAGGGGCCATCAATTTCATCACAACAATTATCAATATAAAACCCCCTGCCATAACCCAATACCAAACGCCCCTCTTCGTCTGATCCGTCCTAATCACAGCAGTCCTACTTCTCCTATCTCTCCCAGTCCTAGCTGCTGGCATCACTATACTACTAACAGACCGCAACCTCAACACCACCTTCTTCGACCCCGCCGGAGGAGGAGACCCCATTCTATACCAACACCTATTCTGATTTTTCGGTCACCCTGAAGTTTATATTCTTATCCTACCAGGCTTCGGAATAATCTCCCATATTGTAACTTACTACTCCGGAAAAAAAGAACCATTTGGATACATAGGTATGGTCTGAGCTATGATATCAATTGGCTTCCTAGGGTTTATCGTGTGAGCACACCATATATTTACAGTAGGAATAGACGTAGACACACGAGCATATTTCACCTCCGCTACCATAATCATCGCTATCCCCACCGGCGTCAAAGTATTTAGCTGACTCGCCACACTCCACGGAAGCAATATGAAATGATCTGCTGCAGTGCTCTGAGCCCTAGGATTCATCTTTCTTTTCACCGTAGGTGGCCTGACTGGCATTGTATTAGCAAACTCATCACTAGACATCGTACTACACGACACGTACTACGTTGTAGCCCACTTCCACTATGTCCTATCAATAGGAGCTGTATTTGCCATCATAGGAGGCTTCATTCACTGATTTCCCCTATTCTCAGGCTACACCCTAGACCAAACCTACGCCAAAATCCATTTCACTATCATATTCATCGGCGTAAATCTAACTTTCTTCCCACAACACTTTCTCGGCCTATCCGGAATGCCCCGACGTTACTCGGACTACCCCGATGCATACACCACATGAAACATCCTATCATCTGTAGGCTCATTCATTTCTCTAACAGCAGTAATATTAATAATTTTCATGATTTGAGAAGCCTTCGCTTCGAAGCGAAAAGTCCTAATAGTAGAAGAACCCTCCATAAACCTGGAGTGACTATATGGATGCCCCCCACCCTACCACACATTCGAAGAACCCGTATACATAAAATCTAGA"
-
-# ╔═╡ 2b70f85c-57e8-44a1-8dc9-6bf4fa2798ca
-md"""**Dyscolus fusipalpis**"""
-
-# ╔═╡ 1d171200-ce6a-4881-8777-9493d0c29d88
-df_str = "atgATTTTACCGCGACAATGATTATTTTCAACAAACCATAAGGATATTGGTACATTATATTTTATTTTTGGAGCATGATCAGGAATAGTAGGGACTTCACTAAGTATACTAATTCGAGCTGAATTGGGAAATCCTGGAGCATTAATTGGTGATGATCAAATTTATAATGTTATTGTAACTGCTCATGCATTTATTATGATTTTTTTTATAGTAATGCCTATTATAATTGGAGGATTTGGAAATTGATTAGTTCCTCTAATATTAGGGGCTCCTGATATAGCCTTTCCTCGAATAAATAATATAAGTTTTTGATTACTTCCTCCTTCACTAACACTTCTCTTAATGAGAAGAATAGTAGAAAGAGGAGCTGGTACCGGATGAACAGTTTACCCACCCCTCTCATCTGGTATTGCCCATGCCGGAGCCTCAGTTGATTTAGCTATTTTTAGTCTACATTTAGCAGGAGTATCTTCAATTTTAGGGGCTGTAAATTTTATTACAACAATTATCAATATACGATCAATTGGTATAACTTTTGATCGAATACCTTTATTTGTATGATCAGTAGGAATTACTGCTTTACTATTACTTTTATCATTACCAGTATTGGCTGGAGCTATCACAATATTATTAACAGATCGAAATTTAAATACTTCATTTTTTGACCCTGCAGGAGGAGGAGATCCTATTTTATACCAACATTTATTTTGATTTTTCGGTCACCCTGAAGTTTATATTTTAATTTTACCAGGATTTGGAATAATTTCTCATATTATTAGCCAAGAAAGAGGGAAAAAGGAAACCTTTGGTTCATTAGGAATAATTTATGCTATATTAGCTATTGGATTATTAGGATTTGTAGTCTGAGCTCACCATATATTTACAGTTGGAATAGATGTTGATACTCGAGCTTATTTTACTTCAGCTACAATAATTATTGCTGTCCCGACTGGAATTAAAATTTTTTCTTGATTAGCAACACTTCATGGAGCTCAAATATCTTATAGTCCTGCATTACTATGAGCTTTAGGATTTGTATTTTTATTCACCGTAGGTGGTCTAACTGGAGTAGTATTAGCTAATTCATCTATTGATATTATTCTTCACGATACATATTATGTTGTTGCCCATTTTCATTATGTGTTATCTATAGGAGCTGTATTTGCAATTATAGCTGGATTTATTCAATGATTCCCTTTATTTACAGGATTAAGAATAAATGATAACTTATTAAAAATTCAATTCATTATTATATTTATTGGGGTAAATTTAACATTTTTCCCTCAACATTTTTTAGGACTAAATGGTATACCACGACGATATTCAGATTATCCTGATGCATATACATCATGAAATATTGTTTCATCAATTGGTTCTACAATTTCTTTTATTGGAGTACTTTTATTAATTTATATTATTTGAGAAAGCTTTGTCTCTCAACGTTTAGTAATTTTCTCAAACCAAATATCAACTTCTATTGAATGATTTCAAAATTATCCTCCAGCTGAACATAGATATTCTGAACTACCGATACTATCTAAT"
-
-# ╔═╡ 48eecf30-3355-4087-902f-3481d4b272cd
-"""Select one of two available string encoding of Cytochrome Oxidase I mitochondria.
-"""
-function choose_co1(species)
-	species == "human" ? hs_str : df_str
-end
-
-# ╔═╡ f6cec82d-24dd-4214-ba4e-6a4293aaac24
-"""Cluster a nucleotide sequence into successive groups of three nucleotides."""
-function splitcodons(seq::LongSequence{BioSequences.DNAAlphabet{4}}) 
-	n = 3
-    codonlist = LongSequence{DNAAlphabet{4}}[]
-    for i in 1:n:length(seq)
-        stophere = min(i+n-1, length(seq))
-        subseq = [seq[j] for j in i:stophere] |> LongDNA{4}
-        push!(codonlist, subseq)
-    end
-    return codonlist
-end
-
 # ╔═╡ b2272623-59f4-4063-9bce-b2035986f6e1
 aa_labels = aa_seq  .|> string
 
@@ -736,6 +718,22 @@ function score_isuniform(one_aa, aadict)
 	end
 	uniform
 end
+
+# ╔═╡ 5c221bf7-b718-427e-bded-78cdad406531
+"""Using the `score_isuniform` function, create a score for every amino acid in the list of keys for a dictionary listing codons for each amino acid.
+"""
+function score_positions(aalist, dict)
+	tfvalues = []
+	for aacid in aalist
+		push!(tfvalues, score_isuniform(aacid, dict))
+		# use the `score_isuniform` function to get a score for `aacid`
+		# add that score to the vector `tfvalues`
+	end
+	return tfvalues
+end
+
+# ╔═╡ b1472850-ab6b-4b29-9ee8-5fe6c7a60d9e
+aa_scores = score_positions(aa_seq, aadict)
 
 # ╔═╡ 9fef495d-49d0-4276-bae6-55be114bd613
 """Create a dictionary from a parallel pair of lists. The first list
@@ -789,6 +787,30 @@ function hilite_diffs(ntlist, variety_bools)
 	end
 	string("<td>", join(html_list), "</td>")
 end
+
+# ╔═╡ d564fc1c-4cc8-442f-af3c-906cf6f59f07
+"""Format an HTML table with higlighting of base locations that show variation for a given amino acid.
+"""
+function tablify(codonseq, tfvals, aalabels)
+	aacells = map(lbl -> "<td>$(lbl)</td>", aalabels)
+	aarow = "<tr><td><i>Amino acids</i></td>" * join(aacells) * "</tr>"
+	
+	codoncells  = [hilite_diffs(codonseq[i], tfvals[i]) for i in 1:length(codonseq)]
+	codonrow = "<tr><td><i>Nucleotides</i></td>" *  join(codoncells) * "</tr>"
+
+	join(["<table>", aarow, codonrow, "</table>"], "\n") 
+end
+
+# ╔═╡ e2d08eda-64e3-450f-8aa9-7ab137b37526
+if isempty(aa_scores)
+else
+
+tablify(
+	codons,
+	aa_scores,
+	(aa_seq .|> string)
+) |> HTML
+end 
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -2012,6 +2034,9 @@ version = "1.4.1+1"
 # ╟─7317c315-8169-498b-b711-46e03293f151
 # ╠═64b0aebd-6e60-45bb-82c5-f9281d64260c
 # ╟─2722450e-1f58-422b-b4f6-3661336022a9
+# ╠═5045cd5d-bb29-4812-a112-492a84783fe4
+# ╟─09749743-2f88-4ac3-9003-f88b9778aa38
+# ╠═1dd0d47d-7e57-4645-8104-09ebea0cf8b3
 # ╟─dd9f8b27-b9d7-44e6-850c-e5581de69c84
 # ╠═c7ff8cef-6300-4afa-a55a-8cd7a5267f23
 # ╟─fd2dd571-a11b-4640-b8b0-eb4dd0877882
@@ -2034,11 +2059,12 @@ version = "1.4.1+1"
 # ╟─83ad4f26-527d-41d9-8132-11d36b21583e
 # ╠═db992a77-e93d-40a7-981d-c7dbb79e07e4
 # ╟─d64157e1-32c8-4567-b520-2415e4ea3cc8
-# ╟─f32a6518-ca63-4aeb-9989-29209f4a90af
+# ╠═f32a6518-ca63-4aeb-9989-29209f4a90af
 # ╠═8845c1b1-b088-4a41-8c3b-e9ce218efad8
 # ╟─aee479a7-a367-4785-852f-331a22766558
 # ╠═386ff938-6803-4e0a-b623-a50fc0ce5d2d
 # ╠═1d77e0cb-3cf6-4bf8-996a-4e9abcd9e8e1
+# ╠═8f63d991-5c01-48e4-b8ad-5611b3607bbc
 # ╟─1a9ca373-621a-45f7-8eef-08ebe6746841
 # ╟─55eb9bea-573a-4563-991b-87b267373d76
 # ╟─c71395e3-ce5b-4c0e-b92c-6316581ddc86
