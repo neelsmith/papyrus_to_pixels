@@ -28,6 +28,9 @@ end
 # ╔═╡ a5cdfaee-238c-40d3-823c-c41754c8ee66
 using BioSequences
 
+# ╔═╡ 5b2556f7-c3df-4979-9cec-b7626fb20b08
+using StatsBase
+
 # ╔═╡ cacfdf8a-413e-49b6-a837-773155fb1d6a
 # This function is part of the `PlutoUI` pacakge:
 TableOfContents()
@@ -287,7 +290,10 @@ You can use the following menu to choose between the two species. Behind the sce
 """
 
 # ╔═╡ d09913ca-00ed-48d2-af67-b7f66579adcb
-md"""*Choose a species to analyze*: $(@bind species Select(["human" => "homo sapiens", "beetle" => "dyscolus fusipalpis"]))"""
+md"""*Choose a species to analyze*: $(@bind species Select(["human" => "homo sapiens", "beetle" => "dyscolus fusipalpis"]) *Choose an amino acid* $(@bind oneacid Select(keys(aadict) |> collect))"""
+
+# ╔═╡ 0d398b63-c027-43a7-be7a-544d0d1d5e21
+
 
 # ╔═╡ 36523fee-f1d8-4747-8720-726eb6ae1800
 species
@@ -380,6 +386,9 @@ md"""In the following cell, we create a dictionary that will use our amino acids
 # ╔═╡ 496f4da7-5817-4754-80cf-099d8a61b288
 md"""Make sure understand how your dictionary works.  Uncomment the following line to see what the dictionary gives for the key `AA_I` (isoleucine), or try another amino acid as the key and see what the resulting value looks like.
 """
+
+# ╔═╡ 15a73c41-5493-4305-8b79-90a70d22e73e
+
 
 # ╔═╡ 776bbd7c-de58-49be-a7c1-42e679fc1dd3
 md"""In the following cell, replace `missing` with a Julia expression that finds the number of times the amino acid isoleucine occurs in your sequence.
@@ -579,8 +588,14 @@ md"""#### Summary of Cytochrome Oxidase I mitochondria gene for a $(species)
 # ╔═╡ b179d607-ef53-4122-96c5-3e1efaf31392
 aadict = dictionary_from_pairs(aa_seq, codons)
 
+# ╔═╡ 46bc7bf6-b8bb-48b6-9dcb-04608a77fc91
+countmap(aadict[oneacid])
+
 # ╔═╡ c24afebe-b88a-44c8-aa14-8f4f86b9392e
 aadict[AA_I]
+
+# ╔═╡ 266a8871-688b-4572-a32d-5933062928fd
+aadict[AA_I] |> unique
 
 # ╔═╡ ca528421-0855-41c6-a840-9bc7435e9b7d
 aa_i_count = length(aadict[AA_I])
@@ -807,6 +822,7 @@ OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 
 [compat]
 BioSequences = "~3.1.6"
@@ -814,6 +830,7 @@ OrderedCollections = "~1.6.3"
 Plots = "~1.40.1"
 PlutoTeachingTools = "~0.2.14"
 PlutoUI = "~0.7.55"
+StatsBase = "~0.34.2"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -822,7 +839,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.0"
 manifest_format = "2.0"
-project_hash = "c1b6fa9f629a9c7df495935a706a0d3ef9f98d5d"
+project_hash = "aa2d94ff31ca309f26b02b97f500b4ac9df8bd18"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -2035,9 +2052,11 @@ version = "1.4.1+1"
 # ╟─c3b1df4d-1270-4f66-b4eb-053beecaa216
 # ╟─e6eef629-6608-43be-b6df-fb816ff56ffc
 # ╟─7515233b-34ef-4db5-b085-2e0d4cbf52d0
-# ╟─d09913ca-00ed-48d2-af67-b7f66579adcb
+# ╠═d09913ca-00ed-48d2-af67-b7f66579adcb
+# ╠═0d398b63-c027-43a7-be7a-544d0d1d5e21
 # ╠═36523fee-f1d8-4747-8720-726eb6ae1800
 # ╠═569d7a4a-ad58-4edf-b92b-0da64163a7ef
+# ╠═46bc7bf6-b8bb-48b6-9dcb-04608a77fc91
 # ╟─e8e1d4ab-cfd9-4cef-b22a-e10cbf86f68c
 # ╠═577afd6e-dbbb-414a-bdff-939da44b815a
 # ╟─83ad4f26-527d-41d9-8132-11d36b21583e
@@ -2068,6 +2087,9 @@ version = "1.4.1+1"
 # ╠═b179d607-ef53-4122-96c5-3e1efaf31392
 # ╟─496f4da7-5817-4754-80cf-099d8a61b288
 # ╠═c24afebe-b88a-44c8-aa14-8f4f86b9392e
+# ╠═266a8871-688b-4572-a32d-5933062928fd
+# ╠═5b2556f7-c3df-4979-9cec-b7626fb20b08
+# ╠═15a73c41-5493-4305-8b79-90a70d22e73e
 # ╟─776bbd7c-de58-49be-a7c1-42e679fc1dd3
 # ╠═ca528421-0855-41c6-a840-9bc7435e9b7d
 # ╟─5e691819-5ea1-448b-bd2b-a46c4afdbdc4
@@ -2106,7 +2128,7 @@ version = "1.4.1+1"
 # ╟─52da3927-6bbb-4820-961b-92d6b17ec8cd
 # ╟─1983630a-ff08-4afe-9fca-0fccfb456d1b
 # ╟─1fe8aa3d-a52b-489b-b996-11ccd53df42e
-# ╟─e66709b6-8ae2-45cc-932d-be8f3898aabb
+# ╠═e66709b6-8ae2-45cc-932d-be8f3898aabb
 # ╟─2b70f85c-57e8-44a1-8dc9-6bf4fa2798ca
 # ╠═1d171200-ce6a-4881-8777-9493d0c29d88
 # ╟─48eecf30-3355-4087-902f-3481d4b272cd

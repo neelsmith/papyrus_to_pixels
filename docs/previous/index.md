@@ -10,6 +10,17 @@ has_children: true
 
 
 
+## Week at a glance: Feb. 6 - 8
+
+This week we introduce DNA sequences, and compare ways to work with sequences of symbols in DNA and in texts.
+
+
+
+### Due dates this week
+
+- *Tuesday, 12:00*: Lab 1 due
+
+
 ## Week at a glance: Jan. 30 - Feb. 1
 
 We meet in in O'Neil 101 for both classes this week. We develop a model for rhetorical style that we will apply the following week to two speeches from the dedication of the Gettysburg cemetery, and learn how to express our data model in Julia.
