@@ -33,7 +33,7 @@ using BioSequences
 TableOfContents()
 
 # ╔═╡ c7925ead-597a-446e-9508-24401dbbb488
-md"""*Template notebook: last modified* **Feb. 10, 2024.**"""
+md"""*Template notebook: last modified* **Feb. 15, 2024.**"""
 
 # ╔═╡ e30883ff-1930-4f75-bde8-0ab46e355693
 md"""
@@ -94,8 +94,7 @@ md"""
 
     1. First, as background, we'll learn a little about Julia's `BioSequences` package, since it can save us some work!
     2. Next, we'll summarize sequences of nucleotides amino acids, and codon units by counting how many elements occur in a sequence, and how many distinct *values* are found in each sequence.
-    3. Then we'll build two dictionaries: one to show what codons appear for each amino acid, and one to show what unique encodings appear for each amino acid.
-so we can look up what codons occur for each amino acid in our sequence.
+    3. Then we'll build two dictionaries: one to show what codons appear for each amino acid, and one to show what unique encodings appear for each amino acid, so that we can look up what codons occur for each amino acid in our sequence.
     4. We'll map each codon to a list of three true / false values recording whether the nucleotide at that position is always the same (true), or varies (false == not uniform). This is one more vector parallel to the vectors for amino acids and for codons: we'll take advantage of Pluto's easy graphics to visualize that variety.
 """
 
@@ -221,7 +220,7 @@ md"""The `BioSequences` package also has a special type for amino acids. As with
 one_methionine = convert(AminoAcid, 'M')
 
 # ╔═╡ 2722450e-1f58-422b-b4f6-3661336022a9
-md"""The package includes a `translate` function to handle the fundamental task of converting a sequence of nucleotides into a sequence of amino acids. You provide one required parameter, a DNA sequence, and it returns a sequence of amino acids. You may optionally provide a parameter specifying a particular code to use. The package provides a vector named `ncbi_trans_table` with all the available options:
+md"""The package includes a `translate` function to handle the fundamental task of converting a sequence of nucleotides into a sequence of amino acids. You provide one required parameter, a DNA sequence, and it returns a sequence of amino acids. You may optionally provide a parameter specifying a particular code to use. The package provides a vector named `ncbi_trans_table` with the following coding tables that can be used for this optional parameter:
 """
 
 # ╔═╡ 5045cd5d-bb29-4812-a112-492a84783fe4
@@ -234,13 +233,15 @@ md"""Since we're looking at mitochondrial DNA, we'll use the fifth entry:"""
 mitochondrial = ncbi_trans_table[5]
 
 # ╔═╡ dd9f8b27-b9d7-44e6-850c-e5581de69c84
-md"""Let's walk through a brief example."""
+md"""Let's walk through a brief example. First we create a nucleotide sequence."""
 
 # ╔═╡ c7ff8cef-6300-4afa-a55a-8cd7a5267f23
 short_dna_example = dna"ATGATT"
 
 # ╔═╡ fd2dd571-a11b-4640-b8b0-eb4dd0877882
-md"""We're using both the `BioSequences` package and the `Plots` package in this notebook, and *both* packages have a function named `translate`! To make clear which we mean, we include the package name before the function:
+md"""Now we'll create the sequence of amino acids that those nucleotides encode with the `translate` function.
+
+We're using both the `BioSequences` package and the `Plots` package in this notebook, and *both* packages have a function named `translate`! To make clear which functoin we mean, we include the package name before the function. 
 """
 
 # ╔═╡ 7ad8ffae-6604-414b-83c3-53676be1f497
@@ -314,7 +315,7 @@ nt_count = missing
 # ╔═╡ f32a6518-ca63-4aeb-9989-29209f4a90af
 md"""Replace the empty brackets `[]` in the follow cell with an invocation of the `translate` function from the `BioSequences` package to create a sequence of amino acids from the sequence of nucleotides.
 
-Use the encodiong for mitochondrial DNA as we did in the example above.
+As we did in the example above, use the encoding for mitochondrial DNA for the optional `code` parameter.
 """
 
 # ╔═╡ 8845c1b1-b088-4a41-8c3b-e9ce218efad8
@@ -331,8 +332,8 @@ if ismissing(aa_count)  || ismissting(aa_values_count)
 	still_missing(md"Supply expressions to find `aa_count` and `aa_values_count`")
 elseif aa_count != length(aa_seq)
 	keep_working(md"This is the same problem you addressed in the previous section: how many items are in the Vector `aa_seq`?")
-elseif aa_values_count != length(aa_seq)
-	keep_working(md"This is the same problem you addressed in the previous section: how many items are in the Vector `aa_seq`?")
+elseif aa_values_count != length(unique(aa_seq))
+	keep_working(md"You've seen this kind of problem: how many *unique* values are in the Vector `aa_seq`?")
 else
 	correct()
 end
@@ -408,19 +409,19 @@ md"""Here's a function that can solve our first step:
 
 For example, if the first list was a list of team numbers, and the second list gave the names of members, the resulting dictionary would let you look up all the team members by the number of the team.
 """
-function dictionary_from_pairs(keyslist, valueslist)
+function onetomanydict(keyslist, valueslist)
 	if ismissing(keyslist)
 		missing
 	else
-	dict = OrderedDict()
-	for (i, aa) in enumerate(keyslist)
-		if haskey(dict, aa)
-			push!(dict[aa], valueslist[i])
-		else
-			dict[aa] = [valueslist[i]]
+		dict = OrderedDict()
+		for (i, aa) in enumerate(keyslist)
+			if haskey(dict, aa)
+				push!(dict[aa], valueslist[i])
+			else
+				dict[aa] = [valueslist[i]]
+			end
 		end
-	end
-	sort(dict)
+		sort(dict)
 	end
 end
 
@@ -446,7 +447,7 @@ aa_i_count = missing
 # ╔═╡ 4d388989-dfea-47b8-8f74-f3def21606de
 md"""#### Step 2: find unique values.
 
-The following cell has the outline of a function that will take our existing dictionary and build a new one. Instead of listing *all* occurrences of codons for each amino acid, the new dictionary will instead list only the unique values for each amino. The first dictionary shows us how frequently an amino acid occurs; the second dictionary will show us how many different ways it can be encoded.
+The following cell has the outline of a function that will take our existing dictionary and build a new one. Instead of listing *all* occurrences of codons for each amino acid, the new dictionary will instead list only the unique values for each one. The first dictionary shows us how frequently an amino acid occurs; the second dictionary will show us how many different ways it can be encoded.
 
 The function cycles through every key value in the starting dictionary. You'll need to retrieve the value for that key (i.e., `dict[key]`), and count the unique items in the resulting list.  Then assign that new list of unique values to the new dictionary, using the same amino acid as the key.  Your assignment will look something like
 
@@ -466,8 +467,13 @@ For example, if we had a dictionary that had team numbers as keys and a list of 
 function uniquedict(dict)
 	uniquevalues = OrderedDict()
 	for key in keys(dict)
-		# Assign a value to the new dictionary named `uniquevalues`.
-		# The value should include only the unique values for that key
+		# Assign a value to the new dictionary (the one named `uniquevalues`).
+		# Remember you can assign values directly to a dictionary. 
+		# The left side of the assignment (=) will refer to a specific
+		# value in the dictionary using a key in square brackets;
+		# the right side of the assignment will be the value you
+		# want to look up with that key.
+		# In this case, the value should be a list including only the unique values for that key
 	end
 	return uniquevalues
 end
@@ -477,19 +483,19 @@ md"""### D. Where in each codon does variation occur?"""
 
 # ╔═╡ c02480c9-288d-4f3e-bd2d-7d592b93f2cb
 md"""
-Using a dictionary to index codons to amino acids has show us both how often each amino acid occurs, and how many different ways it can be encoded. In the final section of this notebook, we'll use the same data to see for each amino acid whether variations in encoding in the first, second or third nucleotide of the codon.
+Using dictionaries to index codons to amino acids, you have found (1) how often each amino acid occurs, and (2) how many different ways it can be encoded. In the final section of this notebook, we'll use the same data to see whether variations in the encoding of each amino acid occur in the first, second or third nucleotide of the codon.
 """
 
 # ╔═╡ 740140fb-9eb6-436f-82a0-d96903011b30
 md"""
-This notebook includes a function named `score_isuniform`. When you give it one amino acid and our dictionary of encodings, it looks at the different encodings and deteremines if there are uniform or if there is any variety at each of the three nucleotides. It represents this as a Vector with three true/false values: true means that the encoding is consistent (always the same value at that nucleotide), false means that more than one nucleotide is used at that position.
+This notebook includes a function named `uniform_slots`. When you give it one amino acid and our dictionary of encodings, it looks at the different encodings and deteremines if there are uniform or if there is any variety at each of the three nucleotides. It represents this as a Vector with three true/false values: true means that the encoding is consistent (always the same value at that nucleotide), false means that more than one nucleotide is used at that position.
 """
 
 # ╔═╡ 3efec0dc-e441-47ec-8b3a-249ff18db111
 #unique_encodings[AA_I]
 
 # ╔═╡ 3a2df03c-273b-4f5d-a2bc-229b23e77ab0
-#score_isuniform(AA_I, aadict)
+#uniform_slots(AA_I, aadict)
 
 # ╔═╡ e3007454-efe2-4936-98f3-396e8a9fe343
 md"""
@@ -521,19 +527,55 @@ Follow the hints in comments to complete the body of the for loop.
 
 """
 
+# ╔═╡ 5c221bf7-b718-427e-bded-78cdad406531
+"""Using the `uniform_slots` function, create a score for every amino acid in the list of keys for a dictionary listing codons for each amino acid.
+"""
+function score_positions(aalist, dict)
+	tfvalues = []
+	for aacid in aalist
+		push!(tfvalues, score_isuniform(aacid, dict))
+		# use the `uniform_slots` function to get a score for `aacid`,
+		# and add that score to the vector `tfvalues`
+	end
+	return tfvalues
+end
+
 # ╔═╡ 93a15dd9-76da-4929-a9a6-715c42599085
 md"""### E. Visualizing results in Pluto"""
 
-# ╔═╡ 7fb75fdf-6dce-4a50-ba95-67eeedd659b4
-md"""
-The table in the following cell lists your sequence of amino acids in the top row.
+# ╔═╡ c9f8dc1a-1610-4de6-9f5c-d6e6136a4dbf
+md"""### F. Next steps"""
 
-The bottom row lists the codon for each amino acids, and highlights the display according to your true-false scores, with highlighted nucleotides showing values that can vary for the same amino acid.
+# ╔═╡ 30cbe23b-9410-4ed1-a1cf-7ff2aefe97b2
+md"""
+!!! note "Next steps"
+
+    What further questions does your work on this notebook raise?
+
+    Are there other things you want to find out about this data set, or other things you want to learn more about to understand this material better?  
+
+    What would be your next steps if you were continuing to work on this without specific instructions or requirements?
+"""
+
+# ╔═╡ c1f02c7a-8a54-44e3-bc15-f0e4f2b0fa9e
+md"""**==>ADD YOUR IDEAS ABOUT NEXT STEPS HERE<==**
+
 
 """
 
 # ╔═╡ 8f9484fa-1960-41e1-8652-8a5c2285651b
 md"""## 3. Reflection
+
+"""
+
+# ╔═╡ b62e573a-bd3b-41d7-8039-629ad0335df7
+md"""
+!!! note "Reflection: relating multiple features"
+
+
+    In this lab, you aligned different models of the same DNA data. By comparing a DNA sequence modelled as amino acids with the same sequence modelled as codons, you were able to make original discoveries about the DAN sequence of a particuilar gene in two different species.
+
+    How can you transfer your experience in this lab to other problems? Think of at least one other question you think you could address by defining multiple features for the same series of entities, and relating the values in parallel vectors of features. (You don't need to do this, or even know exactly how you would solve the problem in detail.)
 
 """
 
@@ -546,25 +588,6 @@ html"""
 
 # ╔═╡ 52da3927-6bbb-4820-961b-92d6b17ec8cd
 md"""> Sequence data"""
-
-# ╔═╡ 1fe8aa3d-a52b-489b-b996-11ccd53df42e
-md"""**Homo sapiens**"""
-
-# ╔═╡ e66709b6-8ae2-45cc-932d-be8f3898aabb
-hs_str = "ATGTTCGCCGACCGTTGACTATTCTCTACAAACCACAAAGACATTGGAACACTATACCTATTATTCGGCGCATGAGCTGGAGTCCTAGGCACAGCTCTAAGCCTCCTTATTCGAGCCGAGCTGGGCCAGCCAGGCAACCTTCTAGGTAACGACCACATCTACAACGTTATCGTCACAGCCCATGCATTTGTAATAATCTTCTTCATAGTAATACCCATCATAATCGGAGGCTTTGGCAACTGACTAGTTCCCCTAATAATCGGTGCCCCCGATATGGCGTTTCCCCGCATAAACAACATAAGCTTCTGACTCTTACCTCCCTCTCTCCTACTCCTGCTCGCATCTGCTATAGTGGAGGCCGGAGCAGGAACAGGTTGAACAGTCTACCCTCCCTTAGCAGGGAACTACTCCCACCCTGGAGCCTCCGTAGACCTAACCATCTTCTCCTTACACCTAGCAGGTGTCTCCTCTATCTTAGGGGCCATCAATTTCATCACAACAATTATCAATATAAAACCCCCTGCCATAACCCAATACCAAACGCCCCTCTTCGTCTGATCCGTCCTAATCACAGCAGTCCTACTTCTCCTATCTCTCCCAGTCCTAGCTGCTGGCATCACTATACTACTAACAGACCGCAACCTCAACACCACCTTCTTCGACCCCGCCGGAGGAGGAGACCCCATTCTATACCAACACCTATTCTGATTTTTCGGTCACCCTGAAGTTTATATTCTTATCCTACCAGGCTTCGGAATAATCTCCCATATTGTAACTTACTACTCCGGAAAAAAAGAACCATTTGGATACATAGGTATGGTCTGAGCTATGATATCAATTGGCTTCCTAGGGTTTATCGTGTGAGCACACCATATATTTACAGTAGGAATAGACGTAGACACACGAGCATATTTCACCTCCGCTACCATAATCATCGCTATCCCCACCGGCGTCAAAGTATTTAGCTGACTCGCCACACTCCACGGAAGCAATATGAAATGATCTGCTGCAGTGCTCTGAGCCCTAGGATTCATCTTTCTTTTCACCGTAGGTGGCCTGACTGGCATTGTATTAGCAAACTCATCACTAGACATCGTACTACACGACACGTACTACGTTGTAGCCCACTTCCACTATGTCCTATCAATAGGAGCTGTATTTGCCATCATAGGAGGCTTCATTCACTGATTTCCCCTATTCTCAGGCTACACCCTAGACCAAACCTACGCCAAAATCCATTTCACTATCATATTCATCGGCGTAAATCTAACTTTCTTCCCACAACACTTTCTCGGCCTATCCGGAATGCCCCGACGTTACTCGGACTACCCCGATGCATACACCACATGAAACATCCTATCATCTGTAGGCTCATTCATTTCTCTAACAGCAGTAATATTAATAATTTTCATGATTTGAGAAGCCTTCGCTTCGAAGCGAAAAGTCCTAATAGTAGAAGAACCCTCCATAAACCTGGAGTGACTATATGGATGCCCCCCACCCTACCACACATTCGAAGAACCCGTATACATAAAATCTAGA"
-
-# ╔═╡ 2b70f85c-57e8-44a1-8dc9-6bf4fa2798ca
-md"""**Dyscolus fusipalpis**"""
-
-# ╔═╡ 1d171200-ce6a-4881-8777-9493d0c29d88
-df_str = "atgATTTTACCGCGACAATGATTATTTTCAACAAACCATAAGGATATTGGTACATTATATTTTATTTTTGGAGCATGATCAGGAATAGTAGGGACTTCACTAAGTATACTAATTCGAGCTGAATTGGGAAATCCTGGAGCATTAATTGGTGATGATCAAATTTATAATGTTATTGTAACTGCTCATGCATTTATTATGATTTTTTTTATAGTAATGCCTATTATAATTGGAGGATTTGGAAATTGATTAGTTCCTCTAATATTAGGGGCTCCTGATATAGCCTTTCCTCGAATAAATAATATAAGTTTTTGATTACTTCCTCCTTCACTAACACTTCTCTTAATGAGAAGAATAGTAGAAAGAGGAGCTGGTACCGGATGAACAGTTTACCCACCCCTCTCATCTGGTATTGCCCATGCCGGAGCCTCAGTTGATTTAGCTATTTTTAGTCTACATTTAGCAGGAGTATCTTCAATTTTAGGGGCTGTAAATTTTATTACAACAATTATCAATATACGATCAATTGGTATAACTTTTGATCGAATACCTTTATTTGTATGATCAGTAGGAATTACTGCTTTACTATTACTTTTATCATTACCAGTATTGGCTGGAGCTATCACAATATTATTAACAGATCGAAATTTAAATACTTCATTTTTTGACCCTGCAGGAGGAGGAGATCCTATTTTATACCAACATTTATTTTGATTTTTCGGTCACCCTGAAGTTTATATTTTAATTTTACCAGGATTTGGAATAATTTCTCATATTATTAGCCAAGAAAGAGGGAAAAAGGAAACCTTTGGTTCATTAGGAATAATTTATGCTATATTAGCTATTGGATTATTAGGATTTGTAGTCTGAGCTCACCATATATTTACAGTTGGAATAGATGTTGATACTCGAGCTTATTTTACTTCAGCTACAATAATTATTGCTGTCCCGACTGGAATTAAAATTTTTTCTTGATTAGCAACACTTCATGGAGCTCAAATATCTTATAGTCCTGCATTACTATGAGCTTTAGGATTTGTATTTTTATTCACCGTAGGTGGTCTAACTGGAGTAGTATTAGCTAATTCATCTATTGATATTATTCTTCACGATACATATTATGTTGTTGCCCATTTTCATTATGTGTTATCTATAGGAGCTGTATTTGCAATTATAGCTGGATTTATTCAATGATTCCCTTTATTTACAGGATTAAGAATAAATGATAACTTATTAAAAATTCAATTCATTATTATATTTATTGGGGTAAATTTAACATTTTTCCCTCAACATTTTTTAGGACTAAATGGTATACCACGACGATATTCAGATTATCCTGATGCATATACATCATGAAATATTGTTTCATCAATTGGTTCTACAATTTCTTTTATTGGAGTACTTTTATTAATTTATATTATTTGAGAAAGCTTTGTCTCTCAACGTTTAGTAATTTTCTCAAACCAAATATCAACTTCTATTGAATGATTTCAAAATTATCCTCCAGCTGAACATAGATATTCTGAACTACCGATACTATCTAAT"
-
-# ╔═╡ 48eecf30-3355-4087-902f-3481d4b272cd
-"""Select one of two available string encoding of Cytochrome Oxidase I mitochondria.
-"""
-function choose_co1(species)
-	species == "human" ? hs_str : df_str
-end
 
 # ╔═╡ 1983630a-ff08-4afe-9fca-0fccfb456d1b
 dnastring = choose_co1(species)
@@ -593,24 +616,22 @@ else
 	correct()
 end
 
-# ╔═╡ f6cec82d-24dd-4214-ba4e-6a4293aaac24
-"""Cluster a nucleotide sequence into successive groups of three nucleotides."""
-function splitcodons(seq::LongSequence{BioSequences.DNAAlphabet{4}}) 
-	n = 3
-    codonlist = LongSequence{DNAAlphabet{4}}[]
-    for i in 1:n:length(seq)
-        stophere = min(i+n-1, length(seq))
-        subseq = [seq[j] for j in i:stophere] |> LongDNA{4}
-        push!(codonlist, subseq)
-    end
-    return codonlist
-end
-
 # ╔═╡ c71395e3-ce5b-4c0e-b92c-6316581ddc86
 codons = splitcodons(dna_seq)
 
+# ╔═╡ 2e1aec4a-513b-4b4c-b062-4ffd7eea9438
+if ismissing(codon_count)  || ismissting(codon_values_count)
+	still_missing(md"Supply expressions to find `codon_count` and `codon_values_count`")
+elseif codon_count != length(codons)
+	keep_working(md"This is the same problem you addressed in the previous section: how many items are in the Vector `aa_seq`?")
+elseif codon_values_count != length(unique(codons))
+	keep_working(md"You solved a problem just like this when you found the number of distinct values for amino acids.")
+else
+	correct()
+end
+
 # ╔═╡ b179d607-ef53-4122-96c5-3e1efaf31392
-aadict = dictionary_from_pairs(aa_seq, codons)
+aadict = onetomanydict(aa_seq, codons)
 
 # ╔═╡ 5e691819-5ea1-448b-bd2b-a46c4afdbdc4
 if ismissing(aa_i_count) 
@@ -622,8 +643,8 @@ else
 end
 
 # ╔═╡ 6fd7a85a-e22a-437e-bcdf-8834a9f87f72
-if ismissing(aadict)
-	md""
+if ismissing(aadict) || isempty(aadict)
+	md"*When you have constructed your dictionary of amino acid encodings, the following cell will plot their values as a bar graph.*"
 else
 	md"""This graph shows us how many times each amino acid occurs in our sample."""
 end	
@@ -645,16 +666,18 @@ end
 unique_encodings  = uniquedict(aadict)
 
 # ╔═╡ 6576ff9f-5dad-46b0-907b-6192b7bb268c
-if ismissing(unique_encodings)
-	keep_working(md"Your definition of the `uniquedict` function is reutrning an empty dictionary.")
+if ismissing(unique_encodings) || isempty(unique_encodings)
+	keep_working(md"Your definition of the `uniquedict` function is still returning an empty dictionary.")
 else
 	correct()
 end
 
 
 # ╔═╡ 36ba4be3-f5d9-4df0-b24a-946f2b447b91
-if ismissing(unique_encodings)
-	md""
+if ismissing(unique_encodings) || isempty(unique_encodings)
+	md"""*When you have constructed the dictionary of unique encodings for each
+	amino acid, the following cell will plot their values as a bar graph.*
+	"""
 else
 	md"""Now we can visualize how many different ways each amino acid is encoded."""
 end
@@ -693,6 +716,64 @@ All the codons begin with `AT` but the third position varies. `score_isuniform` 
 """
 end
 
+# ╔═╡ b1472850-ab6b-4b29-9ee8-5fe6c7a60d9e
+aa_scores = score_positions(aa_seq, aadict)
+
+# ╔═╡ 7fb75fdf-6dce-4a50-ba95-67eeedd659b4
+if isempty(aa_scores)
+	md"""*When you have computed values for `aa_scores`, the following cell will display a highlighted visualization of the results.*"""
+else
+md"""
+The table in the following cell lists your sequence of amino acids in the top row.
+
+The bottom row lists the codon for each amino acids, and highlights the display according to your true-false scores, with highlighted nucleotides showing values that can vary for the same amino acid.
+
+"""
+end
+
+# ╔═╡ e2d08eda-64e3-450f-8aa9-7ab137b37526
+if isempty(aa_scores)
+else
+
+tablify(
+	codons,
+	aa_scores,
+	(aa_seq .|> string)
+) |> HTML
+end 
+
+# ╔═╡ 1fe8aa3d-a52b-489b-b996-11ccd53df42e
+md"""**Homo sapiens**"""
+
+# ╔═╡ e66709b6-8ae2-45cc-932d-be8f3898aabb
+hs_str = "ATGTTCGCCGACCGTTGACTATTCTCTACAAACCACAAAGACATTGGAACACTATACCTATTATTCGGCGCATGAGCTGGAGTCCTAGGCACAGCTCTAAGCCTCCTTATTCGAGCCGAGCTGGGCCAGCCAGGCAACCTTCTAGGTAACGACCACATCTACAACGTTATCGTCACAGCCCATGCATTTGTAATAATCTTCTTCATAGTAATACCCATCATAATCGGAGGCTTTGGCAACTGACTAGTTCCCCTAATAATCGGTGCCCCCGATATGGCGTTTCCCCGCATAAACAACATAAGCTTCTGACTCTTACCTCCCTCTCTCCTACTCCTGCTCGCATCTGCTATAGTGGAGGCCGGAGCAGGAACAGGTTGAACAGTCTACCCTCCCTTAGCAGGGAACTACTCCCACCCTGGAGCCTCCGTAGACCTAACCATCTTCTCCTTACACCTAGCAGGTGTCTCCTCTATCTTAGGGGCCATCAATTTCATCACAACAATTATCAATATAAAACCCCCTGCCATAACCCAATACCAAACGCCCCTCTTCGTCTGATCCGTCCTAATCACAGCAGTCCTACTTCTCCTATCTCTCCCAGTCCTAGCTGCTGGCATCACTATACTACTAACAGACCGCAACCTCAACACCACCTTCTTCGACCCCGCCGGAGGAGGAGACCCCATTCTATACCAACACCTATTCTGATTTTTCGGTCACCCTGAAGTTTATATTCTTATCCTACCAGGCTTCGGAATAATCTCCCATATTGTAACTTACTACTCCGGAAAAAAAGAACCATTTGGATACATAGGTATGGTCTGAGCTATGATATCAATTGGCTTCCTAGGGTTTATCGTGTGAGCACACCATATATTTACAGTAGGAATAGACGTAGACACACGAGCATATTTCACCTCCGCTACCATAATCATCGCTATCCCCACCGGCGTCAAAGTATTTAGCTGACTCGCCACACTCCACGGAAGCAATATGAAATGATCTGCTGCAGTGCTCTGAGCCCTAGGATTCATCTTTCTTTTCACCGTAGGTGGCCTGACTGGCATTGTATTAGCAAACTCATCACTAGACATCGTACTACACGACACGTACTACGTTGTAGCCCACTTCCACTATGTCCTATCAATAGGAGCTGTATTTGCCATCATAGGAGGCTTCATTCACTGATTTCCCCTATTCTCAGGCTACACCCTAGACCAAACCTACGCCAAAATCCATTTCACTATCATATTCATCGGCGTAAATCTAACTTTCTTCCCACAACACTTTCTCGGCCTATCCGGAATGCCCCGACGTTACTCGGACTACCCCGATGCATACACCACATGAAACATCCTATCATCTGTAGGCTCATTCATTTCTCTAACAGCAGTAATATTAATAATTTTCATGATTTGAGAAGCCTTCGCTTCGAAGCGAAAAGTCCTAATAGTAGAAGAACCCTCCATAAACCTGGAGTGACTATATGGATGCCCCCCACCCTACCACACATTCGAAGAACCCGTATACATAAAATCTAGA"
+
+# ╔═╡ 2b70f85c-57e8-44a1-8dc9-6bf4fa2798ca
+md"""**Dyscolus fusipalpis**"""
+
+# ╔═╡ 1d171200-ce6a-4881-8777-9493d0c29d88
+df_str = "atgATTTTACCGCGACAATGATTATTTTCAACAAACCATAAGGATATTGGTACATTATATTTTATTTTTGGAGCATGATCAGGAATAGTAGGGACTTCACTAAGTATACTAATTCGAGCTGAATTGGGAAATCCTGGAGCATTAATTGGTGATGATCAAATTTATAATGTTATTGTAACTGCTCATGCATTTATTATGATTTTTTTTATAGTAATGCCTATTATAATTGGAGGATTTGGAAATTGATTAGTTCCTCTAATATTAGGGGCTCCTGATATAGCCTTTCCTCGAATAAATAATATAAGTTTTTGATTACTTCCTCCTTCACTAACACTTCTCTTAATGAGAAGAATAGTAGAAAGAGGAGCTGGTACCGGATGAACAGTTTACCCACCCCTCTCATCTGGTATTGCCCATGCCGGAGCCTCAGTTGATTTAGCTATTTTTAGTCTACATTTAGCAGGAGTATCTTCAATTTTAGGGGCTGTAAATTTTATTACAACAATTATCAATATACGATCAATTGGTATAACTTTTGATCGAATACCTTTATTTGTATGATCAGTAGGAATTACTGCTTTACTATTACTTTTATCATTACCAGTATTGGCTGGAGCTATCACAATATTATTAACAGATCGAAATTTAAATACTTCATTTTTTGACCCTGCAGGAGGAGGAGATCCTATTTTATACCAACATTTATTTTGATTTTTCGGTCACCCTGAAGTTTATATTTTAATTTTACCAGGATTTGGAATAATTTCTCATATTATTAGCCAAGAAAGAGGGAAAAAGGAAACCTTTGGTTCATTAGGAATAATTTATGCTATATTAGCTATTGGATTATTAGGATTTGTAGTCTGAGCTCACCATATATTTACAGTTGGAATAGATGTTGATACTCGAGCTTATTTTACTTCAGCTACAATAATTATTGCTGTCCCGACTGGAATTAAAATTTTTTCTTGATTAGCAACACTTCATGGAGCTCAAATATCTTATAGTCCTGCATTACTATGAGCTTTAGGATTTGTATTTTTATTCACCGTAGGTGGTCTAACTGGAGTAGTATTAGCTAATTCATCTATTGATATTATTCTTCACGATACATATTATGTTGTTGCCCATTTTCATTATGTGTTATCTATAGGAGCTGTATTTGCAATTATAGCTGGATTTATTCAATGATTCCCTTTATTTACAGGATTAAGAATAAATGATAACTTATTAAAAATTCAATTCATTATTATATTTATTGGGGTAAATTTAACATTTTTCCCTCAACATTTTTTAGGACTAAATGGTATACCACGACGATATTCAGATTATCCTGATGCATATACATCATGAAATATTGTTTCATCAATTGGTTCTACAATTTCTTTTATTGGAGTACTTTTATTAATTTATATTATTTGAGAAAGCTTTGTCTCTCAACGTTTAGTAATTTTCTCAAACCAAATATCAACTTCTATTGAATGATTTCAAAATTATCCTCCAGCTGAACATAGATATTCTGAACTACCGATACTATCTAAT"
+
+# ╔═╡ 48eecf30-3355-4087-902f-3481d4b272cd
+"""Select one of two available string encoding of Cytochrome Oxidase I mitochondria.
+"""
+function choose_co1(species)
+	species == "human" ? hs_str : df_str
+end
+
+# ╔═╡ f6cec82d-24dd-4214-ba4e-6a4293aaac24
+"""Cluster a nucleotide sequence into successive groups of three nucleotides."""
+function splitcodons(seq::LongSequence{BioSequences.DNAAlphabet{4}}) 
+	n = 3
+    codonlist = LongSequence{DNAAlphabet{4}}[]
+    for i in 1:n:length(seq)
+        stophere = min(i+n-1, length(seq))
+        subseq = [seq[j] for j in i:stophere] |> LongDNA{4}
+        push!(codonlist, subseq)
+    end
+    return codonlist
+end
+
 # ╔═╡ b2272623-59f4-4063-9bce-b2035986f6e1
 aa_labels = aa_seq  .|> string
 
@@ -703,7 +784,7 @@ md"""> Indexing and comparing data"""
 """For one amino acid in a dictionary listing codons for each amino acid, 
 see if the encodings vary in the first, second or third nucleotide.  Return a Vector of three boolean values, where `true` means the encoding is uniform (no variation), and `false` means the encoding is not uniform (two or more different values occur there).
 """
-function score_isuniform(one_aa, aadict)
+function uniform_slots(one_aa, aadict)
 	codons_for_aa = aadict[one_aa]
 	uniform = Bool[]
 		
@@ -718,22 +799,6 @@ function score_isuniform(one_aa, aadict)
 	end
 	uniform
 end
-
-# ╔═╡ 5c221bf7-b718-427e-bded-78cdad406531
-"""Using the `score_isuniform` function, create a score for every amino acid in the list of keys for a dictionary listing codons for each amino acid.
-"""
-function score_positions(aalist, dict)
-	tfvalues = []
-	for aacid in aalist
-		push!(tfvalues, score_isuniform(aacid, dict))
-		# use the `score_isuniform` function to get a score for `aacid`
-		# add that score to the vector `tfvalues`
-	end
-	return tfvalues
-end
-
-# ╔═╡ b1472850-ab6b-4b29-9ee8-5fe6c7a60d9e
-aa_scores = score_positions(aa_seq, aadict)
 
 # ╔═╡ 9fef495d-49d0-4276-bae6-55be114bd613
 """Create a dictionary from a parallel pair of lists. The first list
@@ -800,17 +865,6 @@ function tablify(codonseq, tfvals, aalabels)
 
 	join(["<table>", aarow, codonrow, "</table>"], "\n") 
 end
-
-# ╔═╡ e2d08eda-64e3-450f-8aa9-7ab137b37526
-if isempty(aa_scores)
-else
-
-tablify(
-	codons,
-	aa_scores,
-	(aa_seq .|> string)
-) |> HTML
-end 
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -2037,9 +2091,9 @@ version = "1.4.1+1"
 # ╠═5045cd5d-bb29-4812-a112-492a84783fe4
 # ╟─09749743-2f88-4ac3-9003-f88b9778aa38
 # ╠═1dd0d47d-7e57-4645-8104-09ebea0cf8b3
-# ╟─dd9f8b27-b9d7-44e6-850c-e5581de69c84
+# ╠═dd9f8b27-b9d7-44e6-850c-e5581de69c84
 # ╠═c7ff8cef-6300-4afa-a55a-8cd7a5267f23
-# ╟─fd2dd571-a11b-4640-b8b0-eb4dd0877882
+# ╠═fd2dd571-a11b-4640-b8b0-eb4dd0877882
 # ╠═7ad8ffae-6604-414b-83c3-53676be1f497
 # ╟─aa4aebcc-a710-4519-9daf-945bcb2b02dc
 # ╠═5990561b-e760-415e-ac2b-461381d796c9
@@ -2059,12 +2113,12 @@ version = "1.4.1+1"
 # ╟─83ad4f26-527d-41d9-8132-11d36b21583e
 # ╠═db992a77-e93d-40a7-981d-c7dbb79e07e4
 # ╟─d64157e1-32c8-4567-b520-2415e4ea3cc8
-# ╠═f32a6518-ca63-4aeb-9989-29209f4a90af
+# ╟─f32a6518-ca63-4aeb-9989-29209f4a90af
 # ╠═8845c1b1-b088-4a41-8c3b-e9ce218efad8
 # ╟─aee479a7-a367-4785-852f-331a22766558
 # ╠═386ff938-6803-4e0a-b623-a50fc0ce5d2d
 # ╠═1d77e0cb-3cf6-4bf8-996a-4e9abcd9e8e1
-# ╠═8f63d991-5c01-48e4-b8ad-5611b3607bbc
+# ╟─8f63d991-5c01-48e4-b8ad-5611b3607bbc
 # ╟─1a9ca373-621a-45f7-8eef-08ebe6746841
 # ╟─55eb9bea-573a-4563-991b-87b267373d76
 # ╟─c71395e3-ce5b-4c0e-b92c-6316581ddc86
@@ -2072,6 +2126,7 @@ version = "1.4.1+1"
 # ╠═8382cdc7-13bd-47d1-b507-b6d9ee94fcd7
 # ╠═0ab106ba-d840-4bd1-8bfa-e75a214ce399
 # ╠═d80a8982-7035-41fd-a7b9-78662ebcf4bd
+# ╟─2e1aec4a-513b-4b4c-b062-4ffd7eea9438
 # ╟─c5e87c41-1a46-4a76-b344-cf9acf32f048
 # ╟─f56a5b59-e986-4293-a433-dd7118ba2323
 # ╟─54f5e863-aa85-4755-992c-d60b7ac5ecc4
@@ -2112,18 +2167,21 @@ version = "1.4.1+1"
 # ╠═b1472850-ab6b-4b29-9ee8-5fe6c7a60d9e
 # ╠═7a2dd394-b6ef-4239-a417-0c6edfe77b79
 # ╟─af917767-c3a0-4470-b356-83e9a93b69fc
-# ╟─d564fc1c-4cc8-442f-af3c-906cf6f59f07
 # ╟─93a15dd9-76da-4929-a9a6-715c42599085
 # ╟─7fb75fdf-6dce-4a50-ba95-67eeedd659b4
 # ╟─e2d08eda-64e3-450f-8aa9-7ab137b37526
+# ╟─c9f8dc1a-1610-4de6-9f5c-d6e6136a4dbf
+# ╟─30cbe23b-9410-4ed1-a1cf-7ff2aefe97b2
+# ╟─c1f02c7a-8a54-44e3-bc15-f0e4f2b0fa9e
 # ╟─8f9484fa-1960-41e1-8652-8a5c2285651b
+# ╟─b62e573a-bd3b-41d7-8039-629ad0335df7
 # ╟─ed94a586-26ab-4091-92b0-de4a81f77111
 # ╟─52da3927-6bbb-4820-961b-92d6b17ec8cd
 # ╟─1983630a-ff08-4afe-9fca-0fccfb456d1b
 # ╟─1fe8aa3d-a52b-489b-b996-11ccd53df42e
 # ╟─e66709b6-8ae2-45cc-932d-be8f3898aabb
 # ╟─2b70f85c-57e8-44a1-8dc9-6bf4fa2798ca
-# ╠═1d171200-ce6a-4881-8777-9493d0c29d88
+# ╟─1d171200-ce6a-4881-8777-9493d0c29d88
 # ╟─48eecf30-3355-4087-902f-3481d4b272cd
 # ╟─f6cec82d-24dd-4214-ba4e-6a4293aaac24
 # ╠═b2272623-59f4-4063-9bce-b2035986f6e1
@@ -2133,5 +2191,6 @@ version = "1.4.1+1"
 # ╟─bbc0eb4f-1228-4fe0-ba75-104b88e3e250
 # ╟─5f1f7065-5e60-4266-b422-94f7d7750d1f
 # ╟─0788d300-cc0d-4d43-9ee0-a7c91d542605
+# ╟─d564fc1c-4cc8-442f-af3c-906cf6f59f07
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

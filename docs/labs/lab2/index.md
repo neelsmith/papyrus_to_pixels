@@ -7,8 +7,11 @@ parent: "Labs"
 
 # Matching sequences in DNA
 
-**TBA**
+> INSTRUCTIONS TBA.
+>
+> REVISED DUE DATE TBA.
 
-- texts can be viewed as a seriees of symbols
-- DNA sequences can be viewed as series of symbols
+Link to notebook: 
 
+- [as a web page](./lab-dna.html) (HTML file)
+- [as a Julia notebook](../../../pluto/lab-dna.jl) (`.jl`)
