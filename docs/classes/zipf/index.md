@@ -14,3 +14,6 @@ In preparation for our third assignment, we will begin to look at different mode
 To prompt your thinking about language, we'll look at a remarkable phenomenon known as "Zipf's Law".
 
 Please watch [this video](https://www.youtube.com/watch?v=fCn8zs912OE&pp=ygUKemlwZidzIGxhdw%3D%3D) introducing "The Zipf Mystery".
+
+
+There is no written submission for today's class but you should be able to summarize Zipf's Law in a sentence or two.
