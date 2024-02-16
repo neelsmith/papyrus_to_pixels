@@ -30,16 +30,16 @@ Deadlines to note:
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Feb 13*, *Feb 15* | Introduce [comparing DNA sequences](../labs/lab2/) in beetles and humans | 🔛  Zipf's law | **Tue**: ***NB 2** due.* |
-| *Feb 20*, *Feb 22* | Introduce lab 3:  (lab 2 due) 📓 | 🔛 Defining features  | **Tue**: ***NB 3** due.* |
-| *Feb 27*, *Feb 29* | Workshop lab 3: Constructing and evaluating trees 📓 | Huh? | **Thu**: *Last class before spring break.* |
+| *Feb 13*, *Feb 15* | ☃️❄️*College closed for snow*🌨☃️ | Introduction to working with parallel sets of features |  |
+| *Feb 20*, *Feb 22* | 🔛  [Zipf's law](../classes/zipf/) | Introduce lab 3:  (lab 2 due) 📓 | **Thu**: ***NB 2** due.* |
+| *Feb 27*, *Feb 29* | 🔛 Defining features  | Constructing and evaluating trees 📓 | **Thu**: *Last class before spring break.* |
 
 ## Modeling change through time
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
 | *Mar 5*, *Mar 7* | 🔛 Tree models in biology and textual criticism | Interpreting classified data as trees: language evolution |  |
-| *Mar 12*, *Mar 14* | ***Spring break*** | ***Spring break*** | **Tue**: *Class resumes.* **Tue**: ***NB 4** due.* |
+| *Mar 12*, *Mar 14* | ***Spring break*** | ***Spring break*** | **Tue**: *Class resumes.* |
 | *Mar 19*, *Mar 21* | Workshop lab 4: Classification 📓 | Introduction to research projects | **Thu**: *Project proposal due.* |
 
 ## Developing a project proposal
