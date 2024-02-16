@@ -11,7 +11,8 @@ has_children: true
 
 ## Announcements
 
-- **Feb. 16**: [lab 2 instructions](./labs/lab2/) now online. Due: **Thursday, Feb. 22**.
+- **Feb. 16**: [lab 2 instructions](./labs/lab2/) now online. Due: noon, **Thursday, Feb. 22**.
 
 
 
+- **Feb. 16**: Revised course schedule including assignment for separate section meeting coming soon!
