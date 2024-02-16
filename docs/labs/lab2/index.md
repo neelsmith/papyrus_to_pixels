@@ -20,7 +20,7 @@ A template Pluto notebook is available in two formats:
 
 
 - [as a web page](./lab-dna.html) (HTML file)
-- [as a Julia notebook](../../../pluto/lab-dna.jl) (`.jl`)
+- [as a Julia notebook](../../../pluto/lab-dna.jl) (`.jl` filename)
 
 You may either download the Julia notebook directly and open it in Pluto on your computer, or read [the web page](./lab-dna.html), and use the "Edit or run" button to download the web page as a notebook file. If you don't remember from lab 1 how to do that, you can refer to these  guides:
 
