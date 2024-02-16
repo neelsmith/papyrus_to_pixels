@@ -11,12 +11,7 @@ has_children: true
 
 ## Announcements
 
-- **Feb. 15**: revised scheduled following snow day coming soon!  Watch your email!
-- **Feb. 15**: a Pluto notebook on Superbowl history for today's class:
-    - as a [web page](./julia/superbowls.html) (HTML format)
-    - as a [Pluto notebook](./julia/superbowls.jl)
-
-
+- **Feb. 16**: [lab 2 instructions](./labs/lab2/) now online. Due: **Thursday, Feb. 22**.
 
 
 

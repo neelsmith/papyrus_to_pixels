@@ -13,6 +13,10 @@ has_children: true
 
 ## Announcements
 
+
+- **Feb. 15**: a Pluto notebook on Superbowl history for today's class:
+    - as a [web page](./julia/superbowls.html) (HTML format)
+    - as a [Pluto notebook](./julia/superbowls.jl)
 - **Feb. 7**: Instructions on [how to submit revisions](./labs/revising/) of lab assignments
 - **Feb 12**: [Assessment of collaboration](./labs/assessment1/) on lab 1 due at 12:00.
 - **Feb. 16, 12:00**: deadline for final revisions of lab 1
