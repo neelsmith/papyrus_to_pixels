@@ -63,6 +63,9 @@ md"""
 # ╔═╡ e6f5fe38-cb09-11ed-093a-89974c867831
 md"""## Comparison of phonetic features"""
 
+# ╔═╡ c8f4fd19-e4e9-4277-b4ee-6f073891c8d5
+#@bind multiterms MultiCheckBox(menu, select_all=true)
+
 # ╔═╡ d575f55c-35fc-458d-a014-882aaddf8125
 html"""
 
@@ -347,7 +350,7 @@ PlutoUI = "~0.7.57"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.1"
+julia_version = "1.10.0"
 manifest_format = "2.0"
 project_hash = "d3d025010113360722e9e11e75f3af86c9638980"
 
@@ -376,7 +379,7 @@ version = "0.11.4"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.1.0+0"
+version = "1.0.5+1"
 
 [[deps.Dates]]
 deps = ["Printf"]
@@ -486,7 +489,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+4"
+version = "0.3.23+2"
 
 [[deps.Parsers]]
 deps = ["Dates", "PrecompileTools", "UUIDs"]
@@ -622,6 +625,7 @@ version = "17.4.0+2"
 # ╟─e6f5fe38-cb09-11ed-093a-89974c867831
 # ╟─3fa6ffb2-8e09-40dc-9356-47743e912a32
 # ╟─499181ee-1c7b-49ff-ab3a-1889ae285d1d
+# ╟─c8f4fd19-e4e9-4277-b4ee-6f073891c8d5
 # ╟─d6fa7afc-d3e3-4205-8d35-639dee64cfc2
 # ╟─d575f55c-35fc-458d-a014-882aaddf8125
 # ╟─fa737dfb-8306-4eaf-8554-6d473c8e8e60
