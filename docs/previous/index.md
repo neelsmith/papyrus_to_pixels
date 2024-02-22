@@ -10,6 +10,19 @@ has_children: true
 
 
 
+## Week at a glance: Feb. 13 - 15
+
+- Tuesday: we meet as a separate section for the first time to consider one of the most amazing patterns in nature, that was first observed in relation to language: *Zipf's Law*. On Thursday, 
+This week we introduce DNA sequences, and compare ways to work with sequences of symbols in DNA and in texts.
+- Thursday: we meet in O'Neill to interpret the language data we have gathered as an evolutionary tree
+
+
+### Due dates this week
+
+- *Wednesday, 12:00*: Data form
+- *Thursday, 12:00*: Lab 2 due
+- *Friday, 12:00*: Lab 2 assessment of collaboration
+
 ## Week at a glance: Feb. 6 - 8
 
 This week we introduce DNA sequences, and compare ways to work with sequences of symbols in DNA and in texts.

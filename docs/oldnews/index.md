@@ -13,6 +13,8 @@ has_children: true
 
 ## Announcements
 
+- **Feb. 16**: [lab 2 instructions](./labs/lab2/) now online. Due: noon, **Thursday, Feb. 22**.
+- **Feb. 20**: class meets in Fenwick 420; reminder that masks are required in these meetings.
 
 - **Feb. 15**: a Pluto notebook on Superbowl history for today's class:
     - as a [web page](./julia/superbowls.html) (HTML format)

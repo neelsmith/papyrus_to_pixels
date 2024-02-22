@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.36
+# v0.19.38
 
 using Markdown
 using InteractiveUtils
@@ -247,7 +247,7 @@ PlutoUI = "~0.7.55"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.0"
+julia_version = "1.10.1"
 manifest_format = "2.0"
 project_hash = "607041f5b4687542ae37f14b0dec605dba9d3d6a"
 
@@ -344,7 +344,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.5+1"
+version = "1.1.0+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -788,7 +788,7 @@ version = "1.3.5+1"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+2"
+version = "0.3.23+4"
 
 [[deps.OpenLibm_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -1395,16 +1395,16 @@ version = "1.4.1+1"
 """
 
 # ╔═╡ Cell order:
+# ╟─c9d97d70-e584-4724-bedb-673d2ca226a7
 # ╟─fb041168-bd60-11ee-129e-af955355f4ac
 # ╟─2149a6e1-a158-4e72-b5eb-4fe91d6d73d1
 # ╟─085be780-d017-4632-887e-bce3cdb2c0a9
-# ╟─c9d97d70-e584-4724-bedb-673d2ca226a7
 # ╟─7bfb4f76-5ab3-4871-b747-090dca64f11b
 # ╟─425cc328-ec56-4015-980f-c9de9f994cd9
-# ╠═70ac9a69-0eab-47c0-b9ca-b86d4481884c
-# ╠═ac34a8f9-8f96-4158-99bd-4d109a53d20e
-# ╠═89363915-894c-45de-9f86-503ff161d1eb
-# ╠═eee67019-eb47-4434-a60b-e6e7d921e2cd
+# ╟─70ac9a69-0eab-47c0-b9ca-b86d4481884c
+# ╟─ac34a8f9-8f96-4158-99bd-4d109a53d20e
+# ╟─89363915-894c-45de-9f86-503ff161d1eb
+# ╟─eee67019-eb47-4434-a60b-e6e7d921e2cd
 # ╟─cc8c69fd-c8f5-4772-a85d-8fed909c98d5
 # ╟─3ba25212-ba78-4961-a484-487486c2988a
 # ╠═694ecf82-5252-46e4-b29d-213da036dfd5
