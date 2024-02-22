@@ -1,4 +1,120 @@
-# Evolution of language
+# Agenda
+
+1. Data structures
+2. Plain-text data formats
+3. Evolution of language
+4. Interpreting evolutionary data as a tree
+
+---
+
+# (1) Data structures
+
+---
+
+## Structures you have seen
+
+List (Julia `Vector`):
+
+- ordered series of items, usually all same type
+- can look up by index number
+- functions let us ask questions like "how many?", "what values are included?", "how frequently do values appear?"
+
+---
+
+## Generic operations with Vectors
+
+Create a new Vector by *filtering*:
+
+- select zero or more items from a Vector
+- length of new Vector will therefore be in the range 0 to the length of the original
+- all items in new Vector appear in original
+
+Create a new Vector by *mapping*:
+
+- transform each item in a Vector
+- length of new Vector will therefore be equal to length of original Vector
+- items in new Vector may be anything your mapping creates
+
+
+---
+
+## Structures you have seen
+
+Dictionary (Julia `Dict` or `OrderedDict`)
+
+- pairs of keys -> values
+- can look up by key value
+- could extract keys and values as separate, parallel Vectors
+
+---
+
+## A new structure: Graph
+
+- items in a Graph are *nodes*
+- relation of two nodes is an *edge*
+- edges may be *directed* or *undirected*
+- ultimately generic model!
+
+
+---
+
+## Examples
+
+- you could think of a dictionary as a graph!
+- social network: `person -friend of-> person`
+- genealogy: `child -> parent` (or `parent -> child` ?)
+
+
+---
+
+## A special graph: trees
+
+- have one *root*
+- except for root, all nodes have one parent node
+
+
+
+---
+
+
+
+
+# (2) Plain-text data formats
+
+- human-readable
+- don't require special software
+- good match to model of open scholarship
+
+---
+
+
+## Tables in plain-text format
+
+- *rows* represent observations
+- *columns* represent features
+- need *two* special characters:
+    1. row separator (usually new line)
+    2. column separator (could be anything else)
+
+
+
+---
+
+## Example: parallel terms in multiple languages
+
+Using `|` as column separator:
+
+```
+
+English|father|mother
+French|père|mère
+```
+
+
+---
+
+
+# (3) Evolution of language
 
 ---
 
@@ -27,8 +143,10 @@ Hypothesized:
 
 ## Differences from biological evolution
 
+- mechanism for introducing change?
+- what guides selection?
 - languages can borrow from or be directly influenced by other languages
-- our "fossil record" is only 5,000 years old! 
+- our "fossil record" (written text) is only 5,000 years old! 
 
 (1-5 % of the time span of human language?)
 
@@ -81,7 +199,7 @@ Two Latin sentences with same subject and object:
 
 ## Vocabulary
 
-*Cognates*: words in two languages that have the same origin
+*Cognates*: words in two languages that have the same origin (~ *homology*)
 
 But pronounciation evolves! How do we identify cognates?
 
@@ -124,7 +242,7 @@ Simplistic model for our purposes:
 - *dental* (teeth) (e.g., English `t`)
 - *palatal* (top of mouth) (e.g., English `k`)
 
-![bg left  h:600](https://www.researchgate.net/profile/Muhammad-Yaseen-Khan/publication/357296500/figure/fig2/AS:1104351015776257@1640309208455/IPA-articulation-points-left-Human-vocal-tract-right-IPA-vowels-consonants.ppm)
+![bg left  h:600](./imgs/ipa-articulation.png)
 
 ---
 
@@ -248,3 +366,4 @@ Meaning of words evolves, too!
 - *synchronic system of correspondences*
 
 ---
+
