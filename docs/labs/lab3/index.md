@@ -3,6 +3,7 @@ title: "Lab 3: Linguistic evolution"
 layout: page
 nav_order: 3
 parent: "Labs"
+has_children: true
 ---
 
 
