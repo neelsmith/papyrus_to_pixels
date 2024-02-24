@@ -71,13 +71,19 @@ md"""
 """
 
 # ╔═╡ e6f5fe38-cb09-11ed-093a-89974c867831
-md"""## Comparison of phonetic features"""
+md"""## (1) Comparison of phonetic features"""
 
 # ╔═╡ b50fee84-95c6-4e2b-b28e-ddf379e211d4
 md"""*Choose dataset to analyze*: $(@bind dataset Select(["f22" => "Fall '22 dataset", "s24" => "Spring '24 dataset"], default = "s24"))"""
 
+# ╔═╡ 834c5625-69b2-4e3d-a7dd-8be84422f03f
+md"""### Compare features for a single term"""
+
+# ╔═╡ 8dc318f2-35e2-4c21-b78c-d13b4d1e5077
+md"""### Compare multiple terms"""
+
 # ╔═╡ 8e1a8736-2ca4-4d04-802f-4ef51c9219ac
-md"""## Draw a tree"""
+md"""## (2) Draw a tree"""
 
 # ╔═╡ e4d4df04-5ad6-4bea-86c3-6113a77cdd5b
 md"""*Start your tree by copying and pasting this list into your diagram*:"""
@@ -89,10 +95,10 @@ md"""### Define your tree using Mermaid notation"""
 md"""### Visualize your tree"""
 
 # ╔═╡ 7df0a9ab-7c7e-4d2b-a284-0a1ca2967ef3
-md"""## Evaluate your tree"""
+md"""## (3). Evaluate your tree"""
 
-# ╔═╡ 4d8ca3b5-3d32-46c1-97d7-054b7ad7356b
-#maxParsimonyNet(starttree, df, outgroup = "English")
+# ╔═╡ 4f1838ed-283f-465d-82fd-2c071abc5c9f
+
 
 # ╔═╡ a5320c36-9a5f-4c50-b20a-a0c3a30d8f4a
 """Make a DataFrame"""
@@ -111,9 +117,6 @@ function frameify(rowlabels, collabels, data)
 	rm(f)
 	df
 end
-
-# ╔═╡ 7697e4b1-d279-4448-bf51-f8cd0a8523b3
-
 
 # ╔═╡ 52c5dc36-2d1e-469d-b04a-6ef2845b0ba3
 
@@ -143,10 +146,21 @@ html"""
 <br/><br/><br/><br/><br/><br/><br/>
 """
 
+# ╔═╡ bd11c81e-1c93-4cb1-9b79-62d0d658a9fa
+md"""
+
+---
+
+> ## Stuff behind the scenes you can ignore
+"""
+
+
+
 # ╔═╡ 26afc76c-211d-4b78-8f8f-c6de2cf2be83
 md"""> Computation of phonology values"""
 
 # ╔═╡ 281fe574-cf9d-4a19-8557-52cfe13fd9f1
+"""Compose labels for features for selected vocabulary terms."""
 function featurelabels(idxlist, features)
 	if isempty(idxlist)
 		[]
@@ -193,10 +207,8 @@ function encodestruct(phono, codedict = codingdict)
 end
 
 # ╔═╡ fa737dfb-8306-4eaf-8554-6d473c8e8e60
-md"""> ## Stuff behind the scenes you can ignore
-
-
-> ### Source data
+md"""> 
+> Source data
 >
 > Read data from file and organize it into a 2-dimensional matrix,
 > with each row representing a word and each column a language.
@@ -276,7 +288,7 @@ begin
 end
 
 # ╔═╡ 3946304a-a0db-418d-b470-d8b035d42776
-md"""> ### Phonological analysis
+md"""> Phonological analysis
 >
 > Phonology data and functions to analyze and look up phonology for the initial sound of a string"""
 
@@ -457,8 +469,10 @@ function coderow(delimited, phonologydict, codesdict = codingdict)
 end
 
 # ╔═╡ 443e2b97-445b-48bc-8934-526ff00c315f
-md""">### User interface: build user-selectable menu
+md""">User interface
 >
+> Build user-selectable menu:
+> 
 > Extract the first column of the data matrix (presumed to be English), and
 > build a `Select` menu from it.
 """
@@ -593,25 +607,22 @@ md"""*Choose a direction for your tree*: $(@bind direction Select(dirmenu))"""
 languages = """
 flowchart $(direction)
 
-PIE --> PG
-PIE --> Latin
+OE --> English 
 
-PG --> English
+Dutch
 
-PG --> Dutch
+French
 
+German
 
+Latin
 
-PG --> German
+Russian
 
-Latin --> Spanish
-Latin --> French
+Spanish
 
-PIE --> Russian
+Turkish
 
-
-
-Turkish 
 """
 
 # ╔═╡ 572b9936-2301-44ea-90ca-a77d16b78d9f
@@ -747,11 +758,37 @@ parsimonyGF(starttree,speciesx,traitsx,:softwired)
 # ╔═╡ 43af70f9-7a19-4a12-8b0c-ae30de856b51
 printNodes(opt)
 
-# ╔═╡ 04e07918-3a5d-46b7-b0b4-ed5af8a2bec6
-opt |> typeof
-
 # ╔═╡ 062f1f8f-01de-4bff-ab84-57a0f2a32658
 typeof(starttree)
+
+# ╔═╡ a66def90-5401-47dc-9951-1aa59404d018
+"""Compose Markdown table with values for selected vocabulary."""
+function mdview(rownames, colnames, data)
+	mdtable = []
+	hdrrow = vcat(["language"], colnames)
+	splitter = map(hdrrow) do col
+		"| --- "
+	end 
+	
+	push!(splitter, " |")
+	push!(mdtable, string("| " , join(hdrrow, "| " ), " |"))
+	push!(mdtable, join(splitter," "))
+	
+	r,c = data |> size
+	for i in 1:r
+		rowvals = ["| " * rownames[i]]
+		for j in 1:c
+			push!(rowvals, string("| ", data[r,c]))
+		end
+		rowstring = string(join(rowvals," ") , " |")
+		push!(mdtable, rowstring)
+	end
+	
+	join(mdtable,"\n")
+end
+
+# ╔═╡ fc76beaa-bfd4-4b7e-8df4-ff185d7270a9
+mdview(langnames, traitnames, scores) |> Markdown.parse
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -2199,19 +2236,23 @@ version = "1.4.1+1"
 """
 
 # ╔═╡ Cell order:
-# ╠═ec90119e-6c25-4162-8b93-620a6cc4a554
+# ╟─ec90119e-6c25-4162-8b93-620a6cc4a554
 # ╟─9f51f0da-2f32-4b34-b510-106991af5e9a
-# ╠═cf04fb10-c82a-4f99-84c6-24fb2da174ce
-# ╠═f9e3b172-2d2b-4fa9-9b6b-5b2a000e8434
+# ╟─cf04fb10-c82a-4f99-84c6-24fb2da174ce
+# ╟─f9e3b172-2d2b-4fa9-9b6b-5b2a000e8434
 # ╟─cf0bf814-7679-40b3-ae0f-8b0dbdde5834
 # ╟─034ac389-be75-43a7-bfe7-a976a7dae8b7
 # ╟─833be39a-4eba-46f1-a009-b0a53c5a7433
 # ╟─cffb1c37-f231-4354-bf52-e50070834e41
 # ╟─e6f5fe38-cb09-11ed-093a-89974c867831
 # ╟─b50fee84-95c6-4e2b-b28e-ddf379e211d4
+# ╟─834c5625-69b2-4e3d-a7dd-8be84422f03f
 # ╟─3fa6ffb2-8e09-40dc-9356-47743e912a32
 # ╟─499181ee-1c7b-49ff-ab3a-1889ae285d1d
 # ╟─d6fa7afc-d3e3-4205-8d35-639dee64cfc2
+# ╟─8dc318f2-35e2-4c21-b78c-d13b4d1e5077
+# ╟─c8f4fd19-e4e9-4277-b4ee-6f073891c8d5
+# ╟─fc76beaa-bfd4-4b7e-8df4-ff185d7270a9
 # ╟─8e1a8736-2ca4-4d04-802f-4ef51c9219ac
 # ╟─70f93115-a9bc-414f-8aa3-05543b3847f8
 # ╟─e4d4df04-5ad6-4bea-86c3-6113a77cdd5b
@@ -2222,17 +2263,14 @@ version = "1.4.1+1"
 # ╟─572b9936-2301-44ea-90ca-a77d16b78d9f
 # ╟─19c2c305-f433-4326-b421-c666bc66c6bf
 # ╟─7df0a9ab-7c7e-4d2b-a284-0a1ca2967ef3
-# ╟─c8f4fd19-e4e9-4277-b4ee-6f073891c8d5
 # ╠═36bdd651-c69c-42d1-baa8-a35dc8a336ac
 # ╠═2cf72ab1-9406-4062-a320-80a24c3bb3d9
-# ╠═4d8ca3b5-3d32-46c1-97d7-054b7ad7356b
-# ╟─a5320c36-9a5f-4c50-b20a-a0c3a30d8f4a
+# ╠═4f1838ed-283f-465d-82fd-2c071abc5c9f
+# ╠═a5320c36-9a5f-4c50-b20a-a0c3a30d8f4a
 # ╠═a472f6f5-878d-4c85-ba7a-d355737f419f
 # ╠═e7a9cfd1-63a9-4b41-9dba-c681954af353
 # ╠═2f0c79f7-e003-4d74-8195-4581d70d4d2e
-# ╠═7697e4b1-d279-4448-bf51-f8cd0a8523b3
 # ╠═43af70f9-7a19-4a12-8b0c-ae30de856b51
-# ╠═04e07918-3a5d-46b7-b0b4-ed5af8a2bec6
 # ╠═8b491005-40a6-428c-964c-ffa307d82574
 # ╠═38200357-c1fc-41f9-b823-ada9e72c9796
 # ╠═5b243b3d-99dd-49c2-92f4-986c230b1775
@@ -2252,12 +2290,13 @@ version = "1.4.1+1"
 # ╠═5c30f550-f684-40dd-a90d-8f03e723dc20
 # ╠═4e9ef5b8-b1ff-4d70-8bba-3a6d6a4436aa
 # ╟─d575f55c-35fc-458d-a014-882aaddf8125
+# ╟─bd11c81e-1c93-4cb1-9b79-62d0d658a9fa
 # ╟─26afc76c-211d-4b78-8f8f-c6de2cf2be83
-# ╠═1570fe48-d964-4306-9ca8-588fceb8e73a
+# ╟─1570fe48-d964-4306-9ca8-588fceb8e73a
 # ╟─281fe574-cf9d-4a19-8557-52cfe13fd9f1
 # ╟─b54cf045-15d3-4267-95f8-399fe71e4672
-# ╠═8c079fc8-50c1-4d1d-8708-82139a7136b2
-# ╠═3bf86905-c1a0-447a-b3a6-b45f51beaf1b
+# ╟─8c079fc8-50c1-4d1d-8708-82139a7136b2
+# ╟─3bf86905-c1a0-447a-b3a6-b45f51beaf1b
 # ╟─ca496151-93e8-418b-8906-151b653f1541
 # ╟─fa737dfb-8306-4eaf-8554-6d473c8e8e60
 # ╟─59ce4fe7-c8fc-4b4a-bf15-ed4a7b3ba95e
@@ -2276,14 +2315,15 @@ version = "1.4.1+1"
 # ╟─57a98d63-c3c6-451e-baab-50829d6a6d20
 # ╟─9dde598a-dd5b-450a-ac0a-88b6eeca2dfc
 # ╟─3b0cde1a-698e-43f0-aa92-d26d1b9bafdc
-# ╠═32db71ef-cf4f-48c4-93cb-5afb13ce4a0a
-# ╠═9220e1c7-985e-4259-8868-6050dd4bda7a
-# ╠═23353d30-cddb-48cf-8e6c-021a166c8b4b
-# ╠═5f0afde2-faa5-40ab-9857-d8d604f14d16
-# ╠═1205b182-a761-4ce2-ae73-c61276de48f4
-# ╠═2aa7facd-0a0f-4913-866e-fcaef38a93e6
-# ╠═fba21a41-225b-4582-bf00-558e6aef1269
-# ╠═e858f651-314d-49ce-a6d8-b49528d8cf43
-# ╠═effced2c-836b-4f63-ada6-4b8bfcedfad9
+# ╟─32db71ef-cf4f-48c4-93cb-5afb13ce4a0a
+# ╟─9220e1c7-985e-4259-8868-6050dd4bda7a
+# ╟─23353d30-cddb-48cf-8e6c-021a166c8b4b
+# ╟─5f0afde2-faa5-40ab-9857-d8d604f14d16
+# ╟─1205b182-a761-4ce2-ae73-c61276de48f4
+# ╟─2aa7facd-0a0f-4913-866e-fcaef38a93e6
+# ╟─fba21a41-225b-4582-bf00-558e6aef1269
+# ╟─e858f651-314d-49ce-a6d8-b49528d8cf43
+# ╟─effced2c-836b-4f63-ada6-4b8bfcedfad9
+# ╟─a66def90-5401-47dc-9951-1aa59404d018
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
