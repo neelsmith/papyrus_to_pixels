@@ -32,17 +32,20 @@ starttree = readTopology("(((English,German),Norwegian),Spanish);");
 # ╔═╡ 219e9b3e-e496-439b-afae-24ed97e78fba
 starttree
 
+# ╔═╡ fc7a77ae-b179-4a8f-bfdc-d7ce993ce8cb
+typeof(starttree)
+
 # ╔═╡ be42a582-a0d6-4396-b8cf-7cd887fa1471
 net1 = maxParsimonyNet(starttree, dat, hmax=1, outgroup="Spanish", rootname="swadesh")
+
+# ╔═╡ a212af9e-ab44-47ab-b360-be32d32f2469
+typeof(net1)
 
 # ╔═╡ d44c1743-9b26-4652-baad-f607707a9497
 net1
 
 # ╔═╡ 7f4b1c23-6511-4d82-b6a4-0184641a002e
 kids1 = getroot(net1) |> getchildren
-
-# ╔═╡ 3ab12e42-a6ec-4b17-98c9-58b2bbfd9438
-kids1[1].name
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -705,9 +708,10 @@ version = "17.4.0+2"
 # ╠═640387ad-8cd0-459d-807a-3fa9492c2ffc
 # ╠═2e66fe31-7f5a-4508-826a-29c8e7a30bda
 # ╠═219e9b3e-e496-439b-afae-24ed97e78fba
+# ╠═fc7a77ae-b179-4a8f-bfdc-d7ce993ce8cb
+# ╠═a212af9e-ab44-47ab-b360-be32d32f2469
 # ╠═be42a582-a0d6-4396-b8cf-7cd887fa1471
 # ╠═d44c1743-9b26-4652-baad-f607707a9497
 # ╠═7f4b1c23-6511-4d82-b6a4-0184641a002e
-# ╟─3ab12e42-a6ec-4b17-98c9-58b2bbfd9438
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

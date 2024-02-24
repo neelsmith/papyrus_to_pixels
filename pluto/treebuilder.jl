@@ -23,6 +23,9 @@ begin
 	md"""*Unhide this cell to see the Julia environment.*"""
 end
 
+# ╔═╡ c9d97d70-e584-4724-bedb-673d2ca226a7
+md"""# Sketch a tree in Mermaid syntax and convert it to newick"""
+
 # ╔═╡ 2149a6e1-a158-4e72-b5eb-4fe91d6d73d1
 md"""*Notebook version*:  **1.0.0** *See version description*: $(@bind showversion CheckBox())
 """
@@ -35,9 +38,6 @@ if showversion
 - **1.0.0**: initial release supports defining a Mermaid flowchart and interpreting its graph as a `NewickTree`.  No sanitizing of node names included in this version.	
 """	
 end
-
-# ╔═╡ c9d97d70-e584-4724-bedb-673d2ca226a7
-md"""# Sketch a tree in Mermaid syntax and convert it to newick"""
 
 # ╔═╡ 7bfb4f76-5ab3-4871-b747-090dca64f11b
 md"""> *Draw and visualize family trees using Mermaid flow charts*"""
@@ -225,6 +225,9 @@ newickform = newick(languages) |> readnw
 # ╔═╡ ac34a8f9-8f96-4158-99bd-4d109a53d20e
 aside(plot(newickform))
 
+
+# ╔═╡ 1d898fb9-f84d-4ba5-b794-74702673b4e5
+newickform
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1402,20 +1405,21 @@ version = "1.4.1+1"
 # ╟─7bfb4f76-5ab3-4871-b747-090dca64f11b
 # ╟─425cc328-ec56-4015-980f-c9de9f994cd9
 # ╟─70ac9a69-0eab-47c0-b9ca-b86d4481884c
-# ╟─ac34a8f9-8f96-4158-99bd-4d109a53d20e
+# ╠═ac34a8f9-8f96-4158-99bd-4d109a53d20e
 # ╟─89363915-894c-45de-9f86-503ff161d1eb
-# ╟─eee67019-eb47-4434-a60b-e6e7d921e2cd
+# ╠═eee67019-eb47-4434-a60b-e6e7d921e2cd
+# ╠═1d898fb9-f84d-4ba5-b794-74702673b4e5
 # ╟─cc8c69fd-c8f5-4772-a85d-8fed909c98d5
 # ╟─3ba25212-ba78-4961-a484-487486c2988a
 # ╠═694ecf82-5252-46e4-b29d-213da036dfd5
 # ╠═db21a1c7-5dc5-4f85-9e30-ad49e1b9ad96
-# ╟─11675e4b-9160-419b-b390-ae896760d5e3
-# ╟─b234a942-7c46-4b29-88b2-c20d332efe05
-# ╟─7ccf7a2f-bb42-4cfb-b6a6-5be353455d56
-# ╟─023617b6-24bb-433a-96b3-bf09b8829407
-# ╟─0bdac854-a8ec-4537-971f-e73e1fda1ab9
-# ╟─fa42519e-b56e-4d07-acdb-b9338da345d0
-# ╟─bea063a8-0daf-4fe7-9cdb-5f296bd426e6
+# ╠═11675e4b-9160-419b-b390-ae896760d5e3
+# ╠═b234a942-7c46-4b29-88b2-c20d332efe05
+# ╠═7ccf7a2f-bb42-4cfb-b6a6-5be353455d56
+# ╠═023617b6-24bb-433a-96b3-bf09b8829407
+# ╠═0bdac854-a8ec-4537-971f-e73e1fda1ab9
+# ╠═fa42519e-b56e-4d07-acdb-b9338da345d0
+# ╠═bea063a8-0daf-4fe7-9cdb-5f296bd426e6
 # ╟─9d767368-090a-4c73-8131-585fbc876976
 # ╟─2da281ee-ae30-4384-9b7a-3787dfa3a0bc
 # ╟─00000000-0000-0000-0000-000000000001
