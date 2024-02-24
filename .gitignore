@@ -5,3 +5,6 @@ _site
 docs/.jekyll-cache/
 .vscode/
 scratch/
+*.err
+*.log
+*.out
