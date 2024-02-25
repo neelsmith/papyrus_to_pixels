@@ -54,7 +54,7 @@ md""" # Language evolution
 """
 
 # ╔═╡ e6f5fe38-cb09-11ed-093a-89974c867831
-md"""## (1) Comparison of phonetic features"""
+md"""## (1) Explore data"""
 
 # ╔═╡ b50fee84-95c6-4e2b-b28e-ddf379e211d4
 md"""*Choose dataset to analyze*: $(@bind dataset Select(["f22" => "Fall '22 dataset", "s24" => "Spring '24 dataset"], default = "s24"))"""
@@ -63,7 +63,7 @@ md"""*Choose dataset to analyze*: $(@bind dataset Select(["f22" => "Fall '22 dat
 md"""### Compare features for a single term"""
 
 # ╔═╡ 8dc318f2-35e2-4c21-b78c-d13b4d1e5077
-md"""### Compare multiple terms"""
+md"""### Compare features for multiple terms"""
 
 # ╔═╡ 20cc299d-eaa5-4f88-96df-41798a78aee3
 md"""*See labels for traits*: $(@bind seekey CheckBox())"""
@@ -71,66 +71,70 @@ md"""*See labels for traits*: $(@bind seekey CheckBox())"""
 # ╔═╡ 8e1a8736-2ca4-4d04-802f-4ef51c9219ac
 md"""## (2) Draw a tree"""
 
-# ╔═╡ e4d4df04-5ad6-4bea-86c3-6113a77cdd5b
-md"""*Start your tree by copying and pasting this list into your diagram*:"""
-
 # ╔═╡ aac6c044-2c50-4370-bbc8-5ffbe45232dd
 md"""### Define your tree using Mermaid notation"""
+
+# ╔═╡ 3480eee1-ef1f-40a8-a8e2-0c08d717f620
+md"""Define a Mermaid graph in the cell below that assigns a long string value to the variable `langauges`."""
+
+# ╔═╡ e4d4df04-5ad6-4bea-86c3-6113a77cdd5b
+md"""!!! note
+
+    To be sure you include a node for all languages in the data set you selected, start your tree by copying and pasting the following list into your diagram.
+
+
+    Then use mermaid notation to express relations between ancestor and descendant, like this:
+
+    `OldEnglish --> English`
+
+    When you add nodes for earlier phases (i.e., nodes like `OldEnglish` that aren't included in the list of languages below), use simple names with alphabetic characters only.
+"""
+
+# ╔═╡ 9ccbe0ce-dfc8-4267-bdb3-18d0547ceb94
+md"""*Use the following cell to compose your tree:*"""
 
 # ╔═╡ 9d3eb9e3-c00f-44e8-8cc3-ec61af246fe8
 md"""### Visualize your tree"""
 
+# ╔═╡ 19c2c305-f433-4326-b421-c666bc66c6bf
+
+
 # ╔═╡ 7df0a9ab-7c7e-4d2b-a284-0a1ca2967ef3
-md"""## (3). Evaluate your tree"""
+md"""## (3). Evaluate your model"""
 
-# ╔═╡ a5320c36-9a5f-4c50-b20a-a0c3a30d8f4a
-"""Make a DataFrame"""
-function frameify(rowlabels, collabels, data)
-	hdr = ["language," * join(collabels, ",")]
-	for (rownum, lang) in enumerate(rowlabels)
-		row = lang * "," * join(data[rownum,:], ",")
-		push!(hdr, row)
-	end
-	str = join(hdr,"\n")
-	f = tempname()	
-	open(f, "w") do io
-		write(io, str)
-	end
-	df = CSV.File(f) |> DataFrame
-	rm(f)
-	df
-end
+# ╔═╡ 16dc6793-063c-4f04-88e5-050c896e25b9
+md"""### Measuring the parsimony of your tree
 
-# ╔═╡ 52c5dc36-2d1e-469d-b04a-6ef2845b0ba3
+Smaller scores are better?
+"""
+
+# ╔═╡ 65bd06db-5bb0-4efd-a20d-e2b191091a83
+md"""### Comparing an optimal tree
 
 
-# ╔═╡ deac8153-1b8c-4254-914f-6eb10ac88a00
-
-
-# ╔═╡ 41f70fef-4128-4899-8601-662d7aaa98dc
-#parsimonyGF(starttree, langnames, traitvalues)
-
-# ╔═╡ a13029b1-4f15-4364-b291-60ba915054e6
-net = readTopology("(Spanish,((English)#H1,(Norwegian,(German,#H1))));");
-
-# ╔═╡ 5d9bdd85-dcab-4ba2-9948-dad8ba50029d
-net
+"""
 
 # ╔═╡ 4e9ef5b8-b1ff-4d70-8bba-3a6d6a4436aa
 #net1 = maxParsimonyNet(starttree, dat, hmax=1, outgroup="Spanish", rootname="swadesh")
+
+# ╔═╡ 1ab72af2-d6a5-488b-8101-9adf79d273b6
+html"""
+<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
+"""
 
 # ╔═╡ bd11c81e-1c93-4cb1-9b79-62d0d658a9fa
 md"""
 
 ---
 
-> ## Stuff behind the scenes you can ignore
+> # Stuff behind the scenes you can ignore
 """
 
 
 
 # ╔═╡ 26afc76c-211d-4b78-8f8f-c6de2cf2be83
-md"""> Computation of phonology values"""
+md"""### Computation of phonology values"""
 
 # ╔═╡ 281fe574-cf9d-4a19-8557-52cfe13fd9f1
 """Compose labels for features for selected vocabulary terms."""
@@ -154,7 +158,9 @@ codingdict = Dict([
 	"labial" => 1,
 	"dental" => 2,
 	"palatal" => 3,
-	"vowel" => 4,
+	"sibliant" => 4,
+	"vowel" => 5,
+	
 	"voiced" => 1,
 	"unvoiced" => 2,
 	"plosive" => 1,
@@ -180,9 +186,8 @@ function encodestruct(phono, codedict = codingdict)
 end
 
 # ╔═╡ fa737dfb-8306-4eaf-8554-6d473c8e8e60
-md"""> 
-> Source data
->
+md"""### Source data
+
 > Read data from file and organize it into a 2-dimensional matrix,
 > with each row representing a word and each column a language.
 
@@ -246,7 +251,7 @@ begin
 end
 
 # ╔═╡ 3946304a-a0db-418d-b470-d8b035d42776
-md"""> Phonological analysis
+md"""### Phonological analysis
 >
 > Phonology data and functions to analyze and look up phonology for the initial sound of a string"""
 
@@ -427,7 +432,7 @@ function coderow(delimited, phonologydict, codesdict = codingdict)
 end
 
 # ╔═╡ 443e2b97-445b-48bc-8934-526ff00c315f
-md""">User interface
+md"""### Interactive elements for user interface
 >
 > Build user-selectable menu:
 > 
@@ -484,35 +489,72 @@ end
 # ╔═╡ c8f4fd19-e4e9-4277-b4ee-6f073891c8d5
 @bind termsidx MultiCheckBox(menu[2:end], select_all=true)
 
-# ╔═╡ 36bdd651-c69c-42d1-baa8-a35dc8a336ac
-traitnames = featurelabels(termsidx, featuremtrx)
-
 # ╔═╡ 1570fe48-d964-4306-9ca8-588fceb8e73a
 dataselection = [srcdata[i] for i in termsidx]
 
-# ╔═╡ be3eb016-4474-4089-9e8e-5d87882c5de2
-scores = encodeterms(dataselection)
+# ╔═╡ a66def90-5401-47dc-9951-1aa59404d018
+"""Compose Markdown table with values for selected vocabulary."""
+function mdtableview(rownames, colnames, data)
+	if isempty(colnames)
+		 ""
+	else
+		mdtable = []
+		hdrrow = vcat(["language"], colnames)
+		splitter = map(hdrrow) do col
+			"| --- "
+		end 
+		
+		push!(splitter, " |")
+		push!(mdtable, string("| " , join(hdrrow, "| " ), " |"))
+		push!(mdtable, join(splitter," "))
+		
+		r,c = data |> size
+		for i in 1:r
+			rowvals = ["| " * rownames[i]]
+			for j in 1:c
+				push!(rowvals, string("| ", data[i,j]))
+			end
+			rowstring = string(join(rowvals," ") , " |")
+			push!(mdtable, rowstring)
+		end
+		
+		join(mdtable,"\n")
+	end
+end
 
-# ╔═╡ 2cf72ab1-9406-4062-a320-80a24c3bb3d9
-scores
+# ╔═╡ 9dde598a-dd5b-450a-ac0a-88b6eeca2dfc
+dirmenu = [
+	"BT" => "Bottom to top (BT)",
+	"TB" => "Top to bottom (TB)",
+	"LR" => "Left to right (LR)",
+	"RL" => "Right to left (RL)",
+	]
 
-# ╔═╡ 2c8e3ecd-b754-4af4-83aa-a0dc7a0bdcd4
-df = frameify(langnames, traitnames, scores)
+# ╔═╡ 70f93115-a9bc-414f-8aa3-05543b3847f8
+md"""*Choose a direction for your tree*: $(@bind direction Select(dirmenu))"""
 
-# ╔═╡ a472f6f5-878d-4c85-ba7a-d355737f419f
-speciesx, traitsx = PhyloNetworks.readCSVtoArray(df);
+# ╔═╡ 11d8ffcc-cb70-49cb-b6ae-e2e00a2e2983
+languages = """
+flowchart $(direction)
 
-# ╔═╡ 38200357-c1fc-41f9-b823-ada9e72c9796
-speciesx
+PG --> HighGerman
+PG --> LowGerman
+LowGerman --> English
+HighGerman --> German
+LowGerman --> Dutch
 
-# ╔═╡ 5b243b3d-99dd-49c2-92f4-986c230b1775
-traitsx
+PIE --> PG
+PIE --> Russian
 
-# ╔═╡ 6f16e9d2-4da8-446f-8196-2fb5fbe07c86
-numspecies, numtraits = scores |> size
+PIE --> Latin
+Latin --> Spanish
+Latin --> French
 
-# ╔═╡ 0a82ccb4-78be-47c5-89fe-39b06b1d0759
-scores
+Turkish
+"""
+
+# ╔═╡ 572b9936-2301-44ea-90ca-a77d16b78d9f
+mermaid(languages)
 
 # ╔═╡ 57a98d63-c3c6-451e-baab-50829d6a6d20
 """Implement interpreting Mermaid diagram."""
@@ -532,44 +574,8 @@ function mermaid(s)
 end
 
 
-# ╔═╡ 9dde598a-dd5b-450a-ac0a-88b6eeca2dfc
-dirmenu = [
-	"BT" => "Bottom to top (BT)",
-	"TB" => "Top to bottom (TB)",
-	"LR" => "Left to right (LR)",
-	"RL" => "Right to left (RL)",
-	]
-
-# ╔═╡ 70f93115-a9bc-414f-8aa3-05543b3847f8
-md"""*Choose a direction for your tree*: $(@bind direction Select(dirmenu))"""
-
-# ╔═╡ 11d8ffcc-cb70-49cb-b6ae-e2e00a2e2983
-languages = """
-flowchart $(direction)
-
-OE --> English 
-
-Dutch
-
-French
-
-German
-
-Latin
-
-Russian
-
-Spanish
-
-Turkish
-
-"""
-
-# ╔═╡ 572b9936-2301-44ea-90ca-a77d16b78d9f
-mermaid(languages)
-
 # ╔═╡ 3b0cde1a-698e-43f0-aa92-d26d1b9bafdc
-md"""> All the Newick"""
+md"""### All the Newick"""
 
 # ╔═╡ 2aa7facd-0a0f-4913-866e-fcaef38a93e6
 """Extract list of unique nodes from a list of source->target pairs."""
@@ -669,69 +675,44 @@ function newick(txt)
 	(mermaidpairs(txt) |> newicktree |> reverse |> join) * ";"
 end
 
-# ╔═╡ 014d9a67-26c4-44f2-8404-7029ca05a430
-newickform = newick(languages) |> readnw
-
-# ╔═╡ 19c2c305-f433-4326-b421-c666bc66c6bf
-plot(newickform)
-
-# ╔═╡ 23c998e1-34aa-430e-935c-9e62286b0ec9
-newick2 = string("(", newickform, ",root)")
-
-# ╔═╡ 62fc00d0-4b74-4d6b-9f4a-f5eaa64a72c9
-readnw(newick2) |> plot
+# ╔═╡ 0f736a63-71cb-42e1-b6fd-ff65767da05a
+newickform = newick(languages)
 
 # ╔═╡ 5c30f550-f684-40dd-a90d-8f03e723dc20
-starttree = readTopology(newick2)
+modeltree = readTopology(newickform)
 
-# ╔═╡ e7a9cfd1-63a9-4b41-9dba-c681954af353
-parsimonySoftwired(starttree, speciesx, traitsx)
+# ╔═╡ 6206ed4b-b340-4497-9e68-d4144e33d42c
+newickmodel = readnw(newickform)
 
+# ╔═╡ 842ba5b3-2aba-4081-bb8f-4d61cb312b06
+newickmodel |> plot
 
-# ╔═╡ 2f0c79f7-e003-4d74-8195-4581d70d4d2e
-parsimonyGF(starttree,speciesx,traitsx,:softwired)
+# ╔═╡ 2e9620b6-ee9a-462a-8b50-3267fbac0df3
+md"""### Organizing data in different structures"""
 
-
-# ╔═╡ 8b491005-40a6-428c-964c-ffa307d82574
- opt = maxParsimonyNet(starttree, df, hmax=1, outgroup="Spanish", rootname="PIE")
-
-# ╔═╡ 43af70f9-7a19-4a12-8b0c-ae30de856b51
-printNodes(opt)
-
-# ╔═╡ 062f1f8f-01de-4bff-ab84-57a0f2a32658
-typeof(starttree)
-
-# ╔═╡ a66def90-5401-47dc-9951-1aa59404d018
-"""Compose Markdown table with values for selected vocabulary."""
-function mdview(rownames, colnames, data)
-	if isempty(colnames)
-		 ""
-	else
-		mdtable = []
-		hdrrow = vcat(["language"], colnames)
-		splitter = map(hdrrow) do col
-			"| --- "
-		end 
-		
-		push!(splitter, " |")
-		push!(mdtable, string("| " , join(hdrrow, "| " ), " |"))
-		push!(mdtable, join(splitter," "))
-		
-		r,c = data |> size
-		for i in 1:r
-			rowvals = ["| " * rownames[i]]
-			for j in 1:c
-				push!(rowvals, string("| ", data[r,c]))
-			end
-			rowstring = string(join(rowvals," ") , " |")
-			push!(mdtable, rowstring)
-		end
-		
-		join(mdtable,"\n")
+# ╔═╡ a5320c36-9a5f-4c50-b20a-a0c3a30d8f4a
+"""Make a DataFrame using given row and column labels together with a list of data values."""
+function frameify(rowlabels, collabels, data)
+	hdr = ["taxon," * join(collabels, ",")]
+	for (rownum, lang) in enumerate(rowlabels)
+		row = lang * "," * join(data[rownum,:], ",")
+		push!(hdr, row)
 	end
+	str = join(hdr,"\n")
+	f = tempname()	
+	open(f, "w") do io
+		write(io, str)
+	end
+	df = CSV.File(f) |> DataFrame
+	rm(f)
+	df
 end
 
+# ╔═╡ 36bdd651-c69c-42d1-baa8-a35dc8a336ac
+traitnames = featurelabels(termsidx, featuremtrx)
+
 # ╔═╡ bce931be-d82f-4de5-9edf-3e8a69e2f3dc
+# Short labels for display in table that might have *many* columns
 colhdrs = ["t$(i)" for i in 1:length(traitnames)]
 
 # ╔═╡ d5df5b10-1b6c-4e53-b3a4-830fdb6b65b2
@@ -745,8 +726,59 @@ end
 
 	
 
+# ╔═╡ be3eb016-4474-4089-9e8e-5d87882c5de2
+scores = encodeterms(dataselection)
+
 # ╔═╡ fc76beaa-bfd4-4b7e-8df4-ff185d7270a9
-mdview(langnames, colhdrs, scores) |> Markdown.parse
+mdtableview(langnames, colhdrs, scores) |> Markdown.parse
+
+# ╔═╡ 2c8e3ecd-b754-4af4-83aa-a0dc7a0bdcd4
+df = frameify(langnames, traitnames, scores)
+
+# ╔═╡ 8b491005-40a6-428c-964c-ffa307d82574
+ opt = try
+ 	maxParsimonyNet(modeltree, df, hmax=1, outgroup="Spanish", rootname="PIE")
+ 	catch e
+		@info("Wasn't able to make an optimal tree: $(e)")
+		nothing
+ end
+ 
+
+# ╔═╡ c7d0511b-4e31-487b-b8cf-7aa0ff2ee14e
+if isnothing(opt) 
+else
+	md"""Nodes of optimal tree:"""
+end
+
+# ╔═╡ 43af70f9-7a19-4a12-8b0c-ae30de856b51
+if isnothing(opt) 
+else
+	printNodes(opt)
+end
+
+# ╔═╡ d4787c2c-a12b-47f0-891d-011d3fff344c
+PhyloNetworks.getroot(opt)
+
+# ╔═╡ 8ab3aae3-5151-4a34-93f1-e9e21330810d
+opt.node[opt.root]
+
+# ╔═╡ 6a010ebc-f955-4f08-b0ca-88cc61ba6905
+PhyloNetworks.tipLabels(opt)
+
+# ╔═╡ 8c354ee1-931a-409d-9447-a2a767b471fe
+PhyloNetworks.writeTopology(opt)
+
+# ╔═╡ a472f6f5-878d-4c85-ba7a-d355737f419f
+phylospecies, phylotraits = PhyloNetworks.readCSVtoArray(df);
+
+# ╔═╡ e7a9cfd1-63a9-4b41-9dba-c681954af353
+parsimonySoftwired(modeltree, phylospecies, phylotraits)
+
+# ╔═╡ 2f0c79f7-e003-4d74-8195-4581d70d4d2e
+parsimonyGF(modeltree,phylospecies,phylotraits,:softwired)
+
+# ╔═╡ 6f16e9d2-4da8-446f-8196-2fb5fbe07c86
+numspecies, numtraits = scores |> size
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -2251,44 +2283,38 @@ version = "1.4.1+1"
 # ╟─d6fa7afc-d3e3-4205-8d35-639dee64cfc2
 # ╟─8dc318f2-35e2-4c21-b78c-d13b4d1e5077
 # ╟─c8f4fd19-e4e9-4277-b4ee-6f073891c8d5
-# ╟─20cc299d-eaa5-4f88-96df-41798a78aee3
 # ╟─d5df5b10-1b6c-4e53-b3a4-830fdb6b65b2
 # ╟─fc76beaa-bfd4-4b7e-8df4-ff185d7270a9
+# ╟─20cc299d-eaa5-4f88-96df-41798a78aee3
 # ╟─8e1a8736-2ca4-4d04-802f-4ef51c9219ac
 # ╟─70f93115-a9bc-414f-8aa3-05543b3847f8
+# ╟─aac6c044-2c50-4370-bbc8-5ffbe45232dd
+# ╟─3480eee1-ef1f-40a8-a8e2-0c08d717f620
 # ╟─e4d4df04-5ad6-4bea-86c3-6113a77cdd5b
 # ╟─fc71a3b1-5be6-4f83-a511-b316d8e3790d
-# ╟─aac6c044-2c50-4370-bbc8-5ffbe45232dd
+# ╟─9ccbe0ce-dfc8-4267-bdb3-18d0547ceb94
 # ╠═11d8ffcc-cb70-49cb-b6ae-e2e00a2e2983
 # ╟─9d3eb9e3-c00f-44e8-8cc3-ec61af246fe8
 # ╟─572b9936-2301-44ea-90ca-a77d16b78d9f
 # ╟─19c2c305-f433-4326-b421-c666bc66c6bf
+# ╠═842ba5b3-2aba-4081-bb8f-4d61cb312b06
+# ╠═5c30f550-f684-40dd-a90d-8f03e723dc20
+# ╠═0f736a63-71cb-42e1-b6fd-ff65767da05a
+# ╠═6206ed4b-b340-4497-9e68-d4144e33d42c
 # ╟─7df0a9ab-7c7e-4d2b-a284-0a1ca2967ef3
-# ╠═36bdd651-c69c-42d1-baa8-a35dc8a336ac
-# ╠═2cf72ab1-9406-4062-a320-80a24c3bb3d9
-# ╠═a5320c36-9a5f-4c50-b20a-a0c3a30d8f4a
-# ╠═a472f6f5-878d-4c85-ba7a-d355737f419f
+# ╟─16dc6793-063c-4f04-88e5-050c896e25b9
 # ╠═e7a9cfd1-63a9-4b41-9dba-c681954af353
 # ╠═2f0c79f7-e003-4d74-8195-4581d70d4d2e
-# ╠═43af70f9-7a19-4a12-8b0c-ae30de856b51
-# ╠═8b491005-40a6-428c-964c-ffa307d82574
-# ╠═38200357-c1fc-41f9-b823-ada9e72c9796
-# ╠═5b243b3d-99dd-49c2-92f4-986c230b1775
-# ╠═52c5dc36-2d1e-469d-b04a-6ef2845b0ba3
-# ╠═deac8153-1b8c-4254-914f-6eb10ac88a00
-# ╠═2c8e3ecd-b754-4af4-83aa-a0dc7a0bdcd4
-# ╠═be3eb016-4474-4089-9e8e-5d87882c5de2
-# ╠═062f1f8f-01de-4bff-ab84-57a0f2a32658
-# ╠═41f70fef-4128-4899-8601-662d7aaa98dc
-# ╠═6f16e9d2-4da8-446f-8196-2fb5fbe07c86
-# ╠═0a82ccb4-78be-47c5-89fe-39b06b1d0759
-# ╠═a13029b1-4f15-4364-b291-60ba915054e6
-# ╠═5d9bdd85-dcab-4ba2-9948-dad8ba50029d
-# ╠═014d9a67-26c4-44f2-8404-7029ca05a430
-# ╠═23c998e1-34aa-430e-935c-9e62286b0ec9
-# ╟─62fc00d0-4b74-4d6b-9f4a-f5eaa64a72c9
-# ╠═5c30f550-f684-40dd-a90d-8f03e723dc20
+# ╟─65bd06db-5bb0-4efd-a20d-e2b191091a83
+# ╟─8b491005-40a6-428c-964c-ffa307d82574
+# ╟─c7d0511b-4e31-487b-b8cf-7aa0ff2ee14e
+# ╟─43af70f9-7a19-4a12-8b0c-ae30de856b51
 # ╠═4e9ef5b8-b1ff-4d70-8bba-3a6d6a4436aa
+# ╠═d4787c2c-a12b-47f0-891d-011d3fff344c
+# ╠═8ab3aae3-5151-4a34-93f1-e9e21330810d
+# ╠═6a010ebc-f955-4f08-b0ca-88cc61ba6905
+# ╠═8c354ee1-931a-409d-9447-a2a767b471fe
+# ╟─1ab72af2-d6a5-488b-8101-9adf79d273b6
 # ╟─bd11c81e-1c93-4cb1-9b79-62d0d658a9fa
 # ╟─26afc76c-211d-4b78-8f8f-c6de2cf2be83
 # ╟─1570fe48-d964-4306-9ca8-588fceb8e73a
@@ -2311,8 +2337,9 @@ version = "1.4.1+1"
 # ╟─1c6ee4cd-fa93-4733-8ac1-add2b35f664c
 # ╟─443e2b97-445b-48bc-8934-526ff00c315f
 # ╠═cba0774e-6ffa-4312-ba0a-2ebcfc3c1be4
-# ╟─57a98d63-c3c6-451e-baab-50829d6a6d20
+# ╟─a66def90-5401-47dc-9951-1aa59404d018
 # ╟─9dde598a-dd5b-450a-ac0a-88b6eeca2dfc
+# ╟─57a98d63-c3c6-451e-baab-50829d6a6d20
 # ╟─3b0cde1a-698e-43f0-aa92-d26d1b9bafdc
 # ╟─32db71ef-cf4f-48c4-93cb-5afb13ce4a0a
 # ╟─9220e1c7-985e-4259-8868-6050dd4bda7a
@@ -2323,7 +2350,13 @@ version = "1.4.1+1"
 # ╟─fba21a41-225b-4582-bf00-558e6aef1269
 # ╟─e858f651-314d-49ce-a6d8-b49528d8cf43
 # ╟─effced2c-836b-4f63-ada6-4b8bfcedfad9
-# ╠═a66def90-5401-47dc-9951-1aa59404d018
+# ╟─2e9620b6-ee9a-462a-8b50-3267fbac0df3
+# ╟─a5320c36-9a5f-4c50-b20a-a0c3a30d8f4a
+# ╠═a472f6f5-878d-4c85-ba7a-d355737f419f
+# ╠═36bdd651-c69c-42d1-baa8-a35dc8a336ac
 # ╠═bce931be-d82f-4de5-9edf-3e8a69e2f3dc
+# ╠═2c8e3ecd-b754-4af4-83aa-a0dc7a0bdcd4
+# ╠═be3eb016-4474-4089-9e8e-5d87882c5de2
+# ╠═6f16e9d2-4da8-446f-8196-2fb5fbe07c86
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
