@@ -29,12 +29,13 @@ begin
 end
 
 # ╔═╡ 9f51f0da-2f32-4b34-b510-106991af5e9a
-md"""*Notebook version*: **TBA** *See version info*: $(@bind showversions CheckBox())"""
+md"""*Notebook version*: **2.0.0** *See version info*: $(@bind showversions CheckBox())"""
 
 # ╔═╡ cf04fb10-c82a-4f99-84c6-24fb2da174ce
 begin
 	if showversions
 		md"""
+- **2.0.0**: first draft of nb to use in S'24 courses. Integrates `PhyloNetworks`.
 - **1.0.0**: initial release version to use in Bio114 class meeting in S'23.
 		
 """
@@ -52,6 +53,9 @@ md""" # Language evolution
 
 
 """
+
+# ╔═╡ 3d5022ec-e8b1-4e49-8d81-be8af2f998e1
+md"""## Background: understanding the data"""
 
 # ╔═╡ e6f5fe38-cb09-11ed-093a-89974c867831
 md"""## (1) Explore data"""
@@ -113,9 +117,6 @@ md"""### Comparing an optimal tree
 
 
 """
-
-# ╔═╡ 4e9ef5b8-b1ff-4d70-8bba-3a6d6a4436aa
-#net1 = maxParsimonyNet(starttree, dat, hmax=1, outgroup="Spanish", rootname="swadesh")
 
 # ╔═╡ 1ab72af2-d6a5-488b-8101-9adf79d273b6
 html"""
@@ -537,20 +538,12 @@ md"""*Choose a direction for your tree*: $(@bind direction Select(dirmenu))"""
 languages = """
 flowchart $(direction)
 
-PG --> HighGerman
-PG --> LowGerman
-LowGerman --> English
-HighGerman --> German
-LowGerman --> Dutch
+root
 
-PIE --> PG
-PIE --> Russian
+English
 
-PIE --> Latin
-Latin --> Spanish
-Latin --> French
 
-Turkish
+
 """
 
 # ╔═╡ 572b9936-2301-44ea-90ca-a77d16b78d9f
@@ -737,7 +730,7 @@ df = frameify(langnames, traitnames, scores)
 
 # ╔═╡ 8b491005-40a6-428c-964c-ffa307d82574
  opt = try
- 	maxParsimonyNet(modeltree, df, hmax=1, outgroup="Spanish", rootname="PIE")
+ 	maxParsimonyNet(modeltree, df, hmax=1, outgroup="root")
  	catch e
 		@info("Wasn't able to make an optimal tree: $(e)")
 		nothing
@@ -766,7 +759,13 @@ opt.node[opt.root]
 PhyloNetworks.tipLabels(opt)
 
 # ╔═╡ 8c354ee1-931a-409d-9447-a2a767b471fe
-PhyloNetworks.writeTopology(opt)
+optnewick = PhyloNetworks.writeTopology(opt)
+
+# ╔═╡ b336ec6b-f61b-412d-b747-163b90b7d7f9
+ optmodel = readnw(optnewick)
+
+# ╔═╡ 374b2fee-b724-4e39-9873-a9552c19da79
+plot(optmodel)
 
 # ╔═╡ a472f6f5-878d-4c85-ba7a-d355737f419f
 phylospecies, phylotraits = PhyloNetworks.readCSVtoArray(df);
@@ -2273,8 +2272,9 @@ version = "1.4.1+1"
 # ╟─ec90119e-6c25-4162-8b93-620a6cc4a554
 # ╟─9f51f0da-2f32-4b34-b510-106991af5e9a
 # ╟─cf04fb10-c82a-4f99-84c6-24fb2da174ce
-# ╟─f9e3b172-2d2b-4fa9-9b6b-5b2a000e8434
+# ╠═f9e3b172-2d2b-4fa9-9b6b-5b2a000e8434
 # ╟─cf0bf814-7679-40b3-ae0f-8b0dbdde5834
+# ╟─3d5022ec-e8b1-4e49-8d81-be8af2f998e1
 # ╟─e6f5fe38-cb09-11ed-093a-89974c867831
 # ╟─b50fee84-95c6-4e2b-b28e-ddf379e211d4
 # ╟─834c5625-69b2-4e3d-a7dd-8be84422f03f
@@ -2283,9 +2283,9 @@ version = "1.4.1+1"
 # ╟─d6fa7afc-d3e3-4205-8d35-639dee64cfc2
 # ╟─8dc318f2-35e2-4c21-b78c-d13b4d1e5077
 # ╟─c8f4fd19-e4e9-4277-b4ee-6f073891c8d5
+# ╟─20cc299d-eaa5-4f88-96df-41798a78aee3
 # ╟─d5df5b10-1b6c-4e53-b3a4-830fdb6b65b2
 # ╟─fc76beaa-bfd4-4b7e-8df4-ff185d7270a9
-# ╟─20cc299d-eaa5-4f88-96df-41798a78aee3
 # ╟─8e1a8736-2ca4-4d04-802f-4ef51c9219ac
 # ╟─70f93115-a9bc-414f-8aa3-05543b3847f8
 # ╟─aac6c044-2c50-4370-bbc8-5ffbe45232dd
@@ -2306,14 +2306,15 @@ version = "1.4.1+1"
 # ╠═e7a9cfd1-63a9-4b41-9dba-c681954af353
 # ╠═2f0c79f7-e003-4d74-8195-4581d70d4d2e
 # ╟─65bd06db-5bb0-4efd-a20d-e2b191091a83
-# ╟─8b491005-40a6-428c-964c-ffa307d82574
+# ╠═8b491005-40a6-428c-964c-ffa307d82574
 # ╟─c7d0511b-4e31-487b-b8cf-7aa0ff2ee14e
 # ╟─43af70f9-7a19-4a12-8b0c-ae30de856b51
-# ╠═4e9ef5b8-b1ff-4d70-8bba-3a6d6a4436aa
 # ╠═d4787c2c-a12b-47f0-891d-011d3fff344c
 # ╠═8ab3aae3-5151-4a34-93f1-e9e21330810d
 # ╠═6a010ebc-f955-4f08-b0ca-88cc61ba6905
 # ╠═8c354ee1-931a-409d-9447-a2a767b471fe
+# ╠═b336ec6b-f61b-412d-b747-163b90b7d7f9
+# ╠═374b2fee-b724-4e39-9873-a9552c19da79
 # ╟─1ab72af2-d6a5-488b-8101-9adf79d273b6
 # ╟─bd11c81e-1c93-4cb1-9b79-62d0d658a9fa
 # ╟─26afc76c-211d-4b78-8f8f-c6de2cf2be83
