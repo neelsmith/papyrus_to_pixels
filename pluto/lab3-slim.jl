@@ -29,12 +29,13 @@ begin
 end
 
 # ╔═╡ 9f51f0da-2f32-4b34-b510-106991af5e9a
-md"""*Notebook version*: **2.0.0** *See version info*: $(@bind showversions CheckBox())"""
+md"""*Notebook version*: **2.0.1** *See version info*: $(@bind showversions CheckBox())"""
 
 # ╔═╡ cf04fb10-c82a-4f99-84c6-24fb2da174ce
 begin
 	if showversions
 		md"""
+- **2.0.1**: add better error checking on display of values dependent on selections not yet made by user.
 - **2.0.0**: first draft of nb to use in S'24 courses. Integrates `PhyloNetworks` to assess model trees for parsimony.
 - **1.0.0**: initial release version to use in Bio114 class meeting in S'23.
 		
@@ -793,7 +794,7 @@ traitnames = featurelabels(termsidx, featuremtrx)
 
 # ╔═╡ bce931be-d82f-4de5-9edf-3e8a69e2f3dc
 # Short labels for display in table that might have *many* columns
-colhdrs = ["t$(i)" for i in 1:length(traitnames)]
+colhdrs = isempty(traitnames) ? [] :  ["t$(i)" for i in 1:length(traitnames)]
 
 # ╔═╡ d5df5b10-1b6c-4e53-b3a4-830fdb6b65b2
 if seekey
@@ -813,7 +814,7 @@ scores = encodeterms(dataselection)
 mdtableview(langnames, colhdrs, scores) |> Markdown.parse
 
 # ╔═╡ 2c8e3ecd-b754-4af4-83aa-a0dc7a0bdcd4
-df = frameify(langnames, traitnames, scores)
+df = isempty(termsidx) ? nothing : frameify(langnames, traitnames, scores)
 
 # ╔═╡ 8b491005-40a6-428c-964c-ffa307d82574
  opt = if isnothing(modeltree)
@@ -858,7 +859,7 @@ else
 end
 
 # ╔═╡ a472f6f5-878d-4c85-ba7a-d355737f419f
-phylospecies, phylotraits = PhyloNetworks.readCSVtoArray(df);
+phylospecies, phylotraits = isnothing(df) ? (nothing, nothing) : PhyloNetworks.readCSVtoArray(df);
 
 # ╔═╡ e7a9cfd1-63a9-4b41-9dba-c681954af353
 if isnothing(modeltree)
@@ -873,7 +874,11 @@ else
 end
 
 # ╔═╡ 6f16e9d2-4da8-446f-8196-2fb5fbe07c86
-numspecies, numtraits = scores |> size
+numspecies, numtraits = if isempty(scores) 
+	(0,0)
+else
+	scores |> size
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -903,7 +908,7 @@ PlutoUI = "~0.7.57"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.0"
+julia_version = "1.10.1"
 manifest_format = "2.0"
 project_hash = "3da12477ac8d2652a6ae2bf256f5e4b873ab5ec5"
 
@@ -1039,7 +1044,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.5+1"
+version = "1.1.0+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -1605,7 +1610,7 @@ version = "1.3.5+1"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+2"
+version = "0.3.23+4"
 
 [[deps.OpenLibm_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -2426,7 +2431,7 @@ version = "1.4.1+1"
 # ╟─b54cf045-15d3-4267-95f8-399fe71e4672
 # ╟─8c079fc8-50c1-4d1d-8708-82139a7136b2
 # ╟─3bf86905-c1a0-447a-b3a6-b45f51beaf1b
-# ╠═ca496151-93e8-418b-8906-151b653f1541
+# ╟─ca496151-93e8-418b-8906-151b653f1541
 # ╟─fa737dfb-8306-4eaf-8554-6d473c8e8e60
 # ╟─59ce4fe7-c8fc-4b4a-bf15-ed4a7b3ba95e
 # ╠═cc80b08c-98b3-4ad3-b6b4-af0c250634ef
