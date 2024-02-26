@@ -35,7 +35,7 @@ md"""*Notebook version*: **2.0.0** *See version info*: $(@bind showversions Chec
 begin
 	if showversions
 		md"""
-- **2.0.0**: first draft of nb to use in S'24 courses. Integrates `PhyloNetworks`.
+- **2.0.0**: first draft of nb to use in S'24 courses. Integrates `PhyloNetworks` to assess model trees for parsimony.
 - **1.0.0**: initial release version to use in Bio114 class meeting in S'23.
 		
 """
@@ -54,14 +54,58 @@ md""" # Language evolution
 
 """
 
+# ╔═╡ 932c6efa-b4d2-4194-becb-f840dcf140e4
+md"""!!! tip "Overview"
+
+    In this lab, you will:
+
+    1. explore data we collected as a group about the *phonology* of a selected vocabulary list in multiple languages. You will select a subset of the observations that you decide are relevant to understanding relations among the languages.
+    2. then try to explain the differences you observe as an evolutionary process which you will model as a *evolutionary tree*.
+    3. then compare your hypothesized tree to trees computed automatically for maximum *parsimony* based on the data you selected.
+"""
+
 # ╔═╡ 3d5022ec-e8b1-4e49-8d81-be8af2f998e1
 md"""## Background: understanding the data"""
+
+# ╔═╡ bebab1d4-c987-4be1-977f-ab3cffc149f5
+md"""### Try out some sample words"""
+
+# ╔═╡ 7c3e8a97-617c-4ca7-b6e2-4ef386f58b1e
+md"""!!! note "Understanding the phonological data"
+
+    We will analyze the *first consonant sound* of each word in our survey, according to three properties:
+
+    1. where the sound is formed in the mouth
+    2. how the sound is made
+    3. whether or not the vocal chords also sound (voiced vs. unvoiced)
+
+To get more familiar with what these properties mean, you can use this form to try out sample words, and optionally compare a diagram of where sounds are produced in the mouth.
+"""
+
+# ╔═╡ f05d9c29-511b-4b72-865e-e3548efdd46f
+md"""*See an illustration of phonological properties* $(@bind seediagram CheckBox())"""
+
+# ╔═╡ 67d9aca7-3236-420c-8dfd-96c253aa1321
+if seediagram
+md"""![](https://lh3.googleusercontent.com/proxy/9CxnbARlgMiTLXqjgoB8Kttp9mii-H4QcGo9COMemDQcAutnwYMlCM4RyvF9JOFPiSqrPiMAByFx_iUU3jh4d1eXLNzvlzZ0nOpFOw)""" |> aside
+end
+
+# ╔═╡ 8086f905-c547-4bd9-9716-da3fc33e7eff
+md"""*Enter an example word to analyze*: $(@bind sample TextField(default="quick"))"""
 
 # ╔═╡ e6f5fe38-cb09-11ed-093a-89974c867831
 md"""## (1) Explore data"""
 
+# ╔═╡ 82d4c65a-c0f0-4496-95ee-0f16dbdab926
+md"""!!! note "Interpreting the data set"
+
+    Can we find systematic relationships in the sample data?  Do some languages consistently show similar features? E.g., are there languages that consistently use voiced values or  fricative pronounciation for the same kind of initial consonant (such as for labial or dental consonants)?
+
+    Use the following interactive summaries to compare the phonological features for a single term across all the languages surveyed, or compare the features of multiple terms in a summary table.
+"""
+
 # ╔═╡ b50fee84-95c6-4e2b-b28e-ddf379e211d4
-md"""*Choose dataset to analyze*: $(@bind dataset Select(["f22" => "Fall '22 dataset", "s24" => "Spring '24 dataset"], default = "s24"))"""
+md"""*Choose dataset to analyze*: $(@bind dataset Select(["s23" => "Spring '23 dataset", "s24" => "Spring '24 dataset"], default = "s24"))"""
 
 # ╔═╡ 834c5625-69b2-4e3d-a7dd-8be84422f03f
 md"""### Compare features for a single term"""
@@ -75,33 +119,11 @@ md"""*See labels for traits*: $(@bind seekey CheckBox())"""
 # ╔═╡ 8e1a8736-2ca4-4d04-802f-4ef51c9219ac
 md"""## (2) Draw a tree"""
 
-# ╔═╡ aac6c044-2c50-4370-bbc8-5ffbe45232dd
-md"""### Define your tree using Mermaid notation"""
-
-# ╔═╡ 3480eee1-ef1f-40a8-a8e2-0c08d717f620
-md"""Define a Mermaid graph in the cell below that assigns a long string value to the variable `langauges`."""
-
-# ╔═╡ e4d4df04-5ad6-4bea-86c3-6113a77cdd5b
-md"""!!! note
-
-    To be sure you include a node for all languages in the data set you selected, start your tree by copying and pasting the following list into your diagram.
-
-
-    Then use mermaid notation to express relations between ancestor and descendant, like this:
-
-    `OldEnglish --> English`
-
-    When you add nodes for earlier phases (i.e., nodes like `OldEnglish` that aren't included in the list of languages below), use simple names with alphabetic characters only.
-"""
-
-# ╔═╡ 9ccbe0ce-dfc8-4267-bdb3-18d0547ceb94
-md"""*Use the following cell to compose your tree:*"""
-
 # ╔═╡ 9d3eb9e3-c00f-44e8-8cc3-ec61af246fe8
-md"""### Visualize your tree"""
+md"""### Visualizing your tree"""
 
-# ╔═╡ 19c2c305-f433-4326-b421-c666bc66c6bf
-
+# ╔═╡ 2161a08e-36c2-41c3-adff-14528fcd964d
+md"""Your tree as drawn by Mermaid:"""
 
 # ╔═╡ 7df0a9ab-7c7e-4d2b-a284-0a1ca2967ef3
 md"""## (3). Evaluate your model"""
@@ -109,7 +131,7 @@ md"""## (3). Evaluate your model"""
 # ╔═╡ 16dc6793-063c-4f04-88e5-050c896e25b9
 md"""### Measuring the parsimony of your tree
 
-Smaller scores are better?
+Smaller scores are better:
 """
 
 # ╔═╡ 65bd06db-5bb0-4efd-a20d-e2b191091a83
@@ -118,8 +140,20 @@ md"""### Comparing an optimal tree
 
 """
 
+# ╔═╡ e3020259-79d5-4e5f-9879-34e6514840e2
+md"""!!! note "Trees optimized for parsimony"
+
+    For a given set of data, we can mathematically determine a tree that is the most parsimonious model of evolution leading to the diversity observed in the data. This "optimal" model may or may not be historically correct. In the case of language evolution, for example, vocabulary that is *borrowed* from one language to another can confuse the evolutionary model because similarities and differences are *not* due to evolution.
+
+    The following cells compute a tree optimized for parsimony based on your model.
+
+    
+"""
+
 # ╔═╡ 1ab72af2-d6a5-488b-8101-9adf79d273b6
 html"""
+<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/>
 """
@@ -133,6 +167,9 @@ md"""
 """
 
 
+
+# ╔═╡ 4ef7995a-4c47-4389-bfd3-f3cea5fa5df3
+md"""### Optimal tree"""
 
 # ╔═╡ 26afc76c-211d-4b78-8f8f-c6de2cf2be83
 md"""### Computation of phonology values"""
@@ -161,6 +198,7 @@ codingdict = Dict([
 	"palatal" => 3,
 	"sibliant" => 4,
 	"vowel" => 5,
+	"labiovelar" => 6,
 	
 	"voiced" => 1,
 	"unvoiced" => 2,
@@ -211,8 +249,18 @@ end
 # ╔═╡ cc80b08c-98b3-4ad3-b6b4-af0c250634ef
 langnames, srcdata = loaddata(url)
 
-# ╔═╡ fc71a3b1-5be6-4f83-a511-b316d8e3790d
-join(langnames,"\n\n") |> Markdown.parse
+# ╔═╡ e4d4df04-5ad6-4bea-86c3-6113a77cdd5b
+"""!!! note "Defining a tree using Mermaid syntax"
+
+    Work in the in the cell below that assigns a long string value to the variable `langauges`:
+
+
+    1. Use mermaid notation to express relations between ancestor and descendant, like this:    `OldEnglish --> English`
+    2. When you add nodes for earlier phases that aren't included in the list of languages below (i.e., nodes like `OldEnglish`), use simple names with alphabetic characters only.
+    3. Make sure your graph includes a node named `root` that is the root of your tree (and therefore the ancestor of all other nodes in your graph).
+    4. To refer to languages in the current data set, use the following names: **$(join(langnames, ", "))**
+    5. In this reconstruction, your `root` node should have multiple child nodes, and your tree should include more than one evolutionary generation. (I.e., not *all* nodes will be direct children of `root`.)
+""" |> Markdown.parse
 
 # ╔═╡ 020da4a6-3251-49bc-bbb8-19339965a53b
 
@@ -370,6 +418,28 @@ function initialsound(raw)
 		initial
 	end
 end
+
+# ╔═╡ 120f8508-d854-42be-bf21-1527e6001fbb
+md"""Initial sound to analyze: **$(string(initialsound(sample)))**"""
+
+# ╔═╡ 5f946ada-56ea-4ddc-b8c6-b28c0115aa48
+begin
+	samplephono = phonology_for(initialsound(sample), phonologydata)
+	if isnothing(samplephono)
+		md"""No analysis for **$(string(initialsound(sample)))**"""
+	else
+		samplereply = """
+- Place of articulation: *$(samplephono.place)*
+- Manner: *$(samplephono.manner)*		
+- Voice: *$(samplephono.voice)*		
+		
+"""		|> Markdown.parse
+	end
+end
+
+# ╔═╡ d725acfb-8b75-44d4-945c-3c7fdc8660e9
+md"""(Computations later in this notebook represent each value as a numeric code. The values for **$(string(initialsound(sample)))** will be encoded as **$(phonology_for(initialsound(sample), phonologydata) |> encodestruct)**.)
+"""
 
 # ╔═╡ b54cf045-15d3-4267-95f8-399fe71e4672
 """Compute numeric features for user's current seledtion of terms."""
@@ -538,11 +608,8 @@ md"""*Choose a direction for your tree*: $(@bind direction Select(dirmenu))"""
 languages = """
 flowchart $(direction)
 
+
 root
-
-English
-
-
 
 """
 
@@ -665,20 +732,40 @@ end
 # ╔═╡ 32db71ef-cf4f-48c4-93cb-5afb13ce4a0a
 """Represent a Mermaid flow chart as a Newick tree."""
 function newick(txt)
-	(mermaidpairs(txt) |> newicktree |> reverse |> join) * ";"
+	node_edge_pairs = mermaidpairs(txt)
+	if isempty(node_edge_pairs)
+		nothing
+	else
+	 	(node_edge_pairs |> newicktree |> reverse |> join) * ";"
+	end
 end
 
 # ╔═╡ 0f736a63-71cb-42e1-b6fd-ff65767da05a
-newickform = newick(languages)
+newickform = newick(languages);
 
 # ╔═╡ 5c30f550-f684-40dd-a90d-8f03e723dc20
-modeltree = readTopology(newickform)
+modeltree = isnothing(newickform) ? nothing : readTopology(newickform)
+
+# ╔═╡ ce4899c4-62c2-492c-b7f2-71a852eb666b
+if isnothing(modeltree)
+else
+	modeltree |> PhyloNetworks.getroot
+end
 
 # ╔═╡ 6206ed4b-b340-4497-9e68-d4144e33d42c
-newickmodel = readnw(newickform)
+newickmodel = isnothing(newickform) ? nothing : readnw(newickform);
+
+# ╔═╡ 19c2c305-f433-4326-b421-c666bc66c6bf
+if isnothing(newickmodel)
+else
+	md"""A plot of your tree interpreted as a phyogenetic network:"""
+end
 
 # ╔═╡ 842ba5b3-2aba-4081-bb8f-4d61cb312b06
-newickmodel |> plot
+if isnothing(newickmodel)
+else
+	plot(newickmodel)
+end
 
 # ╔═╡ 2e9620b6-ee9a-462a-8b50-3267fbac0df3
 md"""### Organizing data in different structures"""
@@ -729,18 +816,27 @@ mdtableview(langnames, colhdrs, scores) |> Markdown.parse
 df = frameify(langnames, traitnames, scores)
 
 # ╔═╡ 8b491005-40a6-428c-964c-ffa307d82574
- opt = try
- 	maxParsimonyNet(modeltree, df, hmax=1, outgroup="root")
+ opt = if isnothing(modeltree)
+	 nothing
+ else
+ 	try
+ 		maxParsimonyNet(modeltree, df, hmax=1, outgroup="root")
  	catch e
 		@info("Wasn't able to make an optimal tree: $(e)")
 		nothing
- end
+ 	end
+ end ;
  
 
 # ╔═╡ c7d0511b-4e31-487b-b8cf-7aa0ff2ee14e
 if isnothing(opt) 
+	md"""!!! warn "⛔️Warning⛔️"
+
+    *Unable to compute an optimal tree based on the model defined in the Mermaid graph*.
+"""
+	
 else
-	md"""Nodes of optimal tree:"""
+	md"""Optimal tree based on parsimony:"""
 end
 
 # ╔═╡ 43af70f9-7a19-4a12-8b0c-ae30de856b51
@@ -749,32 +845,32 @@ else
 	printNodes(opt)
 end
 
-# ╔═╡ d4787c2c-a12b-47f0-891d-011d3fff344c
-PhyloNetworks.getroot(opt)
-
-# ╔═╡ 8ab3aae3-5151-4a34-93f1-e9e21330810d
-opt.node[opt.root]
-
-# ╔═╡ 6a010ebc-f955-4f08-b0ca-88cc61ba6905
-PhyloNetworks.tipLabels(opt)
-
 # ╔═╡ 8c354ee1-931a-409d-9447-a2a767b471fe
-optnewick = PhyloNetworks.writeTopology(opt)
+optnewick = isnothing(opt) ? nothing : PhyloNetworks.writeTopology(opt)
 
 # ╔═╡ b336ec6b-f61b-412d-b747-163b90b7d7f9
- optmodel = readnw(optnewick)
+ optmodel = isnothing(optnewick) ? nothing : readnw(optnewick)
 
 # ╔═╡ 374b2fee-b724-4e39-9873-a9552c19da79
-plot(optmodel)
+if isnothing(optmodel)
+else
+	plot(optmodel)
+end
 
 # ╔═╡ a472f6f5-878d-4c85-ba7a-d355737f419f
 phylospecies, phylotraits = PhyloNetworks.readCSVtoArray(df);
 
 # ╔═╡ e7a9cfd1-63a9-4b41-9dba-c681954af353
-parsimonySoftwired(modeltree, phylospecies, phylotraits)
+if isnothing(modeltree)
+else
+	parsimonySoftwired(modeltree, phylospecies, phylotraits)
+end
 
 # ╔═╡ 2f0c79f7-e003-4d74-8195-4581d70d4d2e
-parsimonyGF(modeltree,phylospecies,phylotraits,:softwired)
+if isnothing(modeltree)
+else
+	parsimonyGF(modeltree,phylospecies,phylotraits,:softwired)
+end
 
 # ╔═╡ 6f16e9d2-4da8-446f-8196-2fb5fbe07c86
 numspecies, numtraits = scores |> size
@@ -807,7 +903,7 @@ PlutoUI = "~0.7.57"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.1"
+julia_version = "1.10.0"
 manifest_format = "2.0"
 project_hash = "3da12477ac8d2652a6ae2bf256f5e4b873ab5ec5"
 
@@ -943,7 +1039,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.1.0+0"
+version = "1.0.5+1"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -1509,7 +1605,7 @@ version = "1.3.5+1"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+4"
+version = "0.3.23+2"
 
 [[deps.OpenLibm_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -2272,10 +2368,20 @@ version = "1.4.1+1"
 # ╟─ec90119e-6c25-4162-8b93-620a6cc4a554
 # ╟─9f51f0da-2f32-4b34-b510-106991af5e9a
 # ╟─cf04fb10-c82a-4f99-84c6-24fb2da174ce
-# ╠═f9e3b172-2d2b-4fa9-9b6b-5b2a000e8434
+# ╟─f9e3b172-2d2b-4fa9-9b6b-5b2a000e8434
 # ╟─cf0bf814-7679-40b3-ae0f-8b0dbdde5834
+# ╟─932c6efa-b4d2-4194-becb-f840dcf140e4
 # ╟─3d5022ec-e8b1-4e49-8d81-be8af2f998e1
+# ╟─bebab1d4-c987-4be1-977f-ab3cffc149f5
+# ╟─7c3e8a97-617c-4ca7-b6e2-4ef386f58b1e
+# ╟─67d9aca7-3236-420c-8dfd-96c253aa1321
+# ╟─f05d9c29-511b-4b72-865e-e3548efdd46f
+# ╟─8086f905-c547-4bd9-9716-da3fc33e7eff
+# ╟─120f8508-d854-42be-bf21-1527e6001fbb
+# ╟─5f946ada-56ea-4ddc-b8c6-b28c0115aa48
+# ╟─d725acfb-8b75-44d4-945c-3c7fdc8660e9
 # ╟─e6f5fe38-cb09-11ed-093a-89974c867831
+# ╟─82d4c65a-c0f0-4496-95ee-0f16dbdab926
 # ╟─b50fee84-95c6-4e2b-b28e-ddf379e211d4
 # ╟─834c5625-69b2-4e3d-a7dd-8be84422f03f
 # ╟─3fa6ffb2-8e09-40dc-9356-47743e912a32
@@ -2288,42 +2394,39 @@ version = "1.4.1+1"
 # ╟─fc76beaa-bfd4-4b7e-8df4-ff185d7270a9
 # ╟─8e1a8736-2ca4-4d04-802f-4ef51c9219ac
 # ╟─70f93115-a9bc-414f-8aa3-05543b3847f8
-# ╟─aac6c044-2c50-4370-bbc8-5ffbe45232dd
-# ╟─3480eee1-ef1f-40a8-a8e2-0c08d717f620
 # ╟─e4d4df04-5ad6-4bea-86c3-6113a77cdd5b
-# ╟─fc71a3b1-5be6-4f83-a511-b316d8e3790d
-# ╟─9ccbe0ce-dfc8-4267-bdb3-18d0547ceb94
 # ╠═11d8ffcc-cb70-49cb-b6ae-e2e00a2e2983
 # ╟─9d3eb9e3-c00f-44e8-8cc3-ec61af246fe8
+# ╟─2161a08e-36c2-41c3-adff-14528fcd964d
 # ╟─572b9936-2301-44ea-90ca-a77d16b78d9f
 # ╟─19c2c305-f433-4326-b421-c666bc66c6bf
-# ╠═842ba5b3-2aba-4081-bb8f-4d61cb312b06
+# ╟─842ba5b3-2aba-4081-bb8f-4d61cb312b06
 # ╠═5c30f550-f684-40dd-a90d-8f03e723dc20
-# ╠═0f736a63-71cb-42e1-b6fd-ff65767da05a
-# ╠═6206ed4b-b340-4497-9e68-d4144e33d42c
+# ╟─0f736a63-71cb-42e1-b6fd-ff65767da05a
+# ╟─6206ed4b-b340-4497-9e68-d4144e33d42c
 # ╟─7df0a9ab-7c7e-4d2b-a284-0a1ca2967ef3
 # ╟─16dc6793-063c-4f04-88e5-050c896e25b9
 # ╠═e7a9cfd1-63a9-4b41-9dba-c681954af353
 # ╠═2f0c79f7-e003-4d74-8195-4581d70d4d2e
 # ╟─65bd06db-5bb0-4efd-a20d-e2b191091a83
-# ╠═8b491005-40a6-428c-964c-ffa307d82574
+# ╟─e3020259-79d5-4e5f-9879-34e6514840e2
 # ╟─c7d0511b-4e31-487b-b8cf-7aa0ff2ee14e
+# ╟─374b2fee-b724-4e39-9873-a9552c19da79
 # ╟─43af70f9-7a19-4a12-8b0c-ae30de856b51
-# ╠═d4787c2c-a12b-47f0-891d-011d3fff344c
-# ╠═8ab3aae3-5151-4a34-93f1-e9e21330810d
-# ╠═6a010ebc-f955-4f08-b0ca-88cc61ba6905
-# ╠═8c354ee1-931a-409d-9447-a2a767b471fe
-# ╠═b336ec6b-f61b-412d-b747-163b90b7d7f9
-# ╠═374b2fee-b724-4e39-9873-a9552c19da79
 # ╟─1ab72af2-d6a5-488b-8101-9adf79d273b6
 # ╟─bd11c81e-1c93-4cb1-9b79-62d0d658a9fa
+# ╟─4ef7995a-4c47-4389-bfd3-f3cea5fa5df3
+# ╟─ce4899c4-62c2-492c-b7f2-71a852eb666b
+# ╟─8b491005-40a6-428c-964c-ffa307d82574
+# ╠═b336ec6b-f61b-412d-b747-163b90b7d7f9
+# ╠═8c354ee1-931a-409d-9447-a2a767b471fe
 # ╟─26afc76c-211d-4b78-8f8f-c6de2cf2be83
 # ╟─1570fe48-d964-4306-9ca8-588fceb8e73a
 # ╟─281fe574-cf9d-4a19-8557-52cfe13fd9f1
 # ╟─b54cf045-15d3-4267-95f8-399fe71e4672
 # ╟─8c079fc8-50c1-4d1d-8708-82139a7136b2
 # ╟─3bf86905-c1a0-447a-b3a6-b45f51beaf1b
-# ╟─ca496151-93e8-418b-8906-151b653f1541
+# ╠═ca496151-93e8-418b-8906-151b653f1541
 # ╟─fa737dfb-8306-4eaf-8554-6d473c8e8e60
 # ╟─59ce4fe7-c8fc-4b4a-bf15-ed4a7b3ba95e
 # ╠═cc80b08c-98b3-4ad3-b6b4-af0c250634ef
