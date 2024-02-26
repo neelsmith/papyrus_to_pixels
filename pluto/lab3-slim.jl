@@ -29,12 +29,13 @@ begin
 end
 
 # ╔═╡ 9f51f0da-2f32-4b34-b510-106991af5e9a
-md"""*Notebook version*: **2.0.1** *See version info*: $(@bind showversions CheckBox())"""
+md"""*Notebook version*: **2.1.0** *See version info*: $(@bind showversions CheckBox())"""
 
 # ╔═╡ cf04fb10-c82a-4f99-84c6-24fb2da174ce
 begin
 	if showversions
 		md"""
+- **2.1.0**: add Arabic consonants to phonology dictionary
 - **2.0.1**: add better error checking on display of values dependent on selections not yet made by user.
 - **2.0.0**: first draft of nb to use in S'24 courses. Integrates `PhyloNetworks` to assess model trees for parsimony.
 - **1.0.0**: initial release version to use in Bio114 class meeting in S'23.
@@ -88,7 +89,7 @@ md"""*See an illustration of phonological properties* $(@bind seediagram CheckBo
 
 # ╔═╡ 67d9aca7-3236-420c-8dfd-96c253aa1321
 if seediagram
-md"""![](https://lh3.googleusercontent.com/proxy/9CxnbARlgMiTLXqjgoB8Kttp9mii-H4QcGo9COMemDQcAutnwYMlCM4RyvF9JOFPiSqrPiMAByFx_iUU3jh4d1eXLNzvlzZ0nOpFOw)""" |> aside
+md"""![](https://raw.githubusercontent.com/neelsmith/papyrus_to_pixels/main/data/languages/phono-diagram.gif)""" |> aside
 end
 
 # ╔═╡ 8086f905-c547-4bd9-9716-da3fc33e7eff
@@ -197,12 +198,14 @@ codingdict = Dict([
 	"labial" => 1,
 	"dental" => 2,
 	"palatal" => 3,
-	"sibliant" => 4,
-	"vowel" => 5,
+	"velar" => 4,
+	"sibilant" => 5,
 	"labiovelar" => 6,
+	"vowel" => 7,
 	
 	"voiced" => 1,
 	"unvoiced" => 2,
+	
 	"plosive" => 1,
 	"fricative" => 2
 ])
@@ -321,7 +324,9 @@ phonologydata = Dict(
 	"p" => Phonology("labial", "unvoiced", "plosive"),
 	"f" => Phonology("labial", "unvoiced", "fricative"),
 	"v" => Phonology("labial", "voiced", "fricative"),
-
+	
+	"ب" => Phonology("labial", "voiced", "plosive"),
+	"ف" => Phonology("labial", "unvoiced", "fricative"),
 
 
 	"б" => Phonology("labial", "voiced", "plosive"),
@@ -332,7 +337,16 @@ phonologydata = Dict(
 	"d" => Phonology("dental", "voiced", "plosive"),
 	"t" => Phonology("dental", "unvoiced", "plosive"),
 	"th" => Phonology("dental", "unvoiced", "fricative"),
+
+	"ت" => Phonology("dental", "unvoiced", "plosive"),
+	"ث" => Phonology("dental", "unvoiced", "fricative"),
+	
+	
 	"к" => Phonology("palatal", "unvoiced", "plosive"),
+	"ك" => Phonology("palatal", "unvoiced", "plosive"),
+	"خ" => Phonology("palatal", "unvoiced", "fricative"),
+	
+	"ق" => Phonology("velar", "unvoiced", "plosive"),
 
 	"д" =>  Phonology("dental", "voiced", "plosive"),
 	"т" => Phonology("dental", "unvoiced", "plosive"),
@@ -351,6 +365,11 @@ phonologydata = Dict(
 	"n" => Phonology("liquid", "", ""),
 	"r" => Phonology("liquid", "", ""),
 	"l" => Phonology("liquid", "", ""),
+
+	"ل" => Phonology("liquid", "", ""),
+	"ر" => Phonology("liquid", "", ""),
+	"م" => Phonology("liquid", "", ""),
+	"ن" => Phonology("liquid", "", ""),
 	
 	"н"  => Phonology("liquid", "", ""),
 	"м" => Phonology("liquid", "", ""),
@@ -359,6 +378,8 @@ phonologydata = Dict(
 	"р" => Phonology("liquid", "", ""),
 		
 	"s" => Phonology("sibilant","unvoiced", ""),
+	"س" => Phonology("sibilant","unvoiced", ""),
+	"ش" => Phonology("sibilant","unvoiced", ""),
 	"z" => Phonology("sibilant","voiced", ""),
 
 
@@ -375,6 +396,9 @@ phonologydata = Dict(
 	"а" => Phonology("vowel","", ""),
 	"е"  => Phonology("vowel","", ""),
 	"о"  => Phonology("vowel","", ""),
+	
+	"أ"  => Phonology("vowel","", ""),
+	"ا"  => Phonology("vowel","", ""),
 )
 
 	
@@ -2441,7 +2465,7 @@ version = "1.4.1+1"
 # ╟─5e05badd-982c-48e5-9111-da5180e7616a
 # ╟─3946304a-a0db-418d-b470-d8b035d42776
 # ╟─987fd8d1-6f47-4db9-8338-d5889ddd8e09
-# ╟─b8351248-9abb-487d-8e8f-151d01c83762
+# ╠═b8351248-9abb-487d-8e8f-151d01c83762
 # ╟─4bc2cf7d-a2f2-4851-a93c-fc99f9bb450b
 # ╟─1c6ee4cd-fa93-4733-8ac1-add2b35f664c
 # ╟─443e2b97-445b-48bc-8934-526ff00c315f
