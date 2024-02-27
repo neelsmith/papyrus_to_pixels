@@ -634,7 +634,11 @@ languages = """
 flowchart $(direction)
 
 
-root
+root --> Russian
+root --> Turkish
+root --> Arabic
+root --> Latin
+Latin --> Spanish
 
 """
 
@@ -792,6 +796,9 @@ else
 	plot(newickmodel)
 end
 
+# ╔═╡ d78fd333-96ea-4948-b2a0-27f9607b42ef
+newick(languages)
+
 # ╔═╡ 2e9620b6-ee9a-462a-8b50-3267fbac0df3
 md"""### Organizing data in different structures"""
 
@@ -932,7 +939,7 @@ PlutoUI = "~0.7.57"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.1"
+julia_version = "1.10.0"
 manifest_format = "2.0"
 project_hash = "3da12477ac8d2652a6ae2bf256f5e4b873ab5ec5"
 
@@ -1068,7 +1075,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.1.0+0"
+version = "1.0.5+1"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -1634,7 +1641,7 @@ version = "1.3.5+1"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+4"
+version = "0.3.23+2"
 
 [[deps.OpenLibm_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -2432,6 +2439,7 @@ version = "1.4.1+1"
 # ╟─842ba5b3-2aba-4081-bb8f-4d61cb312b06
 # ╠═5c30f550-f684-40dd-a90d-8f03e723dc20
 # ╟─0f736a63-71cb-42e1-b6fd-ff65767da05a
+# ╠═d78fd333-96ea-4948-b2a0-27f9607b42ef
 # ╟─6206ed4b-b340-4497-9e68-d4144e33d42c
 # ╟─7df0a9ab-7c7e-4d2b-a284-0a1ca2967ef3
 # ╟─16dc6793-063c-4f04-88e5-050c896e25b9
@@ -2446,7 +2454,7 @@ version = "1.4.1+1"
 # ╟─bd11c81e-1c93-4cb1-9b79-62d0d658a9fa
 # ╟─4ef7995a-4c47-4389-bfd3-f3cea5fa5df3
 # ╟─ce4899c4-62c2-492c-b7f2-71a852eb666b
-# ╟─8b491005-40a6-428c-964c-ffa307d82574
+# ╠═8b491005-40a6-428c-964c-ffa307d82574
 # ╠═b336ec6b-f61b-412d-b747-163b90b7d7f9
 # ╠═8c354ee1-931a-409d-9447-a2a767b471fe
 # ╟─26afc76c-211d-4b78-8f8f-c6de2cf2be83
@@ -2465,7 +2473,7 @@ version = "1.4.1+1"
 # ╟─5e05badd-982c-48e5-9111-da5180e7616a
 # ╟─3946304a-a0db-418d-b470-d8b035d42776
 # ╟─987fd8d1-6f47-4db9-8338-d5889ddd8e09
-# ╠═b8351248-9abb-487d-8e8f-151d01c83762
+# ╟─b8351248-9abb-487d-8e8f-151d01c83762
 # ╟─4bc2cf7d-a2f2-4851-a93c-fc99f9bb450b
 # ╟─1c6ee4cd-fa93-4733-8ac1-add2b35f664c
 # ╟─443e2b97-445b-48bc-8934-526ff00c315f
