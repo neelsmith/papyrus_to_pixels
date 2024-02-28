@@ -11,7 +11,7 @@ has_children: true
 
 ## Announcements
 
-
+- **Feb. 28**: drop-in hours end today at 11:15 due to talk in the Classics Department!
 - **Feb. 27**: notebook for work in class today on language evolution:
     - as an [HTML file](./labs/lab3/lab-language.html)
     - as a [Pluto notebook](https://raw.githubusercontent.com/neelsmith/papyrus_to_pixels/main/pluto/lab-language.jl)

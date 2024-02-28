@@ -264,10 +264,10 @@ In each of the two following cells, replace `missing` with a julia expression to
 """
 
 # ╔═╡ be0ca947-a2ee-4f43-ab44-fe8dec44f3bc
-short_dna_count = missing
+short_dna_count = length(short_dna_example)
 
 # ╔═╡ f8910883-f348-4e57-8321-8c055c0c79aa
-short_aa_count = missing
+short_aa_count = length(short_aa_exampl)
 
 # ╔═╡ 22c6d066-3bfa-4f67-b7eb-089989454749
 if ismissing(short_dna_count) || ismissing(short_aa_count)
@@ -309,38 +309,15 @@ md"""We'll turn this string of characters into a sequence of biological data, as
 # ╔═╡ 83ad4f26-527d-41d9-8132-11d36b21583e
 md"""As you did above, replace `missing` with a Julia expression that counts the number of items in the DNA sequence."""
 
-# ╔═╡ db992a77-e93d-40a7-981d-c7dbb79e07e4
-nt_count = missing
-
 # ╔═╡ f32a6518-ca63-4aeb-9989-29209f4a90af
 md"""Replace the empty brackets `[]` in the follow cell with an invocation of the `translate` function from the `BioSequences` package to create a sequence of amino acids from the sequence of nucleotides.
 
 As we did in the example above, use the encoding for mitochondrial DNA for the optional `code` parameter.
 """
 
-# ╔═╡ 8845c1b1-b088-4a41-8c3b-e9ce218efad8
-aa_seq = [] 
-
 # ╔═╡ f7c863d5-aec8-4489-bda0-e6cb9a9b86e3
 md"""Once again, let's find the number of amino acids in our sequence: assign it to `aa_count`; then find he number of distinct values in the sequence, and assign it to `aa_values_count`.
 """
-
-# ╔═╡ 386ff938-6803-4e0a-b623-a50fc0ce5d2d
-aa_count = missing 
-
-# ╔═╡ 1d77e0cb-3cf6-4bf8-996a-4e9abcd9e8e1
-aa_values_count = missing 
-
-# ╔═╡ 8f63d991-5c01-48e4-b8ad-5611b3607bbc
-if ismissing(aa_count)  || ismissing(aa_values_count)
-	still_missing(md"Supply expressions to find `aa_count` and `aa_values_count`")
-elseif aa_count != length(aa_seq)
-	keep_working(md"This is the same problem you addressed in the previous section: how many items are in the Vector `aa_seq`?")
-elseif aa_values_count != length(unique(aa_seq))
-	keep_working(md"You've seen this kind of problem: how many *unique* values are in the Vector `aa_seq`?")
-else
-	correct()
-end
 
 # ╔═╡ 1a9ca373-621a-45f7-8eef-08ebe6746841
 md"""#### Codons"""
@@ -355,42 +332,12 @@ md"""
 """
 
 
-# ╔═╡ 8382cdc7-13bd-47d1-b507-b6d9ee94fcd7
-codon_count = missing 
-
-# ╔═╡ 0ab106ba-d840-4bd1-8bfa-e75a214ce399
-codon_count == aa_count # when this is true, you've done it right!
-
-# ╔═╡ 4a1b7412-8700-4216-a4ce-30a7859d349e
-if ismissing(codon_count) || ismissing(aa_count)
-	still_missing(md"Supply expressions to compute the number of codons and the number of amino acids.")
-elseif codon_count != aa_count
-	keep_working(md"You have different values for the number of codons and the number of amino acids: they should be the same!")
-else
-	correct()
-end
-
-# ╔═╡ cb586622-41ea-44eb-98e0-475eb51f0979
-
-
 # ╔═╡ 0f99e07a-cefd-4660-b48f-3883cf7f5e16
 
-
-# ╔═╡ d80a8982-7035-41fd-a7b9-78662ebcf4bd
-codon_values_count = missing 
 
 # ╔═╡ c5e87c41-1a46-4a76-b344-cf9acf32f048
 md"""The next cell uses *interpolation* to include the values you have computed in a single long string formatted as Markdown with the `md` macro.
 
-"""
-
-# ╔═╡ f56a5b59-e986-4293-a433-dd7118ba2323
-md"""#### Summary of Cytochrome Oxidase I mitochondria gene for a $(species)
-
-- number of nucleotides in sequence: $(nt_count)
-- number of amino acids in sequence: $(aa_count)
-- number of distinct amino acids: $(aa_values_count)
-- number of distinct encodings (codons): $(codon_values_count)
 """
 
 # ╔═╡ 54f5e863-aa85-4755-992c-d60b7ac5ecc4
@@ -453,15 +400,9 @@ md"""In the following cell, we create a dictionary that will use our amino acids
 md"""Make sure understand how your dictionary works.  Uncomment the following line to see what the dictionary gives for the key `AA_I` (isoleucine), or try another amino acid as the key and see what the resulting value looks like.
 """
 
-# ╔═╡ c24afebe-b88a-44c8-aa14-8f4f86b9392e
-#aadict[AA_I]
-
 # ╔═╡ 776bbd7c-de58-49be-a7c1-42e679fc1dd3
 md"""In the following cell, replace `missing` with a Julia expression that finds the number of times the amino acid isoleucine occurs in your sequence.
 """
-
-# ╔═╡ ca528421-0855-41c6-a840-9bc7435e9b7d
-aa_i_count = missing
 
 # ╔═╡ 4d388989-dfea-47b8-8f74-f3def21606de
 md"""#### Step 2: find unique values.
@@ -493,6 +434,8 @@ function uniquedict(dict)
 		# the right side of the assignment will be the value you
 		# want to look up with that key.
 		# In this case, the value should be a list including only the unique values for that key
+		numitems = unique(dict[key])
+		uniquevalues[key] = numitems
 	end
 	return uniquevalues
 end
@@ -510,12 +453,6 @@ md"""
 This notebook includes a function named `uniform_slots`. When you give it one amino acid and our dictionary of encodings, it looks at the different encodings and deteremines if there are uniform or if there is any variety at each of the three nucleotides. It represents this as a Vector with three true/false values: true means that the encoding is consistent (always the same value at that nucleotide), false means that more than one nucleotide is used at that position.
 """
 
-# ╔═╡ 3efec0dc-e441-47ec-8b3a-249ff18db111
-#unique_encodings[AA_I]
-
-# ╔═╡ 3a2df03c-273b-4f5d-a2bc-229b23e77ab0
-#uniform_slots(AA_I, aadict)
-
 # ╔═╡ e3007454-efe2-4936-98f3-396e8a9fe343
 md"""
 We will now apply the `score_isuniform` function to *every* amino acid in our list.
@@ -527,7 +464,7 @@ To do that, we'll need to learn how to add items to an existing vector with Juli
 # ╔═╡ 0977d5a9-c2e9-4961-82d6-dc33880f9744
 """Add item to a vector."""
 function additem(vect, item)
-	push!( vect, item)
+	push!(vect, item)
 end
 
 # ╔═╡ 8430413d-8ced-4717-99ae-3718f5df4c7d
@@ -545,18 +482,6 @@ The following cell outlines a function to do just that. It starts by creating an
 Follow the hints in comments to complete the body of the for loop.
 
 """
-
-# ╔═╡ 5c221bf7-b718-427e-bded-78cdad406531
-"""Using the `uniform_slots` function, create a score for every amino acid in the list of keys for a dictionary listing codons for each amino acid.
-"""
-function score_positions(aalist, dict)
-	tfvalues = []
-	for aacid in aalist
-		# use the `uniform_slots` function to get a score for `aacid`,
-		# and add that score to the vector `tfvalues`
-	end
-	return tfvalues
-end
 
 # ╔═╡ 93a15dd9-76da-4929-a9a6-715c42599085
 md"""### E. Visualizing results in Pluto"""
@@ -635,11 +560,43 @@ dnastring
 # ╔═╡ 577afd6e-dbbb-414a-bdff-939da44b815a
 dna_seq = LongDNA{4}(dnastring)
 
+# ╔═╡ db992a77-e93d-40a7-981d-c7dbb79e07e4
+nt_count = length(dna_seq)
+
 # ╔═╡ d64157e1-32c8-4567-b520-2415e4ea3cc8
 if ismissing(nt_count) 
 	still_missing()
 elseif nt_count != length(dna_seq)
 	keep_working(md"This is the same problem you addressed in the previous section: how many items are in the Vector `dna_seq`?")
+else
+	correct()
+end
+
+# ╔═╡ 8845c1b1-b088-4a41-8c3b-e9ce218efad8
+aa_seq = BioSequences.translate(dna_seq, code = mitochondrial)
+
+# ╔═╡ 386ff938-6803-4e0a-b623-a50fc0ce5d2d
+aa_count = length(aa_seq) 
+
+# ╔═╡ cf23961d-117b-486c-bbbf-88a1b729804b
+aa_values = unique(aa_seq)
+
+# ╔═╡ 1d77e0cb-3cf6-4bf8-996a-4e9abcd9e8e1
+aa_values_count = length(aa_values) 
+
+# ╔═╡ b1085088-4823-4252-8979-6661af6e4665
+length(unique(aa_seq))
+
+# ╔═╡ 82be0905-c721-4fca-8c6d-3ad428dbce9d
+unique(aa_seq) |> length
+
+# ╔═╡ 8f63d991-5c01-48e4-b8ad-5611b3607bbc
+if ismissing(aa_count)  || ismissing(aa_values_count)
+	still_missing(md"Supply expressions to find `aa_count` and `aa_values_count`")
+elseif aa_count != length(aa_seq)
+	keep_working(md"This is the same problem you addressed in the previous section: how many items are in the Vector `aa_seq`?")
+elseif aa_values_count != length(unique(aa_seq))
+	keep_working(md"You've seen this kind of problem: how many *unique* values are in the Vector `aa_seq`?")
 else
 	correct()
 end
@@ -669,6 +626,36 @@ end
 # ╔═╡ c71395e3-ce5b-4c0e-b92c-6316581ddc86
 codons = splitcodons(dna_seq)
 
+# ╔═╡ 8382cdc7-13bd-47d1-b507-b6d9ee94fcd7
+codon_count = length(codons) 
+
+# ╔═╡ 0ab106ba-d840-4bd1-8bfa-e75a214ce399
+codon_count == aa_count # when this is true, you've done it right!
+
+# ╔═╡ 4a1b7412-8700-4216-a4ce-30a7859d349e
+if ismissing(codon_count) || ismissing(aa_count)
+	still_missing(md"Supply expressions to compute the number of codons and the number of amino acids.")
+elseif codon_count != aa_count
+	keep_working(md"You have different values for the number of codons and the number of amino acids: they should be the same!")
+else
+	correct()
+end
+
+# ╔═╡ cb586622-41ea-44eb-98e0-475eb51f0979
+codons
+
+# ╔═╡ d80a8982-7035-41fd-a7b9-78662ebcf4bd
+codon_values_count = unique(codons) |> length
+
+# ╔═╡ f56a5b59-e986-4293-a433-dd7118ba2323
+md"""#### Summary of Cytochrome Oxidase I mitochondria gene for a $(species)
+
+- number of nucleotides in sequence: $(nt_count)
+- number of amino acids in sequence: $(aa_count)
+- number of distinct amino acids: $(aa_values_count)
+- number of distinct encodings (codons): $(codon_values_count)
+"""
+
 # ╔═╡ 2e1aec4a-513b-4b4c-b062-4ffd7eea9438
 if ismissing(codon_count)  || ismissing(codon_values_count)
 	still_missing(md"Supply expressions to find `codon_count` and `codon_values_count`")
@@ -682,6 +669,12 @@ end
 
 # ╔═╡ b179d607-ef53-4122-96c5-3e1efaf31392
 aadict = onetomanydict(aa_seq, codons)
+
+# ╔═╡ c24afebe-b88a-44c8-aa14-8f4f86b9392e
+aadict[AA_I]
+
+# ╔═╡ ca528421-0855-41c6-a840-9bc7435e9b7d
+aa_i_count = aadict[AA_I]|> length
 
 # ╔═╡ 5e691819-5ea1-448b-bd2b-a46c4afdbdc4
 if ismissing(aa_i_count) 
@@ -744,6 +737,9 @@ else
 	bar(aalabels, unqfreqs, xticks = :all)
 end
 
+# ╔═╡ 3efec0dc-e441-47ec-8b3a-249ff18db111
+unique_encodings[AA_I]
+
 # ╔═╡ 7a2dd394-b6ef-4239-a417-0c6edfe77b79
 unique_encodings
 
@@ -762,21 +758,6 @@ else
 
 All the codons begin with `AT` but the third position varies. `score_isuniform` reports this as `[true, true, false]`.
 
-
-"""
-end
-
-# ╔═╡ b1472850-ab6b-4b29-9ee8-5fe6c7a60d9e
-aa_scores = score_positions(aa_seq, aadict)
-
-# ╔═╡ 7fb75fdf-6dce-4a50-ba95-67eeedd659b4
-if isempty(aa_scores)
-	md"""*When you have computed values for `aa_scores`, the following cell will display a highlighted visualization of the results.*"""
-else
-md"""
-The table in the following cell lists your sequence of amino acids in the top row.
-
-The bottom row lists the codon for each amino acids, and highlights the display according to your true-false scores, with highlighted nucleotides showing values that can vary for the same amino acid.
 
 """
 end
@@ -805,6 +786,41 @@ function uniform_slots(one_aa, aadict)
 		end
 	end
 	uniform
+end
+
+# ╔═╡ 3a2df03c-273b-4f5d-a2bc-229b23e77ab0
+uniform_slots(AA_I, aadict)
+
+# ╔═╡ 5c221bf7-b718-427e-bded-78cdad406531
+"""Using the `uniform_slots` function, create a score for every amino acid in the list of keys for a dictionary listing codons for each amino acid.
+"""
+function score_positions(aalist, dict)
+	tfvalues = []
+	for aacid in aalist
+		# use the `uniform_slots` function to get a score for `aacid`,
+		# and add that score to the vector `tfvalues`
+		tfscores = uniform_slots(aacid, dict)
+		push!(tfvalues, tfscores)
+	end
+	return tfvalues
+end
+
+# ╔═╡ b1472850-ab6b-4b29-9ee8-5fe6c7a60d9e
+aa_scores = score_positions(aa_seq, aadict)
+
+# ╔═╡ aa5ca4b5-5e5c-4c43-87e8-2ddaac59a7e5
+length(aa_scores)
+
+# ╔═╡ 7fb75fdf-6dce-4a50-ba95-67eeedd659b4
+if isempty(aa_scores)
+	md"""*When you have computed values for `aa_scores`, the following cell will display a highlighted visualization of the results.*"""
+else
+md"""
+The table in the following cell lists your sequence of amino acids in the top row.
+
+The bottom row lists the codon for each amino acids, and highlights the display according to your true-false scores, with highlighted nucleotides showing values that can vary for the same amino acid.
+
+"""
 end
 
 # ╔═╡ 9fef495d-49d0-4276-bae6-55be114bd613
@@ -2136,7 +2152,10 @@ version = "1.4.1+1"
 # ╟─aee479a7-a367-4785-852f-331a22766558
 # ╟─f7c863d5-aec8-4489-bda0-e6cb9a9b86e3
 # ╠═386ff938-6803-4e0a-b623-a50fc0ce5d2d
+# ╠═cf23961d-117b-486c-bbbf-88a1b729804b
 # ╠═1d77e0cb-3cf6-4bf8-996a-4e9abcd9e8e1
+# ╠═b1085088-4823-4252-8979-6661af6e4665
+# ╠═82be0905-c721-4fca-8c6d-3ad428dbce9d
 # ╟─8f63d991-5c01-48e4-b8ad-5611b3607bbc
 # ╟─1a9ca373-621a-45f7-8eef-08ebe6746841
 # ╟─55eb9bea-573a-4563-991b-87b267373d76
@@ -2144,7 +2163,7 @@ version = "1.4.1+1"
 # ╟─dfbd143b-8201-4cf0-a6a6-76c709b346cc
 # ╠═8382cdc7-13bd-47d1-b507-b6d9ee94fcd7
 # ╠═0ab106ba-d840-4bd1-8bfa-e75a214ce399
-# ╠═4a1b7412-8700-4216-a4ce-30a7859d349e
+# ╟─4a1b7412-8700-4216-a4ce-30a7859d349e
 # ╠═cb586622-41ea-44eb-98e0-475eb51f0979
 # ╠═0f99e07a-cefd-4660-b48f-3883cf7f5e16
 # ╠═d80a8982-7035-41fd-a7b9-78662ebcf4bd
@@ -2171,7 +2190,7 @@ version = "1.4.1+1"
 # ╟─090335fe-0d57-40a4-8e79-a76b5a95f46f
 # ╠═5f1b846e-18c2-4b78-87bb-57871ccd7d07
 # ╟─6576ff9f-5dad-46b0-907b-6192b7bb268c
-# ╠═5e3f6650-2d77-403c-83a7-1cc157f6fc23
+# ╟─5e3f6650-2d77-403c-83a7-1cc157f6fc23
 # ╟─36ba4be3-f5d9-4df0-b24a-946f2b447b91
 # ╟─d1307742-5fe6-482d-b92b-cf1790d30b8d
 # ╟─6f19c952-020e-4a14-9652-1fc2498c2250
@@ -2187,6 +2206,7 @@ version = "1.4.1+1"
 # ╟─814fbaea-e408-482b-b54c-25caed2cab70
 # ╠═5c221bf7-b718-427e-bded-78cdad406531
 # ╠═b1472850-ab6b-4b29-9ee8-5fe6c7a60d9e
+# ╠═aa5ca4b5-5e5c-4c43-87e8-2ddaac59a7e5
 # ╠═7a2dd394-b6ef-4239-a417-0c6edfe77b79
 # ╟─af917767-c3a0-4470-b356-83e9a93b69fc
 # ╟─93a15dd9-76da-4929-a9a6-715c42599085
