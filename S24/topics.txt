@@ -34,8 +34,9 @@ Constructing and evaluating trees 📓
 
 ## Modeling change through time
 
-🔛 Tree models in biology and textual criticism
 Interpreting classified data as trees: language evolution
+🔛 Tree models in [textual criticism](../classes/trees-texts/)
+
 
 
 

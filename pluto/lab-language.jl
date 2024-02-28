@@ -634,11 +634,18 @@ languages = """
 flowchart $(direction)
 
 
-root --> Russian
+root --> labialfamily
+labialfamily --> fricativegroup
+labialfamily --> plosivegroup
+fricativegroup --> English
+fricativegroup --> Dutch
+plosivegroup --> French
+fricativegroup --> German
+plosivegroup --> Spanish
+plosivegroup --> Italian
+
 root --> Turkish
 root --> Arabic
-root --> Latin
-Latin --> Spanish
 
 """
 

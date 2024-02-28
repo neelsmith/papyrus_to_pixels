@@ -38,7 +38,7 @@ Deadlines to note:
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Mar 5*, *Mar 7* | 🔛 Tree models in biology and textual criticism | Interpreting classified data as trees: language evolution |  |
+| *Mar 5*, *Mar 7* | Interpreting classified data as trees: language evolution | 🔛 Tree models in [textual criticism](../classes/trees-texts/) |  |
 | *Mar 12*, *Mar 14* | ***Spring break*** | ***Spring break*** | **Tue**: *Class resumes.* |
 | *Mar 19*, *Mar 21* | Workshop lab 4: Classification 📓 | Introduction to research projects | **Thu**: *Project proposal due.* |
 
