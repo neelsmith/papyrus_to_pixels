@@ -11,6 +11,15 @@ has_children: true
 
 ## Announcements
 
+
+- **Feb. 29**: 
+    - background on the [5 versions of the Gettysburg Address](https://www.abrahamlincolnonline.org/lincoln/speeches/gettysburg.htm#:~:text=There%20are%20five%20known%20copies,probably%20was%20the%20reading%20copy.)
+    - notebook for comparing features
+        - as a [web page](./classes/gburg-trees/feature-matrix.html) (HTML)
+        - as a [Julia notebook](./classes/gburg-trees/feature-matrix.jl)
+    - notebook for comparing tokens of the Gettysburg Address:
+        - as a [web page](./classes/gburg-trees/gburgfeatures.html)
+        - as a [Julia notebook](./classes/gburg-trees/gburgfeatures.jl)
 - **Feb. 28**: drop-in hours end today at 11:15 due to talk in the Classics Department!
 - **Feb. 27**: notebook for work in class today on language evolution:
     - as an [HTML file](./labs/lab3/lab-language.html)
