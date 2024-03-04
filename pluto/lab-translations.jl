@@ -18,7 +18,7 @@ end
 begin
 	using Downloads
 	using PlutoUI
-
+	# using VectorAlignments
 	using StatsBase, OrderedCollections
 	md"""*To see the Julia environment, unhide this cell.*"""
 end
@@ -29,13 +29,34 @@ TableOfContents()
 # ╔═╡ 8389ee5e-d993-11ee-1cd3-ff3165294839
 md"""# Comparing translations"""
 
+# ╔═╡ 616eab90-8a7b-497d-b576-a254fe23dca3
+md"""!!! tip "Improve this!"
+
+    Improve the results of this analysis by writing a better function to tokenize text.
+"""
+
 # ╔═╡ 25f4a836-b4d8-47da-9c93-3f9df2d81ecf
 function tokenizetext(txt)
 	split(txt)
 end
 
+# ╔═╡ 1bd3e785-0e51-4500-ac4a-d0e9667b741f
+md"""## Overview of corpus"""
+
+# ╔═╡ 32c8450e-fcfc-4292-a5c6-babeed7bfab9
+md"""## "Stop words" to ignore"""
+
+# ╔═╡ 991ce7b9-c99e-4e23-b53b-643494d8dad1
+md"""!!! note "Instructions"
+
+    Choose stop words from a list of `n` most frequent terms across all texts, then use the `Submit` button.
+"""
+
 # ╔═╡ 0a3e7769-487e-4a28-9c77-5e08f6667203
-@bind n Slider(10:10:500, default = 200, show_value=true)
+md"""*Value for* `n`: $(@bind n Slider(10:10:500, show_value=true))"""
+
+# ╔═╡ b18b9057-79ef-4473-8878-855826c0467b
+md"""## Selected contents"""
 
 # ╔═╡ 97c90eb0-c6ac-4782-9f43-084fb0f688ad
 html"""
@@ -46,11 +67,49 @@ html"""
 # ╔═╡ 1cfb8992-1de2-4f63-9135-eff34d370e67
 md"""> # Stuff you don't need to look at"""
 
+# ╔═╡ 9cbd31fb-1927-4bea-a8c4-74851c250797
+md"""> ## Total SCS and feature table of scores"""
+
+# ╔═╡ 0ef17be4-8159-42d4-a862-3d5a77af19f3
+"""Compute normalized freqeuncies for tokens in a list and return a dictionary of their counts.""" 
+function normscores(tknlist)
+	total = length(tknlist)
+	freqs = countmap(tknlist)
+	normeddict = OrderedDict()
+	for k in keys(freqs)
+		normeddict[k] = freqs[k] / total
+	end
+	sort(normeddict)
+end
+
+# ╔═╡ 0c4c9c3a-e533-476f-be14-56a5a010f611
+md"""> ## Characterizing contents"""
+
+# ╔═╡ 0e37b191-da47-4066-b7e2-8c883387b730
+"""Format Markdown table summarizing contents"""
+function summarytable(xlations, bklists, vrscounts, tknlists, vocab)
+	mdlines = ["| Translation | Books | Verses | Tokens | Vocabulary size |",
+	"| --- | --- | --- | --- | --- |",	
+	]
+
+	for (i, title) in enumerate(xlations)
+		row = string("| ", title, " | ", length(bklists[i]), " |", vrscounts[i], " |", length(tknlists[i]), " |" , length(vocab[i]), " |")
+		push!(mdlines, row)
+	end
+	join(mdlines,"\n")
+end
+
+# ╔═╡ 87dc6cfe-44e9-4604-a6c1-d2a6fef17328
+md"""> ## Selected contents"""
+
 # ╔═╡ c3ec5291-2f3f-405f-a04f-b0e7df9770b4
-md"""> Tokenizations"""
+md"""> ## Global tokenizations"""
 
 # ╔═╡ 0f4f7370-526a-494d-a668-d2d95e47298c
-md"""> Load data"""
+md"""> ## Load data"""
+
+# ╔═╡ 89a8f473-0440-4792-842e-e877c2eb93d7
+metadataurl = "https://raw.githubusercontent.com/neelsmith/papyrus_to_pixels/main/data/texts/bibles/sources.cex"
 
 # ╔═╡ 21303eb5-eaed-48be-8814-47dd6ad393aa
 baseurl = "https://raw.githubusercontent.com/neelsmith/papyrus_to_pixels/main/data/texts/bibles/"
@@ -67,8 +126,14 @@ filenames = [
 	
 ]
 
-# ╔═╡ 89a8f473-0440-4792-842e-e877c2eb93d7
-metadataurl = "https://raw.githubusercontent.com/neelsmith/papyrus_to_pixels/main/data/texts/bibles/sources.cex"
+# ╔═╡ 9ef93e1f-0cd3-4175-bd60-8a1dad69279d
+"""Structure for a citable Biblical passage."""
+struct Passage
+	version
+	book
+	ref
+	text
+end
 
 # ╔═╡ 10612973-ee18-4382-9800-ae33d2520742
 """Read lines from remote URL."""
@@ -79,6 +144,22 @@ function readdata(u)
 	datalines
 end
 	
+
+# ╔═╡ 96dec338-79be-41b4-810e-00d95372b4d0
+"""Parse ebibles data format into a Julia struct.
+"""
+function parselinesformat(lines, versionid)
+	re = r"([^ ]+) ([^ ]+) (.+)"
+	passages = []
+	for (i, ln) in enumerate(lines)
+		m = match(re, ln)
+		if ! isnothing(m)
+			bk, ref, psg = m.captures
+			push!(passages, Passage(versionid, bk, ref, psg))
+		end
+	end
+	passages
+end
 
 # ╔═╡ 7007c64a-e990-49be-9829-f2662d671bd4
 datalines = readdata(metadataurl)
@@ -92,6 +173,9 @@ end
 # ╔═╡ edf1fa49-d50c-49ba-92f0-9a87e8fcb839
  textdict = Dict(menu)
 
+# ╔═╡ 33dbf434-7d91-48a8-a200-35499993cc1a
+labels = [textdict[fname] for fname in filenames]
+
 # ╔═╡ e2fae900-c222-4eee-9c94-959bfe68987e
 textdata = map(filenames) do f
 	readdata(baseurl * f)
@@ -100,33 +184,53 @@ end
 # ╔═╡ 67021d14-f5fd-4da6-8702-83833b5ac848
 map(v -> length(v), textdata)
 
-# ╔═╡ 9ef93e1f-0cd3-4175-bd60-8a1dad69279d
-"""Structure for a citable Biblical passage."""
-struct Passage
-	version
-	book
-	ref
-	text
-end
-
-# ╔═╡ 96dec338-79be-41b4-810e-00d95372b4d0
-"""
-"""
-function chapterkeys(lines, versionid)
-	re = r"([^ ]+) ([^ ]+) (.+)"
-	passages = []
-	for (i, ln) in enumerate(lines)
-		m = match(re, ln)
-		if ! isnothing(m)
-			bk, ref, psg = m.captures
-			push!(passages, Passage(versionid, bk, ref, psg))
-		end
-	end
-	passages
-end
-
 # ╔═╡ 5be24375-6ee6-4394-8587-45dded4e805a
-citable = [chapterkeys(txt, filenames[i]) for (i,txt) in enumerate(textdata)]
+citable = [parselinesformat(txt, filenames[i]) for (i,txt) in enumerate(textdata)]
+
+# ╔═╡ 1f0e2b6c-4651-4133-aeef-81939fed926a
+books = [unique(map(psg -> psg.book, txt)) for txt in citable]
+
+# ╔═╡ aaead9f6-a21e-4288-95a9-9138f7aefefc
+@bind booklist confirm(MultiCheckBox((books[4]), select_all=true))
+
+# ╔═╡ 208dbc9f-57bb-4c08-a0c1-9262bd665c27
+md"""*Contents of translations for book(s)* **$(join(booklist, ", "))**:"""
+
+# ╔═╡ a07d7d3e-a469-4489-ac15-d6aa05774300
+verses = [length(txt) for txt in  citable]
+
+# ╔═╡ 037d2ac9-9f71-4a84-890a-223a7900cc41
+selectedpsgs = [filter(psg -> psg.book in booklist, psglist) for psglist in citable]
+
+# ╔═╡ 25c5ce38-4b53-4eba-9569-24ccc1ed05c8
+ selectedbooks = [unique(map(psg -> psg.book, txt)) for txt in selectedpsgs]
+
+# ╔═╡ ad360374-0437-470c-ab87-7b0f3c398454
+selectedverses = [length(txt) for txt in  selectedpsgs]
+
+# ╔═╡ 5c6e91a1-ac1b-4579-9c7e-bd484248838f
+selectedtext = [join(map(psg -> psg.text, txt)," ") for txt in selectedpsgs]
+
+# ╔═╡ fcd8b5cb-9bd3-4373-96ae-65f1dadbd714
+selectedtokens = [tokenizetext(txt) for txt in selectedtext]
+
+# ╔═╡ 62844d27-a061-49aa-bc0f-236df6e67b72
+vocablist = [sort(unique(tkns)) for tkns in selectedtokens]
+
+# ╔═╡ 8128bbbb-8e5a-4891-88a8-127e8bdd9246
+totaltokens = [length(tkns) for tkns in selectedtokens]
+
+# ╔═╡ 9bc5ff9c-77a5-45c0-a9dd-b286fe34d658
+tokenscores = [normscores(tlist) for tlist in selectedtokens]
+
+# ╔═╡ 572e8630-9fac-4aea-8ae7-1d75d546a8ca
+sort(tokenscores[1], byvalue = true, rev = true)
+
+# ╔═╡ 5f0818fe-b47c-4a7b-9116-646f7a62e374
+selectedvocab = [sort(unique(tlist)) for tlist in selectedtokens]
+
+# ╔═╡ 73090143-3914-4b7f-b73b-d8469c45a491
+summarytable(labels, selectedbooks, selectedverses, selectedtokens, selectedvocab) |> Markdown.parse
 
 # ╔═╡ 86c12ab8-163f-43bd-8f3d-248ef2555e97
 textonly = [map(psg -> psg.text, txt) for txt in citable ]
@@ -145,22 +249,31 @@ allfreqs = sort(allfreqs_raw, byvalue=true, rev=true)
 stopcandidates = collect(keys(allfreqs))[1:n]
 
 # ╔═╡ 5e7aa912-abba-4f75-9217-14e2204f15b5
-@bind stoppers MultiCheckBox(stopcandidates, select_all = true)
+@bind stoppers confirm(MultiCheckBox(stopcandidates, select_all = true))
 
 # ╔═╡ 9389e8bf-0959-44d4-9a79-784357997d33
 stoppers
 
+# ╔═╡ 9933af7c-7b29-4250-83c4-4b2ccf2b9055
+filteredtokens = [sort(filter(t -> ! (t in stoppers), tkns)) for tkns in selectedtokens]
+
+# ╔═╡ efbb1285-d7b3-4509-9151-29935649c6cd
+tokenfreqs = [OrderedDict(countmap(tkns)) for tkns in filteredtokens]
+
 # ╔═╡ 2eced09d-30ed-4448-96ab-80348d2bba17
 tokens = [tokenizetext(join(txt,"\n")) for txt in textonly]
+
+# ╔═╡ 63ca826f-8e9e-4dbe-891d-b6e7b5855d55
+vocab = [sort(unique(tlist)) for tlist in tokens]
+
+# ╔═╡ a800ec25-354d-4370-958b-05b06b278ad8
+summarytable(labels, books, verses, tokens, vocab) |> Markdown.parse
 
 # ╔═╡ 287a3417-1b7a-4a6d-8784-f1b7a6d6ff25
 rawfreqs = [OrderedDict(countmap(tknlist)) for tknlist in tokens]
 
 # ╔═╡ 8632c027-c552-4fe4-8074-16a968b217b6
 sorted = [ sort(freqs, rev=true, byvalue=true) for freqs in rawfreqs]
-
-# ╔═╡ b9d62c2a-61ea-401a-926c-f75a85b4f4d6
-md"""> Compute vocab list"""
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -525,12 +638,42 @@ version = "17.4.0+2"
 # ╟─d6d9ea5e-9895-4013-871c-8cbeb88820cb
 # ╟─66deb0e9-f3f7-4a49-a2e2-b52c887ba182
 # ╟─8389ee5e-d993-11ee-1cd3-ff3165294839
+# ╟─616eab90-8a7b-497d-b576-a254fe23dca3
 # ╠═25f4a836-b4d8-47da-9c93-3f9df2d81ecf
+# ╟─1bd3e785-0e51-4500-ac4a-d0e9667b741f
+# ╟─a800ec25-354d-4370-958b-05b06b278ad8
+# ╟─32c8450e-fcfc-4292-a5c6-babeed7bfab9
+# ╟─991ce7b9-c99e-4e23-b53b-643494d8dad1
 # ╟─0a3e7769-487e-4a28-9c77-5e08f6667203
 # ╟─5e7aa912-abba-4f75-9217-14e2204f15b5
-# ╠═9389e8bf-0959-44d4-9a79-784357997d33
+# ╟─9389e8bf-0959-44d4-9a79-784357997d33
+# ╟─b18b9057-79ef-4473-8878-855826c0467b
+# ╟─aaead9f6-a21e-4288-95a9-9138f7aefefc
+# ╟─208dbc9f-57bb-4c08-a0c1-9262bd665c27
+# ╟─73090143-3914-4b7f-b73b-d8469c45a491
 # ╟─97c90eb0-c6ac-4782-9f43-084fb0f688ad
 # ╟─1cfb8992-1de2-4f63-9135-eff34d370e67
+# ╟─9cbd31fb-1927-4bea-a8c4-74851c250797
+# ╟─62844d27-a061-49aa-bc0f-236df6e67b72
+# ╠═8128bbbb-8e5a-4891-88a8-127e8bdd9246
+# ╠═9bc5ff9c-77a5-45c0-a9dd-b286fe34d658
+# ╠═572e8630-9fac-4aea-8ae7-1d75d546a8ca
+# ╟─0ef17be4-8159-42d4-a862-3d5a77af19f3
+# ╟─0c4c9c3a-e533-476f-be14-56a5a010f611
+# ╟─0e37b191-da47-4066-b7e2-8c883387b730
+# ╠═67021d14-f5fd-4da6-8702-83833b5ac848
+# ╟─33dbf434-7d91-48a8-a200-35499993cc1a
+# ╟─1f0e2b6c-4651-4133-aeef-81939fed926a
+# ╠═a07d7d3e-a469-4489-ac15-d6aa05774300
+# ╠═63ca826f-8e9e-4dbe-891d-b6e7b5855d55
+# ╟─87dc6cfe-44e9-4604-a6c1-d2a6fef17328
+# ╟─037d2ac9-9f71-4a84-890a-223a7900cc41
+# ╠═25c5ce38-4b53-4eba-9569-24ccc1ed05c8
+# ╠═ad360374-0437-470c-ab87-7b0f3c398454
+# ╠═5c6e91a1-ac1b-4579-9c7e-bd484248838f
+# ╠═fcd8b5cb-9bd3-4373-96ae-65f1dadbd714
+# ╠═9933af7c-7b29-4250-83c4-4b2ccf2b9055
+# ╟─5f0818fe-b47c-4a7b-9116-646f7a62e374
 # ╟─c3ec5291-2f3f-405f-a04f-b0e7df9770b4
 # ╟─fc22cc31-2ffc-430e-9d9a-e0604f13c369
 # ╟─6a6e762c-6ad8-4939-855e-0cfa98052438
@@ -538,21 +681,20 @@ version = "17.4.0+2"
 # ╠═ef13e58e-4a84-435f-bbfb-280bd04bb1b7
 # ╠═86c12ab8-163f-43bd-8f3d-248ef2555e97
 # ╠═2eced09d-30ed-4448-96ab-80348d2bba17
+# ╠═efbb1285-d7b3-4509-9151-29935649c6cd
 # ╠═287a3417-1b7a-4a6d-8784-f1b7a6d6ff25
 # ╠═8632c027-c552-4fe4-8074-16a968b217b6
 # ╟─0f4f7370-526a-494d-a668-d2d95e47298c
-# ╠═5be24375-6ee6-4394-8587-45dded4e805a
+# ╟─89a8f473-0440-4792-842e-e877c2eb93d7
 # ╟─21303eb5-eaed-48be-8814-47dd6ad393aa
 # ╟─4e20cb12-51f3-4b57-9057-392dffbc4af6
-# ╟─89a8f473-0440-4792-842e-e877c2eb93d7
+# ╟─9ef93e1f-0cd3-4175-bd60-8a1dad69279d
 # ╟─10612973-ee18-4382-9800-ae33d2520742
+# ╟─96dec338-79be-41b4-810e-00d95372b4d0
+# ╟─5be24375-6ee6-4394-8587-45dded4e805a
 # ╟─7007c64a-e990-49be-9829-f2662d671bd4
 # ╟─8b1237c7-e5c1-428d-8e7f-26a243387329
 # ╟─edf1fa49-d50c-49ba-92f0-9a87e8fcb839
 # ╟─e2fae900-c222-4eee-9c94-959bfe68987e
-# ╠═67021d14-f5fd-4da6-8702-83833b5ac848
-# ╟─9ef93e1f-0cd3-4175-bd60-8a1dad69279d
-# ╟─96dec338-79be-41b4-810e-00d95372b4d0
-# ╟─b9d62c2a-61ea-401a-926c-f75a85b4f4d6
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
