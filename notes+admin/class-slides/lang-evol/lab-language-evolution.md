@@ -218,9 +218,9 @@ Cassiodorus (6th c. CE): guesses *barbarus* comes from *barba* ("beard") and *ru
 
 ## Testing possible cognates
 
-- similar meaning
-- *systematic* correspondences in cognates of two languages
-- change in pronounciation can be explained phonetically
+- similar meaning == *function*
+- *systematic* correspondences in cognates of two languages == *structure*
+- change in pronounciation can be explained phonetically == *development*
 
 ---
 

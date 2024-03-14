@@ -17,4 +17,14 @@ In developing your final submission, you will take account of the digital basis 
 
 You will develop the project in five stages. You must complete each stage successfully before advancing the next stage. For example, you may not complete (and receive credit for) the final stage (a written submission in two formats) until you have successfully completed the four preceding phases.
 
+
+## Timetable
+
+- formal project proposal due **March 26**
+- first draft of project code due **April 11**
+- oral presentations:
+    - practice session must be completed by **April 24**
+    - in-class presenstations will be scheduled for **April 30** and **May 2**
+- final submission due **May 7**    
+
 Please refer to the detailed instructions for each phase of the project.

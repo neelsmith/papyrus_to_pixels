@@ -27,60 +27,52 @@ Introduce lab 3:  (lab 2 due) 📓
 
 
 🔛 Defining features 
-Constructing and evaluating trees 📓
-
-
-
-
-## Modeling change through time
-
-Interpreting classified data as trees: language evolution
 🔛 Tree models in [textual criticism](../classes/trees-texts/)
 
 
 
-
-
-
-
-
 ***Spring break***
 ***Spring break***
 
-Workshop lab 4: Classification 📓
+
+## Modeling change through time
+
+
+
+Key ideas: normalization, comparison, alignment
 Introduction to research projects
 
 ## Developing a project proposal
 
-🔛  Extending your lab work 📓
-Workshop: Formal project proposals\
+🔛 Work on [project ideas](../classes/project-ideas/)
+Workshop: Formal [project proposals](../classes/project-proposal/)
 
-🔛 class
+🔛 📓 Project proposal due
 ***Easter break***
 
 
 ## Investigating a research topic: interpreting change through time
 
-📓  Project proposal due
-Review collections of data in Julia, and [plain-text formats](../classes/textio/)
 
-
-
-Workshop draft code
-Presentations
+What is good scholarship?
 
 class
-class
+Workshop draft code; evening panel discussion
 
+
+class
+How to present
+
+class
 
 ## Perspectives across sections
 
+
+Workshop projects in class
 class
 Project fair, 1
-
-
 Project fair, 2
-[Evolution, textual transmission, AI, and you](../classes/conclusion/)
+
 
 *Study period*
 *Exams begin*

@@ -16,22 +16,24 @@ fixedDates = [
   
   ["2024-02-29",  "Last class before spring break."],
   ["2024-03-12",  "Class resumes."],
-  ["2024-03-26",  "Last class before Easter break."],
+  ["2024-03-28",  "Easter break."],
   ["2024-04-02",  "Class resumes."],
+  ["2024-04-24",  "Deadline for rehearsal of oral presentation."],
   ["2024-05-02",  "Last class."],
 
 
   ["2024-02-06",  "**NB 1** due."],
-    ["2024-02-22",  "**NB 2** due."],
+  ["2024-02-22",  "**NB 2** due."],
+  ["2024-03-14",  "**NB 3** due."],
+  ["2024-04-26",  "**NB 4** due."],
 
-
-    ["2024-03-21",  "Project proposal due."],
+    ["2024-03-26",  "Project proposal due."],
     
     
 
 
     
-    ["2024-04-09",  "First draft of project code due."],
+    ["2024-04-11",  "First draft of project code due."],
     ["2024-05-07",  "Complete project submission due."],
   
 ]

@@ -36,7 +36,6 @@ md"""!!! tip "Improve this!"
 """
 
 # ╔═╡ 0f853ac2-72f4-4108-88e4-44948bb49831
-"""Find candidates for proper names in a text."""
 function findpn(txt)
 	tkns = split(txt) |> unique
 	uc = filter(tkns) do wd
@@ -51,11 +50,9 @@ function findpn(txt)
 end
 
 # ╔═╡ 25f4a836-b4d8-47da-9c93-3f9df2d81ecf
-"""Complete this function."""
 function tokenizetext(txt; droppn = true)
 	tidier = filter(txt) do c
-		#c == ' ' || isletter(c)
-		! ispunct(c) && ! isdigit(c)
+		c == ' ' || isletter(c)
 	end
 	lctkns = split(lowercase(tidier))
 	if droppn
@@ -67,6 +64,9 @@ function tokenizetext(txt; droppn = true)
 		lctkns
 	end
 end
+
+# ╔═╡ b5d31015-1268-493a-8e39-bde6ef8b9cc9
+tokenizetext("Now is the time. The real time.")
 
 # ╔═╡ 1bd3e785-0e51-4500-ac4a-d0e9667b741f
 md"""## Overview of corpus"""
@@ -81,7 +81,10 @@ md"""!!! note "Select books"
 md"""## Selected contents"""
 
 # ╔═╡ 306f9e06-3f82-45c2-9c29-2efd51bdc3e9
-md"""*Number of vocab items to compare*: $(@bind ntokens confirm(Slider(100:10:4000, show_value=true)))"""
+@bind ntokens confirm(Slider(100:10:4000, show_value=true))
+
+# ╔═╡ da85c72e-93bc-442b-b786-c8164d093594
+
 
 # ╔═╡ 97c90eb0-c6ac-4782-9f43-084fb0f688ad
 html"""
@@ -101,12 +104,6 @@ md"""!!! tip "Under the hood"
 
 # ╔═╡ 9cbd31fb-1927-4bea-a8c4-74851c250797
 md"""> ## Total SCS and feature table of scores"""
-
-# ╔═╡ 9bc5ff9c-77a5-45c0-a9dd-b286fe34d658
-#tokenscores = [normscores(tlist) for tlist in selectedtokens]
-
-# ╔═╡ 572e8630-9fac-4aea-8ae7-1d75d546a8ca
-#sort(tokenscores[1], byvalue = true, rev = true)
 
 # ╔═╡ 0ef17be4-8159-42d4-a862-3d5a77af19f3
 """Compute normalized freqeuncies for tokens in a list and return a dictionary of their counts.""" 
@@ -215,24 +212,17 @@ end
 # ╔═╡ edf1fa49-d50c-49ba-92f0-9a87e8fcb839
  textdict = Dict(menu)
 
-# ╔═╡ 2d019c52-854f-415e-acec-8933fdfb32ae
-engmenu = filter(map(datalines[2:end]) do ln
-	cols = split(ln, "|")
-	cols[4] in filenames ? string(cols[4]) => string(cols[1]) : "" => ""
-end) do pr
-	! isempty(pr[1])
-end
-
-# ╔═╡ fb190754-943b-43f8-b349-1182791b7118
-@bind engchoice confirm(MultiCheckBox(engmenu, select_all = true))
-
 # ╔═╡ 33dbf434-7d91-48a8-a200-35499993cc1a
-labels = [textdict[fname] for fname in engchoice]
+labels = [textdict[fname] for fname in filenames]
 
 # ╔═╡ e2fae900-c222-4eee-9c94-959bfe68987e
-textdata = isempty(engchoice) ? [] : map(engchoice) do f
+textdata = map(filenames) do f
 	readdata(baseurl * f)
 end
+
+# ╔═╡ d5884218-1af1-47aa-9213-c4dd390fa071
+join(textdata[1]," ") |> findpn
+
 
 # ╔═╡ 67021d14-f5fd-4da6-8702-83833b5ac848
 map(v -> length(v), textdata)
@@ -244,13 +234,10 @@ citable = [parselinesformat(txt, filenames[i]) for (i,txt) in enumerate(textdata
 books = [unique(map(psg -> psg.book, txt)) for txt in citable]
 
 # ╔═╡ aaead9f6-a21e-4288-95a9-9138f7aefefc
-@bind booklist confirm(MultiCheckBox((books[1]), select_all=true))
+@bind booklist confirm(MultiCheckBox((books[4]), select_all=true))
 
 # ╔═╡ 208dbc9f-57bb-4c08-a0c1-9262bd665c27
 md"""*Contents of translations for book(s)* **$(join(booklist, ", "))**:"""
-
-# ╔═╡ a2280dcb-79b9-4bfb-9fab-f6e02c6c41b4
-booklist
 
 # ╔═╡ a07d7d3e-a469-4489-ac15-d6aa05774300
 verses = [length(txt) for txt in  citable]
@@ -276,6 +263,12 @@ vocablist = [sort(unique(tkns)) for tkns in selectedtokens]
 # ╔═╡ 8128bbbb-8e5a-4891-88a8-127e8bdd9246
 totaltokens = [length(tkns) for tkns in selectedtokens]
 
+# ╔═╡ 9bc5ff9c-77a5-45c0-a9dd-b286fe34d658
+tokenscores = [normscores(tlist) for tlist in selectedtokens]
+
+# ╔═╡ 572e8630-9fac-4aea-8ae7-1d75d546a8ca
+sort(tokenscores[1], byvalue = true, rev = true)
+
 # ╔═╡ 9933af7c-7b29-4250-83c4-4b2ccf2b9055
 filteredtokens = unique.(selectedtokens) .|> sort# [sort(filter(t -> ! (t in stoppers), tkns)) for tkns in selectedtokens]
 
@@ -296,16 +289,7 @@ else
 end
 
 # ╔═╡ 05666760-2908-4dee-95dc-7b80b9d0008a
-mtrx = isempty(tokensdata) ? nothing : featurematrix(tokensdata...)
-
-# ╔═╡ 2e674a8e-fe3f-4788-a21f-8fc5c0efea6f
-mrows, mcols = size(mtrx)
-
-# ╔═╡ 96e54e52-d6c6-47b1-b8c8-3ef6d0de0b5d
-md"""*Number of comparisons to display*: $(@bind rowstoshow confirm(Slider(10:5:mrows, show_value=true)))"""
-
-# ╔═╡ bb073fd6-6314-4250-9a2c-6b580d1dd279
-mtrx[2,:]
+isempty(tokensdata) ? nothing : featurematrix(tokensdata...)
 
 # ╔═╡ 67bac9d4-1829-459d-acf7-aecb13aabfc7
 map(v -> length(v), tokensdata)
@@ -347,9 +331,6 @@ rawfreqs = [OrderedDict(countmap(tknlist)) for tknlist in tokens]
 # ╔═╡ 8632c027-c552-4fe4-8074-16a968b217b6
 sorted = [ sort(freqs, rev=true, byvalue=true) for freqs in rawfreqs]
 
-# ╔═╡ be270b6a-5ca6-494f-b040-59da310132eb
-engchoice
-
 # ╔═╡ 2a33d07e-2646-41e5-922d-816a9fea28d8
 md"""> ## Remove work on stop words"""
 
@@ -368,29 +349,6 @@ md"""> ## Remove work on stop words"""
 
 # ╔═╡ 32c8450e-fcfc-4292-a5c6-babeed7bfab9
 #md"""## "Stop words" to ignore"""
-
-# ╔═╡ bdfc8a60-f7bf-48e5-a51c-13f650fd708c
-md"""> ## Display feature matrix"""
-
-# ╔═╡ da85c72e-93bc-442b-b786-c8164d093594
-"""Format a matrix as a markdown table."""
-function mdtable(m, labels, limit)
-	
-	r, c = size(m)
-	mdlines = ["| " *  join(labels, " | " ) * " |",
-		repeat("| --- ", length(labels)) * " |"
-	]
-	for r in 1:limit
-		row = "| " * join(m[r,:], " | ") * " |"
-		push!(mdlines, row)
-	end
-
-	join(mdlines, "\n")
-	
-end
-
-# ╔═╡ 2ce4ddc9-b68f-4e2b-a17e-5865137b8168
-mdtable(mtrx, labels, rowstoshow) |> Markdown.parse
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -868,23 +826,21 @@ version = "17.4.0+2"
 # ╟─66deb0e9-f3f7-4a49-a2e2-b52c887ba182
 # ╟─8389ee5e-d993-11ee-1cd3-ff3165294839
 # ╟─616eab90-8a7b-497d-b576-a254fe23dca3
-# ╟─25f4a836-b4d8-47da-9c93-3f9df2d81ecf
-# ╟─0f853ac2-72f4-4108-88e4-44948bb49831
+# ╠═25f4a836-b4d8-47da-9c93-3f9df2d81ecf
+# ╠═b5d31015-1268-493a-8e39-bde6ef8b9cc9
+# ╠═0f853ac2-72f4-4108-88e4-44948bb49831
+# ╠═d5884218-1af1-47aa-9213-c4dd390fa071
 # ╟─1bd3e785-0e51-4500-ac4a-d0e9667b741f
-# ╟─fb190754-943b-43f8-b349-1182791b7118
 # ╟─a800ec25-354d-4370-958b-05b06b278ad8
 # ╟─70689e61-2ca3-496f-96b0-9598ecbf94a6
 # ╟─aaead9f6-a21e-4288-95a9-9138f7aefefc
 # ╟─73090143-3914-4b7f-b73b-d8469c45a491
 # ╟─b18b9057-79ef-4473-8878-855826c0467b
 # ╟─208dbc9f-57bb-4c08-a0c1-9262bd665c27
-# ╟─306f9e06-3f82-45c2-9c29-2efd51bdc3e9
+# ╠═306f9e06-3f82-45c2-9c29-2efd51bdc3e9
 # ╠═176158ff-fa52-453e-a30b-755462a8fb04
-# ╟─05666760-2908-4dee-95dc-7b80b9d0008a
-# ╟─96e54e52-d6c6-47b1-b8c8-3ef6d0de0b5d
-# ╠═2ce4ddc9-b68f-4e2b-a17e-5865137b8168
-# ╠═2e674a8e-fe3f-4788-a21f-8fc5c0efea6f
-# ╠═bb073fd6-6314-4250-9a2c-6b580d1dd279
+# ╠═05666760-2908-4dee-95dc-7b80b9d0008a
+# ╠═da85c72e-93bc-442b-b786-c8164d093594
 # ╟─a6fa7ae2-9d8f-499f-9d73-d0e8bad3d8e5
 # ╠═67bac9d4-1829-459d-acf7-aecb13aabfc7
 # ╟─97c90eb0-c6ac-4782-9f43-084fb0f688ad
@@ -899,13 +855,12 @@ version = "17.4.0+2"
 # ╟─0c4c9c3a-e533-476f-be14-56a5a010f611
 # ╟─0e37b191-da47-4066-b7e2-8c883387b730
 # ╠═67021d14-f5fd-4da6-8702-83833b5ac848
-# ╠═33dbf434-7d91-48a8-a200-35499993cc1a
+# ╟─33dbf434-7d91-48a8-a200-35499993cc1a
 # ╟─1f0e2b6c-4651-4133-aeef-81939fed926a
 # ╠═a07d7d3e-a469-4489-ac15-d6aa05774300
 # ╠═63ca826f-8e9e-4dbe-891d-b6e7b5855d55
 # ╟─87dc6cfe-44e9-4604-a6c1-d2a6fef17328
-# ╠═a2280dcb-79b9-4bfb-9fab-f6e02c6c41b4
-# ╠═037d2ac9-9f71-4a84-890a-223a7900cc41
+# ╟─037d2ac9-9f71-4a84-890a-223a7900cc41
 # ╠═25c5ce38-4b53-4eba-9569-24ccc1ed05c8
 # ╠═ad360374-0437-470c-ab87-7b0f3c398454
 # ╠═5c6e91a1-ac1b-4579-9c7e-bd484248838f
@@ -914,9 +869,9 @@ version = "17.4.0+2"
 # ╟─5f0818fe-b47c-4a7b-9116-646f7a62e374
 # ╟─c3ec5291-2f3f-405f-a04f-b0e7df9770b4
 # ╟─fc22cc31-2ffc-430e-9d9a-e0604f13c369
-# ╠═6a6e762c-6ad8-4939-855e-0cfa98052438
+# ╟─6a6e762c-6ad8-4939-855e-0cfa98052438
 # ╟─00a1ff11-8d26-47fb-8535-cfa8282a2111
-# ╠═ef13e58e-4a84-435f-bbfb-280bd04bb1b7
+# ╟─ef13e58e-4a84-435f-bbfb-280bd04bb1b7
 # ╟─86c12ab8-163f-43bd-8f3d-248ef2555e97
 # ╟─2eced09d-30ed-4448-96ab-80348d2bba17
 # ╟─efbb1285-d7b3-4509-9151-29935649c6cd
@@ -925,23 +880,19 @@ version = "17.4.0+2"
 # ╟─0f4f7370-526a-494d-a668-d2d95e47298c
 # ╟─89a8f473-0440-4792-842e-e877c2eb93d7
 # ╟─21303eb5-eaed-48be-8814-47dd6ad393aa
-# ╟─4e20cb12-51f3-4b57-9057-392dffbc4af6
+# ╠═4e20cb12-51f3-4b57-9057-392dffbc4af6
 # ╟─9ef93e1f-0cd3-4175-bd60-8a1dad69279d
 # ╟─10612973-ee18-4382-9800-ae33d2520742
 # ╟─96dec338-79be-41b4-810e-00d95372b4d0
-# ╠═5be24375-6ee6-4394-8587-45dded4e805a
+# ╟─5be24375-6ee6-4394-8587-45dded4e805a
 # ╟─7007c64a-e990-49be-9829-f2662d671bd4
-# ╠═8b1237c7-e5c1-428d-8e7f-26a243387329
-# ╠═edf1fa49-d50c-49ba-92f0-9a87e8fcb839
-# ╠═e2fae900-c222-4eee-9c94-959bfe68987e
-# ╠═be270b6a-5ca6-494f-b040-59da310132eb
-# ╟─2d019c52-854f-415e-acec-8933fdfb32ae
+# ╟─8b1237c7-e5c1-428d-8e7f-26a243387329
+# ╟─edf1fa49-d50c-49ba-92f0-9a87e8fcb839
+# ╟─e2fae900-c222-4eee-9c94-959bfe68987e
 # ╟─2a33d07e-2646-41e5-922d-816a9fea28d8
 # ╠═991ce7b9-c99e-4e23-b53b-643494d8dad1
 # ╠═5e7aa912-abba-4f75-9217-14e2204f15b5
 # ╠═0a3e7769-487e-4a28-9c77-5e08f6667203
 # ╠═32c8450e-fcfc-4292-a5c6-babeed7bfab9
-# ╟─bdfc8a60-f7bf-48e5-a51c-13f650fd708c
-# ╟─da85c72e-93bc-442b-b786-c8164d093594
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

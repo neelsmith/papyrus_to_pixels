@@ -1,0 +1,33 @@
+
+Zipf's Law
+
+Frequency = 1 / its rank !
+Power law
+
+
+(Pareto: 80/20 rule of thumb)
+
+WHAT ARE WE OBSERVING?
+
+
+
+--> AVERAGES MAY NOT BE HELPFUL!
+
+Mandelbrot: random stuff is also ZipFy!
+--> But this is due to special meaning of one symbol: the token breaker (space)
+
+
+PERSPECTIVES:
+
+1) Generative model; stats of n-grams: a way of accounting for context
+
+Probabilities are not in isolation
+
+
+2) Corpus perspective:
+
+Long tail: what do we learn from it?
+
+---
+
+Now what about n-grams?  How will they differ?
