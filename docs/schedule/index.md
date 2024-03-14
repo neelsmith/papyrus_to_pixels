@@ -39,7 +39,7 @@ Deadlines to note:
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Mar 12*, *Mar 14* | Key ideas: normalization, comparison, alignment | Introduction to research projects | **Tue**: *Class resumes.* |
+| *Mar 12*, *Mar 14* | Key ideas: normalization, comparison, alignment | Introduction to research projects | **Tue**: *Class resumes.* **Thu**: ***NB 3** due.* |
 
 ## Developing a project proposal
 
@@ -60,6 +60,6 @@ Deadlines to note:
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Apr 23*, *Apr 25* | Workshop projects in class | class | **Wed**: *Deadline for rehearsal of oral presentation.* |
+| *Apr 23*, *Apr 25* | Workshop projects in class | class | **Wed**: *Deadline for rehearsal of oral presentation.* **Fri**: ***NB 4** due.* |
 | *Apr 30*, *May 2* | Project fair, 1 | Project fair, 2 | **Thu**: *Last class.* |
 | *May 7*, *May 9* | *Study period* | *Exams begin* | **Tue**: *Complete project submission due.* |

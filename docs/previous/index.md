@@ -10,6 +10,17 @@ has_children: true
 
 
 
+## Week at a glance: Feb. 27 - 29
+
+- Tuesday: defining features 
+- Thursday: tree models in textual criticism: five versions of Lincoln' Gettysburg Address
+
+## Week at a glance: Feb. 20 - 22
+
+- Tuesday: Zipf's Law
+- Thursday: language evolution
+
+
 ## Week at a glance: Feb. 13 - 15
 
 - Tuesday: we meet as a separate section for the first time to consider one of the most amazing patterns in nature, that was first observed in relation to language: *Zipf's Law*. On Thursday, 
