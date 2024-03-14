@@ -13,6 +13,13 @@ Deadline: March 26.
 
 Your group will develop a formal written proposal that includes the following sections.
 
+## Members of your team
+
+List all members of your team.
+
+## Group project rules and expectations
+
+Use the model of the compact your group developed for lab exercises to define how your group will collaborate.
 
 ## Research question
 
