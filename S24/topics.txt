@@ -45,7 +45,7 @@ Introduction to research projects
 ## Developing a project proposal
 
 🔛 Work on [project ideas](../classes/project-ideas/)
-Workshop: Formal project proposals
+Workshop: Formal [project proposals](../classes/project-proposal/)
 
 🔛 📓 Project proposal due
 ***Easter break***

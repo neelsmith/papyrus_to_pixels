@@ -13,7 +13,8 @@ has_children: true
 
 
 - Revised schedule now available on line
-
+- See a timetable for [final project](../project/). Note most immediately your group's formal project proposal is due [March 26](../project/stage2/)
+    
 
 ## Week at a glance: Mar. 12 - 14
 
@@ -25,6 +26,6 @@ has_children: true
 ## Week at a glance: Mar. 19 - 21
 
 - Tuesday: discussion of project ideas (in Fenwick 420)
-- Thurday: workshop formal project proposal (in O'Neill)
+- Thurday: workshop formal project proposal (in O'Neil)
 
 
