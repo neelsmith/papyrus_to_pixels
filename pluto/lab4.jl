@@ -25,7 +25,7 @@ end
 TableOfContents()
 
 # ╔═╡ 2f5167aa-e5fb-11ee-151c-290eefd7b2f3
-md"""# Lab 4"""
+md"""# Lab 4: preparing a "Bag of Words" model text"""
 
 # ╔═╡ d2f8932c-825c-4dc4-8d83-37fe73e4818c
 """Complete this function."""
@@ -186,7 +186,7 @@ StatsBase = "~0.34.2"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.1"
+julia_version = "1.10.0"
 manifest_format = "2.0"
 project_hash = "c1c89b58a18062b130451cbc248f09a756d1c83e"
 
@@ -225,7 +225,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.1.0+0"
+version = "1.0.5+1"
 
 [[deps.DataAPI]]
 git-tree-sha1 = "abe83f3a2f1b857aac70ef8b269080af17764bbe"
@@ -379,7 +379,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+4"
+version = "0.3.23+2"
 
 [[deps.OrderedCollections]]
 git-tree-sha1 = "dfdf5519f235516220579f949664f1bf44e741c5"

@@ -10,6 +10,12 @@ has_children: true
 
 
 
+## Week at a glance: Mar. 12 - 14
+
+- Tuesday: normalization, comparison, alignment
+- Thursday: introdution to course projects
+
+
 ## Week at a glance: Feb. 27 - 29
 
 - Tuesday: defining features 
