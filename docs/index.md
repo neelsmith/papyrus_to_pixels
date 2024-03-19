@@ -12,6 +12,7 @@ has_children: true
 ## Announcements
 
 
+- **Friday, Mar. 22**: I'll be out of town for the Classical Association of New England Annual Meeting: no drop-in hours today.
 - Co-curricular event, **April 9, 6:00**: "AI and coding in liberal arts research". Panel discussion with Patrick Burns, Digital Research Scholar, Institute for the Study of the Ancient World, New York University.
 - Revised class schedule now available on line
 - See a timetable for [final project](../project/). Note most immediately your group's formal project proposal is due [March 26](../project/stage2/)
