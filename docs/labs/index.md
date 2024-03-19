@@ -35,8 +35,8 @@ All four lab assignments have a common outline, that could be summarized as:
 
 1. [rhetorical style in the Gettysburg Address](./lab1/) (modeling texts)
 2. [comparing sequences in DNA](./lab2/) (classifying species)
-3. Feature extraction
-4. Similarity and classification
+3. [linguistic evolution](./lab3/)  (evaluating evolutionary trees based on parsimony)
+4. [comparing English translations of the Bible](./lab4/) (working with a "bag of words" model of text)
 
 
 ## Revising assignments
