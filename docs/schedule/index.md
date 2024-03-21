@@ -46,7 +46,7 @@ Deadlines to note:
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
 | *Mar 19*, *Mar 21* | 🔛 Work on [project ideas](../classes/project-ideas/) | Workshop: Formal [project proposals](../classes/project-proposal/) |  |
-| *Mar 26*, *Mar 28* | 🔛 📓 Project proposal due | ***Easter break*** | **Thu**: *Easter break.* **Tue**: *Project proposal due.* |
+| *Mar 26*, *Mar 28* | 🔛 📓 [In-class workshop: lab 4](../labs/lab4/) | ***Easter break*** | **Thu**: *Easter break.* **Tue**: *Project proposal due.* |
 
 ## Investigating a research topic: interpreting change through time
 
