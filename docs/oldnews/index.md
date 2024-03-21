@@ -15,6 +15,8 @@ has_children: true
 
 
 
+- Revised class schedule now available on line
+- See a timetable for [final project](../project/). Note most immediately your group's formal project proposal is due [March 26](../project/stage2/)
 - **Feb. 29**: 
     - background on the [5 versions of the Gettysburg Address](https://www.abrahamlincolnonline.org/lincoln/speeches/gettysburg.htm#:~:text=There%20are%20five%20known%20copies,probably%20was%20the%20reading%20copy.)
     - notebook for comparing features

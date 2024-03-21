@@ -31,8 +31,8 @@ In this assignment, we'll practice a slightly different development strategy. Yo
 
 A template Julia notebook is available in two formats:
 
-- as a web page (HTML file)
-- as a Pluto notebook (`.jl` filename)
+- as a [web page](./lab4.html) (HTML file)
+- as a [Pluto notebook](./lab4.jl)  (`.jl` filename)
 
 For this assignment:
 
