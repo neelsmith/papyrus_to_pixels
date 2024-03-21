@@ -40,4 +40,4 @@ What results do you expect to find?
 
 ## Submitting your proposal
 
-Add a file named `{LASTNAME}-proposal.md` to your folder course on the course Google drive, replacing `{LASTNAME}` with your last name.
+Add a plain-text file named `{LASTNAME}-proposal.md` to your folder course on the course Google drive, replacing `{LASTNAME}` with your last name.

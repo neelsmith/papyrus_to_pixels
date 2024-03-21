@@ -47,7 +47,7 @@ Introduction to research projects
 🔛 Work on [project ideas](../classes/project-ideas/)
 Workshop: Formal [project proposals](../classes/project-proposal/)
 
-🔛 📓 Project proposal due
+🔛 📓 [In-class workshop: lab 4](../labs/lab4/)
 ***Easter break***
 
 
