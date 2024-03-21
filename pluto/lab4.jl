@@ -19,28 +19,127 @@ begin
 	using Downloads
 	using PlutoUI
 	using StatsBase, OrderedCollections
+	md"""*Unhide this cell to see the Julia environment.*"""
 end
 
 # ╔═╡ 80bb377e-ee63-4695-9345-9891018f9687
 TableOfContents()
 
+# ╔═╡ 86f1a6f4-d738-488d-aecc-3eae85d853a8
+md"""*Template notebook: last modified* **Mar. 21, 2024.**"""
+
+# ╔═╡ f9dc0eec-63ce-49ea-8ef9-b26b71f90958
+md"""
+!!! alert "Requirements for assignment: preparing a \"bag of words\" model of a text"
+
+    1. Follow the guidelines in this notebook to develop a function for tokenizing an English translation of the Bible.
+    3. When you have completed all missing sections of code and discussion, save your notebook as a file named {LASTNAME}-lab4.jl substituting your last name for {LASTNAME}, and add the file to your personal folder on the course Google drive.
+    4. Make sure everyone in your group has submitted a notebook with identical solutions to the problem.  Include your individual thoughts in the final reflection section of the notebook.
+
+"""
+
+
+# ╔═╡ 3d793a37-fe2e-48e1-b264-379e24cf0dc1
+md"""## Publication"""
+
+# ╔═╡ b0c53af2-be14-47f5-9e57-b6b1e6a30b9c
+md"""
+*Authors*: **-->ALL NAMES OF COLLABORATORS HERE<--**
+
+
+*Date last modified*: **-->DATE HERE<--**
+
+"""
+
+# ╔═╡ a5bbf210-ad59-4e54-a4fe-4ff18cf0f905
+md"""*License* : 
+**[CC BY-SA 4.0 DEED](https://creativecommons.org/licenses/by-sa/4.0/deed.en)** [![](https://upload.wikimedia.org/wikipedia/commons/a/a9/CC-BY-SA.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.en)
+"""
+
 # ╔═╡ 2f5167aa-e5fb-11ee-151c-290eefd7b2f3
 md"""# Lab 4: preparing a "Bag of Words" model text"""
 
+# ╔═╡ c2960c64-fd0e-4cb1-90e5-7aa74e51e81a
+md"""## 1. Defining the goal
+
+
+"""
+
+# ╔═╡ f3aebae5-9596-4516-92ec-0c0082df6556
+md"""
+!!! note "Goal"
+
+    In this notebook, we want to develop a function to find a unique set of tokens for a text.
+
+    You will need to define what is an appropriate token for the larger, collective assignment where we will compare vocabulary sets across different translations of the Bible. You will have to decide what is a meaningful token for that purse, and complete a function to implement your definition.
+
+"""
+
+# ╔═╡ bb449550-079f-4785-b8ba-4e859ba0a056
+md"""## 2. Breaking down the problem
+
+"""
+
+# ╔═╡ 566a03be-04df-49a4-ba7d-1a069bdd4e31
+md"""
+!!! note "Breaking down the problem"
+
+    Your function will be given one required parameter: a single string of text.  You will need to clean up, or *normalize* your input, and then split it up into tokens. Finally, you'll want to get the list of *unique* tokens in the text.
+"""
+
+# ╔═╡ b7b6a889-ae04-432a-bfd1-dfc88b338991
+md"""### A. Developing your function"""
+
+# ╔═╡ 98d80b1b-11bf-41f3-b40b-68570731c9c3
+md"""After you submit this notebook, we'll apply your solution to a large collection of English translations of the Bible. You can more conveniently develop your function on a small test set.
+"""
+
 # ╔═╡ d2f8932c-825c-4dc4-8d83-37fe73e4818c
-"""Complete this function."""
+"""**-->ADD DOCUMENTATION HERE OF WHAT YOUR FUNCTION DOES<--**"""
 function tokenizetext(txt)
-	split(txt)
+	split(txt) |> unique |> sort
 end
 
+# ╔═╡ 3b1f6738-023f-486e-a568-9a7ade7f43c3
+md"""For a quick impression of what your function does, here's a test on a few words of hand-typed text:"""
+
+# ╔═╡ 73bf3a30-d0ea-47ab-bb56-b5371971b5ca
+tokenizetext("This is not a very long text.")
+
 # ╔═╡ 09806e87-efe3-4dac-8cc7-8346ef3e7375
-md"""## Test your tokenizing function"""
+md"""### B. Test your function"""
+
+# ╔═╡ e2d15699-8217-40a1-a18b-08c6c32c4fa2
+md"""You can test your function here on a larger set of test data by selecting up to 100 verses of either the American Standard Version or the King James Version, and visually inspecting up to 200 of the most frequent tokens """
 
 # ╔═╡ bb29c0d1-0ad5-473a-8dc4-2b8af53b75ad
 md"""*Test tokenize function on verses [1-100]*: $(@bind psgcount Slider(1:100, show_value = true))"""
 
 # ╔═╡ 214039a0-ec1f-49e3-8fbb-fac4107884f0
-md"""*View most frequent tokens [5-200]*: $(@bind outputcount Slider(5:5:200, show_value=true))"""
+md"""*View resulting tokens [5-200]*: $(@bind outputcount Slider(5:5:200, show_value=true))"""
+
+# ╔═╡ ad17c175-5ca8-4ec0-aa63-7377c90dbdc3
+md"""### C. Next steps"""
+
+# ╔═╡ 8f822699-45ec-49d0-a6d8-fd120e371188
+md"""
+!!! note "Next steps"
+
+    Are there other factors you might want to consider in comparing vocabuary lists for different translations? For example, should proper names (people, places) be included, or are those too similar to inform us about translators' choices?
+"""
+
+# ╔═╡ e227492a-05f8-4571-8b80-9240865bc009
+md"""## 3. Reflection
+"""
+
+# ╔═╡ 7da4a61a-3bd9-4a83-8d82-c313b1ec88cc
+md"""
+!!! note "Reflection: preparing a \"bag of words\" model of text"
+
+
+    In this lab, you developed a generic function that we'll use in a larger project. As you're beginning to work on a longer project, can you transfer this experience to planning your project work? How can you segment tasks you need to complete for your project so that you can test small pieces and verify that they work reliably before trying to use them in a more complex project?
+
+"""
 
 # ╔═╡ 6672cfa0-b353-4ce7-8baa-7b71386bf5bb
 html"""
@@ -53,6 +152,9 @@ md"""> ## Stuff you can ignore"""
 
 # ╔═╡ 9fa625fb-318c-4bbc-8ee3-2a5f9b318ece
 md"""> ### UI"""
+
+# ╔═╡ b6879a45-1ce8-4ddd-af29-8458f1536bd5
+#mdtable(countdicts[txtidx], labels[txtidx], outputcount) |> Markdown.parse
 
 # ╔═╡ ecf65633-eee5-4d25-8ff3-1eeac34f6b5a
 """ Compose markdown table for an ordered dictionary.
@@ -77,6 +179,29 @@ end
 
 # ╔═╡ 5f5b36a3-7517-45c2-a7a1-2d1d450e3829
 md"""> ### Tokenize"""
+
+# ╔═╡ 4c641bc3-e6d0-4b91-9da1-f6d767b1fd23
+
+
+# ╔═╡ 4bf6f682-4b02-4747-ac55-9fc16f066be0
+"""Use `tokenizetext` function to compute frequencies of tokens in multiple texts,
+limiting consideration to the first `passagecount` passages of each text.
+"""
+function tokenlists(textcontents, passagecount)
+	results = []
+	
+	textcount  = length(textcontents)
+	for i in 1:textcount
+		textvector = []
+		for j in 1:passagecount
+			tkns = tokenizetext(textcontents[i][j])
+			push!(textvector, tkns)
+		end
+		tknlist = textvector |> Iterators.flatten |> collect
+		push!(results, sort(unique(tknlist)))
+	end
+	results 
+end
 
 # ╔═╡ 4a8c2a4c-5639-44b2-bb0c-9826e833f695
 """Use `tokenizetext` function to compute frequencies of tokens in multiple texts,
@@ -122,9 +247,9 @@ md"""*See results for*: $(@bind txtidx Select(menu))"""
 
 # ╔═╡ c4bc1729-8319-4b81-bded-976e4c3f165b
 psgcount == 1 ? md"""
-### Results: most frequent tokens (up to $(outputcount)) for 1 verse in the $(labels[txtidx])
+**Results**: tokens (up to $(outputcount)) for 1 verse in the $(labels[txtidx])
 """ : md"""
-### Most frequent tokens (up to $(outputcount)) for $(psgcount) verses in the $(labels[txtidx])
+**Results**: tokens (up to $(outputcount)) for $(psgcount) verses in the $(labels[txtidx])
 """
 
 # ╔═╡ f2295d0d-adfb-4eb2-b57e-e0ea44743ed7
@@ -162,11 +287,19 @@ end
 # ╔═╡ 51d5fe49-c386-44e4-be31-faf1aff0e9be
 textdata = [parsetextdata(dataset) for dataset in datasets]
 
+# ╔═╡ a29611e9-b989-4285-abdd-e8239aac92db
+tkns = tokenlists(textdata,psgcount)
+
+# ╔═╡ 3cce3d47-a4f5-4c47-b49b-80ab9213ca04
+begin
+	rows = minimum([outputcount, length(tkns[1])])
+	items = map(t -> "- " * t, tkns[txtidx][1:rows])
+	join(items, "\n") |> Markdown.parse
+
+end
+
 # ╔═╡ ae51c7a2-9665-4213-95b7-16d1faaeed39
 countdicts = tokenfreqs(textdata, psgcount)
-
-# ╔═╡ b6879a45-1ce8-4ddd-af29-8458f1536bd5
-mdtable(countdicts[txtidx], labels[txtidx], outputcount) |> Markdown.parse
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -528,23 +661,45 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╟─7e2f96e0-72f8-4468-addc-42a3196c1cb5
 # ╟─80bb377e-ee63-4695-9345-9891018f9687
+# ╟─7e2f96e0-72f8-4468-addc-42a3196c1cb5
+# ╟─86f1a6f4-d738-488d-aecc-3eae85d853a8
+# ╟─f9dc0eec-63ce-49ea-8ef9-b26b71f90958
+# ╟─3d793a37-fe2e-48e1-b264-379e24cf0dc1
+# ╟─b0c53af2-be14-47f5-9e57-b6b1e6a30b9c
+# ╟─a5bbf210-ad59-4e54-a4fe-4ff18cf0f905
 # ╟─2f5167aa-e5fb-11ee-151c-290eefd7b2f3
-# ╟─d2f8932c-825c-4dc4-8d83-37fe73e4818c
+# ╟─c2960c64-fd0e-4cb1-90e5-7aa74e51e81a
+# ╟─f3aebae5-9596-4516-92ec-0c0082df6556
+# ╟─bb449550-079f-4785-b8ba-4e859ba0a056
+# ╟─566a03be-04df-49a4-ba7d-1a069bdd4e31
+# ╟─b7b6a889-ae04-432a-bfd1-dfc88b338991
+# ╟─98d80b1b-11bf-41f3-b40b-68570731c9c3
+# ╠═d2f8932c-825c-4dc4-8d83-37fe73e4818c
+# ╟─3b1f6738-023f-486e-a568-9a7ade7f43c3
+# ╠═73bf3a30-d0ea-47ab-bb56-b5371971b5ca
 # ╟─09806e87-efe3-4dac-8cc7-8346ef3e7375
+# ╟─e2d15699-8217-40a1-a18b-08c6c32c4fa2
 # ╟─bb29c0d1-0ad5-473a-8dc4-2b8af53b75ad
 # ╟─a544e01b-bb80-4929-affd-1616ddca957c
 # ╟─214039a0-ec1f-49e3-8fbb-fac4107884f0
 # ╟─c4bc1729-8319-4b81-bded-976e4c3f165b
-# ╟─b6879a45-1ce8-4ddd-af29-8458f1536bd5
+# ╟─3cce3d47-a4f5-4c47-b49b-80ab9213ca04
+# ╟─ad17c175-5ca8-4ec0-aa63-7377c90dbdc3
+# ╟─8f822699-45ec-49d0-a6d8-fd120e371188
+# ╟─e227492a-05f8-4571-8b80-9240865bc009
+# ╟─7da4a61a-3bd9-4a83-8d82-c313b1ec88cc
 # ╟─6672cfa0-b353-4ce7-8baa-7b71386bf5bb
 # ╟─0a5c17af-eb6c-4977-9d76-82698b05a880
 # ╟─9fa625fb-318c-4bbc-8ee3-2a5f9b318ece
 # ╟─90701252-8a17-44ad-8224-5d74b0385091
-# ╠═ecf65633-eee5-4d25-8ff3-1eeac34f6b5a
+# ╟─b6879a45-1ce8-4ddd-af29-8458f1536bd5
+# ╟─ecf65633-eee5-4d25-8ff3-1eeac34f6b5a
 # ╟─5f5b36a3-7517-45c2-a7a1-2d1d450e3829
-# ╠═ae51c7a2-9665-4213-95b7-16d1faaeed39
+# ╠═4c641bc3-e6d0-4b91-9da1-f6d767b1fd23
+# ╟─a29611e9-b989-4285-abdd-e8239aac92db
+# ╠═4bf6f682-4b02-4747-ac55-9fc16f066be0
+# ╟─ae51c7a2-9665-4213-95b7-16d1faaeed39
 # ╟─4a8c2a4c-5639-44b2-bb0c-9826e833f695
 # ╟─b4cb56e3-1e65-4fd6-b09e-89deb17001bb
 # ╟─eded19cf-a78d-4e7b-ba26-58e296aee2c2
