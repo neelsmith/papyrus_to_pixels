@@ -9,6 +9,13 @@ has_children: true
 # Overview of previous weeks
 
 
+## Week at a glance: Mar. 19 - 21
+
+- Tuesday: discussion of project ideas (in Fenwick 420)
+- Thurday: workshop formal project proposal (in O'Neil)
+
+
+
 
 ## Week at a glance: Mar. 12 - 14
 
