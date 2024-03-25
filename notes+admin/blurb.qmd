@@ -4,27 +4,20 @@ format:
   html: default
   pdf: default
   docx: default
-
 ---
 
+On Tuesday, April 9, in Rehm Auditorium, BIO 199 "Change Through Time" and CLAS 199 "Papyrus to Pixels" will host a panel discussion on the topic "AI and coding in liberal arts research."
 
- On Tuesday, April 9, BIO 199 "Change Through Time" and CLAS 199 "Papyrus to Pixels" will host a panel discussion on the topic "AI and coding in liberal arts research." 
- 
- The starting point for discussion will be James Somers' essay "[A Coder Considers the Waning Days of the Craft](https://www.newyorker.com/magazine/2023/11/20/a-coder-considers-the-waning-days-of-the-craft)" (*New Yorker* Nov. 13, 2023: `https://www.newyorker.com/magazine/2023/11/20/a-coder-considers-the-waning-days-of-the-craft`).
+The starting point for discussion will be James Somers' essay "[A Coder Considers the Waning Days of the Craft](https://www.newyorker.com/magazine/2023/11/20/a-coder-considers-the-waning-days-of-the-craft)" (*New Yorker* Nov. 13, 2023: https://www.newyorker.com/magazine/2023/11/20/a-coder-considers-the-waning-days-of-the-craft).
 
-Panellists will include Dr. Patrick Burns, Associate Research Scholar for Digital Projects at New York University's Institute for the Study of the Ancient World, Prof. Neel Smith (Classics), and students from our course with a variety of backgrounds:
+Panellists will include Dr. Patrick Burns, Associate Research Scholar for Digital Projects at New York University's Institute for the Study of the Ancient World; Prof. Neel Smith (Classics); and students from our course with varied academic interests and experience:
 
-
-- Emily Murphy '24 (Political Science), 
-- Emma Proffitt '25 (Chemistry), 
+- Emily Murphy '24 (Political Science)
+- Emma Proffitt '25 (Chemistry)
 - Salvatore Milano '26 (Computer Science)
-
 
 ## Background
 
-Students in BIO 199/CLAS 199 are now beginning work on original research projects that include some level of writing code, because it would not be possible to explore your topic without doing so. Most of the students in the course have no previous experience writing code. 
+Students in BIO 199/CLAS 199 are now beginning work on original research projects that include some level of writing code. Most of the students in the course have no previous experience programming.
 
-We want you to reflect on that experience, and in this assignment, want you to reflect on how your experience doing research with code fits in to the rapidly change landscape of AI. 
-
-
-
+As one part of their reflection on this experience, students are submitting questions for the panellists. We are making this a campus-wide event because we would like to broaden the discussion of how the experience of doing research with code at a liberal arts college fits in to the rapidly change landscape of AI.
