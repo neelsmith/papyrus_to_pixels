@@ -11,6 +11,7 @@ has_children: true
 ## Announcements
 
 
+- Reminder: [formal project proposals](./project/stage2/) are due **Mar. 26** at noon
 - Co-curricular event, **April 9, 6:00**, Rehm Auditorium (Smith Hall): "AI and coding in liberal arts research".  See [instructions](./shared-resources/panel/) for  required assignment in conjunction with this event.
 
     
