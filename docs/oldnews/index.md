@@ -15,7 +15,8 @@ has_children: true
 
 
 
-- Revised class schedule now available on line
+- **Friday, Mar. 22**: I'll be out of town for the Classical Association of New England Annual Meeting: no drop-in hours today.
+- **Mar. 21**: [Lab 4 instructions](./labs/lab4/) available
 - See a timetable for [final project](../project/). Note most immediately your group's formal project proposal is due [March 26](../project/stage2/)
 - **Feb. 29**: 
     - background on the [5 versions of the Gettysburg Address](https://www.abrahamlincolnonline.org/lincoln/speeches/gettysburg.htm#:~:text=There%20are%20five%20known%20copies,probably%20was%20the%20reading%20copy.)
