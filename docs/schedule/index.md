@@ -52,7 +52,7 @@ Deadlines to note:
 
 | Dates | Tuesday | Thursday | Notes |
 | ---: | :--- | :--- | :--- |
-| *Apr 2*, *Apr 4* | What is good scholarship? | class | **Tue**: *Class resumes.* |
+| *Apr 2*, *Apr 4* | What is [good scholarship](../classes/good_scholarship/)? | class | **Tue**: *Class resumes.* |
 | *Apr 9*, *Apr 11* | Workshop draft code; evening panel discussion | class | **Thu**: *First draft of project code due.* |
 | *Apr 16*, *Apr 18* | How to present | class |  |
 
