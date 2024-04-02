@@ -10,15 +10,13 @@ has_children: true
 
 ## Announcements
 
-
-- Reminder: [formal project proposals](./project/stage2/) are due **Mar. 26** at noon
 - Co-curricular event, **April 9, 6:00**, Rehm Auditorium (Smith Hall): "AI and coding in liberal arts research".  See [instructions](./shared-resources/panel/) for  required assignment in conjunction with this event.
 
     
 
 
 
-## Week at a glance: Mar. 26
 
-- Tuesday: work on lab 4
-- Thursday: no class (Easter break)
+## Week at a glance: Apr. 2 - Apr. 4
+
+We begin work on extended projects with a discussion on Tuesday (in O'Neill) of what makes good scholarship, and workshop in initial work plans on Thursday (in Fenwick).

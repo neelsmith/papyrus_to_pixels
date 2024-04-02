@@ -9,6 +9,13 @@ has_children: true
 # Overview of previous weeks
 
 
+
+## Week at a glance: Mar. 26
+
+- Tuesday: work on lab 4
+- Thursday: no class (Easter break)
+
+
 ## Week at a glance: Mar. 19 - 21
 
 - Tuesday: discussion of project ideas (in Fenwick 420)

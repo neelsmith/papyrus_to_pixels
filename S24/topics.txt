@@ -55,8 +55,9 @@ Workshop: Formal [project proposals](../project/stage2/)
 
 
 What is [good scholarship](../classes/good_scholarship/)?
+🔛 Small-group work: [developing a working project plan](../classes/project-outline-workshop/)
 
-class
+
 Workshop draft code; evening panel discussion
 
 
