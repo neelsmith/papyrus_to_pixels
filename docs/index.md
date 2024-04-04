@@ -10,6 +10,7 @@ has_children: true
 
 ## Announcements
 
+- **Mon., Apr. 8**:  please submit [preparatory assignment](./shared-resources/panel/) for co-curricular event on Tuesday
 - Co-curricular event, **April 9, 6:00**, Rehm Auditorium (Smith Hall): "AI and coding in liberal arts research".  See [instructions](./shared-resources/panel/) for  required assignment in conjunction with this event.
 
     
