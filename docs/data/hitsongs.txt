@@ -1,0 +1,20 @@
+﻿Year|Artist|songname|genre|length
+
+
+1940|Bing Crosby|White Christmas|Jazz|182
+1945|The Andrew Sisters|Rum and Coke-cola|Pop|188
+1950|Gordan Jenkins and the Weavers| Goodnight Irine|Folk|245
+1955| Perez Prado| Cherry Pink And Apple Blossom|Jazz|179
+1960| Percy Faith| Theme from’ A Summer Place|Waltz|145
+1965| Sam The Sham and The Pharaohs| Wooly Bully|Rock and Roll|140 
+1970| Simon and Garfunkel|Bridge Over Troubled Water|Pop|290
+1975| Captain and Tennille| Love Will Keep Us Together|Rock|204
+1980| Blondie| Call me|Rock|135
+1985| Wham!| Careless Whisper|Pop|390
+1990| Wilson Phillips| Hold on|Pop|263
+1995| Coolio| Gangsta’s Paradise| Hip-Hop| 244
+2000| Faith Hill| Breathe|Country|249
+2005| Mariah Carey| We belong together| R&B| 201
+2010| Ke$ha| TiK ToK|Pop|196
+2015| Mark Ronson| Uptown Funk!|Funk|270
+2020| The Weeknd| Blinding lights|R&B|202
