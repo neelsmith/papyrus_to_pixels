@@ -104,9 +104,6 @@ TableOfContents()
 # ╔═╡ 49ef0a51-1394-4209-8ca7-a1dce1b09c6b
 md"""## Plotting"""
 
-# ╔═╡ 3c6e3a0c-908d-44f7-9569-6c1229078d4c
-md"""- Pluto notebook with [plotting examples](https://featured.plutojl.org/plot/plots.jl)"""
-
 # ╔═╡ 7408514f-db1b-4f18-a731-0156d8a66d8f
 md"""!!! note "Data for this example"
 
@@ -116,8 +113,20 @@ md"""!!! note "Data for this example"
 # ╔═╡ 8eaff136-f878-4743-a784-8119aa892bf8
 md"""Plotting x/y pairs is easy!"""
 
+# ╔═╡ 1f9b961e-df7a-4239-a81b-cfa9e31cb622
+md"""## More examples of plots"""
+
+# ╔═╡ 3c6e3a0c-908d-44f7-9569-6c1229078d4c
+md"""- Pluto notebook with [plotting examples](https://featured.plutojl.org/plot/plots.jl)"""
+
 # ╔═╡ bd3dd52a-18a3-41b2-8f79-2a93b646af26
-md"""## Some example data: the Declaration of Independence"""
+md"""## Example data: the Declaration of Independence"""
+
+# ╔═╡ 5260cf67-7126-4d23-92d2-e9fdda873589
+md"""!!! note "Source"
+
+    The transcription of the text of the Declaration is from the [U.S. National Archives](https://www.archives.gov/founding-docs/declaration-transcript)
+"""
 
 # ╔═╡ 4daf95ea-dc64-4708-b02e-18a1677a66a1
 declaration = """In Congress, July 4, 1776
@@ -188,17 +197,26 @@ We, therefore, the Representatives of the united States of America, in General C
 
 
 
+# ╔═╡ 8a30ab86-6b70-4202-85d6-53171dea48de
+md"""Use `StatsBase` and `OrderedCollections` to make an ordered dictionary of counts in a one-liner!"""
+
 # ╔═╡ 661ddf2f-9f01-4d0f-ac06-cb778d673739
 wordcounts = split(declaration) |> countmap |> OrderedDict
 
 # ╔═╡ ce579b26-6ea3-445e-99ad-444f70a3fdb2
 sort!(wordcounts;  byvalue=true, rev=true)
 
+# ╔═╡ 5329d438-3d59-4557-92ba-a0d466ad14f0
+md"""Collect the keys and values of our dictionary separately for plotting. The words (keys of the dictionary) will be the x axis of our plot, and the counts (values of the dictionary) will be the y value."""
+
 # ╔═╡ 863da391-2afb-4a10-a8ed-a84d0d2add4b
 words = wordcounts |> keys |> collect
 
 # ╔═╡ 68d2d718-b19d-43b9-8caa-4625bc7c7540
 counts = wordcounts |> values |> collect
+
+# ╔═╡ c20d6bdf-0654-46f5-8c4f-9caff05c7f1c
+plot(words, counts)
 
 # ╔═╡ 42ea3bad-6825-4a7f-ae6a-2a0975dd9f6d
 plot(words, counts, kind = "bar")
@@ -665,16 +683,21 @@ version = "17.4.0+2"
 # ╟─e828a2f9-b429-442a-9ace-f5ed57e8ac56
 # ╠═d14033fb-436e-4704-862a-7315a46de171
 # ╟─49ef0a51-1394-4209-8ca7-a1dce1b09c6b
-# ╟─3c6e3a0c-908d-44f7-9569-6c1229078d4c
 # ╟─7408514f-db1b-4f18-a731-0156d8a66d8f
 # ╠═8839dea7-a5cd-415a-8b43-866c041be282
 # ╟─8eaff136-f878-4743-a784-8119aa892bf8
+# ╠═c20d6bdf-0654-46f5-8c4f-9caff05c7f1c
+# ╟─1f9b961e-df7a-4239-a81b-cfa9e31cb622
+# ╟─3c6e3a0c-908d-44f7-9569-6c1229078d4c
 # ╠═42ea3bad-6825-4a7f-ae6a-2a0975dd9f6d
 # ╟─bd3dd52a-18a3-41b2-8f79-2a93b646af26
-# ╠═07cad8d8-04d5-4189-bc48-81e838a2dccc
+# ╟─5260cf67-7126-4d23-92d2-e9fdda873589
 # ╟─4daf95ea-dc64-4708-b02e-18a1677a66a1
+# ╟─8a30ab86-6b70-4202-85d6-53171dea48de
+# ╠═07cad8d8-04d5-4189-bc48-81e838a2dccc
 # ╠═661ddf2f-9f01-4d0f-ac06-cb778d673739
 # ╟─ce579b26-6ea3-445e-99ad-444f70a3fdb2
+# ╟─5329d438-3d59-4557-92ba-a0d466ad14f0
 # ╠═863da391-2afb-4a10-a8ed-a84d0d2add4b
 # ╠═68d2d718-b19d-43b9-8caa-4625bc7c7540
 # ╟─00000000-0000-0000-0000-000000000001
