@@ -15,7 +15,7 @@ has_children: true
 
 
 
-
+- Co-curricular event, **April 9, 6:00**, Rehm Auditorium (Smith Hall): "AI and coding in liberal arts research".  See [instructions](./shared-resources/panel/) for  required assignment in conjunction with this event.
 - Reminder: [formal project proposals](./project/stage2/) are due **Mar. 26** at noon
 - **Friday, Mar. 22**: I'll be out of town for the Classical Association of New England Annual Meeting: no drop-in hours today.
 - **Mar. 21**: [Lab 4 instructions](./labs/lab4/) available

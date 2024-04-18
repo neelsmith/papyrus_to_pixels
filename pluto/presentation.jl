@@ -27,7 +27,7 @@ using StatsBase, OrderedCollections
 md"""# Presenting a slide show from Pluto"""
 
 # ╔═╡ a678cded-c3fd-4f8d-b3e1-0adb4c7d4982
-html"<button onclick='present()'>present</button>"
+#html"<button onclick='present()'>present</button>"
 
 # ╔═╡ 2fa0ed15-23a2-4598-ae21-d0bbd590d019
 md"""## Hidden magic"""
@@ -45,6 +45,15 @@ Pluto has a built-in `present` button (illustrated immediately above this cell)!
 
 """
 
+# ╔═╡ 5a585aa5-b1bb-43ce-be42-c395e3e9f24e
+md"""## How does it work?"""
+
+# ╔═╡ 09de3ad5-01aa-43e7-924b-989167c6c34b
+md"""
+
+- the slideshow function uses headings to split your notebook into slides
+"""
+
 # ╔═╡ bd9aca0f-dab9-4b5c-b5ca-714395596e10
 md"""## Other tips
 
@@ -57,6 +66,10 @@ md"""## Other tips
 
 # ╔═╡ 71a02ce9-a047-411c-805f-16b467e0448b
 md"""## Markdown formatting"""
+
+# ╔═╡ b755ebaf-710e-40d9-b5bd-4579b1a72f58
+md"""Get familiar with **Markdown**!
+"""
 
 # ╔═╡ 9f70ffb7-56e6-47e1-9fef-24e4a34c356d
 md"""
@@ -84,10 +97,39 @@ md"""!!! note "Learn more"
 md"""Here's an example of using a "Select" widget:"""
 
 # ╔═╡ c54ac023-7a19-4bd1-8c06-5fb7555cffc2
-@bind filename Select(["text 1", "second text", "another document"])
+@bind filename Select(
+	["text 1", "second text", "another document"]
+)
 
 # ╔═╡ 1364f130-d24b-480e-bff0-1514e5d49867
 filename
+
+# ╔═╡ 213b0ae8-6104-45fd-a4e9-fd40f71c65d3
+md"""## Link an image"""
+
+# ╔═╡ ebed8135-04ee-48b4-843f-c7a05109864a
+imgurl = "https://www.archives.gov/files/founding-docs/declaration-of-independence-front-630.jpg"
+
+# ╔═╡ 2bd971e5-a12b-4b4b-a31d-b4a9c61829f9
+"""
+Here's a url for an image: [image]($(imgurl))
+"""  |> Markdown.parse
+
+
+# ╔═╡ 06dde7e6-361a-4ab2-97de-1952f0fc3f54
+md"""
+
+- links: 
+    `[text](link)`
+- display image link: `![text](imagelink)`
+- string interpolation
+    `"$(variable_like_a_long_url)"`
+ - markdown with interpolation: `"markdown with $(variable)" |> Markdown.parse`
+
+"""
+
+# ╔═╡ 4f42af52-b3c7-4afd-84b0-d66c943aa084
+"""![Declaration of Independence]($(imgurl))""" |> Markdown.parse
 
 # ╔═╡ 204c084e-e16b-4e8e-bf70-64138d926337
 md"""## A table of contents for navigation"""
@@ -118,6 +160,12 @@ md"""## More examples of plots"""
 
 # ╔═╡ 3c6e3a0c-908d-44f7-9569-6c1229078d4c
 md"""- Pluto notebook with [plotting examples](https://featured.plutojl.org/plot/plots.jl)"""
+
+# ╔═╡ eb153118-5792-4a8e-a8d1-c44dbb3c0bbe
+md"""## Reference"""
+
+# ╔═╡ 57262796-ea12-4a8c-92a4-9b108a3f7685
+md"""The  cells in the following section load a sample data set."""
 
 # ╔═╡ bd3dd52a-18a3-41b2-8f79-2a93b646af26
 md"""## Example data: the Declaration of Independence"""
@@ -669,8 +717,11 @@ version = "17.4.0+2"
 # ╟─a678cded-c3fd-4f8d-b3e1-0adb4c7d4982
 # ╟─2fa0ed15-23a2-4598-ae21-d0bbd590d019
 # ╟─6e674784-b134-4b5a-ba5e-2dc15de1776c
+# ╟─5a585aa5-b1bb-43ce-be42-c395e3e9f24e
+# ╟─09de3ad5-01aa-43e7-924b-989167c6c34b
 # ╟─bd9aca0f-dab9-4b5c-b5ca-714395596e10
 # ╟─71a02ce9-a047-411c-805f-16b467e0448b
+# ╟─b755ebaf-710e-40d9-b5bd-4579b1a72f58
 # ╟─9f70ffb7-56e6-47e1-9fef-24e4a34c356d
 # ╟─72d8c81c-332c-4bc1-b872-cfd0e6c50864
 # ╟─cb455f06-1977-4dcb-950e-11cc844b809c
@@ -679,6 +730,11 @@ version = "17.4.0+2"
 # ╠═fb9f01b0-12c6-4238-88ee-6f6af67d6bd6
 # ╠═c54ac023-7a19-4bd1-8c06-5fb7555cffc2
 # ╠═1364f130-d24b-480e-bff0-1514e5d49867
+# ╟─213b0ae8-6104-45fd-a4e9-fd40f71c65d3
+# ╟─ebed8135-04ee-48b4-843f-c7a05109864a
+# ╟─2bd971e5-a12b-4b4b-a31d-b4a9c61829f9
+# ╟─06dde7e6-361a-4ab2-97de-1952f0fc3f54
+# ╠═4f42af52-b3c7-4afd-84b0-d66c943aa084
 # ╟─204c084e-e16b-4e8e-bf70-64138d926337
 # ╟─e828a2f9-b429-442a-9ace-f5ed57e8ac56
 # ╠═d14033fb-436e-4704-862a-7315a46de171
@@ -690,6 +746,8 @@ version = "17.4.0+2"
 # ╟─1f9b961e-df7a-4239-a81b-cfa9e31cb622
 # ╟─3c6e3a0c-908d-44f7-9569-6c1229078d4c
 # ╠═42ea3bad-6825-4a7f-ae6a-2a0975dd9f6d
+# ╟─eb153118-5792-4a8e-a8d1-c44dbb3c0bbe
+# ╟─57262796-ea12-4a8c-92a4-9b108a3f7685
 # ╟─bd3dd52a-18a3-41b2-8f79-2a93b646af26
 # ╟─5260cf67-7126-4d23-92d2-e9fdda873589
 # ╟─4daf95ea-dc64-4708-b02e-18a1677a66a1

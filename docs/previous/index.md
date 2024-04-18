@@ -8,6 +8,15 @@ has_children: true
 
 # Overview of previous weeks
 
+    
+
+
+
+
+## Week at a glance: Apr. 2 - Apr. 4
+
+We begin work on extended projects with a discussion on Tuesday (in O'Neill) of what makes good scholarship, and workshop in initial work plans on Thursday (in Fenwick).
+
 
 
 ## Week at a glance: Mar. 26

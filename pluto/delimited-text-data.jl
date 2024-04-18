@@ -102,7 +102,7 @@ PlutoUI = "~0.7.58"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.1"
+julia_version = "1.10.0"
 manifest_format = "2.0"
 project_hash = "8f2c82fc1fe13e1354a2ec17060404ab671fb41d"
 
@@ -131,7 +131,7 @@ version = "0.11.5"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.1.0+0"
+version = "1.0.5+1"
 
 [[deps.Dates]]
 deps = ["Printf"]
@@ -241,7 +241,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+4"
+version = "0.3.23+2"
 
 [[deps.Parsers]]
 deps = ["Dates", "PrecompileTools", "UUIDs"]
@@ -371,7 +371,7 @@ version = "17.4.0+2"
 # ╟─cb4dfcc5-3e9d-475d-a447-e7e381dd9964
 # ╟─1bc2b534-f674-11ee-0525-3520b7197c35
 # ╟─c28d1447-a874-446f-9478-11017b1d8fed
-# ╟─ff6eeb6e-9d7d-4de9-8cd0-666a9940ac04
+# ╠═ff6eeb6e-9d7d-4de9-8cd0-666a9940ac04
 # ╠═82be78ae-1052-424e-b3d1-c6ba9391b3fc
 # ╟─8a04afbc-95f8-4f87-9e9e-5e97b9e3dcfa
 # ╠═30aaa934-f523-49fd-892c-5b3f38baea3e

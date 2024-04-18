@@ -8,15 +8,17 @@ has_children: true
 # Papyrus to Pixels: home page
 
 
+
+
+
 ## Announcements
 
-- Co-curricular event, **April 9, 6:00**, Rehm Auditorium (Smith Hall): "AI and coding in liberal arts research".  See [instructions](./shared-resources/panel/) for  required assignment in conjunction with this event.
 
-    
-
-
+- Sign up for rehearsal of oral presentations
+- Notes on [making presentations using Pluto notebooks](./julia/presentation.html) (in a Pluto notebook!)
 
 
-## Week at a glance: Apr. 2 - Apr. 4
+## Week at a glance: Apr. 16 - Apr. 18
 
-We begin work on extended projects with a discussion on Tuesday (in O'Neill) of what makes good scholarship, and workshop in initial work plans on Thursday (in Fenwick).
+We begin work on extended projects with a discussion on Tuesday (in O'Neill) about oral presentations, and workshop our projects on Thursday (in Fenwick).
+
