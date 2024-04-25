@@ -26,8 +26,8 @@ nav_order: 2000
 
 
 1. Title: "Patterns in mythological narratives". Presenters: Emma Crain, Matthew Bushway
-2: Title: "Who talks in *Star Wars* movies?" Presenters: Tate Hadges, Salvatore Milano, Emily Murphy
-3: Title: "European Royal Family Feature Evolution". Presenters: Bryce Maloney, Meredith McDonough
+2. Title: "Who talks in *Star Wars* movies?" Presenters: Tate Hadges, Salvatore Milano, Emily Murphy
+3. Title: "European Royal Family Feature Evolution". Presenters: Bryce Maloney, Meredith McDonough
 4. Title: "Changes in NBA Player Height over Time". Presenters: Nyeoti Punni, Ethan Gill, Julian Beban
 
 
