@@ -11,6 +11,10 @@ has_children: true
     
 
 
+## Week at a glance: Apr. 16 - Apr. 18
+
+We begin work on extended projects with a discussion on Tuesday (in O'Neill) about oral presentations, and workshop our projects on Thursday (in Fenwick).
+
 
 
 ## Week at a glance: Apr. 2 - Apr. 4
