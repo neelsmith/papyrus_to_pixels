@@ -11,7 +11,7 @@ has_children: true
 
 ## Announcements
 
-
+- [Schedule of presentations](./presentations)!
 - Sign up for rehearsal of oral presentations
 - Notes on [making presentations using Pluto notebooks](./julia/presentation.html) (in a Pluto notebook!)
 
