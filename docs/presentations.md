@@ -13,7 +13,7 @@ nav_order: 2000
 > Slides due: noon on Monday, Apr. 29
 
 
-1. Title: "Comparing DNA Sequences from GenBank and a Holy Cross Lab".  Presenters: Emma Proffitt and Caitlyn Sullivan
+1. Title: "Comparing Sequence Alignments: Can We Live on Mars?".  Presenters: Emma Proffitt and Caitlyn Sullivan
 2. Title: "Penguin Evolutionary Relationships". Presenters: Thomas McAuliffe, Brennan DeCourcey, Frank Amuso
 3. Title: "Social media on sports: spam or ham?". Presenters: Anthony Petrosino, Ben McCalmon
 4. Title: "Giant Panda Evolution". Presenters: Marquis Wilson, Payton Van Meter, Frankie Majkowski
